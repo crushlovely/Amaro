@@ -23,22 +23,8 @@
 		BDDB997718C3943B003EBC42 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995618C3943B003EBC42 /* UIKit.framework */; };
 		BDDB997F18C3943B003EBC42 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BDDB997D18C3943B003EBC42 /* InfoPlist.strings */; };
 		BDDB998118C3943B003EBC42 /* CrushBootstrapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDB998018C3943B003EBC42 /* CrushBootstrapTests.m */; };
-		BDF1756518C3972E008BD9C6 /* Common.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1755118C3972E008BD9C6 /* Common.xcconfig */; };
-		BDF1756618C3972E008BD9C6 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1755318C3972E008BD9C6 /* Debug.xcconfig */; };
-		BDF1756718C3972E008BD9C6 /* Profile.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1755418C3972E008BD9C6 /* Profile.xcconfig */; };
-		BDF1756818C3972E008BD9C6 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1755518C3972E008BD9C6 /* Release.xcconfig */; };
-		BDF1756918C3972E008BD9C6 /* Test.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1755618C3972E008BD9C6 /* Test.xcconfig */; };
-		BDF1756A18C3972E008BD9C6 /* Application.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1755818C3972E008BD9C6 /* Application.xcconfig */; };
-		BDF1756B18C3972E008BD9C6 /* StaticLibrary.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1755918C3972E008BD9C6 /* StaticLibrary.xcconfig */; };
-		BDF1756C18C3972E008BD9C6 /* iOS-Application.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1755B18C3972E008BD9C6 /* iOS-Application.xcconfig */; };
-		BDF1756D18C3972E008BD9C6 /* iOS-Base.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1755C18C3972E008BD9C6 /* iOS-Base.xcconfig */; };
-		BDF1756E18C3972E008BD9C6 /* iOS-StaticLibrary.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1755D18C3972E008BD9C6 /* iOS-StaticLibrary.xcconfig */; };
-		BDF1756F18C3972E008BD9C6 /* Mac-Application.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1755F18C3972E008BD9C6 /* Mac-Application.xcconfig */; };
-		BDF1757018C3972E008BD9C6 /* Mac-Base.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1756018C3972E008BD9C6 /* Mac-Base.xcconfig */; };
-		BDF1757118C3972E008BD9C6 /* Mac-DynamicLibrary.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1756118C3972E008BD9C6 /* Mac-DynamicLibrary.xcconfig */; };
-		BDF1757218C3972E008BD9C6 /* Mac-Framework.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1756218C3972E008BD9C6 /* Mac-Framework.xcconfig */; };
-		BDF1757318C3972E008BD9C6 /* Mac-StaticLibrary.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1756318C3972E008BD9C6 /* Mac-StaticLibrary.xcconfig */; };
 		BDF1757418C3972E008BD9C6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BDF1756418C3972E008BD9C6 /* README.md */; };
+		BDF1758818C3D550008BD9C6 /* CRLMethodLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF1758718C3D550008BD9C6 /* CRLMethodLogFormatter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +77,8 @@
 		BDF1756318C3972E008BD9C6 /* Mac-StaticLibrary.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mac-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
 		BDF1756418C3972E008BD9C6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		BDF1758018C39F45008BD9C6 /* iOSApp+Pods.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "iOSApp+Pods.xcconfig"; sourceTree = "<group>"; };
+		BDF1758618C3D550008BD9C6 /* CRLMethodLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRLMethodLogFormatter.h; sourceTree = "<group>"; };
+		BDF1758718C3D550008BD9C6 /* CRLMethodLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRLMethodLogFormatter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +151,7 @@
 				BDDB996A18C3943B003EBC42 /* CRLViewController.h */,
 				BDDB996B18C3943B003EBC42 /* CRLViewController.m */,
 				BDDB996D18C3943B003EBC42 /* Images.xcassets */,
+				BDF1758418C3D4D0008BD9C6 /* Utils */,
 				BDDB995918C3943B003EBC42 /* Supporting Files */,
 			);
 			path = CrushBootstrap;
@@ -270,6 +259,23 @@
 			path = "Mac OS X";
 			sourceTree = "<group>";
 		};
+		BDF1758418C3D4D0008BD9C6 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				BDF1758518C3D501008BD9C6 /* LogFormatters */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		BDF1758518C3D501008BD9C6 /* LogFormatters */ = {
+			isa = PBXGroup;
+			children = (
+				BDF1758618C3D550008BD9C6 /* CRLMethodLogFormatter.h */,
+				BDF1758718C3D550008BD9C6 /* CRLMethodLogFormatter.m */,
+			);
+			path = LogFormatters;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -350,26 +356,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDF1756818C3972E008BD9C6 /* Release.xcconfig in Resources */,
-				BDF1756F18C3972E008BD9C6 /* Mac-Application.xcconfig in Resources */,
 				BDF1757418C3972E008BD9C6 /* README.md in Resources */,
-				BDF1756A18C3972E008BD9C6 /* Application.xcconfig in Resources */,
-				BDF1756518C3972E008BD9C6 /* Common.xcconfig in Resources */,
-				BDF1756B18C3972E008BD9C6 /* StaticLibrary.xcconfig in Resources */,
 				BDDB996918C3943B003EBC42 /* Main_iPad.storyboard in Resources */,
-				BDF1756718C3972E008BD9C6 /* Profile.xcconfig in Resources */,
-				BDF1756618C3972E008BD9C6 /* Debug.xcconfig in Resources */,
 				BDDB996E18C3943B003EBC42 /* Images.xcassets in Resources */,
-				BDF1757318C3972E008BD9C6 /* Mac-StaticLibrary.xcconfig in Resources */,
-				BDF1757018C3972E008BD9C6 /* Mac-Base.xcconfig in Resources */,
-				BDF1756E18C3972E008BD9C6 /* iOS-StaticLibrary.xcconfig in Resources */,
 				BDDB996618C3943B003EBC42 /* Main_iPhone.storyboard in Resources */,
-				BDF1756D18C3972E008BD9C6 /* iOS-Base.xcconfig in Resources */,
 				BDDB995D18C3943B003EBC42 /* InfoPlist.strings in Resources */,
-				BDF1756918C3972E008BD9C6 /* Test.xcconfig in Resources */,
-				BDF1757218C3972E008BD9C6 /* Mac-Framework.xcconfig in Resources */,
-				BDF1756C18C3972E008BD9C6 /* iOS-Application.xcconfig in Resources */,
-				BDF1757118C3972E008BD9C6 /* Mac-DynamicLibrary.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,6 +427,7 @@
 			files = (
 				BDDB996318C3943B003EBC42 /* CRLAppDelegate.m in Sources */,
 				BDDB995F18C3943B003EBC42 /* main.m in Sources */,
+				BDF1758818C3D550008BD9C6 /* CRLMethodLogFormatter.m in Sources */,
 				BDDB996C18C3943B003EBC42 /* CRLViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -528,6 +520,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

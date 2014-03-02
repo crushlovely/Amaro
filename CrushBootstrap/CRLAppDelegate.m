@@ -13,6 +13,7 @@
 #import <CocoaLumberjack/DDASLLogger.h>
 #import <CocoaLumberjack/DDTTYLogger.h>
 #import <CrashlyticsLumberjack/CrashlyticsLogger.h>
+#import "CRLMethodLogFormatter.h"
 
 @implementation CRLAppDelegate
 
@@ -21,15 +22,19 @@
     [Crashlytics startWithAPIKey:@"c8472ec808f54475648e7963858199db751e8608"];
     
     // Emulate NSLog behavior for DDLog*
+    [[DDASLLogger sharedInstance] setLogFormatter:[[CRLMethodLogFormatter alloc] init]];
+    [[DDTTYLogger sharedInstance] setLogFormatter:[[CRLMethodLogFormatter alloc] init]];
+
     [DDLog addLogger:[DDASLLogger sharedInstance]];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     
     // Send warning & error messages to Crashlytics
+    [[CrashlyticsLogger sharedInstance] setLogFormatter:[[CRLMethodLogFormatter alloc] init]];
     [DDLog addLogger:[CrashlyticsLogger sharedInstance] withLogLevel:LOG_LEVEL_WARN];
     
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
