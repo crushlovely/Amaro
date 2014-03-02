@@ -127,7 +127,10 @@
 				BDDB995118C3943B003EBC42 /* Frameworks */,
 				BDDB995018C3943B003EBC42 /* Products */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
+			usesTabs = 0;
 		};
 		BDDB995018C3943B003EBC42 /* Products */ = {
 			isa = PBXGroup;

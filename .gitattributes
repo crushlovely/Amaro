@@ -1,0 +1,4 @@
+# Have git treat project files in such a way that it just merges, without trying to fix whitespace.
+# See http://robots.thoughtbot.com/xcode-and-git-bridging-the-gap
+# The diff=cat lets us still see diffs on the command line.
+*.pbxproj binary merge=union diff=cat
