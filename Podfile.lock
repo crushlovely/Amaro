@@ -1,1 +1,21 @@
+PODS:
+  - CocoaLumberjack (1.8.1):
+    - CocoaLumberjack/Extensions
+  - CocoaLumberjack/Core (1.8.1)
+  - CocoaLumberjack/Extensions (1.8.1):
+    - CocoaLumberjack/Core
+  - CrashlyticsFramework (2.1.6)
+  - CrashlyticsLumberjack (1.0.1):
+    - CocoaLumberjack/Core
+
+DEPENDENCIES:
+  - CocoaLumberjack
+  - CrashlyticsFramework
+  - CrashlyticsLumberjack
+
+SPEC CHECKSUMS:
+  CocoaLumberjack: 020378ec400d658923bf5887178394f65f052c90
+  CrashlyticsFramework: c45a8807d10d2995f50d9250e7b44d40afad6847
+  CrashlyticsLumberjack: 8ee2adbd0f815d8b111e5f72cd82d39b08430ebc
+
 COCOAPODS: 0.29.0

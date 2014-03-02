@@ -8,11 +8,25 @@
 
 #import "CRLAppDelegate.h"
 
+#import <Crashlytics/Crashlytics.h>
+
+#import <CocoaLumberjack/DDASLLogger.h>
+#import <CocoaLumberjack/DDTTYLogger.h>
+#import <CrashlyticsLumberjack/CrashlyticsLogger.h>
+
 @implementation CRLAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [Crashlytics startWithAPIKey:@"c8472ec808f54475648e7963858199db751e8608"];
+    
+    // Emulate NSLog behavior for DDLog*
+    [DDLog addLogger:[DDASLLogger sharedInstance]];
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    
+    // Send warning & error messages to Crashlytics
+    [DDLog addLogger:[CrashlyticsLogger sharedInstance] withLogLevel:LOG_LEVEL_WARN];
+    
     return YES;
 }
 							

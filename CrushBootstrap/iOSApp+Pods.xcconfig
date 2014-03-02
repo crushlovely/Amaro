@@ -1,0 +1,4 @@
+// A meta-xcconfig needed to incorporate that of CocoaPods and the xcconfigs one.
+
+#include "../Pods/Pods.xcconfig"
+#include "../external/xcconfigs/iOS/iOS-Application.xcconfig"
