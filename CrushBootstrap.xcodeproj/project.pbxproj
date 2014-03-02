@@ -1,0 +1,758 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BDDB995318C3943B003EBC42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995218C3943B003EBC42 /* Foundation.framework */; };
+		BDDB995518C3943B003EBC42 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995418C3943B003EBC42 /* CoreGraphics.framework */; };
+		BDDB995718C3943B003EBC42 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995618C3943B003EBC42 /* UIKit.framework */; };
+		BDDB995D18C3943B003EBC42 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BDDB995B18C3943B003EBC42 /* InfoPlist.strings */; };
+		BDDB995F18C3943B003EBC42 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDB995E18C3943B003EBC42 /* main.m */; };
+		BDDB996318C3943B003EBC42 /* CRLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDB996218C3943B003EBC42 /* CRLAppDelegate.m */; };
+		BDDB996618C3943B003EBC42 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDDB996418C3943B003EBC42 /* Main_iPhone.storyboard */; };
+		BDDB996918C3943B003EBC42 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDDB996718C3943B003EBC42 /* Main_iPad.storyboard */; };
+		BDDB996C18C3943B003EBC42 /* CRLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDB996B18C3943B003EBC42 /* CRLViewController.m */; };
+		BDDB996E18C3943B003EBC42 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDDB996D18C3943B003EBC42 /* Images.xcassets */; };
+		BDDB997518C3943B003EBC42 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB997418C3943B003EBC42 /* XCTest.framework */; };
+		BDDB997618C3943B003EBC42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995218C3943B003EBC42 /* Foundation.framework */; };
+		BDDB997718C3943B003EBC42 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995618C3943B003EBC42 /* UIKit.framework */; };
+		BDDB997F18C3943B003EBC42 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BDDB997D18C3943B003EBC42 /* InfoPlist.strings */; };
+		BDDB998118C3943B003EBC42 /* CrushBootstrapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDB998018C3943B003EBC42 /* CrushBootstrapTests.m */; };
+		BDF1756518C3972E008BD9C6 /* Common.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1755118C3972E008BD9C6 /* Common.xcconfig */; };
+		BDF1756618C3972E008BD9C6 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1755318C3972E008BD9C6 /* Debug.xcconfig */; };
+		BDF1756718C3972E008BD9C6 /* Profile.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1755418C3972E008BD9C6 /* Profile.xcconfig */; };
+		BDF1756818C3972E008BD9C6 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1755518C3972E008BD9C6 /* Release.xcconfig */; };
+		BDF1756918C3972E008BD9C6 /* Test.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1755618C3972E008BD9C6 /* Test.xcconfig */; };
+		BDF1756A18C3972E008BD9C6 /* Application.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1755818C3972E008BD9C6 /* Application.xcconfig */; };
+		BDF1756B18C3972E008BD9C6 /* StaticLibrary.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1755918C3972E008BD9C6 /* StaticLibrary.xcconfig */; };
+		BDF1756C18C3972E008BD9C6 /* iOS-Application.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1755B18C3972E008BD9C6 /* iOS-Application.xcconfig */; };
+		BDF1756D18C3972E008BD9C6 /* iOS-Base.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1755C18C3972E008BD9C6 /* iOS-Base.xcconfig */; };
+		BDF1756E18C3972E008BD9C6 /* iOS-StaticLibrary.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1755D18C3972E008BD9C6 /* iOS-StaticLibrary.xcconfig */; };
+		BDF1756F18C3972E008BD9C6 /* Mac-Application.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1755F18C3972E008BD9C6 /* Mac-Application.xcconfig */; };
+		BDF1757018C3972E008BD9C6 /* Mac-Base.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1756018C3972E008BD9C6 /* Mac-Base.xcconfig */; };
+		BDF1757118C3972E008BD9C6 /* Mac-DynamicLibrary.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1756118C3972E008BD9C6 /* Mac-DynamicLibrary.xcconfig */; };
+		BDF1757218C3972E008BD9C6 /* Mac-Framework.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1756218C3972E008BD9C6 /* Mac-Framework.xcconfig */; };
+		BDF1757318C3972E008BD9C6 /* Mac-StaticLibrary.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BDF1756318C3972E008BD9C6 /* Mac-StaticLibrary.xcconfig */; };
+		BDF1757418C3972E008BD9C6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BDF1756418C3972E008BD9C6 /* README.md */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BDDB997818C3943B003EBC42 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BDDB994718C3943B003EBC42 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BDDB994E18C3943B003EBC42;
+			remoteInfo = CrushBootstrap;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BDDB994F18C3943B003EBC42 /* CrushBootstrap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrushBootstrap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDDB995218C3943B003EBC42 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BDDB995418C3943B003EBC42 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		BDDB995618C3943B003EBC42 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		BDDB995A18C3943B003EBC42 /* CrushBootstrap-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CrushBootstrap-Info.plist"; sourceTree = "<group>"; };
+		BDDB995C18C3943B003EBC42 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BDDB995E18C3943B003EBC42 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BDDB996018C3943B003EBC42 /* CrushBootstrap-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CrushBootstrap-Prefix.pch"; sourceTree = "<group>"; };
+		BDDB996118C3943B003EBC42 /* CRLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRLAppDelegate.h; sourceTree = "<group>"; };
+		BDDB996218C3943B003EBC42 /* CRLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRLAppDelegate.m; sourceTree = "<group>"; };
+		BDDB996518C3943B003EBC42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		BDDB996818C3943B003EBC42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		BDDB996A18C3943B003EBC42 /* CRLViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRLViewController.h; sourceTree = "<group>"; };
+		BDDB996B18C3943B003EBC42 /* CRLViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRLViewController.m; sourceTree = "<group>"; };
+		BDDB996D18C3943B003EBC42 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		BDDB997318C3943B003EBC42 /* CrushBootstrapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrushBootstrapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDDB997418C3943B003EBC42 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		BDDB997C18C3943B003EBC42 /* CrushBootstrapTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CrushBootstrapTests-Info.plist"; sourceTree = "<group>"; };
+		BDDB997E18C3943B003EBC42 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BDDB998018C3943B003EBC42 /* CrushBootstrapTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CrushBootstrapTests.m; sourceTree = "<group>"; };
+		BDF1755118C3972E008BD9C6 /* Common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
+		BDF1755318C3972E008BD9C6 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		BDF1755418C3972E008BD9C6 /* Profile.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Profile.xcconfig; sourceTree = "<group>"; };
+		BDF1755518C3972E008BD9C6 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		BDF1755618C3972E008BD9C6 /* Test.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Test.xcconfig; sourceTree = "<group>"; };
+		BDF1755818C3972E008BD9C6 /* Application.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Application.xcconfig; sourceTree = "<group>"; };
+		BDF1755918C3972E008BD9C6 /* StaticLibrary.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = StaticLibrary.xcconfig; sourceTree = "<group>"; };
+		BDF1755B18C3972E008BD9C6 /* iOS-Application.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "iOS-Application.xcconfig"; sourceTree = "<group>"; };
+		BDF1755C18C3972E008BD9C6 /* iOS-Base.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "iOS-Base.xcconfig"; sourceTree = "<group>"; };
+		BDF1755D18C3972E008BD9C6 /* iOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "iOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
+		BDF1755F18C3972E008BD9C6 /* Mac-Application.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mac-Application.xcconfig"; sourceTree = "<group>"; };
+		BDF1756018C3972E008BD9C6 /* Mac-Base.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mac-Base.xcconfig"; sourceTree = "<group>"; };
+		BDF1756118C3972E008BD9C6 /* Mac-DynamicLibrary.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mac-DynamicLibrary.xcconfig"; sourceTree = "<group>"; };
+		BDF1756218C3972E008BD9C6 /* Mac-Framework.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mac-Framework.xcconfig"; sourceTree = "<group>"; };
+		BDF1756318C3972E008BD9C6 /* Mac-StaticLibrary.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mac-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
+		BDF1756418C3972E008BD9C6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BDDB994C18C3943B003EBC42 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDDB995518C3943B003EBC42 /* CoreGraphics.framework in Frameworks */,
+				BDDB995718C3943B003EBC42 /* UIKit.framework in Frameworks */,
+				BDDB995318C3943B003EBC42 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BDDB997018C3943B003EBC42 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDDB997518C3943B003EBC42 /* XCTest.framework in Frameworks */,
+				BDDB997718C3943B003EBC42 /* UIKit.framework in Frameworks */,
+				BDDB997618C3943B003EBC42 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BDDB994618C3943B003EBC42 = {
+			isa = PBXGroup;
+			children = (
+				BDF1754E18C3972E008BD9C6 /* external */,
+				BDDB995818C3943B003EBC42 /* CrushBootstrap */,
+				BDDB997A18C3943B003EBC42 /* CrushBootstrapTests */,
+				BDDB995118C3943B003EBC42 /* Frameworks */,
+				BDDB995018C3943B003EBC42 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BDDB995018C3943B003EBC42 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BDDB994F18C3943B003EBC42 /* CrushBootstrap.app */,
+				BDDB997318C3943B003EBC42 /* CrushBootstrapTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BDDB995118C3943B003EBC42 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BDDB995218C3943B003EBC42 /* Foundation.framework */,
+				BDDB995418C3943B003EBC42 /* CoreGraphics.framework */,
+				BDDB995618C3943B003EBC42 /* UIKit.framework */,
+				BDDB997418C3943B003EBC42 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BDDB995818C3943B003EBC42 /* CrushBootstrap */ = {
+			isa = PBXGroup;
+			children = (
+				BDDB996118C3943B003EBC42 /* CRLAppDelegate.h */,
+				BDDB996218C3943B003EBC42 /* CRLAppDelegate.m */,
+				BDDB996418C3943B003EBC42 /* Main_iPhone.storyboard */,
+				BDDB996718C3943B003EBC42 /* Main_iPad.storyboard */,
+				BDDB996A18C3943B003EBC42 /* CRLViewController.h */,
+				BDDB996B18C3943B003EBC42 /* CRLViewController.m */,
+				BDDB996D18C3943B003EBC42 /* Images.xcassets */,
+				BDDB995918C3943B003EBC42 /* Supporting Files */,
+			);
+			path = CrushBootstrap;
+			sourceTree = "<group>";
+		};
+		BDDB995918C3943B003EBC42 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BDDB995A18C3943B003EBC42 /* CrushBootstrap-Info.plist */,
+				BDDB995B18C3943B003EBC42 /* InfoPlist.strings */,
+				BDDB995E18C3943B003EBC42 /* main.m */,
+				BDDB996018C3943B003EBC42 /* CrushBootstrap-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BDDB997A18C3943B003EBC42 /* CrushBootstrapTests */ = {
+			isa = PBXGroup;
+			children = (
+				BDDB998018C3943B003EBC42 /* CrushBootstrapTests.m */,
+				BDDB997B18C3943B003EBC42 /* Supporting Files */,
+			);
+			path = CrushBootstrapTests;
+			sourceTree = "<group>";
+		};
+		BDDB997B18C3943B003EBC42 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BDDB997C18C3943B003EBC42 /* CrushBootstrapTests-Info.plist */,
+				BDDB997D18C3943B003EBC42 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BDF1754E18C3972E008BD9C6 /* external */ = {
+			isa = PBXGroup;
+			children = (
+				BDF1754F18C3972E008BD9C6 /* xcconfigs */,
+			);
+			path = external;
+			sourceTree = "<group>";
+		};
+		BDF1754F18C3972E008BD9C6 /* xcconfigs */ = {
+			isa = PBXGroup;
+			children = (
+				BDF1755018C3972E008BD9C6 /* Base */,
+				BDF1755A18C3972E008BD9C6 /* iOS */,
+				BDF1755E18C3972E008BD9C6 /* Mac OS X */,
+				BDF1756418C3972E008BD9C6 /* README.md */,
+			);
+			path = xcconfigs;
+			sourceTree = "<group>";
+		};
+		BDF1755018C3972E008BD9C6 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				BDF1755118C3972E008BD9C6 /* Common.xcconfig */,
+				BDF1755218C3972E008BD9C6 /* Configurations */,
+				BDF1755718C3972E008BD9C6 /* Targets */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		BDF1755218C3972E008BD9C6 /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				BDF1755318C3972E008BD9C6 /* Debug.xcconfig */,
+				BDF1755418C3972E008BD9C6 /* Profile.xcconfig */,
+				BDF1755518C3972E008BD9C6 /* Release.xcconfig */,
+				BDF1755618C3972E008BD9C6 /* Test.xcconfig */,
+			);
+			path = Configurations;
+			sourceTree = "<group>";
+		};
+		BDF1755718C3972E008BD9C6 /* Targets */ = {
+			isa = PBXGroup;
+			children = (
+				BDF1755818C3972E008BD9C6 /* Application.xcconfig */,
+				BDF1755918C3972E008BD9C6 /* StaticLibrary.xcconfig */,
+			);
+			path = Targets;
+			sourceTree = "<group>";
+		};
+		BDF1755A18C3972E008BD9C6 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				BDF1755B18C3972E008BD9C6 /* iOS-Application.xcconfig */,
+				BDF1755C18C3972E008BD9C6 /* iOS-Base.xcconfig */,
+				BDF1755D18C3972E008BD9C6 /* iOS-StaticLibrary.xcconfig */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		BDF1755E18C3972E008BD9C6 /* Mac OS X */ = {
+			isa = PBXGroup;
+			children = (
+				BDF1755F18C3972E008BD9C6 /* Mac-Application.xcconfig */,
+				BDF1756018C3972E008BD9C6 /* Mac-Base.xcconfig */,
+				BDF1756118C3972E008BD9C6 /* Mac-DynamicLibrary.xcconfig */,
+				BDF1756218C3972E008BD9C6 /* Mac-Framework.xcconfig */,
+				BDF1756318C3972E008BD9C6 /* Mac-StaticLibrary.xcconfig */,
+			);
+			path = "Mac OS X";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BDDB994E18C3943B003EBC42 /* CrushBootstrap */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BDDB998418C3943B003EBC42 /* Build configuration list for PBXNativeTarget "CrushBootstrap" */;
+			buildPhases = (
+				BDDB994B18C3943B003EBC42 /* Sources */,
+				BDDB994C18C3943B003EBC42 /* Frameworks */,
+				BDDB994D18C3943B003EBC42 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CrushBootstrap;
+			productName = CrushBootstrap;
+			productReference = BDDB994F18C3943B003EBC42 /* CrushBootstrap.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BDDB997218C3943B003EBC42 /* CrushBootstrapTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BDDB998718C3943B003EBC42 /* Build configuration list for PBXNativeTarget "CrushBootstrapTests" */;
+			buildPhases = (
+				BDDB996F18C3943B003EBC42 /* Sources */,
+				BDDB997018C3943B003EBC42 /* Frameworks */,
+				BDDB997118C3943B003EBC42 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BDDB997918C3943B003EBC42 /* PBXTargetDependency */,
+			);
+			name = CrushBootstrapTests;
+			productName = CrushBootstrapTests;
+			productReference = BDDB997318C3943B003EBC42 /* CrushBootstrapTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BDDB994718C3943B003EBC42 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = CRL;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Crush & Lovely";
+				TargetAttributes = {
+					BDDB997218C3943B003EBC42 = {
+						TestTargetID = BDDB994E18C3943B003EBC42;
+					};
+				};
+			};
+			buildConfigurationList = BDDB994A18C3943B003EBC42 /* Build configuration list for PBXProject "CrushBootstrap" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BDDB994618C3943B003EBC42;
+			productRefGroup = BDDB995018C3943B003EBC42 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BDDB994E18C3943B003EBC42 /* CrushBootstrap */,
+				BDDB997218C3943B003EBC42 /* CrushBootstrapTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BDDB994D18C3943B003EBC42 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDF1756818C3972E008BD9C6 /* Release.xcconfig in Resources */,
+				BDF1756F18C3972E008BD9C6 /* Mac-Application.xcconfig in Resources */,
+				BDF1757418C3972E008BD9C6 /* README.md in Resources */,
+				BDF1756A18C3972E008BD9C6 /* Application.xcconfig in Resources */,
+				BDF1756518C3972E008BD9C6 /* Common.xcconfig in Resources */,
+				BDF1756B18C3972E008BD9C6 /* StaticLibrary.xcconfig in Resources */,
+				BDDB996918C3943B003EBC42 /* Main_iPad.storyboard in Resources */,
+				BDF1756718C3972E008BD9C6 /* Profile.xcconfig in Resources */,
+				BDF1756618C3972E008BD9C6 /* Debug.xcconfig in Resources */,
+				BDDB996E18C3943B003EBC42 /* Images.xcassets in Resources */,
+				BDF1757318C3972E008BD9C6 /* Mac-StaticLibrary.xcconfig in Resources */,
+				BDF1757018C3972E008BD9C6 /* Mac-Base.xcconfig in Resources */,
+				BDF1756E18C3972E008BD9C6 /* iOS-StaticLibrary.xcconfig in Resources */,
+				BDDB996618C3943B003EBC42 /* Main_iPhone.storyboard in Resources */,
+				BDF1756D18C3972E008BD9C6 /* iOS-Base.xcconfig in Resources */,
+				BDDB995D18C3943B003EBC42 /* InfoPlist.strings in Resources */,
+				BDF1756918C3972E008BD9C6 /* Test.xcconfig in Resources */,
+				BDF1757218C3972E008BD9C6 /* Mac-Framework.xcconfig in Resources */,
+				BDF1756C18C3972E008BD9C6 /* iOS-Application.xcconfig in Resources */,
+				BDF1757118C3972E008BD9C6 /* Mac-DynamicLibrary.xcconfig in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BDDB997118C3943B003EBC42 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDDB997F18C3943B003EBC42 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BDDB994B18C3943B003EBC42 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDDB996318C3943B003EBC42 /* CRLAppDelegate.m in Sources */,
+				BDDB995F18C3943B003EBC42 /* main.m in Sources */,
+				BDDB996C18C3943B003EBC42 /* CRLViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BDDB996F18C3943B003EBC42 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDDB998118C3943B003EBC42 /* CrushBootstrapTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BDDB997918C3943B003EBC42 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BDDB994E18C3943B003EBC42 /* CrushBootstrap */;
+			targetProxy = BDDB997818C3943B003EBC42 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BDDB995B18C3943B003EBC42 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BDDB995C18C3943B003EBC42 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		BDDB996418C3943B003EBC42 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BDDB996518C3943B003EBC42 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		BDDB996718C3943B003EBC42 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BDDB996818C3943B003EBC42 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		BDDB997D18C3943B003EBC42 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BDDB997E18C3943B003EBC42 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BDDB998218C3943B003EBC42 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDF1755318C3972E008BD9C6 /* Debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BDDB998318C3943B003EBC42 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDF1755518C3972E008BD9C6 /* Release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BDDB998518C3943B003EBC42 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDF1755B18C3972E008BD9C6 /* iOS-Application.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CrushBootstrap/CrushBootstrap-Prefix.pch";
+				INFOPLIST_FILE = "CrushBootstrap/CrushBootstrap-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BDDB998618C3943B003EBC42 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDF1755B18C3972E008BD9C6 /* iOS-Application.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CrushBootstrap/CrushBootstrap-Prefix.pch";
+				INFOPLIST_FILE = "CrushBootstrap/CrushBootstrap-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		BDDB998818C3943B003EBC42 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDF1755B18C3972E008BD9C6 /* iOS-Application.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CrushBootstrap.app/CrushBootstrap";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CrushBootstrap/CrushBootstrap-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "CrushBootstrapTests/CrushBootstrapTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		BDDB998918C3943B003EBC42 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDF1755B18C3972E008BD9C6 /* iOS-Application.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CrushBootstrap.app/CrushBootstrap";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CrushBootstrap/CrushBootstrap-Prefix.pch";
+				INFOPLIST_FILE = "CrushBootstrapTests/CrushBootstrapTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		BDF1757A18C3986D008BD9C6 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDF1755418C3972E008BD9C6 /* Profile.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Profile;
+		};
+		BDF1757B18C3986D008BD9C6 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDF1755B18C3972E008BD9C6 /* iOS-Application.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CrushBootstrap/CrushBootstrap-Prefix.pch";
+				INFOPLIST_FILE = "CrushBootstrap/CrushBootstrap-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Profile;
+		};
+		BDF1757C18C3986D008BD9C6 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDF1755B18C3972E008BD9C6 /* iOS-Application.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CrushBootstrap.app/CrushBootstrap";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CrushBootstrap/CrushBootstrap-Prefix.pch";
+				INFOPLIST_FILE = "CrushBootstrapTests/CrushBootstrapTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Profile;
+		};
+		BDF1757D18C39BD3008BD9C6 /* Test */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDF1755618C3972E008BD9C6 /* Test.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Test;
+		};
+		BDF1757E18C39BD3008BD9C6 /* Test */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDF1755B18C3972E008BD9C6 /* iOS-Application.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CrushBootstrap/CrushBootstrap-Prefix.pch";
+				INFOPLIST_FILE = "CrushBootstrap/CrushBootstrap-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Test;
+		};
+		BDF1757F18C39BD3008BD9C6 /* Test */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDF1755B18C3972E008BD9C6 /* iOS-Application.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CrushBootstrap.app/CrushBootstrap";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CrushBootstrap/CrushBootstrap-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "CrushBootstrapTests/CrushBootstrapTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Test;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BDDB994A18C3943B003EBC42 /* Build configuration list for PBXProject "CrushBootstrap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BDDB998218C3943B003EBC42 /* Debug */,
+				BDF1757D18C39BD3008BD9C6 /* Test */,
+				BDDB998318C3943B003EBC42 /* Release */,
+				BDF1757A18C3986D008BD9C6 /* Profile */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BDDB998418C3943B003EBC42 /* Build configuration list for PBXNativeTarget "CrushBootstrap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BDDB998518C3943B003EBC42 /* Debug */,
+				BDF1757E18C39BD3008BD9C6 /* Test */,
+				BDDB998618C3943B003EBC42 /* Release */,
+				BDF1757B18C3986D008BD9C6 /* Profile */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BDDB998718C3943B003EBC42 /* Build configuration list for PBXNativeTarget "CrushBootstrapTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BDDB998818C3943B003EBC42 /* Debug */,
+				BDF1757F18C39BD3008BD9C6 /* Test */,
+				BDDB998918C3943B003EBC42 /* Release */,
+				BDF1757C18C3986D008BD9C6 /* Profile */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BDDB994718C3943B003EBC42 /* Project object */;
+}
