@@ -185,7 +185,7 @@ git submodule -q update --init --recursive
 pod install --silent
 
 git add Podfile.lock
-git rm tiramisu.sh
+git rm -q tiramisu.sh
 git commit -q -m "[CrushBootstrap] Add Podfile.lock and remove init script"
 
 echo "Done"
