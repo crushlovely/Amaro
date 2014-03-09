@@ -1,12 +1,12 @@
 //
-//  CRLAppDelegate.m
+//  CRBSAppDelegate.m
 //  CrushBootstrap
 //
 //  Created by Tim Clem on 3/2/14.
 //  Copyright (c) 2014 Crush & Lovely. All rights reserved.
 //
 
-#import "CRLAppDelegate.h"
+#import "CRBSAppDelegate.h"
 
 #import <Crashlytics/Crashlytics.h>
 
@@ -15,7 +15,7 @@
 #import <CrashlyticsLumberjack/CrashlyticsLogger.h>
 #import <CRLLib/CRLMethodLogFormatter.h>
 
-@implementation CRLAppDelegate
+@implementation CRBSAppDelegate
 
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

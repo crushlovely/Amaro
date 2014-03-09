@@ -1,5 +1,5 @@
 //
-//  CRLAppDelegate.h
+//  CRBSAppDelegate.h
 //  CrushBootstrap
 //
 //  Created by Tim Clem on 3/2/14.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CRLAppDelegate : UIResponder <UIApplicationDelegate>
+@interface CRBSAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

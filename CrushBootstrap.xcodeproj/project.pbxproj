@@ -13,10 +13,10 @@
 		BDDB995718C3943B003EBC42 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995618C3943B003EBC42 /* UIKit.framework */; };
 		BDDB995D18C3943B003EBC42 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BDDB995B18C3943B003EBC42 /* InfoPlist.strings */; };
 		BDDB995F18C3943B003EBC42 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDB995E18C3943B003EBC42 /* main.m */; };
-		BDDB996318C3943B003EBC42 /* CRLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDB996218C3943B003EBC42 /* CRLAppDelegate.m */; };
+		BDDB996318C3943B003EBC42 /* CRBSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDB996218C3943B003EBC42 /* CRBSAppDelegate.m */; };
 		BDDB996618C3943B003EBC42 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDDB996418C3943B003EBC42 /* Main_iPhone.storyboard */; };
 		BDDB996918C3943B003EBC42 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDDB996718C3943B003EBC42 /* Main_iPad.storyboard */; };
-		BDDB996C18C3943B003EBC42 /* CRLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDB996B18C3943B003EBC42 /* CRLViewController.m */; };
+		BDDB996C18C3943B003EBC42 /* CRBSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDB996B18C3943B003EBC42 /* CRBSViewController.m */; };
 		BDDB996E18C3943B003EBC42 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDDB996D18C3943B003EBC42 /* Images.xcassets */; };
 		BDDB997518C3943B003EBC42 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB997418C3943B003EBC42 /* XCTest.framework */; };
 		BDDB997618C3943B003EBC42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995218C3943B003EBC42 /* Foundation.framework */; };
@@ -47,12 +47,12 @@
 		BDDB995C18C3943B003EBC42 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BDDB995E18C3943B003EBC42 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BDDB996018C3943B003EBC42 /* CrushBootstrap-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CrushBootstrap-Prefix.pch"; sourceTree = "<group>"; };
-		BDDB996118C3943B003EBC42 /* CRLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRLAppDelegate.h; sourceTree = "<group>"; };
-		BDDB996218C3943B003EBC42 /* CRLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRLAppDelegate.m; sourceTree = "<group>"; };
+		BDDB996118C3943B003EBC42 /* CRBSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRBSAppDelegate.h; sourceTree = "<group>"; };
+		BDDB996218C3943B003EBC42 /* CRBSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRBSAppDelegate.m; sourceTree = "<group>"; };
 		BDDB996518C3943B003EBC42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		BDDB996818C3943B003EBC42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		BDDB996A18C3943B003EBC42 /* CRLViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRLViewController.h; sourceTree = "<group>"; };
-		BDDB996B18C3943B003EBC42 /* CRLViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRLViewController.m; sourceTree = "<group>"; };
+		BDDB996A18C3943B003EBC42 /* CRBSViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRBSViewController.h; sourceTree = "<group>"; };
+		BDDB996B18C3943B003EBC42 /* CRBSViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRBSViewController.m; sourceTree = "<group>"; };
 		BDDB996D18C3943B003EBC42 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BDDB997318C3943B003EBC42 /* CrushBootstrapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrushBootstrapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDDB997418C3943B003EBC42 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -141,12 +141,12 @@
 		BDDB995818C3943B003EBC42 /* CrushBootstrap */ = {
 			isa = PBXGroup;
 			children = (
-				BDDB996118C3943B003EBC42 /* CRLAppDelegate.h */,
-				BDDB996218C3943B003EBC42 /* CRLAppDelegate.m */,
+				BDDB996118C3943B003EBC42 /* CRBSAppDelegate.h */,
+				BDDB996218C3943B003EBC42 /* CRBSAppDelegate.m */,
 				BDDB996418C3943B003EBC42 /* Main_iPhone.storyboard */,
 				BDDB996718C3943B003EBC42 /* Main_iPad.storyboard */,
-				BDDB996A18C3943B003EBC42 /* CRLViewController.h */,
-				BDDB996B18C3943B003EBC42 /* CRLViewController.m */,
+				BDDB996A18C3943B003EBC42 /* CRBSViewController.h */,
+				BDDB996B18C3943B003EBC42 /* CRBSViewController.m */,
 				BDDB996D18C3943B003EBC42 /* Images.xcassets */,
 				BDDB995918C3943B003EBC42 /* Supporting Files */,
 			);
@@ -302,7 +302,7 @@
 		BDDB994718C3943B003EBC42 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = CRL;
+				CLASSPREFIX = CRBS;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Crush & Lovely";
 				TargetAttributes = {
@@ -404,9 +404,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDDB996318C3943B003EBC42 /* CRLAppDelegate.m in Sources */,
+				BDDB996318C3943B003EBC42 /* CRBSAppDelegate.m in Sources */,
 				BDDB995F18C3943B003EBC42 /* main.m in Sources */,
-				BDDB996C18C3943B003EBC42 /* CRLViewController.m in Sources */,
+				BDDB996C18C3943B003EBC42 /* CRBSViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

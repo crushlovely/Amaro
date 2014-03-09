@@ -1,19 +1,19 @@
 //
-//  CRLViewController.m
+//  CRBSViewController.m
 //  CrushBootstrap
 //
 //  Created by Tim Clem on 3/2/14.
 //  Copyright (c) 2014 Crush & Lovely. All rights reserved.
 //
 
-#import "CRLViewController.h"
+#import "CRBSViewController.h"
 
-@interface CRLViewController ()
+@interface CRBSViewController ()
 
 @end
 
 
-@implementation CRLViewController
+@implementation CRBSViewController
 
 
 

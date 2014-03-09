@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "CRLAppDelegate.h"
+#import "CRBSAppDelegate.h"
 
 int main(int argc, char * argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([CRLAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([CRBSAppDelegate class]));
     }
 }

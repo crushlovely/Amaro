@@ -6,7 +6,7 @@ set -o pipefail  # Pass the first non-zero exit status through a pipe
 BOOTSTRAP_REPO="git@github.com:misterfifths/CrushBootstrap.git"
 BOOTSTRAP_BRANCH=master
 
-DEFAULT_PREFIX=CRL
+DEFAULT_PREFIX=CRBS
 DEFAULT_PROJECT_NAME=CrushBootstrap
 DEFAULT_FULLNAME=$(dscl . read /Users/`whoami` RealName | sed -n 's/^[\t ]*//;2p')
 
@@ -59,20 +59,16 @@ isBlacklistedPrefix() {
     return 1
 }
 
-read -p "Class prefix (2 or preferably 3 characters; blank for $DEFAULT_PREFIX): " ORIG_PREFIX
+read -p "Class prefix (2 or preferably 3 characters): " ORIG_PREFIX
 PREFIX=$(removeAllWhitespace "$ORIG_PREFIX")
 
-if [[ -z "$PREFIX" ]]; then
-    PREFIX=$DEFAULT_PREFIX
-    ORIG_PREFIX=$DEFAULT_PREFIX
-    echo "  Using $PREFIX prefix"
-fi
 PREFIX=$(echo "$PREFIX" | tr '[:lower:]' '[:upper:]')
 [[ "$PREFIX" != "$ORIG_PREFIX" ]] && echo "  Fixed that for you. Using '$PREFIX'"
 [[ ${#PREFIX} < 2 ]] && die "Prefix is too short"
 [[ ${#PREFIX} > 3 ]] && die "Prefix is too long. Ain't nobody got time to type that."
 [[ $PREFIX =~ ^[A-Z][A-Z0-9]+$ ]] || die "Prefix is an invalid identifier"
 isBlacklistedPrefix "$PREFIX" && die "That prefix is already used by Apple"
+[[ "$PREFIX" == "$DEFAULT_PREFIX" ]] && die "Very funny."
 
 
 ### Full name
@@ -162,7 +158,7 @@ echo "Done"
 echo -n "Updating file contents... "
 
 # Any reference to the project name or the prefix in all files:
-find . -type f -not \( -path './.git/*' -prune \) -exec sed -i '' "s/$DEFAULT_PROJECT_NAME/$PROJECT_NAME/g;s/$DEFAULT_PREFIX/$PREFIX/g" {} +
+find . -type f -not \( -path './.git/*' -prune \) -not -name Podfile -exec sed -i '' "s/$DEFAULT_PROJECT_NAME/$PROJECT_NAME/g;s/$DEFAULT_PREFIX/$PREFIX/g" {} +
 
 # The 'Created by' line in the headers of code files
 TODAY=$(date "+%m/%d/%y" | sed 's/^0//g;s/\/0/\//')  # sed nastiness is to remove leading zeroes from the date format

@@ -1,5 +1,5 @@
 //
-//  CRLViewController.h
+//  CRBSViewController.h
 //  CrushBootstrap
 //
 //  Created by Tim Clem on 3/2/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CRLViewController : UIViewController
+@interface CRBSViewController : UIViewController
 
 @end
