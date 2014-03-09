@@ -7,3 +7,4 @@ pod 'CrashlyticsLumberjack'
 
 pod 'AFNetworking'
 
+pod 'CRLLib', :git => 'https://github.com/misterfifths/CRLLib.git'
