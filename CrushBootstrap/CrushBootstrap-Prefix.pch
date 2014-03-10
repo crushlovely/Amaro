@@ -23,4 +23,15 @@
     #endif
 
     #import <CRLLib/CRLCategoriesAndUtils.h>
+
+    #import <Underscore.m/Underscore.h>
+    #define _ Underscore
+
+    // A lot of the extobjc stuff is a little crazy.
+    // We're including it mainly for 2 things:
+    // The Scope module which gives @weakify and @strongify, and
+    // the KeyPathCoding module which gives @keypath and @collectionkeypath.
+    // Use of any of the other modules is not recommended.
+    #import <libextobjc/EXTScope.h>
+    #import <libextobjc/EXTKeyPathCoding.h>
 #endif
