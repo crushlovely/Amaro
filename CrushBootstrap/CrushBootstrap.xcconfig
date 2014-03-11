@@ -1,0 +1,11 @@
+// Bring in CocoaPods settings and xcconfigs' highly sensible defaults
+#include "../Pods/Pods.xcconfig"
+#include "../external/xcconfigs/iOS/iOS-Application.xcconfig"
+
+
+// Some extra useful warnings:
+CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES
+GCC_WARN_SHADOW = YES
+
+// And tone down xcconfigs a touch:
+GCC_TREAT_WARNINGS_AS_ERRORS = NO

@@ -75,7 +75,7 @@
 		BDF1756218C3972E008BD9C6 /* Mac-Framework.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mac-Framework.xcconfig"; sourceTree = "<group>"; };
 		BDF1756318C3972E008BD9C6 /* Mac-StaticLibrary.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mac-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
 		BDF1756418C3972E008BD9C6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		BDF1758018C39F45008BD9C6 /* iOSApp+Pods.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "iOSApp+Pods.xcconfig"; sourceTree = "<group>"; };
+		BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CrushBootstrap.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,7 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				62199233C093473EAAB5265B /* Pods.xcconfig */,
-				BDF1758018C39F45008BD9C6 /* iOSApp+Pods.xcconfig */,
+				BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */,
 				BDDB995A18C3943B003EBC42 /* CrushBootstrap-Info.plist */,
 				BDDB995B18C3943B003EBC42 /* InfoPlist.strings */,
 				BDDB995E18C3943B003EBC42 /* main.m */,
@@ -265,9 +265,10 @@
 				CE78B447D2424EDEAEAB74EB /* Check Pods Manifest.lock */,
 				BDDB994B18C3943B003EBC42 /* Sources */,
 				BDDB994C18C3943B003EBC42 /* Frameworks */,
+				BD36522718CE89C6009107A7 /* Increment Build Number */,
 				BDDB994D18C3943B003EBC42 /* Resources */,
 				5934C2BEC75D4C51B3689E07 /* Copy Pods Resources */,
-				BDF1758318C3A844008BD9C6 /* ShellScript */,
+				BDF1758318C3A844008BD9C6 /* Crashlytics Script */,
 			);
 			buildRules = (
 			);
@@ -369,13 +370,28 @@
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BDF1758318C3A844008BD9C6 /* ShellScript */ = {
+		BD36522718CE89C6009107A7 /* Increment Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Increment Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
+		};
+		BDF1758318C3A844008BD9C6 /* Crashlytics Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Crashlytics Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -540,7 +556,7 @@
 		};
 		BDDB998518C3943B003EBC42 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* iOSApp+Pods.xcconfig */;
+			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -555,7 +571,7 @@
 		};
 		BDDB998618C3943B003EBC42 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* iOSApp+Pods.xcconfig */;
+			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -569,7 +585,7 @@
 		};
 		BDDB998818C3943B003EBC42 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* iOSApp+Pods.xcconfig */;
+			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CrushBootstrap.app/CrushBootstrap";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -592,7 +608,7 @@
 		};
 		BDDB998918C3943B003EBC42 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* iOSApp+Pods.xcconfig */;
+			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CrushBootstrap.app/CrushBootstrap";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -645,7 +661,7 @@
 		};
 		BDF1757B18C3986D008BD9C6 /* Profile */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* iOSApp+Pods.xcconfig */;
+			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -659,7 +675,7 @@
 		};
 		BDF1757C18C3986D008BD9C6 /* Profile */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* iOSApp+Pods.xcconfig */;
+			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CrushBootstrap.app/CrushBootstrap";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -717,7 +733,7 @@
 		};
 		BDF1757E18C39BD3008BD9C6 /* Test */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* iOSApp+Pods.xcconfig */;
+			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -731,7 +747,7 @@
 		};
 		BDF1757F18C39BD3008BD9C6 /* Test */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* iOSApp+Pods.xcconfig */;
+			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CrushBootstrap.app/CrushBootstrap";
 				FRAMEWORK_SEARCH_PATHS = (
