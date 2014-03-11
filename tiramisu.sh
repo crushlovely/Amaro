@@ -1,5 +1,3 @@
-#!/bin/bash
-
 set -ue  # Bomb on uninitialized variables and non-zero exit statuses
 set -o pipefail  # Pass the first non-zero exit status through a pipe
 
