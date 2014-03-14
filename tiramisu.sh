@@ -211,6 +211,7 @@ read -n1 -p "Would you like to edit your Podfile [y/N]? " EDIT_POD
 echo -n "Initializing submodules and CocoaPods... "
 
 git submodule -q update --init --recursive
+git submodule --quiet foreach 'git checkout -q master'
 pod install --silent
 
 git add Podfile.lock
