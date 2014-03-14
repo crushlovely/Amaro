@@ -9,7 +9,7 @@ DEFAULT_PROJECT_NAME=CrushBootstrap
 DEFAULT_FULLNAME=$(dscl . read /Users/`whoami` RealName | sed -n 's/^[\t ]*//;2p')
 
 die() {
-    echo $1
+    echo -e "\n💀  $1"
     exit 1
 }
 
@@ -21,12 +21,44 @@ removeAllWhitespace() {
     echo $1 | sed 's/[\t ]*//g'
 }
 
+edit() {
+    set +u
+    if [[ -n "$VISUAL" ]]; then $VISUAL "$1"
+    elif [[ -n "$EDITOR" ]]; then $EDITOR "$1"
+    else nano "$1"; fi
+    set -u
+}
+
+friendlyGrep() {
+    local INPUT=""
+    # Grep returns a nonzero exit status if it doesn't match any lines, which we don't want.
+    while read LINE; do
+        if [[ "$LINE" != "\n" && -n "$LINE" ]]; then
+            if [[ -z "$INPUT" ]]; then INPUT="$LINE"
+            else INPUT="$LINE\n$INPUT"; fi
+        fi
+    done
+
+    set +e
+    echo -e "$INPUT" | grep "$@"
+    set -e
+    return 0
+}
+
 ####################
 ### Gathering Info
 ####################
 
-echo "Bootstrapping from branch $BOOTSTRAP_BRANCH of $BOOTSTRAP_REPO"
-echo -e "Allons-y!\n"
+echo
+echo "😸  It's CrushBootstrap v0.1.0!"
+echo -e "We'll be using branch $BOOTSTRAP_BRANCH of $BOOTSTRAP_REPO\n"
+
+
+### Check on deps
+echo -n "Checking environment... "
+type pod >/dev/null 2>&1 || die "You need CocoaPods installed. http://cocoapods.org/#install"
+
+echo -e "👍\n"
 
 
 #### Project Name
@@ -35,7 +67,7 @@ PROJECT_NAME=$(trim "$ORIG_PROJECT_NAME" | tr -s ' ' | tr ' ' '-')
 
 [[ -z "$PROJECT_NAME" ]] && die "Ya gotta enter something!"
 [[ $(dirname -- "$PROJECT_NAME") != "." ]] && die "No paths in your name, silly!"
-[[ "$PROJECT_NAME" != "$ORIG_PROJECT_NAME" ]] && echo "  Fixed that for you. Using '$PROJECT_NAME'"
+[[ "$PROJECT_NAME" != "$ORIG_PROJECT_NAME" ]] && echo " ✨  Fixed that for you. Using '$PROJECT_NAME'"
 [[ -e "$PROJECT_NAME" ]] && die "A file already exists with that name!"
 [[ "$PROJECT_NAME" == "$DEFAULT_PROJECT_NAME" ]] && die "Very funny."
 
@@ -61,7 +93,7 @@ read -p "Class prefix (2 or preferably 3 characters): " ORIG_PREFIX
 PREFIX=$(removeAllWhitespace "$ORIG_PREFIX")
 
 PREFIX=$(echo "$PREFIX" | tr '[:lower:]' '[:upper:]')
-[[ "$PREFIX" != "$ORIG_PREFIX" ]] && echo "  Fixed that for you. Using '$PREFIX'"
+[[ "$PREFIX" != "$ORIG_PREFIX" ]] && echo " ✨  Fixed that for you. Using '$PREFIX'"
 [[ ${#PREFIX} < 2 ]] && die "Prefix is too short"
 [[ ${#PREFIX} > 3 ]] && die "Prefix is too long. Ain't nobody got time to type that."
 [[ $PREFIX =~ ^[A-Z][A-Z0-9]+$ ]] || die "Prefix is an invalid identifier"
@@ -74,11 +106,11 @@ read -p "Your name (blank for $DEFAULT_FULLNAME): " FULLNAME
 FULLNAME=$(trim "$FULLNAME")
 if [[ -z "$FULLNAME" ]]; then
     FULLNAME=$DEFAULT_FULLNAME
-    echo "  Using name $FULLNAME"
+    echo " ✨  Using name $FULLNAME"
 fi
 
 
-echo -e "\nThus ends the interrogation."
+echo -e "\n🎉  Thus ends the interrogation."
 echo -e "Pausing for 3 seconds in case you change your mind. Ctrl+C to abort."
 sleep 3
 echo -e "\n"
@@ -101,21 +133,15 @@ touch README.md
 git add README.md
 git commit -q -m "[CrushBootstrap] Initial commit"
 
-# Re: the nasty grep pipes below...
-# grep returns 1 if it matched something, which set -x thinks is an error code.
-# We could just pipe the whole shebang into true, but we want to know if the
-# original git commands fail. So we have pipefail set globally, and we pipe
-# into a shell where it's off, so we can have true eat grep's return. Ugh...
-
 echo -n "Fetching repository... "
 git remote add bootstrap "$BOOTSTRAP_REPO"
-git fetch -q bootstrap "$BOOTSTRAP_BRANCH" 2>&1 | (set +o pipefail; grep -v 'warning: no common commits' | true)
-echo "Done"
+git fetch -q bootstrap "$BOOTSTRAP_BRANCH" 2>&1 | friendlyGrep -v 'warning: no common commits'
+echo "👍"
 
 echo -n "Merging... "
-git merge -q --squash "remotes/bootstrap/$BOOTSTRAP_BRANCH" 2>&1 | (set +o pipefail; grep -v 'Squash commit -- not updating HEAD|Automatic merge went well' | true)
+git merge -q --squash "remotes/bootstrap/$BOOTSTRAP_BRANCH" 2>&1 | friendlyGrep -v 'Squash commit -- not updating HEAD' | friendlyGrep -v 'Automatic merge went well'
 git commit -q -m "[CrushBootstrap] Bootstrapping..."
-echo "Done"
+echo "👍"
 
 
 ### File renames
@@ -148,7 +174,7 @@ if [[ "$PREFIX" != "$DEFAULT_PREFIX" ]]; then
     find . -type f -name "$DEFAULT_PREFIX*" -not \( -path './.git/*' -prune \) -execdir bash -c 'renamePrefixedFile "$0"' {} \;
 fi
 
-echo "Done"
+echo "👍"
 
 
 ### Content Changes
@@ -162,7 +188,7 @@ find . -type f -not \( -path './.git/*' -prune \) -not -name Podfile -exec sed -
 TODAY=$(date "+%m/%d/%y" | sed 's/^0//g;s/\/0/\//')  # sed nastiness is to remove leading zeroes from the date format
 find . -type f \( -name "*.m" -o -name "*.h" \) -not \( -path './.git/*' -prune \) -exec sed -i '' "s#Created by .* on [0-9].*#Created by $FULLNAME on $TODAY#g" {} +
 
-echo "Done"
+echo "👍"
 
 
 ### And commit!
@@ -170,12 +196,17 @@ echo "Done"
 echo -n "Committing... "
 git add --all
 git commit -q -m "[CrushBootstrap] Bootstrapped"
-echo "Done"
+echo "👍"
 
 
 ####################
 ### Get Usable
 ####################
+
+read -n1 -p "Would you like to edit your Podfile [y/N]? " EDIT_POD
+[[ -z "$EDIT_POD" ]] || echo
+[[ "$EDIT_POD" == "y" || "$EDIT_POD" == "Y" ]] && edit Podfile
+
 
 echo -n "Initializing submodules and CocoaPods... "
 
@@ -186,14 +217,14 @@ git add Podfile.lock
 git rm -q tiramisu.sh
 git commit -q -m "[CrushBootstrap] Add Podfile.lock and remove init script"
 
-echo "Done"
+echo "👍"
 
 
 ####################
 ### All Done
 ####################
 
-echo -e "\nYou're all set!"
+echo -e "\n\n👌️  You're all set! 👌"
 echo "Open $PROJECT_NAME/$PROJECT_NAME.xcworkspace to get started"
-echo "And don't forget to add some prose to $PROJECT_NAME/README.md"
-echo -e "\nXOXO -C&L"
+echo "And don't forget to add some prose to README.md"
+echo -e "\nXOXO -C&L 💋"
