@@ -12,10 +12,13 @@ pod 'CrashlyticsLumberjack'
 pod 'AFNetworking'
 
 # Various goodies
-pod 'libextobjc'
-pod 'Underscore.m'
+pod 'libextobjc'      # Useful macros and some craziness
+pod 'FormatterKit'    # For all your string formatting needs
 
 # You may want...
-#pod 'OMPromises'  # Promises/A+-alike
+#pod 'OMPromises'     # Promises/A+-alike
 #pod 'ReactiveCocoa'  # It's a lifestyle
-#pod 'Mantle' # Github's model framework
+#pod 'Mantle'         # Github's model framework
+#pod 'SSKeychain'
+#pod 'Underscore.m'   # Underscore.js-alike
+
