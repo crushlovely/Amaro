@@ -129,7 +129,7 @@ cd -- "$PROJECT_NAME"
 git init -q
 
 # It's a shame we have to do this, really, but you can't do a squashed merge into an empty repo
-touch README.md
+echo "# $PROJECT_NAME" > README.md
 git add README.md
 git commit -q -m "[CrushBootstrap] Initial commit"
 
@@ -139,7 +139,8 @@ git fetch -q bootstrap "$BOOTSTRAP_BRANCH" 2>&1 | friendlyGrep -v 'warning: no c
 echo "👍"
 
 echo -n "Merging... "
-git merge -q --squash "remotes/bootstrap/$BOOTSTRAP_BRANCH" 2>&1 | friendlyGrep -v 'Squash commit -- not updating HEAD' | friendlyGrep -v 'Automatic merge went well'
+# We're using 'ours' merge option so that our README.md wins
+git merge -q --squash -X ours "remotes/bootstrap/$BOOTSTRAP_BRANCH" 2>&1 | friendlyGrep -v 'Squash commit -- not updating HEAD' | friendlyGrep -v 'Automatic merge went well'
 git commit -q -m "[CrushBootstrap] Bootstrapping..."
 echo "👍"
 
