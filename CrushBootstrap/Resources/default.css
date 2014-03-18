@@ -1,0 +1,20 @@
+/*
+ Styling reference:
+ http://pixate.github.io/pixate-freestyle-ios/style-reference/index.html
+ 
+ iOS 7 pre-installed fonts:
+ http://support.apple.com/kb/HT5878
+ */
+
+freestyle-config {
+    /* Log CSS errors to the console. Feel free to disable this in production. */
+    parse-error-destination: console;
+}
+
+
+label {
+    font-family: "Avenir";
+    font-weight: light;
+    text-align: center;
+    color: #666;
+}

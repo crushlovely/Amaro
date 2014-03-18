@@ -14,6 +14,7 @@ pod 'AFNetworking'
 # Various goodies
 pod 'libextobjc'      # Useful macros and some craziness
 pod 'FormatterKit'    # For all your string formatting needs
+pod 'PixateFreestyle'
 
 # You may want...
 #pod 'OMPromises'     # Promises/A+-alike

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7A1059CDD505490C88A04C84 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D61E01362DD444BBFD6E388 /* libPods.a */; };
+		BD3CA8BC18D8A6D200C993E0 /* default.css in Resources */ = {isa = PBXBuildFile; fileRef = BD3CA8BB18D8A6D200C993E0 /* default.css */; };
 		BDDB995318C3943B003EBC42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995218C3943B003EBC42 /* Foundation.framework */; };
 		BDDB995518C3943B003EBC42 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995418C3943B003EBC42 /* CoreGraphics.framework */; };
 		BDDB995718C3943B003EBC42 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995618C3943B003EBC42 /* UIKit.framework */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		1D61E01362DD444BBFD6E388 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		62199233C093473EAAB5265B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		BD3CA8BB18D8A6D200C993E0 /* default.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = default.css; sourceTree = "<group>"; };
 		BDDB994F18C3943B003EBC42 /* CrushBootstrap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrushBootstrap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDDB995218C3943B003EBC42 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BDDB995418C3943B003EBC42 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -103,11 +105,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BD3CA8BA18D8A68600C993E0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BDDB996D18C3943B003EBC42 /* Images.xcassets */,
+				BD3CA8BB18D8A6D200C993E0 /* default.css */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		BDDB994618C3943B003EBC42 = {
 			isa = PBXGroup;
 			children = (
-				BDF1754E18C3972E008BD9C6 /* external */,
 				BDDB995818C3943B003EBC42 /* CrushBootstrap */,
+				BDF1754E18C3972E008BD9C6 /* External */,
 				BDDB997A18C3943B003EBC42 /* CrushBootstrapTests */,
 				BDDB995118C3943B003EBC42 /* Frameworks */,
 				BDDB995018C3943B003EBC42 /* Products */,
@@ -147,7 +158,7 @@
 				BDDB996718C3943B003EBC42 /* Main_iPad.storyboard */,
 				BDDB996A18C3943B003EBC42 /* CRBSViewController.h */,
 				BDDB996B18C3943B003EBC42 /* CRBSViewController.m */,
-				BDDB996D18C3943B003EBC42 /* Images.xcassets */,
+				BD3CA8BA18D8A68600C993E0 /* Resources */,
 				BDDB995918C3943B003EBC42 /* Supporting Files */,
 			);
 			path = CrushBootstrap;
@@ -184,12 +195,12 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		BDF1754E18C3972E008BD9C6 /* external */ = {
+		BDF1754E18C3972E008BD9C6 /* External */ = {
 			isa = PBXGroup;
 			children = (
 				BDF1754F18C3972E008BD9C6 /* xcconfigs */,
 			);
-			path = external;
+			path = External;
 			sourceTree = "<group>";
 		};
 		BDF1754F18C3972E008BD9C6 /* xcconfigs */ = {
@@ -341,6 +352,7 @@
 				BDDB996E18C3943B003EBC42 /* Images.xcassets in Resources */,
 				BDDB996618C3943B003EBC42 /* Main_iPhone.storyboard in Resources */,
 				BDDB995D18C3943B003EBC42 /* InfoPlist.strings in Resources */,
+				BD3CA8BC18D8A6D200C993E0 /* default.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

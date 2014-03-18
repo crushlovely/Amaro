@@ -15,12 +15,13 @@
 #import <CrashlyticsLumberjack/CrashlyticsLogger.h>
 #import <CRLLib/CRLMethodLogFormatter.h>
 
+
 @implementation CRBSAppDelegate
 
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self initializeLogging];
-    
+
     return YES;
 }
 
