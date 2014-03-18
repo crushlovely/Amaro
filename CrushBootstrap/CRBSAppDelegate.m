@@ -39,7 +39,7 @@
 
     // Send warning & error messages to Crashlytics
     [[CrashlyticsLogger sharedInstance] setLogFormatter:logFormatter];
-    [DDLog addLogger:[CrashlyticsLogger sharedInstance] withLogLevel:LOG_LEVEL_WARN];
+    [DDLog addLogger:[CrashlyticsLogger sharedInstance] withLogLevel:LOG_LEVEL_INFO];
 }
 
 @end
