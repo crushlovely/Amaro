@@ -4,6 +4,12 @@
 //  The contents of this file are implicitly included at the beginning of every source file.
 //
 
+// Pull in tgmath for seamless 32-/64-bit math functions.
+// Due to a nasty clang situation right now (early 2014), we can't just use <tgmath.h>
+// directly. See the note in the header.
+#import <CRLLib/tgmath-stopgap.h>
+
+
 #import <Availability.h>
 
 #ifndef __IPHONE_5_0
