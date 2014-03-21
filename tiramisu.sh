@@ -227,6 +227,10 @@ echo "👍"
 ####################
 
 echo -e "\n\n👌️  You're all set! 👌"
-echo "Open $PROJECT_NAME/$PROJECT_NAME.xcworkspace to get started"
-echo "And don't forget to add some prose to README.md"
+echo "Don't forget to open the .xcworkspace, not the .xcodeproject,"
+echo "and add some prose to README.md!"
 echo -e "\nXOXO -C&L 💋"
+echo
+
+read -n1 -p "Would you like to open the project [Y/n]? " OPEN_PROJECT
+[[ -z "$OPEN_PROJECT" || "$OPEN_PROJECT" == "y" || "$OPEN_PROJECT" == "Y" ]] && open "$PROJECT_NAME.xcworkspace"
