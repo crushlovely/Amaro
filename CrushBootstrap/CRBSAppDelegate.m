@@ -21,6 +21,7 @@
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self initializeLogging];
+    [self applyBuildIconBadge];
 
     return YES;
 }
@@ -40,6 +41,30 @@
     // Send warning & error messages to Crashlytics
     [[CrashlyticsLogger sharedInstance] setLogFormatter:logFormatter];
     [DDLog addLogger:[CrashlyticsLogger sharedInstance] withLogLevel:LOG_LEVEL_INFO];
+}
+
+
+/**
+ Use a private API to badge the application icon with an alpha or beta for internal/ad hoc builds.
+ */
+-(void)applyBuildIconBadge
+{
+#if defined(CONFIGURATION_DEBUG) || defined(CONFIGURATION_ADHOC)
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+    if([[UIApplication sharedApplication] respondsToSelector:@selector(setApplicationBadgeString:)]) {
+        #ifdef CONFIGURATION_DEBUG
+        NSString *badgeString = @"α";
+        #else
+        NSString *badgeString = @"β";
+        #endif
+
+        [[UIApplication sharedApplication] performSelector:@selector(setApplicationBadgeString:) withObject:badgeString];
+    }
+#pragma clang diagnostic pop
+
+#endif
 }
 
 @end
