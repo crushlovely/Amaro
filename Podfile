@@ -1,5 +1,8 @@
 platform :ios, '7.0'
 
+# Inform CocoaPods that we use some custom build configurations
+xcodeproj 'CrushBootstrap', 'AdHoc' => :release, 'Profile' => :release, 'Test' => :debug
+
 # The Crush Bootstrap lib
 pod 'CRLLib', :git => 'https://github.com/misterfifths/CRLLib.git'
 
