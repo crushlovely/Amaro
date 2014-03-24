@@ -183,7 +183,7 @@ echo "👍"
 echo -n "Updating file contents... "
 
 # Any reference to the project name or the prefix in all files:
-find . -type f -not \( -path './.git/*' -prune \) -not -name Podfile -exec sed -i '' "s/$DEFAULT_PROJECT_NAME/$PROJECT_NAME/g;s/$DEFAULT_PREFIX/$PREFIX/g" {} +
+find . -type f -not \( -path './.git/*' -prune \) -exec sed -i '' "s/$DEFAULT_PROJECT_NAME/$PROJECT_NAME/g;s/$DEFAULT_PREFIX/$PREFIX/g" {} +
 
 # The 'Created by' line in the headers of code files
 TODAY=$(date "+%m/%d/%y" | sed 's/^0//g;s/\/0/\//')  # sed nastiness is to remove leading zeroes from the date format
@@ -234,3 +234,4 @@ echo
 
 read -n1 -p "Would you like to open the project [Y/n]? " OPEN_PROJECT
 [[ -z "$OPEN_PROJECT" || "$OPEN_PROJECT" == "y" || "$OPEN_PROJECT" == "Y" ]] && open "$PROJECT_NAME.xcworkspace"
+echo
