@@ -1,7 +1,7 @@
 set -ue  # Bomb on uninitialized variables and non-zero exit statuses
 set -o pipefail  # Pass the first non-zero exit status through a pipe
 
-BOOTSTRAP_REPO="git@github.com:misterfifths/CrushBootstrap.git"
+BOOTSTRAP_REPO="git@github.com:crushlovely/CrushBootstrap.git"
 BOOTSTRAP_BRANCH=master
 
 DEFAULT_PREFIX=CRBS
