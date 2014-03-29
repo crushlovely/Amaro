@@ -8,8 +8,12 @@
 
 SpecBegin(CRBSDummy)
 
-it(@"should be thoroughly tested, y'heard?", ^{
-    expect(YES).to.beTruthy();
+describe(@"YourApp", ^{
+
+    it(@"should be thoroughly tested, y'heard?", ^{
+        expect(YES).to.beTruthy();
+    });
+
 });
 
 SpecEnd

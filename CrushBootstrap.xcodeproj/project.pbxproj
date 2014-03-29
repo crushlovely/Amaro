@@ -430,7 +430,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
+			shellScript = "if [ \"$CONFIGURATION\" != \"Debug\" -a \"$PLATFORM_NAME\" != \"iphonesimulator\" ]; then\n  echo \"Incrementing build number; this is a non-simulator build of non-debug configuration\"\n  buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n  buildNumber=$(($buildNumber + 1))\n  /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\nelse\n  echo \"Not incrementing build number; this is either a simulator build or a debug configuration\"\nfi";
 		};
 		BDF1758318C3A844008BD9C6 /* Crashlytics Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -445,6 +445,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "./Pods/CrashlyticsFramework/Crashlytics.framework/run c8472ec808f54475648e7963858199db751e8608 9d399fbeb1a85d999f7e291175861b5985cd587ab00cf30db29b64582f9a0a31";
+			showEnvVarsInLog = 0;
 		};
 		CE78B447D2424EDEAEAB74EB /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -866,6 +867,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/CrushBootstrap-Prefix.pch";
 				INFOPLIST_FILE = "CrushBootstrap/CrushBootstrap-Info.plist";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv6 armv7 armv7s arm64";
 			};
