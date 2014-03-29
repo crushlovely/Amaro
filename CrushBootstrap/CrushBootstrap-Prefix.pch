@@ -37,4 +37,6 @@
     // Use of any of the other modules is not recommended.
     #import <libextobjc/EXTScope.h>
     #import <libextobjc/EXTKeyPathCoding.h>
+
+    #import <Asterism/Asterism.h>
 #endif

@@ -18,14 +18,15 @@ pod 'AFNetworking'
 pod 'libextobjc'      # Useful macros and some craziness
 pod 'PixateFreestyle' # Style your app with CSS
 pod 'FormatterKit'    # For all your string formatting needs
+pod 'Asterism'        # Nice & fast collection operations
 
 # You may want...
 #pod 'OMPromises'     # Promises/A+-alike
-#pod 'ReactiveCocoa'  # It's a lifestyle
 #pod 'Mantle'         # Github's model framework
 #pod 'SSKeychain'     # Go-to keychain wrapper
-#pod 'Asterism'       # Nice & fast collection operations
 #pod 'DateTools'      # Datetime heavy lifting
+
+
 
 # Testing necessities
 target 'Specs', :exclusive => true do
