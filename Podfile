@@ -24,5 +24,11 @@ pod 'PixateFreestyle'
 #pod 'ReactiveCocoa'  # It's a lifestyle
 #pod 'Mantle'         # Github's model framework
 #pod 'SSKeychain'
-#pod 'Underscore.m'   # Underscore.js-alike
+#pod 'Asterism'       # Nice & fast collection operations
 
+
+target 'Specs', :exclusive => true do
+  pod 'Specta',    '~> 0.2.1'
+  pod 'Expecta',   '~> 0.2.3'
+  pod 'OCMockito', '~> 1.1.0'
+end

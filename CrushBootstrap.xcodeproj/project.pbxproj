@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7A1059CDD505490C88A04C84 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D61E01362DD444BBFD6E388 /* libPods.a */; };
+		9A02F77A5711492A9BF635F8 /* libPods-Specs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EBF96DA068437B82FA86E4 /* libPods-Specs.a */; };
+		BD304C8118E672EA0034105E /* CRBSDummySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BD304C8018E672EA0034105E /* CRBSDummySpec.m */; };
 		BD3CA8BC18D8A6D200C993E0 /* default.css in Resources */ = {isa = PBXBuildFile; fileRef = BD3CA8BB18D8A6D200C993E0 /* default.css */; };
 		BDDB995318C3943B003EBC42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995218C3943B003EBC42 /* Foundation.framework */; };
 		BDDB995518C3943B003EBC42 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995418C3943B003EBC42 /* CoreGraphics.framework */; };
@@ -22,8 +24,6 @@
 		BDDB997518C3943B003EBC42 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB997418C3943B003EBC42 /* XCTest.framework */; };
 		BDDB997618C3943B003EBC42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995218C3943B003EBC42 /* Foundation.framework */; };
 		BDDB997718C3943B003EBC42 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995618C3943B003EBC42 /* UIKit.framework */; };
-		BDDB997F18C3943B003EBC42 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BDDB997D18C3943B003EBC42 /* InfoPlist.strings */; };
-		BDDB998118C3943B003EBC42 /* CrushBootstrapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDB998018C3943B003EBC42 /* CrushBootstrapTests.m */; };
 		BDF1757418C3972E008BD9C6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BDF1756418C3972E008BD9C6 /* README.md */; };
 /* End PBXBuildFile section */
 
@@ -38,9 +38,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Specs.xcconfig"; path = "../Pods/Pods-Specs.xcconfig"; sourceTree = "<group>"; };
 		1D61E01362DD444BBFD6E388 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		62199233C093473EAAB5265B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		BD304C8018E672EA0034105E /* CRBSDummySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBSDummySpec.m; sourceTree = "<group>"; };
 		BD3CA8BB18D8A6D200C993E0 /* default.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = default.css; sourceTree = "<group>"; };
+		BD9FFD9418E66DF4001DF6EC /* Specs-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Specs-Prefix.pch"; sourceTree = "<group>"; };
 		BDDB994F18C3943B003EBC42 /* CrushBootstrap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrushBootstrap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDDB995218C3943B003EBC42 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BDDB995418C3943B003EBC42 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -56,11 +59,9 @@
 		BDDB996A18C3943B003EBC42 /* CRBSViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRBSViewController.h; sourceTree = "<group>"; };
 		BDDB996B18C3943B003EBC42 /* CRBSViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRBSViewController.m; sourceTree = "<group>"; };
 		BDDB996D18C3943B003EBC42 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		BDDB997318C3943B003EBC42 /* CrushBootstrapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrushBootstrapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDDB997318C3943B003EBC42 /* Specs.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Specs.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDDB997418C3943B003EBC42 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		BDDB997C18C3943B003EBC42 /* CrushBootstrapTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CrushBootstrapTests-Info.plist"; sourceTree = "<group>"; };
-		BDDB997E18C3943B003EBC42 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		BDDB998018C3943B003EBC42 /* CrushBootstrapTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CrushBootstrapTests.m; sourceTree = "<group>"; };
+		BDDB997C18C3943B003EBC42 /* Specs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Specs-Info.plist"; sourceTree = "<group>"; };
 		BDF1755118C3972E008BD9C6 /* Common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
 		BDF1755318C3972E008BD9C6 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		BDF1755418C3972E008BD9C6 /* Profile.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Profile.xcconfig; sourceTree = "<group>"; };
@@ -78,6 +79,7 @@
 		BDF1756318C3972E008BD9C6 /* Mac-StaticLibrary.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mac-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
 		BDF1756418C3972E008BD9C6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CrushBootstrap.xcconfig; sourceTree = "<group>"; };
+		E6EBF96DA068437B82FA86E4 /* libPods-Specs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Specs.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				BDDB997518C3943B003EBC42 /* XCTest.framework in Frameworks */,
 				BDDB997718C3943B003EBC42 /* UIKit.framework in Frameworks */,
 				BDDB997618C3943B003EBC42 /* Foundation.framework in Frameworks */,
+				9A02F77A5711492A9BF635F8 /* libPods-Specs.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,8 +121,8 @@
 			isa = PBXGroup;
 			children = (
 				BDDB995818C3943B003EBC42 /* CrushBootstrap */,
+				BDDB997A18C3943B003EBC42 /* Specs */,
 				BDF1754E18C3972E008BD9C6 /* External */,
-				BDDB997A18C3943B003EBC42 /* CrushBootstrapTests */,
 				BDDB995118C3943B003EBC42 /* Frameworks */,
 				BDDB995018C3943B003EBC42 /* Products */,
 			);
@@ -132,7 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				BDDB994F18C3943B003EBC42 /* CrushBootstrap.app */,
-				BDDB997318C3943B003EBC42 /* CrushBootstrapTests.xctest */,
+				BDDB997318C3943B003EBC42 /* Specs.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -145,6 +148,7 @@
 				BDDB995618C3943B003EBC42 /* UIKit.framework */,
 				BDDB997418C3943B003EBC42 /* XCTest.framework */,
 				1D61E01362DD444BBFD6E388 /* libPods.a */,
+				E6EBF96DA068437B82FA86E4 /* libPods-Specs.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -168,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				62199233C093473EAAB5265B /* Pods.xcconfig */,
+				0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */,
 				BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */,
 				BDDB995A18C3943B003EBC42 /* CrushBootstrap-Info.plist */,
 				BDDB995B18C3943B003EBC42 /* InfoPlist.strings */,
@@ -177,20 +182,20 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		BDDB997A18C3943B003EBC42 /* CrushBootstrapTests */ = {
+		BDDB997A18C3943B003EBC42 /* Specs */ = {
 			isa = PBXGroup;
 			children = (
-				BDDB998018C3943B003EBC42 /* CrushBootstrapTests.m */,
+				BD304C8018E672EA0034105E /* CRBSDummySpec.m */,
 				BDDB997B18C3943B003EBC42 /* Supporting Files */,
 			);
-			path = CrushBootstrapTests;
+			path = Specs;
 			sourceTree = "<group>";
 		};
 		BDDB997B18C3943B003EBC42 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				BDDB997C18C3943B003EBC42 /* CrushBootstrapTests-Info.plist */,
-				BDDB997D18C3943B003EBC42 /* InfoPlist.strings */,
+				BDDB997C18C3943B003EBC42 /* Specs-Info.plist */,
+				BD9FFD9418E66DF4001DF6EC /* Specs-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -290,22 +295,24 @@
 			productReference = BDDB994F18C3943B003EBC42 /* CrushBootstrap.app */;
 			productType = "com.apple.product-type.application";
 		};
-		BDDB997218C3943B003EBC42 /* CrushBootstrapTests */ = {
+		BDDB997218C3943B003EBC42 /* Specs */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BDDB998718C3943B003EBC42 /* Build configuration list for PBXNativeTarget "CrushBootstrapTests" */;
+			buildConfigurationList = BDDB998718C3943B003EBC42 /* Build configuration list for PBXNativeTarget "Specs" */;
 			buildPhases = (
+				295A078AF08D45C99B314B81 /* Check Pods Manifest.lock */,
 				BDDB996F18C3943B003EBC42 /* Sources */,
 				BDDB997018C3943B003EBC42 /* Frameworks */,
 				BDDB997118C3943B003EBC42 /* Resources */,
+				A20A1E42928D4423912BE388 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				BDDB997918C3943B003EBC42 /* PBXTargetDependency */,
 			);
-			name = CrushBootstrapTests;
+			name = Specs;
 			productName = CrushBootstrapTests;
-			productReference = BDDB997318C3943B003EBC42 /* CrushBootstrapTests.xctest */;
+			productReference = BDDB997318C3943B003EBC42 /* Specs.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -337,7 +344,7 @@
 			projectRoot = "";
 			targets = (
 				BDDB994E18C3943B003EBC42 /* CrushBootstrap */,
-				BDDB997218C3943B003EBC42 /* CrushBootstrapTests */,
+				BDDB997218C3943B003EBC42 /* Specs */,
 			);
 		};
 /* End PBXProject section */
@@ -360,13 +367,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDDB997F18C3943B003EBC42 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		295A078AF08D45C99B314B81 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		5934C2BEC75D4C51B3689E07 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -380,6 +401,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A20A1E42928D4423912BE388 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-Specs-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BD36522718CE89C6009107A7 /* Increment Build Number */ = {
@@ -442,7 +478,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDDB998118C3943B003EBC42 /* CrushBootstrapTests.m in Sources */,
+				BD304C8118E672EA0034105E /* CRBSDummySpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,14 +515,6 @@
 				BDDB996818C3943B003EBC42 /* Base */,
 			);
 			name = Main_iPad.storyboard;
-			sourceTree = "<group>";
-		};
-		BDDB997D18C3943B003EBC42 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BDDB997E18C3943B003EBC42 /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -549,7 +577,7 @@
 		};
 		BDD67CDD18DFAB85008ECBBD /* AdHoc */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */;
+			baseConfigurationReference = 0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CrushBootstrap.app/CrushBootstrap";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -558,8 +586,8 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CrushBootstrap/CrushBootstrap-Prefix.pch";
-				INFOPLIST_FILE = "CrushBootstrapTests/CrushBootstrapTests-Info.plist";
+				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
+				INFOPLIST_FILE = "Specs/Specs-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -679,7 +707,7 @@
 		};
 		BDDB998818C3943B003EBC42 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */;
+			baseConfigurationReference = 0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CrushBootstrap.app/CrushBootstrap";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -688,12 +716,12 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CrushBootstrap/CrushBootstrap-Prefix.pch";
+				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "CrushBootstrapTests/CrushBootstrapTests-Info.plist";
+				INFOPLIST_FILE = "Specs/Specs-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -702,7 +730,7 @@
 		};
 		BDDB998918C3943B003EBC42 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */;
+			baseConfigurationReference = 0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CrushBootstrap.app/CrushBootstrap";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -711,8 +739,8 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CrushBootstrap/CrushBootstrap-Prefix.pch";
-				INFOPLIST_FILE = "CrushBootstrapTests/CrushBootstrapTests-Info.plist";
+				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
+				INFOPLIST_FILE = "Specs/Specs-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -771,7 +799,7 @@
 		};
 		BDF1757C18C3986D008BD9C6 /* Profile */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */;
+			baseConfigurationReference = 0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CrushBootstrap.app/CrushBootstrap";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -780,8 +808,8 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CrushBootstrap/CrushBootstrap-Prefix.pch";
-				INFOPLIST_FILE = "CrushBootstrapTests/CrushBootstrapTests-Info.plist";
+				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
+				INFOPLIST_FILE = "Specs/Specs-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -845,7 +873,7 @@
 		};
 		BDF1757F18C39BD3008BD9C6 /* Test */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */;
+			baseConfigurationReference = 0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CrushBootstrap.app/CrushBootstrap";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -854,12 +882,12 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CrushBootstrap/CrushBootstrap-Prefix.pch";
+				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "CrushBootstrapTests/CrushBootstrapTests-Info.plist";
+				INFOPLIST_FILE = "Specs/Specs-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -893,7 +921,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BDDB998718C3943B003EBC42 /* Build configuration list for PBXNativeTarget "CrushBootstrapTests" */ = {
+		BDDB998718C3943B003EBC42 /* Build configuration list for PBXNativeTarget "Specs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BDDB998818C3943B003EBC42 /* Debug */,
