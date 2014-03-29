@@ -36,3 +36,10 @@ target 'Specs', :exclusive => true do
 
 # pod 'OHHTTPStubs'
 end
+
+
+# Copy the license settings plist over to our project
+post_install do | installer |
+    require 'fileutils'
+    FileUtils.cp_r('Pods/Pods-Acknowledgements.plist', 'CrushBootstrap/Resources/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
+end

@@ -10,6 +10,7 @@
 		7A1059CDD505490C88A04C84 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D61E01362DD444BBFD6E388 /* libPods.a */; };
 		9A02F77A5711492A9BF635F8 /* libPods-Specs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EBF96DA068437B82FA86E4 /* libPods-Specs.a */; };
 		BD304C8118E672EA0034105E /* CRBSDummySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BD304C8018E672EA0034105E /* CRBSDummySpec.m */; };
+		BD304C8318E77F7E0034105E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BD304C8218E77F7E0034105E /* Settings.bundle */; };
 		BD3CA8BC18D8A6D200C993E0 /* default.css in Resources */ = {isa = PBXBuildFile; fileRef = BD3CA8BB18D8A6D200C993E0 /* default.css */; };
 		BDDB995318C3943B003EBC42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995218C3943B003EBC42 /* Foundation.framework */; };
 		BDDB995518C3943B003EBC42 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995418C3943B003EBC42 /* CoreGraphics.framework */; };
@@ -42,6 +43,7 @@
 		1D61E01362DD444BBFD6E388 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		62199233C093473EAAB5265B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		BD304C8018E672EA0034105E /* CRBSDummySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBSDummySpec.m; sourceTree = "<group>"; };
+		BD304C8218E77F7E0034105E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		BD3CA8BB18D8A6D200C993E0 /* default.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = default.css; sourceTree = "<group>"; };
 		BD9FFD9418E66DF4001DF6EC /* Specs-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Specs-Prefix.pch"; sourceTree = "<group>"; };
 		BDDB994F18C3943B003EBC42 /* CrushBootstrap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrushBootstrap.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,6 +113,7 @@
 		BD3CA8BA18D8A68600C993E0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BD304C8218E77F7E0034105E /* Settings.bundle */,
 				BDDB996D18C3943B003EBC42 /* Images.xcassets */,
 				BD3CA8BB18D8A6D200C993E0 /* default.css */,
 			);
@@ -360,6 +363,7 @@
 				BDDB996618C3943B003EBC42 /* Main_iPhone.storyboard in Resources */,
 				BDDB995D18C3943B003EBC42 /* InfoPlist.strings in Resources */,
 				BD3CA8BC18D8A6D200C993E0 /* default.css in Resources */,
+				BD304C8318E77F7E0034105E /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
