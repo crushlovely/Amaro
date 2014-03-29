@@ -183,12 +183,23 @@ echo "👍"
 
 echo -n "Updating file contents... "
 
+# Without these incantations, sed barfs on certain Unicode strings
+set +u
+_OLD_LC_CTYPE="$LC_CTYPE"
+_OLD_LANG="$LANG"
+set -u
+export LC_CTYPE=C 
+export LANG=C
+
 # Any reference to the project name or the prefix in all files:
 find . -type f -not \( -path './.git/*' -prune \) -exec sed -i '' "s/$DEFAULT_PROJECT_NAME/$PROJECT_NAME/g;s/$DEFAULT_PREFIX/$PREFIX/g" {} +
 
 # The 'Created by' line in the headers of code files
 TODAY=$(date "+%m/%d/%y" | sed 's/^0//g;s/\/0/\//')  # sed nastiness is to remove leading zeroes from the date format
 find . -type f \( -name "*.m" -o -name "*.h" \) -not \( -path './.git/*' -prune \) -exec sed -i '' "s#Created by .* on [0-9].*#Created by $FULLNAME on $TODAY#g" {} +
+
+export LC_CTYPE="$_OLD_LC_CTYPE"
+export LANG="$_OLD_LANG"
 
 echo "👍"
 
