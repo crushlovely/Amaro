@@ -215,7 +215,7 @@ git submodule -q update --init --recursive
 git submodule --quiet foreach 'git checkout -q master'
 pod install --silent
 
-git add Podfile.lock Podfile
+git add Podfile.lock Podfile "$PROJECT_NAME/Resources/Settings.bundle/Acknowledgements.plist"
 git rm -q tiramisu.sh
 git commit -q -m "[CrushBootstrap] Add Podfile.lock and remove init script"
 
