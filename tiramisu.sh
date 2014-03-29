@@ -2,6 +2,7 @@ set -ue  # Bomb on uninitialized variables and non-zero exit statuses
 set -o pipefail  # Pass the first non-zero exit status through a pipe
 
 BOOTSTRAP_REPO="git@github.com:crushlovely/CrushBootstrap.git"
+BOOTSTRAP_WEBSITE="https://github.com/crushlovely/CrushBootstrap"
 BOOTSTRAP_BRANCH=master
 
 DEFAULT_PREFIX=CRBS
@@ -129,7 +130,7 @@ cd -- "$PROJECT_NAME"
 git init -q
 
 # It's a shame we have to do this, really, but you can't do a squashed merge into an empty repo
-echo "# $PROJECT_NAME" > README.md
+echo -e "# $PROJECT_NAME\n\n*An iOS project begun with [CrushBootstrap]($BOOTSTRAP_WEBSITE)\n" > README.md
 git add README.md
 git commit -q -m "[CrushBootstrap] Initial commit"
 
