@@ -130,7 +130,7 @@ cd -- "$PROJECT_NAME"
 git init -q
 
 # It's a shame we have to do this, really, but you can't do a squashed merge into an empty repo
-echo -e "# $PROJECT_NAME\n\n*An iOS project begun with [CrushBootstrap]($BOOTSTRAP_WEBSITE)\n" > README.md
+echo -e "# $PROJECT_NAME\n\n*An iOS project begun with [CrushBootstrap]($BOOTSTRAP_WEBSITE)*\n" > README.md
 git add README.md
 git commit -q -m "[CrushBootstrap] Initial commit"
 
@@ -192,7 +192,7 @@ export LC_CTYPE=C
 export LANG=C
 
 # Any reference to the project name or the prefix in all files:
-find . -type f -not \( -path './.git/*' -prune \) -exec sed -i '' "s/$DEFAULT_PROJECT_NAME/$PROJECT_NAME/g;s/$DEFAULT_PREFIX/$PREFIX/g" {} +
+find . -type f -not \( -path './.git/*' -prune \) -not -path './README.md' -exec sed -i '' "s/$DEFAULT_PROJECT_NAME/$PROJECT_NAME/g;s/$DEFAULT_PREFIX/$PREFIX/g" {} +
 
 # The 'Created by' line in the headers of code files
 TODAY=$(date "+%m/%d/%y" | sed 's/^0//g;s/\/0/\//')  # sed nastiness is to remove leading zeroes from the date format
@@ -229,7 +229,7 @@ pod install --silent
 
 git add Podfile.lock Podfile "$PROJECT_NAME/Resources/Settings.bundle/Acknowledgements.plist"
 git rm -q tiramisu.sh
-git commit -q -m "[CrushBootstrap] Add Podfile.lock and remove init script"
+git commit -q -m "[CrushBootstrap] Install pods and remove init script"
 
 echo "👍"
 
