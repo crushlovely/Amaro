@@ -1,0 +1,5 @@
+#include "../external/xcconfigs/Base/Configurations/Test.xcconfig"
+
+// Instrument for code coverage:
+GCC_GENERATE_TEST_COVERAGE_FILES = YES
+GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES
