@@ -40,6 +40,8 @@ end
 
 # Copy the license settings plist over to our project
 post_install do | installer |
-    require 'fileutils'
-    FileUtils.cp_r('Pods/Pods-Acknowledgements.plist', 'CrushBootstrap/Resources/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
+    if Dir.exists? 'CrushBootstrap/Resources/Settings.bundle'
+        require 'fileutils'
+        FileUtils.cp_r('Pods/Pods-Acknowledgements.plist', 'CrushBootstrap/Resources/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
+    end
 end
