@@ -12,7 +12,7 @@ freestyle-config {
 }
 
 
-label {
+label#hello-world {
     font-family: "Avenir";
     font-weight: light;
     text-align: center;

@@ -113,9 +113,9 @@
 		BD3CA8BA18D8A68600C993E0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				BD304C8218E77F7E0034105E /* Settings.bundle */,
 				BDDB996D18C3943B003EBC42 /* Images.xcassets */,
 				BD3CA8BB18D8A6D200C993E0 /* default.css */,
+				BD304C8218E77F7E0034105E /* Settings.bundle */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
