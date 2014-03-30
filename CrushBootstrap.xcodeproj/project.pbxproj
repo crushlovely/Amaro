@@ -26,8 +26,22 @@
 		BDDB997518C3943B003EBC42 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB997418C3943B003EBC42 /* XCTest.framework */; };
 		BDDB997618C3943B003EBC42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995218C3943B003EBC42 /* Foundation.framework */; };
 		BDDB997718C3943B003EBC42 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995618C3943B003EBC42 /* UIKit.framework */; };
-		BDF1757418C3972E008BD9C6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BDF1756418C3972E008BD9C6 /* README.md */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		BD3D80F418E8B70200FAD1EB /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.scss";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			name = "SCSS compilation";
+			outputFiles = (
+				"$(DERIVED_FILE_DIR)/$(INPUT_FILE_BASE).css",
+			);
+			script = "# Try to use an RVM install, or otherwise just hope sass is in the PATH\n[ -e ~/.rvm/environments/default ] && source ~/.rvm/environments/default\nif [ -n \"$GEM_HOME\" ]; then\n  SASS=\"$GEM_HOME/bin/sass\"\nelse\n  SASS=\"`which sass`\"\nfi\n\nif [ -z \"$SASS\" -o ! -x \"$SASS\" ]; then\n  echo \"To use .scss files, you must install sass and have it in your PATH.\" 1>&2\n  echo \"See http://sass-lang.com/install for instructions.\" 1>&2\n  exit 1\nfi\n\n# Xcode doesn't like to copy resources from build rules out to the product folder,\n# so we're doing it ourselves, and adding the derived files output to placate\n# its dependency stuff.\nOUTPUT=\"${DERIVED_FILE_DIR}/${INPUT_FILE_BASE}.css\"\n\"$SASS\" \"${INPUT_FILE_PATH}\" \"$OUTPUT\"\ncp \"$OUTPUT\" \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/${INPUT_FILE_BASE}.css\"";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
 		BDDB997818C3943B003EBC42 /* PBXContainerItemProxy */ = {
@@ -295,6 +309,7 @@
 				BDF1758318C3A844008BD9C6 /* Crashlytics Script */,
 			);
 			buildRules = (
+				BD3D80F418E8B70200FAD1EB /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -362,13 +377,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDF1757418C3972E008BD9C6 /* README.md in Resources */,
 				BDDB996918C3943B003EBC42 /* Main_iPad.storyboard in Resources */,
 				BDDB996E18C3943B003EBC42 /* Images.xcassets in Resources */,
 				BDDB996618C3943B003EBC42 /* Main_iPhone.storyboard in Resources */,
 				BDDB995D18C3943B003EBC42 /* InfoPlist.strings in Resources */,
-				BD3CA8BC18D8A6D200C993E0 /* default.css in Resources */,
 				BD304C8318E77F7E0034105E /* Settings.bundle in Resources */,
+				BD3CA8BC18D8A6D200C993E0 /* default.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
