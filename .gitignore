@@ -24,3 +24,12 @@ Pods
 
 # Sass' compilation cache
 .sass-cache
+
+# >>>bootstrap-only
+# This 'bootstrap-only' block will be removed from this file for projects created from tiramisu.
+
+Pods-Environment.h
+Acknowledgements.plist
+Podfile.lock
+
+# <<<bootstrap-only
