@@ -4,14 +4,15 @@
 //  The contents of this file are implicitly included at the beginning of every source file.
 //
 
+// Defines about installed Pods
+#import "Pods-Environment.h"
+
 // Pull in tgmath for seamless 32-/64-bit math functions.
 // Due to a nasty clang situation right now (early 2014), we can't just use <tgmath.h>
 // directly. See the note in the header.
+#ifdef COCOAPODS_POD_AVAILABLE_CRLLib
 #import <CRLLib/tgmath-stopgap.h>
-
-
-// Defines about installed Pods
-#import "Pods-Environment.h"
+#endif
 
 
 #import <Availability.h>
