@@ -234,6 +234,15 @@ git commit -q -m "[CrushBootstrap] Install pods and remove init script"
 echo "👍"
 
 
+echo -n "Cleaning up after ourselves... "
+
+# Squash all of our commits together into one, for prettiness
+# See: http://stackoverflow.com/questions/1657017/git-squash-all-commits-into-a-single-commit
+git reset $(git commit-tree HEAD^{tree} -m "[CrushBootstrap] We have liftoff 🚀")
+
+echo "👍"
+
+
 ####################
 ### All Done
 ####################
