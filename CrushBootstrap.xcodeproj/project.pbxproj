@@ -592,7 +592,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
-					CONFIGURATION_ADHOC,
 				);
 				INFOPLIST_FILE = "CrushBootstrap/CrushBootstrap-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -703,10 +702,7 @@
 				DISPLAY_NAME_SUFFIX = " α";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/CrushBootstrap-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					CONFIGURATION_DEBUG,
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "CrushBootstrap/CrushBootstrap-Info.plist";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
