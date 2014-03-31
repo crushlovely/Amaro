@@ -63,6 +63,7 @@
 		BD3D80F118E8ACB700FAD1EB /* CrushBootstrap-Test.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "CrushBootstrap-Test.xcconfig"; sourceTree = "<group>"; };
 		BD3D80F218E8AD9100FAD1EB /* ZZZCodeCoverageFixForiOS7.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZZCodeCoverageFixForiOS7.m; sourceTree = "<group>"; };
 		BD9FFD9418E66DF4001DF6EC /* Specs-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Specs-Prefix.pch"; sourceTree = "<group>"; };
+		BDB71B2418E9EC0700579B97 /* Pods-Environment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pods-Environment.h"; sourceTree = "<group>"; };
 		BDDB994F18C3943B003EBC42 /* CrushBootstrap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrushBootstrap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDDB995218C3943B003EBC42 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BDDB995418C3943B003EBC42 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -195,6 +196,7 @@
 				0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */,
 				BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */,
 				BD3D80F118E8ACB700FAD1EB /* CrushBootstrap-Test.xcconfig */,
+				BDB71B2418E9EC0700579B97 /* Pods-Environment.h */,
 				BDDB995A18C3943B003EBC42 /* CrushBootstrap-Info.plist */,
 				BDDB995B18C3943B003EBC42 /* InfoPlist.strings */,
 				BDDB995E18C3943B003EBC42 /* main.m */,
