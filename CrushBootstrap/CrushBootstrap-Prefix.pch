@@ -26,6 +26,7 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 
+    #ifdef COCOAPODS_POD_AVAILABLE_CocoaLumberjack
     #import <CocoaLumberjack/DDLog.h>
 
     #ifdef DEBUG
@@ -33,9 +34,13 @@
     #else
         static const int ddLogLevel = LOG_LEVEL_WARN;
     #endif
+    #endif
 
+    #ifdef COCOAPODS_POD_AVAILABLE_CRLLib
     #import <CRLLib/CRLCategoriesAndUtils.h>
+    #endif
 
+    #ifdef COCOAPODS_POD_AVAILABLE_libextobjc
     // A lot of the extobjc stuff is a little crazy.
     // We're including it mainly for 2 things:
     // The Scope module which gives @weakify and @strongify, and
@@ -43,6 +48,9 @@
     // Use of any of the other modules is not recommended.
     #import <libextobjc/EXTScope.h>
     #import <libextobjc/EXTKeyPathCoding.h>
+    #endif
 
+    #ifdef COCOAPODS_POD_AVAILABLE_Asterism
     #import <Asterism/Asterism.h>
+    #endif
 #endif
