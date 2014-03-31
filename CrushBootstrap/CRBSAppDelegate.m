@@ -25,6 +25,10 @@
     #endif
 #endif
 
+#if defined(COCOAPODS_POD_AVAILABLE_CRLInstallrChecker) && defined(CONFIGURATION_ADHOC)
+#import <CRLInstallrChecker/CRLInstallrChecker.h>
+#endif
+
 
 @implementation CRBSAppDelegate
 
@@ -47,11 +51,11 @@
     /*
      [CRLInstallrChecker sharedInstance].appKey = @"<installr app key>";
      dispatch_queue_t lowPriorityQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
-     
+
      // Waiting for 3 seconds in hopes that the app will be fully usable by then.
      // Feel free to adjust the delay as needed, or even move the -checkNow call to your main VC.
      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), lowPriorityQueue, ^{
-         [[CRLInstallrChecker sharedInstance] checkNow]];
+         [[CRLInstallrChecker sharedInstance] checkNow];
      });
      */
 #endif

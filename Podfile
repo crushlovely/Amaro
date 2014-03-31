@@ -3,8 +3,9 @@ platform :ios, '7.0'
 # Inform CocoaPods that we use some custom build configurations
 xcodeproj 'CrushBootstrap', 'AdHoc' => :release, 'Profile' => :release, 'Test' => :debug
 
-# The Crush Bootstrap lib
+# Crush internals
 pod 'CRLLib', :git => 'https://github.com/crushlovely/CRLLib.git'
+pod 'CRLInstallrChecker', :git => 'https://github.com/crushlovely/CRLInstallrChecker.git'
 
 # Logging & Analytics
 pod 'CocoaLumberjack'
@@ -39,7 +40,7 @@ end
 
 
 # Copy the license settings plist over to our project
-post_install do | installer |
+post_install do |installer|
     if Dir.exists? 'CrushBootstrap/Resources/Settings.bundle'
         require 'fileutils'
         FileUtils.cp_r('Pods/Pods-Acknowledgements.plist', 'CrushBootstrap/Resources/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
