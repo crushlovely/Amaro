@@ -2,7 +2,7 @@
 *(better name forthcoming)*
 
 ## What's this then?
-We want to hit the ground running. Xcode and the iOS ecosystem don't make that easy. Enter CrushBootstrap. After running one simple command, you get a ready-to-build universal iOS application, [full of delights](#whats-included-).
+We want to hit the ground running. Xcode and the iOS ecosystem don't make that easy. Enter CrushBootstrap. After running one simple command, you get a ready-to-build universal iOS application, [full of delights](#whats-included).
 
 
 ## Gimme gimme
