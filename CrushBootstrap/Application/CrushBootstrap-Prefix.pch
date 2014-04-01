@@ -10,8 +10,8 @@
 // Pull in tgmath for seamless 32-/64-bit math functions.
 // Due to a nasty clang situation right now (early 2014), we can't just use <tgmath.h>
 // directly. See the note in the header.
-#ifdef COCOAPODS_POD_AVAILABLE_CRLLib
-#import <CRLLib/tgmath-stopgap.h>
+#ifdef COCOAPODS_POD_AVAILABLE_Sidecar
+#import <Sidecar/tgmath-stopgap.h>
 #endif
 
 
@@ -36,8 +36,8 @@
         #endif
     #endif
 
-    #ifdef COCOAPODS_POD_AVAILABLE_CRLLib
-        #import <CRLLib/CRLCategoriesAndUtils.h>
+    #ifdef COCOAPODS_POD_AVAILABLE_Sidecar
+        #import <Sidecar/CRLCategoriesAndUtils.h>
     #endif
 
     #ifdef COCOAPODS_POD_AVAILABLE_libextobjc

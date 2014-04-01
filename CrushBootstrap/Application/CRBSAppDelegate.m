@@ -20,8 +20,8 @@
     #import <CrashlyticsLumberjack/CrashlyticsLogger.h>
     #endif
 
-    #ifdef COCOAPODS_POD_AVAILABLE_CRLLib
-    #import <CRLLib/CRLMethodLogFormatter.h>
+    #ifdef COCOAPODS_POD_AVAILABLE_Sidecar
+    #import <Sidecar/CRLMethodLogFormatter.h>
     #endif
 #endif
 
@@ -62,7 +62,7 @@
     #endif
 
     #ifdef COCOAPODS_POD_AVAILABLE_CocoaLumberjack
-        #ifdef COCOAPODS_POD_AVAILABLE_CRLLib
+        #ifdef COCOAPODS_POD_AVAILABLE_Sidecar
         CRLMethodLogFormatter *logFormatter = [[CRLMethodLogFormatter alloc] init];
         [[DDASLLogger sharedInstance] setLogFormatter:logFormatter];
         [[DDTTYLogger sharedInstance] setLogFormatter:logFormatter];
@@ -74,8 +74,10 @@
 
         // Send warning & error messages to Crashlytics
         #ifdef COCOAPODS_POD_AVAILABLE_CrashlyticsLumberjack
-        [[CrashlyticsLogger sharedInstance] setLogFormatter:logFormatter];
-        [DDLog addLogger:[CrashlyticsLogger sharedInstance] withLogLevel:LOG_LEVEL_INFO];
+            #ifdef COCOAPODS_POD_AVAILABLE_Sidecar
+            [[CrashlyticsLogger sharedInstance] setLogFormatter:logFormatter];
+            #endif
+            [DDLog addLogger:[CrashlyticsLogger sharedInstance] withLogLevel:LOG_LEVEL_INFO];
         #endif
     #endif
 }
