@@ -1,18 +1,20 @@
-# It's CrushBootstrap!
-*(better name forthcoming)*
+# ![icon](CrushBootstrap/Resources/Images.xcassets/AppIcon.appiconset/Icon-76.png) Amaro
 
-## What's this then?
-We want to hit the ground running. Xcode and the iOS ecosystem don't make that easy. Enter CrushBootstrap. After running one simple command, you get a ready-to-build universal iOS application, [full of delights](#whats-included).
+Crush & Lovely's iOS boilerplate.
+
+
+## Say what now?
+We want to hit the ground running. Xcode and the iOS ecosystem don't make that easy. Enter Amaro. After running one simple command, you get a ready-to-build universal iOS application, [full of delights](#whats-included).
 
 
 ## Gimme gimme
 Change to your projects directory, run this line in your terminal, and follow the prompts:
 
 ```sh
-(read -p 'GitHub username: ' GH_USER; read -sp 'Password: ' GH_PASS; bash -i <(curl -sSLu "$GH_USER:$GH_PASS" https://raw.github.com/crushlovely/CrushBootstrap/master/tiramisu.sh))
+(read -p 'GitHub username: ' GH_USER; read -sp 'Password: ' GH_PASS; bash -i <(curl -sSLu "$GH_USER:$GH_PASS" https://raw.github.com/crushlovely/Amaro/master/tiramisu.sh))
 ```
 
-Of course, if you're wary of running random shell scripts (legit!), please read [tiramisu.sh](blob/master/tiramisu.sh). At a high level, the script creates a local git repository with CrushBootstrap as a remote named "bootstrap", tweaks filenames and contents as per your input, and grabs third-party code.
+Of course, if you're wary of running random shell scripts (legit!), please read [tiramisu.sh](blob/master/tiramisu.sh). At a high level, the script creates a local git repository with Amaro as a remote named "bootstrap", tweaks filenames and contents as per your input, and grabs third-party code.
 
 (Tiramisu is Italian for "pick me up". Bootstrap... pick me up... get it?!? 💃)
 
@@ -31,7 +33,7 @@ And, optionally:
 
 
 ## What's Included?
-CrushBootstrap aims to set you up with all you need to write a beautiful, maintainable, well-tested app.
+Amaro aims to set you up with all you need to write a beautiful, maintainable, well-tested app.
 
 ### Foundation
 * A well-chosen class prefix is enforced.
@@ -76,7 +78,7 @@ Additionally, the Podfile notes a few optional libraries that you may find usefu
 
 
 ## Maintaining the Spirit
-CrushBootstrap will get you started on the right foot, but it's up to you not to mess it up! Here are some tips to stay in line with the spirit of the project.
+Amaro will get you started on the right foot, but it's up to you not to mess it up! Here are some tips to stay in line with the spirit of the project.
 
 Read up on the included and optional libraries. Most of them are very good at solving common problems, and you should become familiar with them. Ideally you should spend your time solving problems, not [solving problems around solving problems](http://www.chris-granger.com/2014/03/27/toward-a-better-programming/).
 
