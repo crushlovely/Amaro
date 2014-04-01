@@ -4,7 +4,7 @@ platform :ios, '7.0'
 xcodeproj 'CrushBootstrap', 'AdHoc' => :release, 'Profile' => :release, 'Test' => :debug
 
 # Crush internals
-pod 'CRLLib', :git => 'https://github.com/crushlovely/CRLLib.git'
+pod 'Sidecar', :git => 'https://github.com/crushlovely/Sidecar.git'
 pod 'CRLInstallrChecker', :git => 'https://github.com/crushlovely/CRLInstallrChecker.git'
 
 # Logging & Analytics
