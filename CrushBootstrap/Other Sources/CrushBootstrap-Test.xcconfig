@@ -1,4 +1,4 @@
-#include "../external/xcconfigs/Base/Configurations/Test.xcconfig"
+#include "../../External/xcconfigs/Base/Configurations/Test.xcconfig"
 
 // Instrument for code coverage:
 GCC_GENERATE_TEST_COVERAGE_FILES = YES

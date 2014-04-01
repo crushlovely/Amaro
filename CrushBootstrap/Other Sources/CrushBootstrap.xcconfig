@@ -1,6 +1,6 @@
 // Bring in CocoaPods settings and xcconfigs' highly sensible defaults
-#include "../Pods/Pods.xcconfig"
-#include "../external/xcconfigs/iOS/iOS-Application.xcconfig"
+#include "../../Pods/Pods.xcconfig"
+#include "../../External/xcconfigs/iOS/iOS-Application.xcconfig"
 
 
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) CONFIGURATION_$(CONFIGURATION:upper)

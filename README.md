@@ -107,3 +107,8 @@ As mentioned above, the bootstrap [automatically generates a settings section](h
 * Mantle: [MIT](https://github.com/MantleFramework/Mantle)
 * SSKeyChain: [MIT](https://github.com/soffes/sskeychain/blob/master/LICENSE)
 * DateTools: [MIT](https://github.com/MatthewYork/DateTools/blob/master/LICENSE)
+
+
+## Acknowledgements
+
+The lovely [default icon](http://thenounproject.com/term/scotch/9025/) was created by Scott Lewis for The Noun Project. It is licensed under the [Creative Commons Attribution 3.0 license](http://creativecommons.org/licenses/by/3.0/us/).

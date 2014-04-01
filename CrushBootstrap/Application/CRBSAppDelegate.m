@@ -42,11 +42,11 @@
 
 -(void)initializeLoggingAndServices
 {
-#ifdef COCOAPODS_POD_AVAILABLE_CrashlyticsFramework
+    #ifdef COCOAPODS_POD_AVAILABLE_CrashlyticsFramework
     [Crashlytics startWithAPIKey:@"c8472ec808f54475648e7963858199db751e8608"];
-#endif
+    #endif
 
-#if defined(COCOAPODS_POD_AVAILABLE_CRLInstallrChecker) && defined(CONFIGURATION_ADHOC)
+    #if defined(COCOAPODS_POD_AVAILABLE_CRLInstallrChecker) && defined(CONFIGURATION_ADHOC)
     // Uncomment and fill in your Installr app key to automatically prompt the user about app updates.
     /*
      [CRLInstallrChecker sharedInstance].appKey = @"<installr app key>";
@@ -58,25 +58,25 @@
          [[CRLInstallrChecker sharedInstance] checkNow];
      });
      */
-#endif
-
-#ifdef COCOAPODS_POD_AVAILABLE_CocoaLumberjack
-    #ifdef COCOAPODS_POD_AVAILABLE_CRLLib
-    CRLMethodLogFormatter *logFormatter = [[CRLMethodLogFormatter alloc] init];
-    [[DDASLLogger sharedInstance] setLogFormatter:logFormatter];
-    [[DDTTYLogger sharedInstance] setLogFormatter:logFormatter];
     #endif
 
-    // Emulate NSLog behavior for DDLog*
-    [DDLog addLogger:[DDASLLogger sharedInstance]];
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    #ifdef COCOAPODS_POD_AVAILABLE_CocoaLumberjack
+        #ifdef COCOAPODS_POD_AVAILABLE_CRLLib
+        CRLMethodLogFormatter *logFormatter = [[CRLMethodLogFormatter alloc] init];
+        [[DDASLLogger sharedInstance] setLogFormatter:logFormatter];
+        [[DDTTYLogger sharedInstance] setLogFormatter:logFormatter];
+        #endif
 
-    // Send warning & error messages to Crashlytics
-    #ifdef COCOAPODS_POD_AVAILABLE_CrashlyticsLumberjack
-    [[CrashlyticsLogger sharedInstance] setLogFormatter:logFormatter];
-    [DDLog addLogger:[CrashlyticsLogger sharedInstance] withLogLevel:LOG_LEVEL_INFO];
+        // Emulate NSLog behavior for DDLog*
+        [DDLog addLogger:[DDASLLogger sharedInstance]];
+        [DDLog addLogger:[DDTTYLogger sharedInstance]];
+
+        // Send warning & error messages to Crashlytics
+        #ifdef COCOAPODS_POD_AVAILABLE_CrashlyticsLumberjack
+        [[CrashlyticsLogger sharedInstance] setLogFormatter:logFormatter];
+        [DDLog addLogger:[CrashlyticsLogger sharedInstance] withLogLevel:LOG_LEVEL_INFO];
+        #endif
     #endif
-#endif
 }
 
 
@@ -85,10 +85,10 @@
  */
 -(void)applyBuildIconBadge
 {
-#if defined(CONFIGURATION_DEBUG) || defined(CONFIGURATION_ADHOC)
+    #if defined(CONFIGURATION_DEBUG) || defined(CONFIGURATION_ADHOC)
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wundeclared-selector"
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wundeclared-selector"
     if([[UIApplication sharedApplication] respondsToSelector:@selector(setApplicationBadgeString:)]) {
         #ifdef CONFIGURATION_DEBUG
         NSString *badgeString = @"α";
@@ -98,9 +98,9 @@
 
         [[UIApplication sharedApplication] performSelector:@selector(setApplicationBadgeString:) withObject:badgeString];
     }
-#pragma clang diagnostic pop
+    #pragma clang diagnostic pop
 
-#endif
+    #endif
 }
 
 @end
