@@ -1,8 +1,8 @@
 set -ue  # Bomb on uninitialized variables and non-zero exit statuses
 set -o pipefail  # Pass the first non-zero exit status through a pipe
 
-BOOTSTRAP_REPO="git@github.com:crushlovely/CrushBootstrap.git"
-BOOTSTRAP_WEBSITE="https://github.com/crushlovely/CrushBootstrap"
+BOOTSTRAP_REPO="git@github.com:crushlovely/Amaro.git"
+BOOTSTRAP_WEBSITE="https://github.com/crushlovely/Amaro"
 BOOTSTRAP_BRANCH=master
 
 DEFAULT_PREFIX=CRBS
@@ -51,7 +51,7 @@ friendlyGrep() {
 ####################
 
 echo
-echo "😸  It's CrushBootstrap v0.1.0!"
+echo "😸  Amaro v0.1.0!"
 echo -e "We'll be using branch $BOOTSTRAP_BRANCH of $BOOTSTRAP_REPO\n"
 
 
@@ -130,9 +130,9 @@ cd -- "$PROJECT_NAME"
 git init -q
 
 # It's a shame we have to do this, really, but you can't do a squashed merge into an empty repo
-echo -e "# $PROJECT_NAME\n\n*An iOS project begun with [CrushBootstrap]($BOOTSTRAP_WEBSITE)*\n" > README.md
+echo -e "# $PROJECT_NAME\n\n*An iOS project begun with [Amaro]($BOOTSTRAP_WEBSITE)*\n" > README.md
 git add README.md
-git commit -q -m "[CrushBootstrap] Initial commit"
+git commit -q -m "[Amaro] Initial commit"
 
 echo -n "Fetching repository... "
 git remote add bootstrap "$BOOTSTRAP_REPO"
@@ -142,7 +142,7 @@ echo "👍"
 echo -n "Merging... "
 # We're using 'ours' merge option so that our README.md wins
 git merge -q --squash -X ours "remotes/bootstrap/$BOOTSTRAP_BRANCH" 2>&1 | friendlyGrep -v 'Squash commit -- not updating HEAD' | friendlyGrep -v 'Automatic merge went well'
-git commit -q -m "[CrushBootstrap] Bootstrapping..."
+git commit -q -m "[Amaro] Bootstrapping..."
 echo "👍"
 
 
@@ -211,7 +211,7 @@ echo "👍"
 
 echo -n "Committing... "
 git add --all
-git commit -q -m "[CrushBootstrap] Bootstrapped"
+git commit -q -m "[Amaro] Bootstrapped"
 echo "👍"
 
 
@@ -232,7 +232,7 @@ pod install --silent
 
 git add --all
 git rm -q tiramisu.sh
-git commit -q -m "[CrushBootstrap] Install pods and remove init script"
+git commit -q -m "[Amaro] Install pods and remove init script"
 
 echo "👍"
 
@@ -241,7 +241,7 @@ echo -n "Cleaning up after ourselves... "
 
 # Squash all of our commits together into one, for prettiness
 # See: http://stackoverflow.com/questions/1657017/git-squash-all-commits-into-a-single-commit
-git reset $(git commit-tree HEAD^{tree} -m "[CrushBootstrap] We have liftoff 🚀")
+git reset $(git commit-tree HEAD^{tree} -m "[Amaro] We have liftoff 🚀")
 
 echo "👍"
 
