@@ -16,10 +16,9 @@
 int main(int argc, char * argv[])
 {
     @autoreleasepool {
-
-#ifdef COCOAPODS_POD_AVAILABLE_PixateFreestyle
+        #ifdef COCOAPODS_POD_AVAILABLE_PixateFreestyle
         [PixateFreestyle initializePixateFreestyle];
-#endif
+        #endif
 
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([CRBSAppDelegate class]));
     }

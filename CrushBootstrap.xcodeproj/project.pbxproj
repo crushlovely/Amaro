@@ -13,14 +13,13 @@
 		BD304C8318E77F7E0034105E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BD304C8218E77F7E0034105E /* Settings.bundle */; };
 		BD3CA8BC18D8A6D200C993E0 /* default.css in Resources */ = {isa = PBXBuildFile; fileRef = BD3CA8BB18D8A6D200C993E0 /* default.css */; };
 		BD3D80F318E8AD9100FAD1EB /* ZZZCodeCoverageFixForiOS7.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3D80F218E8AD9100FAD1EB /* ZZZCodeCoverageFixForiOS7.m */; };
+		BD6951CF18EA4B0800F2F410 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6951CE18EA4B0800F2F410 /* main.m */; };
+		BD6951ED18EA54BB00F2F410 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD6951EB18EA54BB00F2F410 /* Main_iPad.storyboard */; };
+		BD6951EE18EA54BB00F2F410 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD6951EC18EA54BB00F2F410 /* Main_iPhone.storyboard */; };
 		BDDB995318C3943B003EBC42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995218C3943B003EBC42 /* Foundation.framework */; };
 		BDDB995518C3943B003EBC42 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995418C3943B003EBC42 /* CoreGraphics.framework */; };
 		BDDB995718C3943B003EBC42 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995618C3943B003EBC42 /* UIKit.framework */; };
-		BDDB995D18C3943B003EBC42 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BDDB995B18C3943B003EBC42 /* InfoPlist.strings */; };
-		BDDB995F18C3943B003EBC42 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDB995E18C3943B003EBC42 /* main.m */; };
 		BDDB996318C3943B003EBC42 /* CRBSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDB996218C3943B003EBC42 /* CRBSAppDelegate.m */; };
-		BDDB996618C3943B003EBC42 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDDB996418C3943B003EBC42 /* Main_iPhone.storyboard */; };
-		BDDB996918C3943B003EBC42 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDDB996718C3943B003EBC42 /* Main_iPad.storyboard */; };
 		BDDB996C18C3943B003EBC42 /* CRBSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDB996B18C3943B003EBC42 /* CRBSViewController.m */; };
 		BDDB996E18C3943B003EBC42 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDDB996D18C3943B003EBC42 /* Images.xcassets */; };
 		BDDB997518C3943B003EBC42 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB997418C3943B003EBC42 /* XCTest.framework */; };
@@ -54,30 +53,30 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Specs.xcconfig"; path = "../Pods/Pods-Specs.xcconfig"; sourceTree = "<group>"; };
+		0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Specs.xcconfig"; path = "../../Pods/Pods-Specs.xcconfig"; sourceTree = "<group>"; };
 		1D61E01362DD444BBFD6E388 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		62199233C093473EAAB5265B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		62199233C093473EAAB5265B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		BD304C8018E672EA0034105E /* CRBSDummySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBSDummySpec.m; sourceTree = "<group>"; };
 		BD304C8218E77F7E0034105E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		BD3CA8BB18D8A6D200C993E0 /* default.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = default.css; sourceTree = "<group>"; };
-		BD3D80F118E8ACB700FAD1EB /* CrushBootstrap-Test.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "CrushBootstrap-Test.xcconfig"; sourceTree = "<group>"; };
 		BD3D80F218E8AD9100FAD1EB /* ZZZCodeCoverageFixForiOS7.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZZCodeCoverageFixForiOS7.m; sourceTree = "<group>"; };
+		BD574AFE18EA481500EDD66F /* CrushBootstrap-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CrushBootstrap-Prefix.pch"; sourceTree = "<group>"; };
+		BD574AFF18EA481500EDD66F /* CrushBootstrap-Test.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "CrushBootstrap-Test.xcconfig"; sourceTree = "<group>"; };
+		BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = CrushBootstrap.xcconfig; sourceTree = "<group>"; };
+		BD574B0218EA481500EDD66F /* Pods-Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pods-Environment.h"; sourceTree = "<group>"; };
+		BD6951CE18EA4B0800F2F410 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BD6951EA18EA54A800F2F410 /* CrushBootstrap-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CrushBootstrap-Info.plist"; sourceTree = "<group>"; };
+		BD6951EB18EA54BB00F2F410 /* Main_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPad.storyboard; sourceTree = "<group>"; };
+		BD6951EC18EA54BB00F2F410 /* Main_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPhone.storyboard; sourceTree = "<group>"; };
 		BD9FFD9418E66DF4001DF6EC /* Specs-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Specs-Prefix.pch"; sourceTree = "<group>"; };
-		BDB71B2418E9EC0700579B97 /* Pods-Environment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pods-Environment.h"; sourceTree = "<group>"; };
 		BDDB994F18C3943B003EBC42 /* CrushBootstrap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrushBootstrap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDDB995218C3943B003EBC42 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BDDB995418C3943B003EBC42 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		BDDB995618C3943B003EBC42 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		BDDB995A18C3943B003EBC42 /* CrushBootstrap-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CrushBootstrap-Info.plist"; sourceTree = "<group>"; };
-		BDDB995C18C3943B003EBC42 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		BDDB995E18C3943B003EBC42 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		BDDB996018C3943B003EBC42 /* CrushBootstrap-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CrushBootstrap-Prefix.pch"; sourceTree = "<group>"; };
 		BDDB996118C3943B003EBC42 /* CRBSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRBSAppDelegate.h; sourceTree = "<group>"; };
 		BDDB996218C3943B003EBC42 /* CRBSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRBSAppDelegate.m; sourceTree = "<group>"; };
-		BDDB996518C3943B003EBC42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		BDDB996818C3943B003EBC42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		BDDB996A18C3943B003EBC42 /* CRBSViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRBSViewController.h; sourceTree = "<group>"; };
-		BDDB996B18C3943B003EBC42 /* CRBSViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRBSViewController.m; sourceTree = "<group>"; };
+		BDDB996A18C3943B003EBC42 /* CRBSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRBSViewController.h; sourceTree = "<group>"; };
+		BDDB996B18C3943B003EBC42 /* CRBSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBSViewController.m; sourceTree = "<group>"; };
 		BDDB996D18C3943B003EBC42 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BDDB997318C3943B003EBC42 /* Specs.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Specs.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDDB997418C3943B003EBC42 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -98,7 +97,6 @@
 		BDF1756218C3972E008BD9C6 /* Mac-Framework.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mac-Framework.xcconfig"; sourceTree = "<group>"; };
 		BDF1756318C3972E008BD9C6 /* Mac-StaticLibrary.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mac-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
 		BDF1756418C3972E008BD9C6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CrushBootstrap.xcconfig; sourceTree = "<group>"; };
 		E6EBF96DA068437B82FA86E4 /* libPods-Specs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Specs.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -136,6 +134,62 @@
 				BD304C8218E77F7E0034105E /* Settings.bundle */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		BD574AFA18EA47FA00EDD66F /* Library */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		BD574AFB18EA47FA00EDD66F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BD574AFC18EA481500EDD66F /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				BD6951EA18EA54A800F2F410 /* CrushBootstrap-Info.plist */,
+				BD574AFF18EA481500EDD66F /* CrushBootstrap-Test.xcconfig */,
+				BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */,
+				62199233C093473EAAB5265B /* Pods.xcconfig */,
+				0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */,
+				BD574B0218EA481500EDD66F /* Pods-Environment.h */,
+			);
+			path = "Other Sources";
+			sourceTree = "<group>";
+		};
+		BD574B0318EA481500EDD66F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BDB71B2518EA46ED00579B97 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				BD574AFE18EA481500EDD66F /* CrushBootstrap-Prefix.pch */,
+				BD6951CE18EA4B0800F2F410 /* main.m */,
+				BDDB996118C3943B003EBC42 /* CRBSAppDelegate.h */,
+				BDDB996218C3943B003EBC42 /* CRBSAppDelegate.m */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		BDB71B2618EA471400579B97 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BD6951EB18EA54BB00F2F410 /* Main_iPad.storyboard */,
+				BD6951EC18EA54BB00F2F410 /* Main_iPhone.storyboard */,
+				BDDB996A18C3943B003EBC42 /* CRBSViewController.h */,
+				BDDB996B18C3943B003EBC42 /* CRBSViewController.m */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		BDDB994618C3943B003EBC42 = {
@@ -177,32 +231,15 @@
 		BDDB995818C3943B003EBC42 /* CrushBootstrap */ = {
 			isa = PBXGroup;
 			children = (
-				BDDB996118C3943B003EBC42 /* CRBSAppDelegate.h */,
-				BDDB996218C3943B003EBC42 /* CRBSAppDelegate.m */,
-				BDDB996418C3943B003EBC42 /* Main_iPhone.storyboard */,
-				BDDB996718C3943B003EBC42 /* Main_iPad.storyboard */,
-				BDDB996A18C3943B003EBC42 /* CRBSViewController.h */,
-				BDDB996B18C3943B003EBC42 /* CRBSViewController.m */,
+				BDB71B2618EA471400579B97 /* Controllers */,
+				BD574AFB18EA47FA00EDD66F /* Models */,
+				BD574AFA18EA47FA00EDD66F /* Library */,
 				BD3CA8BA18D8A68600C993E0 /* Resources */,
-				BDDB995918C3943B003EBC42 /* Supporting Files */,
+				BD574B0318EA481500EDD66F /* Views */,
+				BDB71B2518EA46ED00579B97 /* Application */,
+				BD574AFC18EA481500EDD66F /* Other Sources */,
 			);
 			path = CrushBootstrap;
-			sourceTree = "<group>";
-		};
-		BDDB995918C3943B003EBC42 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				62199233C093473EAAB5265B /* Pods.xcconfig */,
-				0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */,
-				BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */,
-				BD3D80F118E8ACB700FAD1EB /* CrushBootstrap-Test.xcconfig */,
-				BDB71B2418E9EC0700579B97 /* Pods-Environment.h */,
-				BDDB995A18C3943B003EBC42 /* CrushBootstrap-Info.plist */,
-				BDDB995B18C3943B003EBC42 /* InfoPlist.strings */,
-				BDDB995E18C3943B003EBC42 /* main.m */,
-				BDDB996018C3943B003EBC42 /* CrushBootstrap-Prefix.pch */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		BDDB997A18C3943B003EBC42 /* Specs */ = {
@@ -379,10 +416,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDDB996918C3943B003EBC42 /* Main_iPad.storyboard in Resources */,
 				BDDB996E18C3943B003EBC42 /* Images.xcassets in Resources */,
-				BDDB996618C3943B003EBC42 /* Main_iPhone.storyboard in Resources */,
-				BDDB995D18C3943B003EBC42 /* InfoPlist.strings in Resources */,
+				BD6951ED18EA54BB00F2F410 /* Main_iPad.storyboard in Resources */,
+				BD6951EE18EA54BB00F2F410 /* Main_iPhone.storyboard in Resources */,
 				BD304C8318E77F7E0034105E /* Settings.bundle in Resources */,
 				BD3CA8BC18D8A6D200C993E0 /* default.css in Resources */,
 			);
@@ -455,7 +491,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "if [ \"$CONFIGURATION\" != \"Debug\" -a \"$PLATFORM_NAME\" != \"iphonesimulator\" ]; then\n  echo \"Incrementing build number; this is a non-simulator build of non-debug configuration\"\n  buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n  buildNumber=$(($buildNumber + 1))\n  /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\nelse\n  echo \"Not incrementing build number; this is either a simulator build or a debug configuration\"\nfi";
+			shellScript = "if [ ! -s \"$INFOPLIST_FILE\" ]; then\n  echo \"Info plist could not be found at $INFOPLIST_FILE\" 1>&2\n  exit 1\nfi\n\nif [ \"$CONFIGURATION\" != \"Debug\" -a \"$PLATFORM_NAME\" != \"iphonesimulator\" ]; then\n  buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n  buildNumber=$(($buildNumber + 1))\n  echo \"Incrementing build number to $buildNumber\"\n  /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\nfi";
 		};
 		BDF1758318C3A844008BD9C6 /* Crashlytics Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -495,7 +531,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDDB996318C3943B003EBC42 /* CRBSAppDelegate.m in Sources */,
-				BDDB995F18C3943B003EBC42 /* main.m in Sources */,
+				BD6951CF18EA4B0800F2F410 /* main.m in Sources */,
 				BDDB996C18C3943B003EBC42 /* CRBSViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -518,33 +554,6 @@
 			targetProxy = BDDB997818C3943B003EBC42 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		BDDB995B18C3943B003EBC42 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BDDB995C18C3943B003EBC42 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		BDDB996418C3943B003EBC42 /* Main_iPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BDDB996518C3943B003EBC42 /* Base */,
-			);
-			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		BDDB996718C3943B003EBC42 /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BDDB996818C3943B003EBC42 /* Base */,
-			);
-			name = Main_iPad.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		BDD67CDB18DFAB85008ECBBD /* AdHoc */ = {
@@ -583,19 +592,20 @@
 		};
 		BDD67CDC18DFAB85008ECBBD /* AdHoc */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */;
+			baseConfigurationReference = BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID_SUFFIX = .adhoc;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DISPLAY_NAME_SUFFIX = " β";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CrushBootstrap/CrushBootstrap-Prefix.pch";
+				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
 				);
-				INFOPLIST_FILE = "CrushBootstrap/CrushBootstrap-Info.plist";
+				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv6 armv7 armv7s arm64";
 			};
@@ -696,16 +706,16 @@
 		};
 		BDDB998518C3943B003EBC42 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */;
+			baseConfigurationReference = BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID_SUFFIX = .debug;
 				DISPLAY_NAME_SUFFIX = " α";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CrushBootstrap/CrushBootstrap-Prefix.pch";
+				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = "CrushBootstrap/CrushBootstrap-Info.plist";
+				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv6 armv7 armv7s arm64";
@@ -714,15 +724,16 @@
 		};
 		BDDB998618C3943B003EBC42 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */;
+			baseConfigurationReference = BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID_SUFFIX = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DISPLAY_NAME_SUFFIX = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CrushBootstrap/CrushBootstrap-Prefix.pch";
-				INFOPLIST_FILE = "CrushBootstrap/CrushBootstrap-Info.plist";
+				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
+				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv6 armv7 armv7s arm64";
 			};
@@ -806,15 +817,15 @@
 		};
 		BDF1757B18C3986D008BD9C6 /* Profile */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */;
+			baseConfigurationReference = BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID_SUFFIX = "";
 				DISPLAY_NAME_SUFFIX = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CrushBootstrap/CrushBootstrap-Prefix.pch";
-				INFOPLIST_FILE = "CrushBootstrap/CrushBootstrap-Info.plist";
+				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
+				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv6 armv7 armv7s arm64";
 			};
@@ -841,7 +852,7 @@
 		};
 		BDF1757D18C39BD3008BD9C6 /* Test */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD3D80F118E8ACB700FAD1EB /* CrushBootstrap-Test.xcconfig */;
+			baseConfigurationReference = BD574AFF18EA481500EDD66F /* CrushBootstrap-Test.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -880,15 +891,15 @@
 		};
 		BDF1757E18C39BD3008BD9C6 /* Test */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDF1758018C39F45008BD9C6 /* CrushBootstrap.xcconfig */;
+			baseConfigurationReference = BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID_SUFFIX = "";
 				DISPLAY_NAME_SUFFIX = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CrushBootstrap/CrushBootstrap-Prefix.pch";
-				INFOPLIST_FILE = "CrushBootstrap/CrushBootstrap-Info.plist";
+				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
+				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv6 armv7 armv7s arm64";
