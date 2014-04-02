@@ -42,10 +42,11 @@ Amaro aims to set you up with all you need to write a beautiful, maintainable, w
 * A `Certificates` directory is included with a readme file about what to include so that other developers can test and release the app.
 * Sensible defaults for build options, warnings, and the like.
     * Build configurations are split into xcconfig files for modularity and consistency. We're using [jspahrsummers/xcconfigs](https://github.com/jspahrsummers/xcconfigs) as our base.
+    * There are separate staging, production, and distribution schemes by default. No more fiddling with variables here and there to switch your target environment.
 * Automatic ways to easily distinguish between builds of the app:
     * Ad-hoc and development builds have their bundle id suffixed with ".adhoc" or ".dev" so that they can co-exist on devices with other builds.
-    * Ad-hoc and development builds have their names suffixed with a beta or alpha symbol (and are badged with the same on the home screen) to easily distinguish them in places where it may otherwise be difficult.
-* The build number of the app is incremented on every non-simulator, non-debug build. This ensures that external distribution services can reliably distinguish builds, even if the version number doesn't change.
+    * Ad-hoc and development builds' icons are badged an 🅢 for staging environments and a 🅟 for production environments. The bundle names (but not the display names) are also changed to easily distinguish them in places where it may otherwise be difficult.
+* The build number of the app is incremented on every ad-hoc and distribution build. This ensures that external distribution services can reliably distinguish builds, even if the version number itself doesn't change.
 * [CocoaPods](http://cocoapods.org) are integrated from the get-go.
 * A barebones settings bundle is included with an "Acknowledgements" section that includes licenses for all your pods. It's automatically updated after each `pod install`.
 
@@ -107,6 +108,7 @@ As mentioned above, the bootstrap [automatically generates a settings section](h
 * Mantle: [MIT](https://github.com/MantleFramework/Mantle)
 * SSKeyChain: [MIT](https://github.com/soffes/sskeychain/blob/master/LICENSE)
 * DateTools: [MIT](https://github.com/MatthewYork/DateTools/blob/master/LICENSE)
+* Sidecar: MIT
 
 
 ## Acknowledgements
