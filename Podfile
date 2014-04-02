@@ -51,5 +51,5 @@ post_install do |installer|
         FileUtils.cp_r('Pods/Pods-Acknowledgements.plist', 'CrushBootstrap/Resources/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
     end
 
-    FileUtils.cp_r('Pods/Pods-Environment.h', 'CrushBootstrap/Other Sources/Pods-Environment.h', :remove_destination => true)
+    FileUtils.cp_r('Pods/Pods-Environment.h', 'CrushBootstrap/Other-Sources/Pods-Environment.h', :remove_destination => true)
 end

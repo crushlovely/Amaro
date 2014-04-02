@@ -162,7 +162,8 @@
 				BD49EA2C18EC842B00F73350 /* CrushBootstrap-Environment.h */,
 				BD574B0218EA481500EDD66F /* Pods-Environment.h */,
 			);
-			path = "Other Sources";
+			name = "Other Sources";
+			path = "Other-Sources";
 			sourceTree = "<group>";
 		};
 		BD574B0318EA481500EDD66F /* Views */ = {
@@ -626,7 +627,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
+				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv6 armv7 armv7s arm64";
@@ -705,7 +706,7 @@
 				BUNDLE_NAME_SUFFIX = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
-				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
+				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv6 armv7 armv7s arm64";
@@ -784,7 +785,7 @@
 					"$(inherited)",
 					"COCOAPODS=1",
 				);
-				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
+				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv6 armv7 armv7s arm64";
 			};
@@ -853,7 +854,7 @@
 				BUNDLE_NAME_SUFFIX = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
-				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
+				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv6 armv7 armv7s arm64";
 			};
@@ -927,7 +928,7 @@
 					"$(inherited)",
 					"COCOAPODS=1",
 				);
-				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
+				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv6 armv7 armv7s arm64";
 			};
@@ -1037,7 +1038,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
+				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv6 armv7 armv7s arm64";
@@ -1055,7 +1056,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
-				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
+				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv6 armv7 armv7s arm64";
 			};
@@ -1147,7 +1148,7 @@
 				BUNDLE_NAME_SUFFIX = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
-				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
+				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv6 armv7 armv7s arm64";
 			};
@@ -1221,7 +1222,7 @@
 				BUNDLE_NAME_SUFFIX = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
-				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
+				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv6 armv7 armv7s arm64";
