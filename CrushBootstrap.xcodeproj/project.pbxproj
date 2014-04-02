@@ -346,6 +346,7 @@
 				BDDB994D18C3943B003EBC42 /* Resources */,
 				5934C2BEC75D4C51B3689E07 /* Copy Pods Resources */,
 				BDF1758318C3A844008BD9C6 /* Crashlytics Script */,
+				BDC7F36218EBA5EE0045D4BD /* Remove Unused Localizations */,
 			);
 			buildRules = (
 				BD3D80F418E8B70200FAD1EB /* PBXBuildRule */,
@@ -492,6 +493,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "if [ ! -s \"$INFOPLIST_FILE\" ]; then\n  echo \"Info plist could not be found at $INFOPLIST_FILE\" 1>&2\n  exit 1\nfi\n\nif [ \"$CONFIGURATION\" != \"Debug\" -a \"$PLATFORM_NAME\" != \"iphonesimulator\" ]; then\n  buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n  buildNumber=$(($buildNumber + 1))\n  echo \"Incrementing build number to $buildNumber\"\n  /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\nfi";
+		};
+		BDC7F36218EBA5EE0045D4BD /* Remove Unused Localizations */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Remove Unused Localizations";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "# This removes localization files for regions which you haven't explicitly localized.\n# This is mainly to work around a three-factor problem:\n# 1) iTunes Connect reads .lproj folders to detect supported languages in an app.\n# 2) FormatterKit provides translations for a ton of languages.\n# 3) CocoaPods copies all of FormatterKit's translations into our app.\n# So, iTunes Connect ends up thinking our app supports a lot of languages it doesn't.\n# By reading the \"knownRegions\" property of the pbxproj, we can get the list of\n# regions you've actually created a localization for in the project settings.\n# See this GitHub issue for details and other workarounds:\n# https://github.com/mattt/FormatterKit/issues/88\n\nset -ue\nset -o pipefail\n\nPROJ_FILE=\"$SRCROOT/$PROJECT_NAME.xcodeproj/project.pbxproj\"\n\nif [ ! -e \"$PROJ_FILE\" ]; then\n  echo \"warning: Unable to find project file for localization parsing. Please report this.\" 1&>2\n  exit 0\nfi\n\n# Grab the ID of the root object (the project itself)\nROOT_OBJ_ID=$(/usr/libexec/PlistBuddy -c 'Print :rootObject' \"$PROJ_FILE\" 2>/dev/null)\n\n# That object has a knownRegion property that is an array of locale strings (e.g. \"Base\", \"en\").\n# Grab that, spit it out in JSON, and massage it into a string fit for a find query.\n# For instance, the above example will become '-name Base.lproj -o -name en.lproj'\n# The <> stuff in the seds is jank to get the -o only between intermediate terms\nREGIONS_PRED=$(plutil -extract \"objects.${ROOT_OBJ_ID}.knownRegions\" json -o - \"$PROJ_FILE\" 2>/dev/null | \\\n    python -c 'import sys, json; print \"\\n\".join(json.load(sys.stdin))' | \\\n    sed 's/$/.lproj>/;s/^/<-name /' |  \\\n    paste -sd' ' - | \\\n    sed 's/> </ -o /g;s/[<>]//g' )\n\nfind \"$CODESIGNING_FOLDER_PATH\" -maxdepth 1 -type d -name '*.lproj' -not \\( $REGIONS_PRED \\) -exec rm -rf {} +\n";
+			showEnvVarsInLog = 0;
 		};
 		BDF1758318C3A844008BD9C6 /* Crashlytics Script */ = {
 			isa = PBXShellScriptBuildPhase;
