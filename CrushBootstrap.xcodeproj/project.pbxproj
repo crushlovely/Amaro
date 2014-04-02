@@ -60,6 +60,7 @@
 		BD304C8218E77F7E0034105E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		BD3CA8BB18D8A6D200C993E0 /* default.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = default.css; sourceTree = "<group>"; };
 		BD3D80F218E8AD9100FAD1EB /* ZZZCodeCoverageFixForiOS7.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZZCodeCoverageFixForiOS7.m; sourceTree = "<group>"; };
+		BD49EA2C18EC842B00F73350 /* CrushBootstrap-Environment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CrushBootstrap-Environment.h"; sourceTree = "<group>"; };
 		BD574AFE18EA481500EDD66F /* CrushBootstrap-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CrushBootstrap-Prefix.pch"; sourceTree = "<group>"; };
 		BD574AFF18EA481500EDD66F /* CrushBootstrap-Test.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "CrushBootstrap-Test.xcconfig"; sourceTree = "<group>"; };
 		BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = CrushBootstrap.xcconfig; sourceTree = "<group>"; };
@@ -158,6 +159,7 @@
 				BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */,
 				62199233C093473EAAB5265B /* Pods.xcconfig */,
 				0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */,
+				BD49EA2C18EC842B00F73350 /* CrushBootstrap-Environment.h */,
 				BD574B0218EA481500EDD66F /* Pods-Environment.h */,
 			);
 			path = "Other Sources";
