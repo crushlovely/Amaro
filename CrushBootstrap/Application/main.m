@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Crush & Lovely. All rights reserved.
 //
 
-#ifdef COCOAPODS_POD_AVAILABLE_PixateFreestyle
+#if HAS_POD(PixateFreestyle)
 #import <PixateFreestyle/PixateFreestyle.h>
 #endif
 
@@ -16,7 +16,7 @@
 int main(int argc, char * argv[])
 {
     @autoreleasepool {
-        #ifdef COCOAPODS_POD_AVAILABLE_PixateFreestyle
+        #if HAS_POD(PixateFreestyle)
         [PixateFreestyle initializePixateFreestyle];
         #endif
 

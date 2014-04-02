@@ -8,24 +8,24 @@
 
 #import "CRBSAppDelegate.h"
 
-#ifdef COCOAPODS_POD_AVAILABLE_CrashlyticsFramework
+#if HAS_POD(CrashlyticsFramework)
 #import <Crashlytics/Crashlytics.h>
 #endif
 
-#ifdef COCOAPODS_POD_AVAILABLE_CocoaLumberjack
+#if HAS_POD(CocoaLumberjack)
     #import <CocoaLumberjack/DDASLLogger.h>
     #import <CocoaLumberjack/DDTTYLogger.h>
 
-    #ifdef COCOAPODS_POD_AVAILABLE_CrashlyticsLumberjack
+    #if HAS_POD(CrashlyticsLumberjack)
     #import <CrashlyticsLumberjack/CrashlyticsLogger.h>
     #endif
 
-    #ifdef COCOAPODS_POD_AVAILABLE_Sidecar
+    #if HAS_POD(Sidecar)
     #import <Sidecar/CRLMethodLogFormatter.h>
     #endif
 #endif
 
-#if defined(COCOAPODS_POD_AVAILABLE_CRLInstallrChecker) && defined(CONFIGURATION_ADHOC)
+#if HAS_POD(CRLInstallrChecker) && defined(CONFIGURATION_ADHOC)
 #import <CRLInstallrChecker/CRLInstallrChecker.h>
 #endif
 
@@ -42,15 +42,14 @@
 
 -(void)initializeLoggingAndServices
 {
-    #ifdef COCOAPODS_POD_AVAILABLE_CrashlyticsFramework
+    #if HAS_POD(CrashlyticsFramework)
     NSString *crashlyticsAPIKey = @"<<CrashlyticsAPIKey>>";
-    if([crashlyticsAPIKey characterAtIndex:0] != '<')  // That is, if it's been set to a real value.
-        [Crashlytics startWithAPIKey:crashlyticsAPIKey];
-    else
-        NSLog(@"Set your Crashlytics API key in the app delegate to enable Crashlytics integration!");
+
+    if([crashlyticsAPIKey characterAtIndex:0] != '<') [Crashlytics startWithAPIKey:crashlyticsAPIKey];
+    else NSLog(@"Set your Crashlytics API key in the app delegate to enable Crashlytics integration!");
     #endif
 
-    #if defined(COCOAPODS_POD_AVAILABLE_CRLInstallrChecker) && defined(CONFIGURATION_ADHOC) && !TARGET_IPHONE_SIMULATOR && !defined(DEBUG)
+    #if HAS_POD(CRLInstallrChecker) && defined(CONFIGURATION_ADHOC) && !TARGET_IPHONE_SIMULATOR && !defined(DEBUG)
     // Uncomment and fill in your Installr app key to automatically prompt the user about app updates.
     /*
     [CRLInstallrChecker sharedInstance].appKey = @"<installr app key>";
@@ -65,8 +64,8 @@
      */
     #endif
 
-    #ifdef COCOAPODS_POD_AVAILABLE_CocoaLumberjack
-        #ifdef COCOAPODS_POD_AVAILABLE_Sidecar
+    #if HAS_POD(CocoaLumberjack)
+        #if HAS_POD(Sidecar)
         CRLMethodLogFormatter *logFormatter = [[CRLMethodLogFormatter alloc] init];
         [[DDASLLogger sharedInstance] setLogFormatter:logFormatter];
         [[DDTTYLogger sharedInstance] setLogFormatter:logFormatter];
@@ -77,10 +76,11 @@
         [DDLog addLogger:[DDTTYLogger sharedInstance]];
 
         // Send warning & error messages to Crashlytics
-        #ifdef COCOAPODS_POD_AVAILABLE_CrashlyticsLumberjack
-            #ifdef COCOAPODS_POD_AVAILABLE_Sidecar
+        #if HAS_POD(CrashlyticsLumberjack)
+            #if HAS_POD(Sidecar)
             [[CrashlyticsLogger sharedInstance] setLogFormatter:logFormatter];
             #endif
+
             [DDLog addLogger:[CrashlyticsLogger sharedInstance] withLogLevel:LOG_LEVEL_INFO];
         #endif
     #endif

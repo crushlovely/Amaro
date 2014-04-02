@@ -6,11 +6,13 @@
 
 // Defines about installed Pods
 #import "Pods-Environment.h"
+#define HAS_POD(podname) defined(COCOAPODS_POD_AVAILABLE_ ## podname)
+
 
 // Pull in tgmath for seamless 32-/64-bit math functions.
 // Due to a nasty clang situation right now (early 2014), we can't just use <tgmath.h>
 // directly. See the note in the header.
-#ifdef COCOAPODS_POD_AVAILABLE_Sidecar
+#if HAS_POD(Sidecar)
 #import <Sidecar/tgmath-stopgap.h>
 #endif
 
@@ -26,7 +28,7 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 
-    #ifdef COCOAPODS_POD_AVAILABLE_CocoaLumberjack
+    #if HAS_POD(CocoaLumberjack)
         #import <CocoaLumberjack/DDLog.h>
 
         #ifdef DEBUG
@@ -36,11 +38,11 @@
         #endif
     #endif
 
-    #ifdef COCOAPODS_POD_AVAILABLE_Sidecar
+    #if HAS_POD(Sidecar)
         #import <Sidecar/CRLCategoriesAndUtils.h>
     #endif
 
-    #ifdef COCOAPODS_POD_AVAILABLE_libextobjc
+    #if HAS_POD(libextobjc)
         // A lot of the extobjc stuff is a little crazy.
         // We're including it mainly for 2 things:
         // The Scope module which gives @weakify and @strongify, and
@@ -50,7 +52,7 @@
         #import <libextobjc/EXTKeyPathCoding.h>
     #endif
 
-    #ifdef COCOAPODS_POD_AVAILABLE_Asterism
+    #if HAS_POD(Asterism)
         #import <Asterism/Asterism.h>
     #endif
 #endif
