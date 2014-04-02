@@ -9,6 +9,12 @@ DEFAULT_PREFIX=CRBS
 DEFAULT_PROJECT_NAME=CrushBootstrap
 DEFAULT_FULLNAME=$(dscl . read /Users/`whoami` RealName | sed -n 's/^[\t ]*//;2p')
 
+
+
+####################
+### Utilities
+####################
+
 die() {
     echo -e "\n💀  $1"
     exit 1
@@ -45,6 +51,108 @@ friendlyGrep() {
     set -e
     return 0
 }
+
+set +u
+_OLD_LC_CTYPE="$LC_CTYPE"
+_OLD_LANG="$LANG"
+set -u
+
+switchToCLocale() {
+    # Without these magical incantations, sed barfs on some unicode.
+    # But, we can't set them globally because Cocoapods wants a real locale.
+    export LC_CTYPE=C
+    export LANG=C
+}
+
+resetLocale() {
+    export LC_CTYPE="$_OLD_LC_CTYPE"
+    export LANG="$_OLD_LANG"
+}
+
+
+
+####################
+### Crashlytics
+####################
+
+setUpCrashlytics() {
+    read -p 'Crashlytics email: ' CL_EMAIL
+    if [ -z "$CL_EMAIL" ]; then
+        echo "Aborting Crashlytics setup..."
+        return 0
+    fi
+
+    read -sp 'Crashlytics password: ' CL_PASSWORD
+    echo
+    if [ -z "$CL_PASSWORD" ]; then
+        echo "Aborting Crashlytics setup..."
+        return 0
+    fi
+
+    # We're pulling this data from the Crashlytics API, bypassing the GUI.
+    # See https://gist.github.com/codebutler/5763818
+
+    PYTHON_CMD=$(cat <<EOF
+try:
+    import sys, json;
+    for org in json.load(sys.stdin)['organizations']:
+        print org['name'] + ':', org['api_key']
+except:
+    pass
+EOF)
+
+    set +e
+
+    ORGS_RAW=$(curl -sSf --header "Content-Type: application/json" \
+                   --header "X-CRASHLYTICS-DEVELOPER-TOKEN: ed8fc3dc68a7475cc970eb1e9c0cb6603b0a3ea2" \
+                   --data "{\"email\":\"$CL_EMAIL\",\"password\":\"$CL_PASSWORD\"}" https://api.crashlytics.com/api/v2/session.json | \
+               python -c "$PYTHON_CMD")
+
+    set -e
+
+    if [ -z "$ORGS_RAW" ]; then
+        echo "Error talking with the Crashlytics API. Aborting Crashlytics setup..."
+        return 0
+    fi
+
+    # Split on newlines into an array
+    IFS=$'\n' ORGS=($ORGS_RAW)
+
+    # If there's only one organization, use it
+    if [ ${#ORGS[@]} -eq 1 ]; then
+        installCrashlyticsKeyFromOrg "${ORGS[0]}"
+        return 0
+    fi
+
+    local PS3="Which organization would you like to use? "
+    select ORG in "${ORGS[@]}" "Cancel"; do
+        [ "$ORG" = "Cancel" ] && return 0
+        if [ -n "$ORG" ]; then
+            installCrashlyticsKeyFromOrg "$ORG"
+            break
+        fi
+    done
+}
+
+installCrashlyticsKeyFromOrg() {
+    # This regex is just a little too much for sed, apparently...
+    ORG_NAME=$(echo "$1" | perl -pe 's/^(.*): .+$/\1/')
+    KEY=$(echo "$1" | perl -pe 's/^.*: (.+)$/\1/')
+    echo " ✨  Using Crashlytics key for $ORG_NAME"
+
+    echo -n "Updating file contents... "
+    switchToCLocale
+    find . -type f -not \( -path './.git/*' -prune \) -exec sed -i '' "s/<<CrashlyticsAPIKey>>/$KEY/g" {} +
+    resetLocale
+    echo "👍"
+
+    echo -n "Committing... "
+    git add --all
+    git commit -q -m "[Amaro] Installed Crashlytics API key"
+    echo "👍"
+}
+
+
 
 ####################
 ### Gathering Info
@@ -183,13 +291,7 @@ echo "👍"
 
 echo -n "Updating file contents... "
 
-# Without these incantations, sed barfs on certain Unicode strings
-set +u
-_OLD_LC_CTYPE="$LC_CTYPE"
-_OLD_LANG="$LANG"
-set -u
-export LC_CTYPE=C 
-export LANG=C
+switchToCLocale
 
 # Any reference to the project name or the prefix in all files:
 find . -type f -not \( -path './.git/*' -prune \) -not -path './README.md' -exec sed -i '' "s/$DEFAULT_PROJECT_NAME/$PROJECT_NAME/g;s/$DEFAULT_PREFIX/$PREFIX/g" {} +
@@ -201,8 +303,7 @@ find . -type f \( -name "*.m" -o -name "*.h" \) -not \( -path './.git/*' -prune 
 # Remove ignores that are only relevant in the bootstrap repo itself
 sed -i '' '/.*>>>bootstrap-only/,/.*<<<bootstrap-only/d' .gitignore
 
-export LC_CTYPE="$_OLD_LC_CTYPE"
-export LANG="$_OLD_LANG"
+resetLocale
 
 echo "👍"
 
@@ -235,6 +336,11 @@ git rm -q tiramisu.sh
 git commit -q -m "[Amaro] Install pods and remove init script"
 
 echo "👍"
+
+
+read -n1 -p "Would you like to set up Crashlytics now [Y/n]? " SET_UP_CRASHLYTICS
+[[ -z $"SET_UP_CRASHLYTICS" ]] || echo
+[[ -z "$SET_UP_CRASHLYTICS" || "$SET_UP_CRASHLYTICS" == "y" || "$SET_UP_CRASHLYTICS" == "Y" ]] && setUpCrashlytics
 
 
 echo -n "Cleaning up after ourselves... "

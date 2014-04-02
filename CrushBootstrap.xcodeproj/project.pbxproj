@@ -504,8 +504,8 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Pods/CrashlyticsFramework/Crashlytics.framework/run c8472ec808f54475648e7963858199db751e8608 9d399fbeb1a85d999f7e291175861b5985cd587ab00cf30db29b64582f9a0a31";
+			shellPath = /bin/bash;
+			shellScript = "CRASHLYTICS_SCRIPT=\"./Pods/CrashlyticsFramework/Crashlytics.framework/run\"\n[ -x \"$CRASHLYTICS_SCRIPT\" ] || exit 0\n\n# Enter your key below:\nCRASHLYTICS_API_KEY=\"<<CrashlyticsAPIKey>>\"\n\nif [ \"${CRASHLYTICS_API_KEY:0:1}\" = \"<\" ]; then\n  echo \"warning: Set your Crashlytics API key in the Build Phases tab to enable Crashlytics integration\" 1>&2\n  exit 0\nfi\n\n\"$CRASHLYTICS_SCRIPT\" \"$CRASHLYTICS_API_KEY\"";
 			showEnvVarsInLog = 0;
 		};
 		CE78B447D2424EDEAEAB74EB /* Check Pods Manifest.lock */ = {

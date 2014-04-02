@@ -14,9 +14,9 @@ Change to your projects directory, run this line in your terminal, and follow th
 (read -p 'GitHub username: ' GH_USER; read -sp 'Password: ' GH_PASS; bash -i <(curl -sSLu "$GH_USER:$GH_PASS" https://raw.github.com/crushlovely/Amaro/master/tiramisu.sh))
 ```
 
-Of course, if you're wary of running random shell scripts (legit!), please read [tiramisu.sh](blob/master/tiramisu.sh). At a high level, the script creates a local git repository with Amaro as a remote named "bootstrap", tweaks filenames and contents as per your input, and grabs third-party code.
+Of course, if you're wary of running random shell scripts (legit!), please read [tiramisu.sh](tiramisu.sh). At a high level, the script creates a local git repository with Amaro as a remote named "bootstrap", tweaks filenames and contents as per your input, and grabs third-party code.
 
-(Tiramisu is Italian for "pick me up". Bootstrap... pick me up... get it?!? 💃)
+(Tiramisu is Italian for "pick me up". Bootstrap... pick me up... get it?!? :dancer:)
 
 
 ## Details and Requirements
@@ -25,7 +25,7 @@ The bootstrap assumes:
 * You are using Xcode 5.
 * You have the [CocoaPods gem](http://cocoapods.org/#install) installed.
 * You are targetting iOS 7.0, at minimum (and thus will be compiling against at least the iOS 7.0 SDK).
-    * If the client takes issue with this, point them [here](https://developer.apple.com/support/appstore/). As of March 2014, iOS 7 has an 85% adoption rate.
+    * As of [March 2014](https://developer.apple.com/support/appstore/), iOS 7 has an 85% adoption rate.
 
 And, optionally:
 
@@ -33,7 +33,7 @@ And, optionally:
 
 
 ## What's Included?
-Amaro aims to set you up with all you need to write a beautiful, maintainable, well-tested app.
+Amaro aims to set you up with all you need to write a beautiful, maintainable, well-tested app. All the default pods are optional; feel free to pick and choose as needed for your project (though you will probably want most of them).
 
 ### Foundation
 * A well-chosen class prefix is enforced.
@@ -45,7 +45,7 @@ Amaro aims to set you up with all you need to write a beautiful, maintainable, w
 * Automatic ways to easily distinguish between builds of the app:
     * Ad-hoc and development builds have their bundle id suffixed with ".adhoc" or ".dev" so that they can co-exist on devices with other builds.
     * Ad-hoc and development builds have their names suffixed with a beta or alpha symbol (and are badged with the same on the home screen) to easily distinguish them in places where it may otherwise be difficult.
-* The build number of the app is incremented on every non-simulator, non-debug build. This ensures that external services (e.g. TestFlight) can reliably distinguish builds, even if the version number doesn't change.
+* The build number of the app is incremented on every non-simulator, non-debug build. This ensures that external distribution services can reliably distinguish builds, even if the version number doesn't change.
 * [CocoaPods](http://cocoapods.org) are integrated from the get-go.
 * A barebones settings bundle is included with an "Acknowledgements" section that includes licenses for all your pods. It's automatically updated after each `pod install`.
 
@@ -65,7 +65,7 @@ Amaro aims to set you up with all you need to write a beautiful, maintainable, w
 * [libextobjc](https://github.com/jspahrsummers/libextobjc)'s [scope](https://github.com/jspahrsummers/libextobjc/blob/master/extobjc/EXTScope.h) and [keypath checking](https://github.com/jspahrsummers/libextobjc/blob/master/extobjc/EXTKeyPathCoding.h) modules.
 * [FormatterKit](https://github.com/mattt/FormatterKit), for all your string-formatting needs.
 * [Asterism](https://github.com/robb/Asterism), a fast, simple and flexible library for manipulating collections.
-* [Crush's homegrown library](https://github.com/crushlovely/CRLLib) with commonly needed functionality, such as creating UIColors from hex, playing short sound effects, and performing blocks on the main thread.
+* [Sidecar](https://github.com/crushlovely/Sidecar), Crush's homegrown library. Features commonly needed functionality, such as creating UIColors from hex, playing short sound effects, and performing blocks on the main thread.
 
 ### More...
 Additionally, the Podfile notes a few optional libraries that you may find useful:
@@ -89,8 +89,6 @@ Here are some specific tips:
     * There should almost never be a reason to check in third-party projects wholesale. If you need to modify someone else's code, fork the repo and include the fork in your Podfile with a direct [`:git` reference](http://guides.cocoapods.org/syntax/podfile.html#pod).
 * Use CocoaLumberjack's `DDLog` variants instead of `NSLog`. It's faster, provides more information, is more configurable, and understands log levels. All of that with the same familiar syntax. Retrain your fingers.
 * Make friends with Pixate Freestyle. We've yet to have much experience with it in the real world, but it seems pretty damn amazing. Check out the [samples](https://github.com/Pixate/pixate-freestyle-ios/tree/master/samples) to see what I mean.
-
-And finally, **check out our [Programming Conventions](https://github.com/crushlovely/programming-conventions/wiki)**.
 
 
 ## License Rundown

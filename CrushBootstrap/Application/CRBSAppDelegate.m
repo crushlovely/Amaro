@@ -43,21 +43,25 @@
 -(void)initializeLoggingAndServices
 {
     #ifdef COCOAPODS_POD_AVAILABLE_CrashlyticsFramework
-    [Crashlytics startWithAPIKey:@"c8472ec808f54475648e7963858199db751e8608"];
+    NSString *crashlyticsAPIKey = @"<<CrashlyticsAPIKey>>";
+    if([crashlyticsAPIKey characterAtIndex:0] != '<')  // That is, if it's been set to a real value.
+        [Crashlytics startWithAPIKey:crashlyticsAPIKey];
+    else
+        NSLog(@"Set your Crashlytics API key in the app delegate to enable Crashlytics integration!");
     #endif
 
-    #if defined(COCOAPODS_POD_AVAILABLE_CRLInstallrChecker) && defined(CONFIGURATION_ADHOC)
+    #if defined(COCOAPODS_POD_AVAILABLE_CRLInstallrChecker) && defined(CONFIGURATION_ADHOC) && !TARGET_IPHONE_SIMULATOR && !defined(DEBUG)
     // Uncomment and fill in your Installr app key to automatically prompt the user about app updates.
     /*
-     [CRLInstallrChecker sharedInstance].appKey = @"<installr app key>";
+    [CRLInstallrChecker sharedInstance].appKey = @"<installr app key>";
 
-     // Waiting for 3 seconds before triggering the update check, in hopes that the app will be fully
-     // usable by then. Feel free to adjust the delay as needed, or even move the -checkNow call to
-     // your main VC.
-     dispatch_queue_t lowPriorityQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
-     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), lowPriorityQueue, ^{
-         [[CRLInstallrChecker sharedInstance] checkNow];
-     });
+    // Waiting for 3 seconds before triggering the update check, in hopes that the app will be fully
+    // usable by then. Feel free to adjust the delay as needed, or even move the -checkNow call to
+    // your main VC.
+    dispatch_queue_t lowPriorityQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), lowPriorityQueue, ^{
+        [[CRLInstallrChecker sharedInstance] checkNow];
+    });
      */
     #endif
 
