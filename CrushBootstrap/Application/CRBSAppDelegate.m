@@ -25,7 +25,7 @@
     #endif
 #endif
 
-#if HAS_POD(CRLInstallrChecker) && defined(CONFIGURATION_ADHOC)
+#if HAS_POD(CRLInstallrChecker) && IS_ADHOC_BUILD
 #import <CRLInstallrChecker/CRLInstallrChecker.h>
 #endif
 
@@ -49,7 +49,7 @@
     else NSLog(@"Set your Crashlytics API key in the app delegate to enable Crashlytics integration!");
     #endif
 
-    #if HAS_POD(CRLInstallrChecker) && defined(CONFIGURATION_ADHOC) && !TARGET_IPHONE_SIMULATOR && !defined(DEBUG)
+    #if HAS_POD(CRLInstallrChecker) && IS_ADHOC_BUILD && !TARGET_IPHONE_SIMULATOR && !defined(DEBUG)
     // Uncomment and fill in your Installr app key to automatically prompt the user about app updates.
     /*
     [CRLInstallrChecker sharedInstance].appKey = @"<installr app key>";
@@ -82,7 +82,7 @@
             #endif
 
             [DDLog addLogger:[CrashlyticsLogger sharedInstance] withLogLevel:LOG_LEVEL_INFO];
-        #endif
+       #endif
     #endif
 }
 
@@ -92,15 +92,15 @@
  */
 -(void)applyBuildIconBadge
 {
-    #if defined(CONFIGURATION_DEBUG) || defined(CONFIGURATION_ADHOC)
+    #if IS_DEBUG_BUILD || IS_ADHOC_BUILD
 
     #pragma clang diagnostic push
     #pragma clang diagnostic ignored "-Wundeclared-selector"
     if([[UIApplication sharedApplication] respondsToSelector:@selector(setApplicationBadgeString:)]) {
-        #ifdef CONFIGURATION_DEBUG
-        NSString *badgeString = @"α";
+        #ifdef TARGETING_STAGING
+        NSString *badgeString = @"🅢";
         #else
-        NSString *badgeString = @"β";
+        NSString *badgeString = @"🅟";
         #endif
 
         [[UIApplication sharedApplication] performSelector:@selector(setApplicationBadgeString:) withObject:badgeString];

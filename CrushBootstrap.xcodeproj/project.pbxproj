@@ -506,8 +506,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "# This removes localization files for regions which you haven't explicitly localized.\n# This is mainly to work around a three-factor problem:\n# 1) iTunes Connect reads .lproj folders to detect supported languages in an app.\n# 2) FormatterKit provides translations for a ton of languages.\n# 3) CocoaPods copies all of FormatterKit's translations into our app.\n# So, iTunes Connect ends up thinking our app supports a lot of languages it doesn't.\n# By reading the \"knownRegions\" property of the pbxproj, we can get the list of\n# regions you've actually created a localization for in the project settings.\n# See this GitHub issue for details and other workarounds:\n# https://github.com/mattt/FormatterKit/issues/88\n\nset -ue\nset -o pipefail\n\nPROJ_FILE=\"$SRCROOT/$PROJECT_NAME.xcodeproj/project.pbxproj\"\n\nif [ ! -e \"$PROJ_FILE\" ]; then\n  echo \"warning: Unable to find project file for localization parsing. Please report this.\" 1&>2\n  exit 0\nfi\n\n# Grab the ID of the root object (the project itself)\nROOT_OBJ_ID=$(/usr/libexec/PlistBuddy -c 'Print :rootObject' \"$PROJ_FILE\" 2>/dev/null)\n\n# That object has a knownRegion property that is an array of locale strings (e.g. \"Base\", \"en\").\n# Grab that, spit it out in JSON, and massage it into a string fit for a find query.\n# For instance, the above example will become '-name Base.lproj -o -name en.lproj'\n# The <> stuff in the seds is jank to get the -o only between intermediate terms\nREGIONS_PRED=$(plutil -extract \"objects.${ROOT_OBJ_ID}.knownRegions\" json -o - \"$PROJ_FILE\" 2>/dev/null | \\\n    python -c 'import sys, json; print \"\\n\".join(json.load(sys.stdin))' | \\\n    sed 's/$/.lproj>/;s/^/<-name /' |  \\\n    paste -sd' ' - | \\\n    sed 's/> </ -o /g;s/[<>]//g' )\n\nfind \"$CODESIGNING_FOLDER_PATH\" -maxdepth 1 -type d -name '*.lproj' -not \\( $REGIONS_PRED \\) -exec rm -rf {} +\n";
-			showEnvVarsInLog = 0;
+			shellScript = "# This removes localization files for regions which you haven't explicitly localized.\n# This is mainly to work around a three-factor problem:\n# 1) iTunes Connect reads .lproj folders to detect supported languages in an app.\n# 2) FormatterKit provides translations for a ton of languages.\n# 3) CocoaPods copies all of FormatterKit's translations into our app.\n# So, iTunes Connect ends up thinking our app supports a lot of languages it doesn't.\n# By reading the \"knownRegions\" property of the pbxproj, we can get the list of\n# regions you've actually created a localization for in the project settings.\n# See this GitHub issue for details and other workarounds:\n# https://github.com/mattt/FormatterKit/issues/88\n\necho $SCHEME_NAME\n\nset -ue\nset -o pipefail\n\nPROJ_FILE=\"$SRCROOT/$PROJECT_NAME.xcodeproj/project.pbxproj\"\n\nif [ ! -e \"$PROJ_FILE\" ]; then\n  echo \"warning: Unable to find project file for localization parsing. Please report this.\" 1&>2\n  exit 0\nfi\n\n# Grab the ID of the root object (the project itself)\nROOT_OBJ_ID=$(/usr/libexec/PlistBuddy -c 'Print :rootObject' \"$PROJ_FILE\" 2>/dev/null)\n\n# That object has a knownRegion property that is an array of locale strings (e.g. \"Base\", \"en\").\n# Grab that, spit it out in JSON, and massage it into a string fit for a find query.\n# For instance, the above example will become '-name Base.lproj -o -name en.lproj'\n# The <> stuff in the seds is jank to get the -o only between intermediate terms\nREGIONS_PRED=$(plutil -extract \"objects.${ROOT_OBJ_ID}.knownRegions\" json -o - \"$PROJ_FILE\" 2>/dev/null | \\\n    python -c 'import sys, json; print \"\\n\".join(json.load(sys.stdin))' | \\\n    sed 's/$/.lproj>/;s/^/<-name /' |  \\\n    paste -sd' ' - | \\\n    sed 's/> </ -o /g;s/[<>]//g' )\n\nfind \"$CODESIGNING_FOLDER_PATH\" -maxdepth 1 -type d -name '*.lproj' -not \\( $REGIONS_PRED \\) -exec rm -rf {} +\n";
 		};
 		BDF1758318C3A844008BD9C6 /* Crashlytics Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -572,81 +571,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		BDD67CDB18DFAB85008ECBBD /* AdHoc */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDF1755518C3972E008BD9C6 /* Release.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = AdHoc;
-		};
-		BDD67CDC18DFAB85008ECBBD /* AdHoc */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				BUNDLE_ID_SUFFIX = .adhoc;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DISPLAY_NAME_SUFFIX = " β";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"COCOAPODS=1",
-				);
-				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = "armv6 armv7 armv7s arm64";
-			};
-			name = AdHoc;
-		};
-		BDD67CDD18DFAB85008ECBBD /* AdHoc */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CrushBootstrap.app/CrushBootstrap";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
-				INFOPLIST_FILE = "Specs/Specs-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = AdHoc;
-		};
-		BDDB998218C3943B003EBC42 /* Debug */ = {
+		BD49EA2018EC611D00F73350 /* Debug_Production */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BDF1755318C3972E008BD9C6 /* Debug.xcconfig */;
 			buildSettings = {
@@ -684,50 +609,16 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Debug;
+			name = Debug_Production;
 		};
-		BDDB998318C3943B003EBC42 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDF1755518C3972E008BD9C6 /* Release.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		BDDB998518C3943B003EBC42 /* Debug */ = {
+		BD49EA2118EC611D00F73350 /* Debug_Production */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				BUNDLE_ID_SUFFIX = .debug;
-				DISPLAY_NAME_SUFFIX = " α";
+				BUNDLE_ID_SUFFIX = .prod.debug;
+				BUNDLE_NAME_SUFFIX = " (Prod)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -736,26 +627,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv6 armv7 armv7s arm64";
 			};
-			name = Debug;
+			name = Debug_Production;
 		};
-		BDDB998618C3943B003EBC42 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				BUNDLE_ID_SUFFIX = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DISPLAY_NAME_SUFFIX = "";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
-				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = "armv6 armv7 armv7s arm64";
-			};
-			name = Release;
-		};
-		BDDB998818C3943B003EBC42 /* Debug */ = {
+		BD49EA2218EC611D00F73350 /* Debug_Production */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */;
 			buildSettings = {
@@ -776,97 +650,9 @@
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
-			name = Debug;
+			name = Debug_Production;
 		};
-		BDDB998918C3943B003EBC42 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CrushBootstrap.app/CrushBootstrap";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
-				INFOPLIST_FILE = "Specs/Specs-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
-		BDF1757A18C3986D008BD9C6 /* Profile */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDF1755418C3972E008BD9C6 /* Profile.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Profile;
-		};
-		BDF1757B18C3986D008BD9C6 /* Profile */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				BUNDLE_ID_SUFFIX = "";
-				DISPLAY_NAME_SUFFIX = "";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
-				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = "armv6 armv7 armv7s arm64";
-			};
-			name = Profile;
-		};
-		BDF1757C18C3986D008BD9C6 /* Profile */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CrushBootstrap.app/CrushBootstrap";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
-				INFOPLIST_FILE = "Specs/Specs-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Profile;
-		};
-		BDF1757D18C39BD3008BD9C6 /* Test */ = {
+		BD49EA2318EC612E00F73350 /* Test_Production */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BD574AFF18EA481500EDD66F /* CrushBootstrap-Test.xcconfig */;
 			buildSettings = {
@@ -903,16 +689,16 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Test;
+			name = Test_Production;
 		};
-		BDF1757E18C39BD3008BD9C6 /* Test */ = {
+		BD49EA2418EC612E00F73350 /* Test_Production */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID_SUFFIX = "";
-				DISPLAY_NAME_SUFFIX = "";
+				BUNDLE_NAME_SUFFIX = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
 				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
@@ -920,9 +706,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv6 armv7 armv7s arm64";
 			};
-			name = Test;
+			name = Test_Production;
 		};
-		BDF1757F18C39BD3008BD9C6 /* Test */ = {
+		BD49EA2518EC612E00F73350 /* Test_Production */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */;
 			buildSettings = {
@@ -943,7 +729,523 @@
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
-			name = Test;
+			name = Test_Production;
+		};
+		BD49EA2618EC614F00F73350 /* AdHoc_Production */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDF1755518C3972E008BD9C6 /* Release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = AdHoc_Production;
+		};
+		BD49EA2718EC614F00F73350 /* AdHoc_Production */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				BUNDLE_ID_SUFFIX = .prod.adhoc;
+				BUNDLE_NAME_SUFFIX = " (Prod)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+				);
+				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv6 armv7 armv7s arm64";
+			};
+			name = AdHoc_Production;
+		};
+		BD49EA2818EC614F00F73350 /* AdHoc_Production */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CrushBootstrap.app/CrushBootstrap";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
+				INFOPLIST_FILE = "Specs/Specs-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = AdHoc_Production;
+		};
+		BD49EA2918EC62DD00F73350 /* Profile_Production */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDF1755418C3972E008BD9C6 /* Profile.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Profile_Production;
+		};
+		BD49EA2A18EC62DD00F73350 /* Profile_Production */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				BUNDLE_ID_SUFFIX = "";
+				BUNDLE_NAME_SUFFIX = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
+				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv6 armv7 armv7s arm64";
+			};
+			name = Profile_Production;
+		};
+		BD49EA2B18EC62DD00F73350 /* Profile_Production */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CrushBootstrap.app/CrushBootstrap";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
+				INFOPLIST_FILE = "Specs/Specs-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Profile_Production;
+		};
+		BDD67CDB18DFAB85008ECBBD /* AdHoc_Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDF1755518C3972E008BD9C6 /* Release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = AdHoc_Staging;
+		};
+		BDD67CDC18DFAB85008ECBBD /* AdHoc_Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				BUNDLE_ID_SUFFIX = .staging.adhoc;
+				BUNDLE_NAME_SUFFIX = " (Staging)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+				);
+				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv6 armv7 armv7s arm64";
+			};
+			name = AdHoc_Staging;
+		};
+		BDD67CDD18DFAB85008ECBBD /* AdHoc_Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CrushBootstrap.app/CrushBootstrap";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
+				INFOPLIST_FILE = "Specs/Specs-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = AdHoc_Staging;
+		};
+		BDDB998218C3943B003EBC42 /* Debug_Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDF1755318C3972E008BD9C6 /* Debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug_Staging;
+		};
+		BDDB998318C3943B003EBC42 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDF1755518C3972E008BD9C6 /* Release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Distribution;
+		};
+		BDDB998518C3943B003EBC42 /* Debug_Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				BUNDLE_ID_SUFFIX = .staging.debug;
+				BUNDLE_NAME_SUFFIX = " (Staging)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv6 armv7 armv7s arm64";
+			};
+			name = Debug_Staging;
+		};
+		BDDB998618C3943B003EBC42 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				BUNDLE_ID_SUFFIX = "";
+				BUNDLE_NAME_SUFFIX = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
+				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv6 armv7 armv7s arm64";
+			};
+			name = Distribution;
+		};
+		BDDB998818C3943B003EBC42 /* Debug_Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CrushBootstrap.app/CrushBootstrap";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Specs/Specs-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug_Staging;
+		};
+		BDDB998918C3943B003EBC42 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CrushBootstrap.app/CrushBootstrap";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
+				INFOPLIST_FILE = "Specs/Specs-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Distribution;
+		};
+		BDF1757A18C3986D008BD9C6 /* Profile_Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDF1755418C3972E008BD9C6 /* Profile.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Profile_Staging;
+		};
+		BDF1757B18C3986D008BD9C6 /* Profile_Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				BUNDLE_ID_SUFFIX = "";
+				BUNDLE_NAME_SUFFIX = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
+				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv6 armv7 armv7s arm64";
+			};
+			name = Profile_Staging;
+		};
+		BDF1757C18C3986D008BD9C6 /* Profile_Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CrushBootstrap.app/CrushBootstrap";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
+				INFOPLIST_FILE = "Specs/Specs-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Profile_Staging;
+		};
+		BDF1757D18C39BD3008BD9C6 /* Test_Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD574AFF18EA481500EDD66F /* CrushBootstrap-Test.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Test_Staging;
+		};
+		BDF1757E18C39BD3008BD9C6 /* Test_Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				BUNDLE_ID_SUFFIX = "";
+				BUNDLE_NAME_SUFFIX = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
+				INFOPLIST_FILE = "CrushBootstrap/Other Sources/CrushBootstrap-Info.plist";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv6 armv7 armv7s arm64";
+			};
+			name = Test_Staging;
+		};
+		BDF1757F18C39BD3008BD9C6 /* Test_Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0BCADCBD2726475BBDA55E55 /* Pods-Specs.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CrushBootstrap.app/CrushBootstrap";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Specs/Specs-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Test_Staging;
 		};
 /* End XCBuildConfiguration section */
 
@@ -951,38 +1253,50 @@
 		BDDB994A18C3943B003EBC42 /* Build configuration list for PBXProject "CrushBootstrap" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BDDB998218C3943B003EBC42 /* Debug */,
-				BDF1757D18C39BD3008BD9C6 /* Test */,
-				BDDB998318C3943B003EBC42 /* Release */,
-				BDD67CDB18DFAB85008ECBBD /* AdHoc */,
-				BDF1757A18C3986D008BD9C6 /* Profile */,
+				BDDB998218C3943B003EBC42 /* Debug_Staging */,
+				BD49EA2018EC611D00F73350 /* Debug_Production */,
+				BDF1757D18C39BD3008BD9C6 /* Test_Staging */,
+				BD49EA2318EC612E00F73350 /* Test_Production */,
+				BDDB998318C3943B003EBC42 /* Distribution */,
+				BDD67CDB18DFAB85008ECBBD /* AdHoc_Staging */,
+				BD49EA2618EC614F00F73350 /* AdHoc_Production */,
+				BDF1757A18C3986D008BD9C6 /* Profile_Staging */,
+				BD49EA2918EC62DD00F73350 /* Profile_Production */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Distribution;
 		};
 		BDDB998418C3943B003EBC42 /* Build configuration list for PBXNativeTarget "CrushBootstrap" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BDDB998518C3943B003EBC42 /* Debug */,
-				BDF1757E18C39BD3008BD9C6 /* Test */,
-				BDDB998618C3943B003EBC42 /* Release */,
-				BDD67CDC18DFAB85008ECBBD /* AdHoc */,
-				BDF1757B18C3986D008BD9C6 /* Profile */,
+				BDDB998518C3943B003EBC42 /* Debug_Staging */,
+				BD49EA2118EC611D00F73350 /* Debug_Production */,
+				BDF1757E18C39BD3008BD9C6 /* Test_Staging */,
+				BD49EA2418EC612E00F73350 /* Test_Production */,
+				BDDB998618C3943B003EBC42 /* Distribution */,
+				BDD67CDC18DFAB85008ECBBD /* AdHoc_Staging */,
+				BD49EA2718EC614F00F73350 /* AdHoc_Production */,
+				BDF1757B18C3986D008BD9C6 /* Profile_Staging */,
+				BD49EA2A18EC62DD00F73350 /* Profile_Production */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Distribution;
 		};
 		BDDB998718C3943B003EBC42 /* Build configuration list for PBXNativeTarget "Specs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BDDB998818C3943B003EBC42 /* Debug */,
-				BDF1757F18C39BD3008BD9C6 /* Test */,
-				BDDB998918C3943B003EBC42 /* Release */,
-				BDD67CDD18DFAB85008ECBBD /* AdHoc */,
-				BDF1757C18C3986D008BD9C6 /* Profile */,
+				BDDB998818C3943B003EBC42 /* Debug_Staging */,
+				BD49EA2218EC611D00F73350 /* Debug_Production */,
+				BDF1757F18C39BD3008BD9C6 /* Test_Staging */,
+				BD49EA2518EC612E00F73350 /* Test_Production */,
+				BDDB998918C3943B003EBC42 /* Distribution */,
+				BDD67CDD18DFAB85008ECBBD /* AdHoc_Staging */,
+				BD49EA2818EC614F00F73350 /* AdHoc_Production */,
+				BDF1757C18C3986D008BD9C6 /* Profile_Staging */,
+				BD49EA2B18EC62DD00F73350 /* Profile_Production */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Distribution;
 		};
 /* End XCConfigurationList section */
 	};

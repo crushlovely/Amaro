@@ -1,7 +1,12 @@
 platform :ios, '7.0'
 
 # Inform CocoaPods that we use some custom build configurations
-xcodeproj 'CrushBootstrap', 'AdHoc' => :release, 'Profile' => :release, 'Test' => :debug
+xcodeproj 'CrushBootstrap',
+    'Debug_Staging'   => :debug,   'Debug_Production'   => :debug,
+    'Test_Staging'    => :debug,   'Test_Production'    => :debug,
+    'AdHoc_Staging'   => :release, 'AdHoc_Production'   => :release,
+    'Profile_Staging' => :release, 'Profile_Production' => :release,
+    'Distribution'    => :release
 
 # Crush internals
 pod 'Sidecar', :git => 'https://github.com/crushlovely/Sidecar.git'
