@@ -92,7 +92,19 @@ Here are some specific tips:
 * Make friends with Pixate Freestyle. We've yet to have much experience with it in the real world, but it seems pretty damn amazing. Check out the [samples](https://github.com/Pixate/pixate-freestyle-ios/tree/master/samples) to see what I mean.
 
 
-## License Rundown
+## License
+The real content and value of Amaro is as a template; once you've created a new project with the initialization script, Amaro leaves barely a trace. So, in most cases, the only licenses you need to worry about are [those of the third-party software](#third-party-license-rundown) you've included. But anyway, should you want to deal with Amaro itself, it's MIT licensed:
+
+Copyright (c) 2014 Crush & Lovely, LLC
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+## Third-Party License Rundown
 
 As mentioned above, the bootstrap [automatically generates a settings section](https://github.com/CocoaPods/CocoaPods/wiki/Acknowledgements) containing license information for all your Cocoapods. If that's unacceptable for your purposes, here's the license information on the included and optional components:
 
@@ -108,7 +120,7 @@ As mentioned above, the bootstrap [automatically generates a settings section](h
 * Mantle: [MIT](https://github.com/MantleFramework/Mantle)
 * SSKeyChain: [MIT](https://github.com/soffes/sskeychain/blob/master/LICENSE)
 * DateTools: [MIT](https://github.com/MatthewYork/DateTools/blob/master/LICENSE)
-* Sidecar: MIT
+* Sidecar: [MIT](https://github.com/crushlovely/Sidecar/blob/master/LICENSE)
 
 
 ## Acknowledgements
