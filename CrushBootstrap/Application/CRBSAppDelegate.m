@@ -25,8 +25,8 @@
     #endif
 #endif
 
-#if HAS_POD(CRLInstallrChecker) && IS_ADHOC_BUILD
-#import <CRLInstallrChecker/CRLInstallrChecker.h>
+#if HAS_POD(Aperitif) && IS_ADHOC_BUILD
+#import <Aperitif/CRLAperitif.h>
 #endif
 
 
@@ -40,6 +40,17 @@
     return YES;
 }
 
+-(void)applicationDidBecomeActive:(UIApplication *)application
+{
+    [self scheduleCheckForUpdates];
+}
+
+
+#pragma mark Amaro foundation goodies
+
+/**
+ Connects to Crashlytics and sets up CocoaLumberjack
+ */
 -(void)initializeLoggingAndServices
 {
     #if HAS_POD(CrashlyticsFramework)
@@ -47,21 +58,6 @@
 
     if([crashlyticsAPIKey characterAtIndex:0] != '<') [Crashlytics startWithAPIKey:crashlyticsAPIKey];
     else NSLog(@"Set your Crashlytics API key in the app delegate to enable Crashlytics integration!");
-    #endif
-
-    #if HAS_POD(CRLInstallrChecker) && IS_ADHOC_BUILD && !TARGET_IPHONE_SIMULATOR && !defined(DEBUG)
-    // Uncomment and fill in your Installr app key to automatically prompt the user about app updates.
-    /*
-    [CRLInstallrChecker sharedInstance].appKey = @"<installr app key>";
-
-    // Waiting for 3 seconds before triggering the update check, in hopes that the app will be fully
-    // usable by then. Feel free to adjust the delay as needed, or even move the -checkNow call to
-    // your main VC.
-    dispatch_queue_t lowPriorityQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), lowPriorityQueue, ^{
-        [[CRLInstallrChecker sharedInstance] checkNow];
-    });
-     */
     #endif
 
     #if HAS_POD(CocoaLumberjack)
@@ -106,6 +102,29 @@
         [[UIApplication sharedApplication] performSelector:@selector(setApplicationBadgeString:) withObject:badgeString];
     }
     #pragma clang diagnostic pop
+
+    #endif
+}
+
+/**
+ Schedules a check for updates to the app in the Installr API. Only executed for Ad Hoc builds,
+ not targetting the simulator (i.e. archives of the -Staging and -Production schemes).
+ */
+-(void)scheduleCheckForUpdates
+{
+    // Uncomment the blob below and fill in your Installr app tokens to enable automatically
+    // prompting the user when a new build of your app is pushed.
+
+    #if HAS_POD(Aperitif) && IS_ADHOC_BUILD && !TARGET_IPHONE_SIMULATOR && !defined(DEBUG)
+
+//    #ifdef TARGETING_STAGING
+//    NSString * const installrAppToken = @"<Installr app token for the staging build of your app>";
+//    #else
+//    NSString * const installrAppToken = @"<Installr app token for the production build of your app>";
+//    #endif
+//
+//    [CRLAperitif sharedInstance].appToken = installrAppToken;
+//    [[CRLAperitif sharedInstance] checkAfterDelay:3.0];
 
     #endif
 }

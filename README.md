@@ -53,6 +53,7 @@ Amaro aims to set you up with all you need to write a beautiful, maintainable, w
 ### Logging, Error Reporting, Testing
 * [CocoaLumberjack](https://github.com/CocoaLumberjack/CocoaLumberjack) is configured for logging. A custom formatter is used by default to include the class and method name in log messages.
 * The [Crashlytics framework](http://crashlytics.com) is included, and tied into CocoaLumberjack so that high-importance log messages are sent to Crashlytics.
+* [Aperitif](https://github.com/crushlovely/Aperitif), to check for updates of the app in [Installr](https://installrapp.com) and prompt the user to install them (in ad hoc builds only, obviously).
 * [Specta](https://github.com/specta/specta), [Expecta](https://github.com/specta/expecta), and [OCMokito](https://github.com/jonreid/OCMockito) are included to allow for the creation of [Rspec](http://rspec.info)-like tests. Xcode integration for testing is fully configured; add your tests to the Specs target and hit Cmd+U.
 * The test target automatically generates code coverage data that can be viewed with [Cover Story](https://code.google.com/p/coverstory/) or [gcov](http://gcc.gnu.org/onlinedocs/gcc/Gcov-Intro.html).
 
@@ -121,6 +122,7 @@ As mentioned above, the bootstrap [automatically generates a settings section](h
 * SSKeyChain: [MIT](https://github.com/soffes/sskeychain/blob/master/LICENSE)
 * DateTools: [MIT](https://github.com/MatthewYork/DateTools/blob/master/LICENSE)
 * Sidecar: [MIT](https://github.com/crushlovely/Sidecar/blob/master/LICENSE)
+* Aperitif: [MIT](https://github.com/crushlovely/Aperitif/blob/master/LICENSE)
 
 
 ## Acknowledgements

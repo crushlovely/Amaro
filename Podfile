@@ -10,7 +10,7 @@ xcodeproj 'CrushBootstrap',
 
 # Crush internals
 pod 'Sidecar', :git => 'https://github.com/crushlovely/Sidecar.git'
-pod 'CRLInstallrChecker', :git => 'https://github.com/crushlovely/CRLInstallrChecker.git'
+pod 'Aperitif', :git => 'https://github.com/crushlovely/Aperitif.git'
 
 # Logging & Analytics
 pod 'CocoaLumberjack'
