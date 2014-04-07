@@ -11,7 +11,7 @@ We want to hit the ground running. Xcode and the iOS ecosystem don't make that e
 Change to your projects directory, run this line in your terminal, and follow the prompts:
 
 ```sh
-(read -p 'GitHub username: ' GH_USER; read -sp 'Password: ' GH_PASS; bash -i <(curl -sSLu "$GH_USER:$GH_PASS" https://raw.github.com/crushlovely/Amaro/master/tiramisu.sh))
+bash -i <(curl -fsSL https://raw.github.com/crushlovely/Amaro/master/tiramisu.sh)
 ```
 
 Of course, if you're wary of running random shell scripts (legit!), please read [tiramisu.sh](tiramisu.sh). At a high level, the script creates a local git repository with Amaro as a remote named "bootstrap", tweaks filenames and contents as per your input, and grabs third-party code.
@@ -58,7 +58,6 @@ Amaro aims to set you up with all you need to write a beautiful, maintainable, w
 * The test target automatically generates code coverage data that can be viewed with [Cover Story](https://code.google.com/p/coverstory/) or [gcov](http://gcc.gnu.org/onlinedocs/gcc/Gcov-Intro.html).
 
 ### Visuals
-
 * [Pixate Freestyle](https://github.com/Pixate/pixate-freestyle-ios), for easy, centralized app styling via CSS.
     * SCSS files included in the project are automatically compiled at build-time, and only the resulting CSS is included in your app. This functionality requires that [Sass](http://sass-lang.com/install) be installed and available in your path (or in your default RVM configuration's path).
 
