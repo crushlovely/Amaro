@@ -1,4 +1,4 @@
-# ![icon](CrushBootstrap/Resources/Images.xcassets/AppIcon.appiconset/Icon-76.png) Amaro
+# ![icon](CrushBootstrap/Resources/Images.xcassets/AppIcon.appiconset/Icon-76.png) Amaro [![Build Status](https://travis-ci.org/crushlovely/Amaro.svg?branch=master)](https://travis-ci.org/crushlovely/Amaro)
 
 Crush & Lovely's iOS boilerplate.
 
