@@ -7,7 +7,7 @@ BOOTSTRAP_BRANCH=master
 
 DEFAULT_PREFIX=CRBS
 DEFAULT_PROJECT_NAME=CrushBootstrap
-DEFAULT_FULLNAME=$(dscl . read /Users/`whoami` RealName | sed -n 's/^[\t ]*//;2p')
+DEFAULT_FULLNAME=$(dscl . read /Users/`whoami` RealName | sed -n $'s/^[\t ]*//;2p')
 
 
 
@@ -21,11 +21,11 @@ die() {
 }
 
 trim() {
-    echo $1 | sed 's/^[\t ]*//;s/[\t ]*$//'
+    echo $1 | sed $'s/^[\t ]*//;s/[\t ]*$//'
 }
 
 removeAllWhitespace() {
-    echo $1 | sed 's/[\t ]*//g'
+    echo $1 | sed $'s/[\t ]*//g'
 }
 
 edit() {
