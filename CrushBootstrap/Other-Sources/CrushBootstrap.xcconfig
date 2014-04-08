@@ -1,14 +1,28 @@
 // Bring in CocoaPods settings and xcconfigs' highly sensible defaults
-#include "../../Pods/Pods.xcconfig"
 #include "../../External/xcconfigs/iOS/iOS-Application.xcconfig"
+#include "../../Pods/Pods.xcconfig"
 
-
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) CONFIGURATION_$(CONFIGURATION:upper)
-
+// Shame about having to re-define COCOAPODS here, but it's not easy to append to variables
+// in xcconfigs. See this discussion: https://github.com/CocoaPods/CocoaPods/issues/1212
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) CONFIGURATION_$(CONFIGURATION:upper) COCOAPODS=1
 
 // Some extra useful warnings:
 CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES
 GCC_WARN_SHADOW = YES
+CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = YES
+CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES
+WARNING_CFLAGS = $(inherited) -Wunreachable-code -Wall -Wextra -Wno-unused-parameter
 
-// And tone down xcconfigs a touch:
+// Tone down xcconfigs a touch:
 GCC_TREAT_WARNINGS_AS_ERRORS = NO
+
+// Others:
+CLANG_ENABLE_MODULES = YES
+
+// We don't need to generate dsym files in debug builds;
+// it will just take extra time, and the symbols aren't stripped anyway.
+// See: http://labs.spotify.com/2013/11/04/shaving-off-time-from-the-ios-edit-build-test-cycle/
+DEBUG_INFORMATION_FORMAT[config=Debug_Staging] = dwarf
+DEBUG_INFORMATION_FORMAT[config=Debug_Production] = dwarf
+DEBUG_INFORMATION_FORMAT[config=Test_Staging] = dwarf
+DEBUG_INFORMATION_FORMAT[config=Test_Production] = dwarf
