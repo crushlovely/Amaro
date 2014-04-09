@@ -74,7 +74,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Profile_Production"
+      buildConfiguration = "Distribution"
       debugDocumentVersioning = "YES">
       <BuildableProductRunnable>
          <BuildableReference

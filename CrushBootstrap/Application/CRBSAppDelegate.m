@@ -88,7 +88,7 @@
  */
 -(void)applyBuildIconBadge
 {
-    #if IS_DEBUG_BUILD || IS_ADHOC_BUILD
+    #if !IS_DISTRIBUTION_BUILD
 
     #pragma clang diagnostic push
     #pragma clang diagnostic ignored "-Wundeclared-selector"
