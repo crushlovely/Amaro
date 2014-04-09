@@ -11,7 +11,7 @@ CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES
 GCC_WARN_SHADOW = YES
 CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = YES
 CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES
-WARNING_CFLAGS = $(inherited) -Wunreachable-code -Wall -Wextra -Wno-unused-parameter
+WARNING_CFLAGS = $(inherited) -Wunreachable-code -Wall -Wextra -Wno-unused-parameter -Wno-unknown-warning-option
 
 // Tone down xcconfigs a touch:
 GCC_TREAT_WARNINGS_AS_ERRORS = NO
