@@ -1,7 +1,7 @@
 set -ue  # Bomb on uninitialized variables and non-zero exit statuses
 set -o pipefail  # Pass the first non-zero exit status through a pipe
 
-BOOTSTRAP_REPO="git@github.com:crushlovely/Amaro.git"
+BOOTSTRAP_REPO="git://github.com/crushlovely/Amaro.git"
 BOOTSTRAP_WEBSITE="https://github.com/crushlovely/Amaro"
 BOOTSTRAP_BRANCH=master
 
@@ -300,8 +300,8 @@ find . -type f -not \( -path './.git/*' -prune \) -not -path './README.md' -exec
 TODAY=$(date "+%m/%d/%y" | sed 's/^0//g;s/\/0/\//')  # sed nastiness is to remove leading zeroes from the date format
 find . -type f \( -name "*.m" -o -name "*.h" \) -not \( -path './.git/*' -prune \) -exec sed -i '' "s#Created by .* on [0-9].*#Created by $FULLNAME on $TODAY#g" {} +
 
-# Remove ignores that are only relevant in the bootstrap repo itself
-sed -i '' '/.*>>>bootstrap-only/,/.*<<<bootstrap-only/d' .gitignore
+# Remove ignores and build commands that are only relevant in the bootstrap repo itself
+sed -i '' '/.*>>>bootstrap-only/,/.*<<<bootstrap-only/d' .gitignore .travis.yml
 
 resetLocale
 
@@ -333,6 +333,7 @@ pod install --silent
 
 git add --all
 git rm -q tiramisu.sh
+git rm -q bootstrap-scripts
 git commit -q -m "[Amaro] Install pods and remove init script"
 
 echo "👍"
