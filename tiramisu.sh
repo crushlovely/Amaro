@@ -1,7 +1,7 @@
 set -ue  # Bomb on uninitialized variables and non-zero exit statuses
 set -o pipefail  # Pass the first non-zero exit status through a pipe
 
-BOOTSTRAP_REPO="git@github.com:crushlovely/Amaro.git"
+BOOTSTRAP_REPO="git://github.com/crushlovely/Amaro.git"
 BOOTSTRAP_WEBSITE="https://github.com/crushlovely/Amaro"
 BOOTSTRAP_BRANCH=master
 
