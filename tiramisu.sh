@@ -333,7 +333,7 @@ pod install --silent
 
 git add --all
 git rm -q tiramisu.sh
-git rm -q bootstrap-scripts
+git rm -rq bootstrap-scripts
 git commit -q -m "[Amaro] Install pods and remove init script"
 
 echo "👍"
