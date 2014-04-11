@@ -16,15 +16,9 @@
 		BD6951CF18EA4B0800F2F410 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6951CE18EA4B0800F2F410 /* main.m */; };
 		BD6951ED18EA54BB00F2F410 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD6951EB18EA54BB00F2F410 /* Main_iPad.storyboard */; };
 		BD6951EE18EA54BB00F2F410 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD6951EC18EA54BB00F2F410 /* Main_iPhone.storyboard */; };
-		BDDB995318C3943B003EBC42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995218C3943B003EBC42 /* Foundation.framework */; };
-		BDDB995518C3943B003EBC42 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995418C3943B003EBC42 /* CoreGraphics.framework */; };
-		BDDB995718C3943B003EBC42 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995618C3943B003EBC42 /* UIKit.framework */; };
 		BDDB996318C3943B003EBC42 /* CRBSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDB996218C3943B003EBC42 /* CRBSAppDelegate.m */; };
 		BDDB996C18C3943B003EBC42 /* CRBSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDB996B18C3943B003EBC42 /* CRBSViewController.m */; };
 		BDDB996E18C3943B003EBC42 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDDB996D18C3943B003EBC42 /* Images.xcassets */; };
-		BDDB997518C3943B003EBC42 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB997418C3943B003EBC42 /* XCTest.framework */; };
-		BDDB997618C3943B003EBC42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995218C3943B003EBC42 /* Foundation.framework */; };
-		BDDB997718C3943B003EBC42 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDB995618C3943B003EBC42 /* UIKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -71,16 +65,12 @@
 		BD6951EC18EA54BB00F2F410 /* Main_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPhone.storyboard; sourceTree = "<group>"; };
 		BD9FFD9418E66DF4001DF6EC /* Specs-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Specs-Prefix.pch"; sourceTree = "<group>"; };
 		BDDB994F18C3943B003EBC42 /* CrushBootstrap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrushBootstrap.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		BDDB995218C3943B003EBC42 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		BDDB995418C3943B003EBC42 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		BDDB995618C3943B003EBC42 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BDDB996118C3943B003EBC42 /* CRBSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRBSAppDelegate.h; sourceTree = "<group>"; };
 		BDDB996218C3943B003EBC42 /* CRBSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRBSAppDelegate.m; sourceTree = "<group>"; };
 		BDDB996A18C3943B003EBC42 /* CRBSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRBSViewController.h; sourceTree = "<group>"; };
 		BDDB996B18C3943B003EBC42 /* CRBSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBSViewController.m; sourceTree = "<group>"; };
 		BDDB996D18C3943B003EBC42 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BDDB997318C3943B003EBC42 /* Specs.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Specs.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BDDB997418C3943B003EBC42 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		BDDB997C18C3943B003EBC42 /* Specs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Specs-Info.plist"; sourceTree = "<group>"; };
 		BDF1755118C3972E008BD9C6 /* Common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
 		BDF1755318C3972E008BD9C6 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
@@ -106,9 +96,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDDB995518C3943B003EBC42 /* CoreGraphics.framework in Frameworks */,
-				BDDB995718C3943B003EBC42 /* UIKit.framework in Frameworks */,
-				BDDB995318C3943B003EBC42 /* Foundation.framework in Frameworks */,
 				7A1059CDD505490C88A04C84 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -117,9 +104,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDDB997518C3943B003EBC42 /* XCTest.framework in Frameworks */,
-				BDDB997718C3943B003EBC42 /* UIKit.framework in Frameworks */,
-				BDDB997618C3943B003EBC42 /* Foundation.framework in Frameworks */,
 				9A02F77A5711492A9BF635F8 /* libPods-Specs.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -201,7 +185,6 @@
 				BDDB995818C3943B003EBC42 /* CrushBootstrap */,
 				BDDB997A18C3943B003EBC42 /* Specs */,
 				BDF1754E18C3972E008BD9C6 /* External */,
-				BDDB995118C3943B003EBC42 /* Frameworks */,
 				BDDB995018C3943B003EBC42 /* Products */,
 			);
 			indentWidth = 4;
@@ -216,19 +199,6 @@
 				BDDB997318C3943B003EBC42 /* Specs.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		BDDB995118C3943B003EBC42 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				BDDB995218C3943B003EBC42 /* Foundation.framework */,
-				BDDB995418C3943B003EBC42 /* CoreGraphics.framework */,
-				BDDB995618C3943B003EBC42 /* UIKit.framework */,
-				BDDB997418C3943B003EBC42 /* XCTest.framework */,
-				1D61E01362DD444BBFD6E388 /* libPods.a */,
-				E6EBF96DA068437B82FA86E4 /* libPods-Specs.a */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		BDDB995818C3943B003EBC42 /* CrushBootstrap */ = {
@@ -267,6 +237,8 @@
 		BDF1754E18C3972E008BD9C6 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				1D61E01362DD444BBFD6E388 /* libPods.a */,
+				E6EBF96DA068437B82FA86E4 /* libPods-Specs.a */,
 				BDF1754F18C3972E008BD9C6 /* xcconfigs */,
 			);
 			path = External;
