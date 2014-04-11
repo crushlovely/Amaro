@@ -14,6 +14,12 @@ send -h "AMT\r"
 expect -re "Your name .*: "
 send -h "\r"
 
+expect -re "Organization name .*: "
+send -h "Test Corp.\r"
+
+expect -re "Bundle ID domain .*: "
+send -h "org.testcorp\r"
+
 sleep 3
 
 expect -re "Would you like to edit .*? "
