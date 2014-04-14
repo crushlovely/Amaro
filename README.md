@@ -51,8 +51,8 @@ Amaro aims to set you up with all you need to write a beautiful, maintainable, w
 * A barebones settings bundle is included with an "Acknowledgements" section that includes licenses for all your pods. It's automatically updated after each `pod install`.
 
 ### Logging, Error Reporting, Testing
-* [CocoaLumberjack](https://github.com/CocoaLumberjack/CocoaLumberjack) is configured for logging. A custom formatter is used by default to include the class and method name in log messages.
-* The [Crashlytics framework](http://crashlytics.com) is included, and tied into CocoaLumberjack so that high-importance log messages are sent to Crashlytics.
+* [CocoaLumberjack](https://github.com/CocoaLumberjack/CocoaLumberjack) is configured for logging. A [custom formatter](https://github.com/crushlovely/Sidecar/blob/master/Sidecar/CRLMethodLogFormatter.h) is used by default to include the class and method name in log messages.
+* The [Crashlytics framework](http://crashlytics.com) is included, and tied into CocoaLumberjack via [CrashlyticsLumberjack](https://github.com/TechSmith/CrashlyticsLumberjack) so that high-importance log messages are sent to Crashlytics.
 * [Aperitif](https://github.com/crushlovely/Aperitif), to check for updates of the app in [Installr](https://installrapp.com) and prompt the user to install them (in ad hoc builds only, obviously).
 * [Specta](https://github.com/specta/specta), [Expecta](https://github.com/specta/expecta), and [OCMokito](https://github.com/jonreid/OCMockito) are included to allow for the creation of [Rspec](http://rspec.info)-like tests. Xcode integration for testing is fully configured; add your tests to the Specs target and hit Cmd+U.
 * The test target automatically generates code coverage data that can be viewed with [Cover Story](https://code.google.com/p/coverstory/) or [gcov](http://gcc.gnu.org/onlinedocs/gcc/Gcov-Intro.html).
@@ -110,7 +110,7 @@ As mentioned above, the bootstrap [automatically generates a settings section](h
 
 * Pixate Freestyle: [Apache 2](https://github.com/Pixate/pixate-freestyle-ios/blob/master/LICENSE) -- **requires a copy of the license somewhere in the distribution**
 * Crashlytics Framework: [Terms and Conditions](http://try.crashlytics.com/terms)
-* CrashlyticsLumberjack: [BSD 3-Clause](http://www.opensource.org/licenses/BSD-3-Clause) -- see [this StackOverflow discussion](http://stackoverflow.com/a/670982) about the implications of this for iOS applications (short version: consensus seems to be "do what you will", but the official word is unclear).
+* CrashlyticsLumberjack: [BSD 3-Clause](https://github.com/TechSmith/CrashlyticsLumberjack/blob/master/LICENSE) -- see [this StackOverflow discussion](http://stackoverflow.com/a/670982) about the implications of this for iOS applications (short version: consensus seems to be "do what you will", but the official word is unclear).
 * CocoaLumberjack: [standard BSD](https://github.com/CocoaLumberjack/CocoaLumberjack/blob/master/LICENSE.txt)
 * AFNetworking: [MIT](https://github.com/AFNetworking/AFNetworking/blob/master/LICENSE)
 * extobjc: [MIT](https://github.com/jspahrsummers/libextobjc/blob/master/LICENSE.md)

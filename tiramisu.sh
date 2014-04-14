@@ -392,7 +392,7 @@ echo "👍"
 ####################
 
 echo -e "\n\n👌️  You're all set! 👌"
-echo "Don't forget to open the .xcworkspace, not the .xcodeproject,"
+echo "Don't forget to open the .xcworkspace, not the .xcodeproj,"
 echo "and add some prose to README.md!"
 echo -e "\nXOXO -C&L 💋"
 echo
