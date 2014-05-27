@@ -18,9 +18,13 @@ freestyle-config {
 }
 
 
-label#hello-world {
+label[text="Hello World!"] {
     font-family: "Avenir";
     font-weight: light;
     text-align: center;
     color: #666;
+}
+
+label[text="Hello World!"] attributed-text {
+    letter-spacing: -0.75px;
 }
