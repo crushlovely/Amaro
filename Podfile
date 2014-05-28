@@ -8,8 +8,10 @@ xcodeproj 'CrushBootstrap',
     'Profile_Staging' => :release, 'Profile_Production' => :release,
     'Distribution'    => :release
 
-# Crush internals
+# Crush Utility Belt
 pod 'Sidecar', :git => 'https://github.com/crushlovely/Sidecar.git'
+
+# Update checker for Installr (installrapp.com)
 pod 'Aperitif', :git => 'https://github.com/crushlovely/Aperitif.git'
 
 # Logging & Analytics
