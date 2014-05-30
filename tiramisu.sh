@@ -65,6 +65,7 @@ friendlyGrep() {
 set +u
 _OLD_LC_CTYPE="$LC_CTYPE"
 _OLD_LANG="$LANG"
+_OLD_LC_ALL="$LC_ALL"
 set -u
 
 switchToCLocale() {
@@ -72,11 +73,13 @@ switchToCLocale() {
     # But, we can't set them globally because Cocoapods wants a real locale.
     export LC_CTYPE=C
     export LANG=C
+    export LC_ALL=C
 }
 
 resetLocale() {
     export LC_CTYPE="$_OLD_LC_CTYPE"
     export LANG="$_OLD_LANG"
+    export LC_ALL="$_OLD_LC_ALL"
 }
 
 
