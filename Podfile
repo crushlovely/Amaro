@@ -9,10 +9,10 @@ xcodeproj 'CrushBootstrap',
     'Distribution'    => :release
 
 # Crush Utility Belt
-pod 'Sidecar', :git => 'https://github.com/crushlovely/Sidecar.git'
+pod 'Sidecar'
 
 # Update checker for Installr (installrapp.com)
-pod 'Aperitif', :git => 'https://github.com/crushlovely/Aperitif.git'
+pod 'Aperitif'
 
 # Logging & Analytics
 pod 'CocoaLumberjack'
