@@ -14,4 +14,4 @@ The less spent time in the developer portal, the better.
 
 **From Keychain Access on your local machine:**
 
-1. Your private key linked to the distribution certificated, exported as a p12 file.
+1. Your private key linked to the distribution certificate, exported as a p12 file.
