@@ -29,7 +29,7 @@ pod 'FormatterKit'    # For all your string formatting needs
 pod 'Asterism'        # Nice & fast collection operations
 
 # You may want...
-#pod 'OMPromises'     # Promises/A+-alike
+#pod 'PromiseKit'     # Promises/A+-alike
 #pod 'Mantle'         # Github's model framework
 #pod 'SSKeychain'     # Go-to keychain wrapper
 #pod 'DateTools'      # Datetime heavy lifting
