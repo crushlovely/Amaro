@@ -71,7 +71,7 @@ Amaro aims to set you up with all you need to write a beautiful, maintainable, w
 ### More...
 Additionally, the Podfile notes a few optional libraries that you may find useful:
 
-* [OMPromises](https://github.com/b52/OMPromises), a promises/futures library modelled after [Promises/A+](http://promises-aplus.github.io/promises-spec/).
+* [PromiseKit](https://github.com/mxcl/PromiseKit/blob/master/LICENSE), a promises/futures library similar to [Promises/A+](http://promises-aplus.github.io/promises-spec/), and related wrappers for core libraries.
 * [Mantle](https://github.com/MantleFramework/Mantle), a project from the GitHub folks to make simpler, safer model classes.
 * [SSKeychain](https://github.com/soffes/sskeychain), a friendly wrapper around the Keychain API.
 * [DateTools](https://github.com/MatthewYork/DateTools), if you find yourself needing to do a lot of datetime math.
@@ -116,7 +116,7 @@ As mentioned above, the bootstrap [automatically generates a settings section](h
 * extobjc: [MIT](https://github.com/jspahrsummers/libextobjc/blob/master/LICENSE.md)
 * FormatterKit: [MIT](https://github.com/mattt/FormatterKit/blob/master/LICENSE)
 * Asterism: [MIT](https://github.com/mattt/FormatterKit/blob/master/LICENSE)
-* OMPromises: [MIT](https://github.com/b52/OMPromises/blob/master/LICENSE)
+* PromiseKit: [MIT](https://github.com/mxcl/PromiseKit/blob/master/LICENSE)
 * Mantle: [MIT](https://github.com/MantleFramework/Mantle)
 * SSKeyChain: [MIT](https://github.com/soffes/sskeychain/blob/master/LICENSE)
 * DateTools: [MIT](https://github.com/MatthewYork/DateTools/blob/master/LICENSE)
