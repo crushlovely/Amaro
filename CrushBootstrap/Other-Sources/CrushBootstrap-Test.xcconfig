@@ -1,7 +1,5 @@
 #include "../../External/xcconfigs/Base/Configurations/Test.xcconfig"
 
-CLANG_ENABLE_MODULES = YES
-
 // Instrument for code coverage:
 GCC_GENERATE_TEST_COVERAGE_FILES = YES
 GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES
