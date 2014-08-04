@@ -650,7 +650,7 @@ class Bootstrapper
         end
 
         task 'Installing Crashlytics key' do
-            filelist = FileList['**/*'].exclude('tiramisu.rb')
+            filelist = FileList['**/*'].exclude('tiramisu')
             replace_in_files(filelist, REPLACEMENT_CRASHLYTICS_KEY, api_key)
 
             sh('git add --all')
@@ -660,7 +660,7 @@ class Bootstrapper
 
     def remove_bootstrap_detritus
         task 'Cleaning up after ourselves' do
-            sh('git rm -q tiramisu.sh')
+            sh('git rm -q tiramisu')
             sh('git rm -rq bootstrap-scripts')
 
             # Remove ignores and build commands that are only relevant in the bootstrap repo itself
