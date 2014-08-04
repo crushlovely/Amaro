@@ -22,7 +22,7 @@ Of course, if you're wary of running random scripts (legit!), please read [tiram
 ## Details and Requirements
 The bootstrap assumes:
 
-* You are using Xcode 5.
+* You are using Xcode 5 or later.
 * You have the [CocoaPods gem](http://cocoapods.org/#install) installed.
 * You are on OS 10.9 or later
 * You are targetting iOS 7.0, at minimum (and thus will be compiling against at least the iOS 7.0 SDK).
@@ -46,7 +46,7 @@ Amaro aims to set you up with all you need to write a beautiful, maintainable, w
     * There are separate staging, production, and distribution schemes by default. No more fiddling with variables here and there to switch your target environment.
 * Automatic ways to easily distinguish between builds of the app:
     * Ad-hoc and development builds have their bundle id suffixed with ".adhoc" or ".dev" so that they can co-exist on devices with other builds.
-    * Ad-hoc and development builds' icons are badged an 🅢 for staging environments and a 🅟 for production environments. The bundle names (but not the display names) are also changed to easily distinguish them in places where it may otherwise be difficult.
+    * Ad-hoc and development builds' icons are badged with an 🅢 for staging environments and a 🅟 for production environments. The bundle names (but not the display names) are also changed to easily distinguish them in places where it may otherwise be difficult.
 * The build number of the app is incremented on every ad-hoc and distribution build. This ensures that external distribution services can reliably distinguish builds, even if the version number itself doesn't change.
 * [CocoaPods](http://cocoapods.org) are integrated from the get-go.
 * A barebones settings bundle is included with an "Acknowledgements" section that includes licenses for all your pods. It's automatically updated after each `pod install`.
