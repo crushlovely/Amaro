@@ -602,7 +602,7 @@ class Bootstrapper
     def update_contents
         task 'Updating file contents' do
             # Any reference to the project name in all files.
-            filelist = FileList['**/*']
+            filelist = FileList['**/*', '**/.*'].exclude('.git', '.', '..')
             replace_in_files(filelist, REPLACEMENT_PROJECT_NAME, options[:project_name]) unless options[:project_name] == REPLACEMENT_PROJECT_NAME
 
             # Replace default bundle domain and organization
@@ -669,6 +669,7 @@ class Bootstrapper
             filelist = FileList['.gitignore', '.travis.yml']
             replace_in_files(filelist, /^.+>>>bootstrap-only(?:.|\n)*<<<bootstrap-only.*/, '')
 
+            sh('git add --all')
             commit 'Remove init scripts and bootstrap-specific stuff'
 
             # Squash all of our commits together into one, for prettiness
