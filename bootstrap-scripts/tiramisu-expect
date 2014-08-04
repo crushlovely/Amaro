@@ -1,7 +1,7 @@
 #!/usr/bin/expect -f
 
 set ::env(AMARO_EXPECT) 1
-spawn ruby tiramisu.rb
+spawn ruby tiramisu
 
 set send_human {.2 .3 .7 .2 2}
 
