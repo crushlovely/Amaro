@@ -67,7 +67,8 @@ end
 
 
 module AmaroUtils
-    def commit(message)
+    def commit(message, add_all: true)
+        sh('git add --all') if add_all
         sh("git commit -q -m '[Amaro] #{message}'")
     end
 
@@ -550,7 +551,6 @@ class Bootstrapper
 
             # It's a shame we have to do this, really, but you can't do a squashed merge into an empty repo
             IO.write('README.md', "# %{project_name}\n\n*An iOS project begun with [Amaro](#{BOOTSTRAP_WEBSITE})*\n" % options)
-            sh('git add README.md')
             commit 'Initial commit'
         end
 
@@ -570,7 +570,7 @@ class Bootstrapper
         task 'Merging' do
             # We're using 'ours' merge option so that our README.md wins
             sh("git merge -q --squash -X ours 'remotes/bootstrap/#{BOOTSTRAP_BRANCH}'")
-            commit 'Bootstrapping'
+            commit 'Bootstrapping', :add_all => false
         end
     end
 
@@ -579,8 +579,6 @@ class Bootstrapper
             # Note the trailing / appended to source_path. Otherwise rsync will put
             # a copy of the directory inside the destination, rather than a copy of its contents.
             sh("rsync -a '#{@source_path}/' . --exclude=/.git --exclude=/.gitmodules --exclude=/README.md --exclude='/External/*'")
-
-            sh('git add --all')
             commit 'Bootstrapping'
 
             sh('git clean -xdf') # Remove .gitignored files and directories
@@ -637,7 +635,6 @@ class Bootstrapper
             sh('git submodule -q update --init --recursive')
             sh("git submodule --quiet foreach 'git checkout -q master'")
             sh('pod install --silent')
-            sh('git add --all')
             commit 'Install pods and submodules'
         end
     end
@@ -652,8 +649,6 @@ class Bootstrapper
         task 'Installing Crashlytics key' do
             filelist = FileList['**/*'].exclude('tiramisu')
             replace_in_files(filelist, REPLACEMENT_CRASHLYTICS_KEY, api_key)
-
-            sh('git add --all')
             commit 'Install Crashlytics key'
         end
     end
@@ -669,7 +664,6 @@ class Bootstrapper
             filelist = FileList['.gitignore', '.travis.yml']
             replace_in_files(filelist, /^.+>>>bootstrap-only(?:.|\n)*<<<bootstrap-only.*/, '')
 
-            sh('git add --all')
             commit 'Remove init scripts and bootstrap-specific stuff'
 
             # Squash all of our commits together into one, for prettiness
@@ -778,4 +772,4 @@ XOXO -C&L 💋
 EOS
 
 open_prompt = YesNoPrompt.run!('Would you like to open your project?', :default => true)
-system("open '%{project_name}.xcworkspace'" % options) if open_prompt
+system("open '%{project_name}.xcworkspace'" % bootstrapper.options) if open_prompt
