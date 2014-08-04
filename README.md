@@ -11,7 +11,7 @@ We want to hit the ground running. Xcode and the iOS ecosystem don't make that e
 Change to your projects directory, run this line in your terminal, and follow the prompts:
 
 ```sh
-ruby -e "$(curl -fsSL https://raw.github.com/crushlovely/Amaro/master/tiramisu)
+ruby -e "$(curl -fsSL https://raw.github.com/crushlovely/Amaro/master/tiramisu)"
 ```
 
 Of course, if you're wary of running random scripts (legit!), please read [tiramisu](tiramisu). At a high level, the script creates a local git repository with Amaro as a remote named "bootstrap", tweaks filenames and contents as per your input, and grabs third-party code from Cocoapods.
