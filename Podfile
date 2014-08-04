@@ -2,11 +2,11 @@ platform :ios, '7.0'
 
 # Inform CocoaPods that we use some custom build configurations
 xcodeproj 'CrushBootstrap',
-    'Debug_Staging'   => :debug,   'Debug_Production'   => :debug,
-    'Test_Staging'    => :debug,   'Test_Production'    => :debug,
-    'AdHoc_Staging'   => :release, 'AdHoc_Production'   => :release,
-    'Profile_Staging' => :release, 'Profile_Production' => :release,
-    'Distribution'    => :release
+  'Debug_Staging'   => :debug,   'Debug_Production'   => :debug,
+  'Test_Staging'    => :debug,   'Test_Production'    => :debug,
+  'AdHoc_Staging'   => :release, 'AdHoc_Production'   => :release,
+  'Profile_Staging' => :release, 'Profile_Production' => :release,
+  'Distribution'    => :release
 
 # Crush Utility Belt
 pod 'Sidecar'
@@ -46,12 +46,15 @@ target 'Specs', :exclusive => true do
 end
 
 
-# Copy the license settings plist over to our project
+# Copy the license and settings plists over to our project
 post_install do |installer|
-    if Dir.exists? 'CrushBootstrap/Resources/Settings.bundle'
-        require 'fileutils'
-        FileUtils.cp_r('Pods/Pods-Acknowledgements.plist', 'CrushBootstrap/Resources/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
-    end
+  require 'fileutils'
 
+  if Dir.exists?('CrushBootstrap/Resources/Settings.bundle') && File.exists?('Pods/Pods-Acknowledgements.plist')
+    FileUtils.cp_r('Pods/Pods-Acknowledgements.plist', 'CrushBootstrap/Resources/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
+  end
+
+  if File.exists?('Pods/Pods-Environment.h')
     FileUtils.cp_r('Pods/Pods-Environment.h', 'CrushBootstrap/Other-Sources/Pods-Environment.h', :remove_destination => true)
+  end
 end
