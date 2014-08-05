@@ -671,7 +671,7 @@ class Bootstrapper
 
             # Squash all of our commits together into one, for prettiness
             # See: http://stackoverflow.com/questions/1657017/git-squash-all-commits-into-a-single-commit
-            squashed_commit_hash = sh('git commit-tree HEAD^{tree} -m "[Amaro] We have liftoff!"')
+            squashed_commit_hash = sh('git commit-tree HEAD^{tree} -m "[Amaro] All set. Go make something beautiful!"')
             sh("git reset #{squashed_commit_hash}")
         end
     end
