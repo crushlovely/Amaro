@@ -490,7 +490,7 @@ class Bootstrapper
     REPLACEMENT_CRASHLYTICS_KEY = '<<CrashlyticsAPIKey>>'
 
     BOOTSTRAP_REPO = 'git://github.com/crushlovely/Amaro.git'
-    BOOTSTRAP_BRANCH = 'master'
+    DEFAULT_BOOTSTRAP_BRANCH = 'master'
     BOOTSTRAP_WEBSITE = 'https://github.com/crushlovely/Amaro'
 
     attr_accessor :options
@@ -522,13 +522,16 @@ class Bootstrapper
                 raise AmaroError, "Provided local clone path (#{ARGV[0]}) is invalid." unless path.directory?
                 @source_path = path.realpath.to_s
             end
+
+            # If we're building in Travis, target the branch we came from. Otherwise, master.
+            @bootstrap_branch = ENV['TRAVIS_BRANCH'] || DEFAULT_BOOTSTRAP_BRANCH
         end
     end
 
     def puts_source_description
         if @source_path.nil?
             puts 'Repository: '.gray.bold + Bootstrapper::BOOTSTRAP_REPO.gray
-            puts 'Branch: '.gray.bold + Bootstrapper::BOOTSTRAP_BRANCH.gray
+            puts 'Branch: '.gray.bold + @bootstrap_branch.gray
         else
             puts 'Using local clone: '.gray.bold + @source_path.gray
         end
@@ -564,12 +567,12 @@ class Bootstrapper
     def fetch_from_remote
         task 'Fetching repository' do
             sh("git remote add bootstrap '#{BOOTSTRAP_REPO}'")
-            sh("git fetch --depth=1 -q bootstrap '#{BOOTSTRAP_BRANCH}'")
+            sh("git fetch --depth=1 -q bootstrap '#{@bootstrap_branch}'")
         end
 
         task 'Merging' do
             # We're using 'ours' merge option so that our README.md wins
-            sh("git merge -q --squash -X ours 'remotes/bootstrap/#{BOOTSTRAP_BRANCH}'")
+            sh("git merge -q --squash -X ours 'remotes/bootstrap/#{@bootstrap_branch}'")
             commit 'Bootstrapping', :add_all => false
         end
     end
