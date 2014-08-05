@@ -11,10 +11,10 @@ We want to hit the ground running. Xcode and the iOS ecosystem don't make that e
 Change to your projects directory, run this line in your terminal, and follow the prompts:
 
 ```sh
-bash -i <(curl -fsSL https://raw.github.com/crushlovely/Amaro/master/tiramisu.sh)
+ruby -e "$(curl -fsSL https://raw.github.com/crushlovely/Amaro/master/tiramisu)"
 ```
 
-Of course, if you're wary of running random shell scripts (legit!), please read [tiramisu.sh](tiramisu.sh). At a high level, the script creates a local git repository with Amaro as a remote named "bootstrap", tweaks filenames and contents as per your input, and grabs third-party code.
+Of course, if you're wary of running random scripts (legit!), please read [tiramisu](tiramisu). At a high level, the script creates a local git repository with Amaro as a remote named "bootstrap", tweaks filenames and contents as per your input, and grabs third-party code from Cocoapods.
 
 (Tiramisu is Italian for "pick me up". Bootstrap... pick me up... get it?!? :dancer:)
 
@@ -22,10 +22,11 @@ Of course, if you're wary of running random shell scripts (legit!), please read 
 ## Details and Requirements
 The bootstrap assumes:
 
-* You are using Xcode 5.
+* You are using Xcode 5 or later.
 * You have the [CocoaPods gem](http://cocoapods.org/#install) installed.
+* You are on OS 10.9 or later
 * You are targetting iOS 7.0, at minimum (and thus will be compiling against at least the iOS 7.0 SDK).
-    * As of [March 2014](https://developer.apple.com/support/appstore/), iOS 7 has an 85% adoption rate.
+    * As of [July 2014](https://developer.apple.com/support/appstore/), iOS 7 has an 90% adoption rate.
 
 And, optionally:
 
@@ -36,7 +37,7 @@ And, optionally:
 Amaro aims to set you up with all you need to write a beautiful, maintainable, well-tested app. All the default pods are optional; feel free to pick and choose as needed for your project (though you will probably want most of them).
 
 ### Foundation
-* A well-chosen class prefix is enforced.
+* A well-chosen class prefix is enforced (or may be omitted entirely... [the times, they are a-changin'](http://inessential.com/2014/07/24/prefixes_considered_passe))
 * A local git repository for the application is created (and committed to a few times through the initialization process).
 * Sane `.gitignore` and `.gitattributes` files are included.
 * A `Certificates` directory is included with a readme file about what to include so that other developers can test and release the app.
@@ -45,7 +46,7 @@ Amaro aims to set you up with all you need to write a beautiful, maintainable, w
     * There are separate staging, production, and distribution schemes by default. No more fiddling with variables here and there to switch your target environment.
 * Automatic ways to easily distinguish between builds of the app:
     * Ad-hoc and development builds have their bundle id suffixed with ".adhoc" or ".dev" so that they can co-exist on devices with other builds.
-    * Ad-hoc and development builds' icons are badged an 🅢 for staging environments and a 🅟 for production environments. The bundle names (but not the display names) are also changed to easily distinguish them in places where it may otherwise be difficult.
+    * Ad-hoc and development builds' icons are badged with an 🅢 for staging environments and a 🅟 for production environments. The bundle names (but not the display names) are also changed to easily distinguish them in places where it may otherwise be difficult.
 * The build number of the app is incremented on every ad-hoc and distribution build. This ensures that external distribution services can reliably distinguish builds, even if the version number itself doesn't change.
 * [CocoaPods](http://cocoapods.org) are integrated from the get-go.
 * A barebones settings bundle is included with an "Acknowledgements" section that includes licenses for all your pods. It's automatically updated after each `pod install`.
@@ -89,6 +90,7 @@ Here are some specific tips:
 * Adding an external library? If there's a podspec for it, bring it in via Cocoapods. If there's not, consider writing one and submitting it upstream. Use git submodules as a last resort; version and dependency management with them is a pain in the ass.
     * There should almost never be a reason to check in third-party projects wholesale. If you need to modify someone else's code, fork the repo and include the fork in your Podfile with a direct [`:git` reference](http://guides.cocoapods.org/syntax/podfile.html#pod).
 * Use CocoaLumberjack's `DDLog` variants instead of `NSLog`. It's faster, provides more information, is more configurable, and understands log levels. All of that with the same familiar syntax. Retrain your fingers.
+* Need to define different settings in staging and production? Check out the [ProjectName-Environment.h](CrushBootstrap/Other-Sources/CrushBootstrap-Environment.h) file in Other Sources. It defines macros to test the type of build that is currently taking place.
 * Make friends with Pixate Freestyle. We've yet to have much experience with it in the real world, but it seems pretty damn amazing. Check out the [samples](https://github.com/Pixate/pixate-freestyle-ios/tree/master/samples) to see what I mean.
 
 

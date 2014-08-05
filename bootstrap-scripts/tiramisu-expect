@@ -1,11 +1,11 @@
 #!/usr/bin/expect -f
 
-spawn bash tiramisu.sh
+set ::env(AMARO_EXPECT) 1
+spawn ruby tiramisu
 
-stty echo
 set send_human {.2 .3 .7 .2 2}
 
-expect "New project name: "
+expect ".*New project name: "
 send -h "AmaroTest\r"
 
 expect -re "Class prefix .*: "
@@ -23,12 +23,12 @@ send -h "org.testcorp\r"
 sleep 3
 
 expect -re "Would you like to edit .*? "
-send -h "n"
+send -h "n\r"
 
 set timeout 500
 
 expect -re "Would you like to set up .*? "
-send -h "n"
+send -h "n\r"
 
 expect -re "Would you like to open *? "
-send -h "n"
+send -h "n\r"

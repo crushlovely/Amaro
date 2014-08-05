@@ -1,0 +1,778 @@
+#!/usr/bin/ruby
+# -*- coding: utf-8 -*-
+
+require 'rake'
+require 'io/console'
+require 'net/http'
+require 'uri'
+require 'json'
+require 'pathname'
+
+# If the envrionmental variable AMARO_EXPECT is set, color output is disabled,
+# and a standard getc is used instead of io/console's getch. This mode is
+# for running the script under expect, which is used for testing purposes,
+# and gets confused by all our l33t TTY hackery.
+
+# If an argument is passed to the script, it is expected to be a path to a
+# local clone of the Amaro repository. In this case, instead of cloning the
+# github repo, the local clone is copied into place and cleaned up.
+# This is intended to test modifications to the repo without needing to push
+# to the remote.
+
+trap('INT') do
+    puts
+    exit
+end
+
+class String
+    def self.color_output?
+        STDOUT.isatty && !ENV['AMARO_EXPECT']
+    end
+
+    { :red     => 1,
+      :green   => 2,
+      :yellow  => 3,
+      :blue    => 4,
+      :gray    => 7
+    }.each do |name, code|
+        bg_name = ('bg_' + name.to_s).to_sym
+
+        if color_output?
+            define_method(name) { "\e[#{code + 30}m#{self}\e[39m" }
+            define_method(bg_name) { "\e[#{code + 40}m#{self}\e[49m" }
+        else
+            define_method(name) { self }
+            define_method(bg_name) { self }
+        end
+    end
+
+    { :bold => 1, :faint => 2 }.each do |name, code|
+        if color_output?
+            define_method(name) { "\e[#{code}m#{self}\e[22m" }
+        else
+            define_method(name) { self }
+        end
+    end
+end
+
+
+class AmaroError < RuntimeError
+    def initialize(message = nil, details = nil)
+        super(message)
+        @details = details
+    end
+
+    attr_accessor :details
+end
+
+
+module AmaroUtils
+    def commit(message, add_all: true)
+        sh('git add --all') if add_all
+        sh("git commit -q -m '[Amaro] #{message}'")
+    end
+
+    def task(message, failure_is_fatal: true)
+        print "#{message}...".blue.bold
+        begin
+            yield
+        rescue AmaroError => e
+            puts ' 💀'
+            die(e.message, e.details, :fatal => failure_is_fatal)
+        else
+            puts ' 👍'
+        end
+    end
+
+    def replace_in_files(file_list, pattern, replacement)
+        file_list.each do |fn|
+            next unless File.file? fn  # Skip directories
+            file_contents = IO.binread(fn)
+
+            # Since we read the file as binary, Ruby will freak out if the replacement
+            # string isn't also binary/ASCII (which it won't be if the user input some
+            # Unicode). So, we force the replacement string to binary.
+            updated_contents = file_contents.gsub(pattern, replacement.force_encoding('BINARY'))
+            IO.binwrite(fn, updated_contents) unless file_contents == updated_contents
+        end
+    end
+
+    def rename_filelist(file_list, pattern, replacement)
+        # Iterating in reverse to ensure that files/folders in subdirectories are
+        # renamed before their parent directories (which would invalidate their paths).
+        # TODO: FileList's behavior doesn't guarantee that that will work. Really
+        # should roll our own in-order directory traversal.
+        file_list.reverse_each do |fn|
+            dirname, basename = File.split(fn)
+            new_basename = basename.sub(pattern, replacement)
+
+            next if new_basename == basename
+
+            new_fn = File.join(dirname, new_basename)
+            sh("git mv '#{fn}' '#{new_fn}'")
+        end
+    end
+
+    def edit(filename)
+        editor = ENV['VISUAL'] || ENV['EDITOR'] || 'nano -w'
+        system("#{editor} '#{filename}'")
+    end
+
+    def sh(cmd, error_message = 'Error', show_output_on_error: true)
+        output = `#{cmd} 2>&1`
+        unless $? == 0
+            details = show_output_on_error ? "Command: #{cmd.bold}\nOutput:\n#{output}" : nil
+            raise AmaroError.new(error_message, details)
+        end
+
+        output
+    end
+
+    def die(message, details = nil, fatal: true)
+        puts message.red
+        puts "#{details}\n" unless details.nil?
+        exit if fatal
+    end
+end
+
+
+class InputReader
+    def initialize(length_limit: nil, output_on_empty: '', secure_echo: false, auto_return_when_length_reached: false, source: STDIN)
+        @source = source
+        @length_limit = length_limit
+        @secure_echo = secure_echo
+        @output_on_empty = output_on_empty
+        @auto_return_when_length_reached = auto_return_when_length_reached
+    end
+
+    def read
+        s = read_loop
+
+        print @output_on_empty.faint if s.empty?
+        puts
+
+        s
+    end
+
+    private
+
+    def read_loop
+        line = ''
+
+        loop do
+            c = (@source.isatty && !ENV['AMARO_EXPECT']) ? @source.getch : @source.getc
+
+            # newline or carriage return
+            break if c == "\r" || c == "\n"
+
+            # control-c
+            if c.ord == 3
+                puts
+                exit
+            end
+            
+            if c == "\b" || c.ord == 127
+                backspace! line
+                next
+            end
+
+            # Ignore all escape codes, which come in as multiple characters.
+            # Snatched from here: https://gist.github.com/acook/4190379
+            if c == "\e"
+                @source.read_nonblock(3) rescue nil
+                @source.read_nonblock(2) rescue nil
+                next
+            end
+
+            next unless c =~ /[[:print:]]/
+
+            if @length_limit.nil? || line.length < @length_limit
+                line << c
+                print @secure_echo ? '·' : c
+                
+                break if line.length == @length_limit && @auto_return_when_length_reached
+            end
+        end
+
+        line
+    end
+
+    def backspace!(line)
+        return if line.empty?
+
+        line.chop!
+        print "\b \b"
+    end
+end
+
+
+class Prompt
+    def initialize(prompt, key: nil, default: nil)
+        @key = key  # Hash key used for this prompt if executed via run_prompts
+        @prompt = prompt  # The text to use for the prompt.
+        @default = default  # The default value, or nil if the user must input something
+        @strip = true  # True to remove whitespace on either side of the input
+        @length_limit = nil  # Maximum allowed characters; nil for no limit
+        @secure_echo = false  # Password-style obscured input
+        @value = nil # The final result of the prompt's execution (e.g., processed input or default)
+        @show_correction = true # If true, show the result of the validation_proc if it differs from the input
+        @show_default = true # If true, show the default value after the prompt
+        @raw_input = nil # The pre-corrected input from the user
+        @pre_run_hook = nil # A proc to be executed at the beginning of run!
+        @auto_return_when_length_reached = false # If true, and length_limit is not nil, the prompt finishes when input reaches the length limit
+        
+        # This proc is run after input is complete. It should return the desired resulting value
+        # of the prompt, or throw a RuntimeError if the input is invalid. In that case, the exception's
+        # message will be output and the prompt will be retried.
+        # Note that this proc is not called if input is blank and there is a default.
+        @validation_proc = ->input { input }
+
+        yield self if block_given?
+    end
+
+    attr_accessor :prompt, :default, :validation_proc, :length_limit, :show_correction, :strip, :secure_echo, :show_default, :pre_run_hook, :auto_return_when_length_reached
+    attr_reader :key, :value, :raw_input
+
+    def run!
+        pre_run_hook[] if pre_run_hook
+
+        print composed_prompt.bold
+
+        @raw_input = input_reader.read
+        pre_stripped_input = @raw_input.dup
+
+        if @raw_input.empty?
+            if !default.nil?
+                @value = default
+            else
+                # No default and no input; retry
+                puts '  ❕  Please enter a value.'.yellow
+                return run!
+            end
+        else
+            @raw_input.strip! if strip
+            if @raw_input.empty?
+                # If we're empty now, they must have entered all whitespace. For shame.
+                puts '  ❕  Please enter a value or hit enter for the default.'.yellow
+                return run!
+            end
+
+            begin
+                @value = validation_proc[@raw_input.dup]
+            rescue RuntimeError => exc
+                puts "  ❗️  #{exc.message}".red
+                return run!  # Try again
+            end
+
+            if show_correction && (@value != @raw_input || @raw_input != pre_stripped_input)
+                puts "  ✨  Fixed that for ya. Using '#{@value.bold}'".gray
+            end
+        end
+
+        @value
+    end
+
+    # Oneshot new and run
+    def self.run!(*args, &block)
+        new(*args, &block).run!
+    end
+
+    # Runs the given prompts, and returns a hash where the keys are the prompts' keys,
+    # and the values are the prompts' values. If a prompt has subprompts and those
+    # should be executed, the prompt's value becomes the hash result of running the
+    # subprompts (i.e., the result of run_sequence on the subprompts).
+    def self.run_sequence(*prompts)
+        results = {}
+        prompts.each do |prompt|
+            prompt.run!
+            results[prompt.key] = prompt.value unless prompt.key.nil?
+
+            next unless prompt.is_a?(YesNoPrompt) && prompt.run_subprompts?
+
+            subprompts_value = run_sequence(*prompt.subprompts)
+            results[prompt.key] = subprompts_value unless prompt.key.nil?
+        end
+
+        results
+    end
+
+    protected
+
+    def input_reader
+        InputReader.new(
+            :length_limit => length_limit,
+            :output_on_empty => default_autofill,
+            :secure_echo => secure_echo,
+            :auto_return_when_length_reached => auto_return_when_length_reached
+        )
+    end
+
+    def composed_prompt
+        p = prompt.rstrip
+
+        punct = p[-1]
+        if punct == ':' || punct == '?'
+            p.chop!
+        else
+            punct = ':'
+        end
+
+        p << " #{default_prompt}" unless default.nil? || !show_default
+        p << "#{punct} "
+    end
+
+    # The text output before punctuation at the end of the prompt, if
+    # a default is set.
+    def default_prompt
+        "(blank for #{default})"
+    end
+
+    # The text to output if the user accepts the default
+    def default_autofill
+        default ? default.to_s : ''
+    end
+end
+
+
+class YesNoPrompt < Prompt
+    def initialize(prompt, key: nil, default: nil)
+        super
+
+        @length_limit = 1
+        @auto_return_when_length_reached = true
+        @show_correction = false
+        @subprompts = nil
+
+        @validation_proc = lambda do |input|
+            return true if input.downcase == 'y'
+            return false if input.downcase == 'n'
+
+            raise "Please enter 'y' or 'n'."
+        end
+    end
+
+    attr_accessor :subprompts
+
+    protected
+
+    def default_prompt
+        default ? '(Y/n)' : '(y/N)'
+    end
+
+    def default_autofill
+        default ? 'y' : 'n'
+    end
+
+    def run_subprompts?
+        value && subprompts && subprompts.length > 0
+    end
+end
+
+
+class CrashlyticsFlow
+    ENDPOINT_URL = 'https://api.crashlytics.com/api/v2/session.json'
+    TOKEN_HEADER_KEY = 'X-CRASHLYTICS-DEVELOPER-TOKEN'
+    APP_BUNDLE_ID = 'com.crashlytics.mac'
+    APP_BINARY_NAME = 'Crashlytics'
+
+    def initialize
+        @email = Prompt.new('Email address')
+
+        @password = Prompt.new('Password')
+        @password.secure_echo = true
+        @password.strip = false
+    end
+
+    def run!
+        return unless YesNoPrompt.run!('Would you like to set up Crashlytics?', :default => false)
+        dev_token = nil
+
+        task 'Finding Crashlytics developer token', :failure_is_fatal => false do
+            dev_token = get_dev_token
+        end
+
+        return if dev_token.nil?
+
+        organizations = get_organizations dev_token
+        return if organizations.nil?
+
+        get_api_key organizations
+    end
+
+    private
+
+    include AmaroUtils
+
+    def get_dev_token
+        app_path = `mdfind "kMDItemCFBundleIdentifier == '#{APP_BUNDLE_ID}'" 2>/dev/null`.split($/).first
+        raise AmaroError, 'Crashlytics does not seem to be installed.' if app_path.nil? || app_path.empty?
+
+        app_path = File.join(app_path, 'Contents', 'MacOS', APP_BINARY_NAME)
+        raise AmaroError, "The Crashlytics binary (#{app_path}) is not readable." unless File.file? app_path
+
+        strings = `strings -n #{TOKEN_HEADER_KEY.length} '#{app_path}' | grep -C10 '#{TOKEN_HEADER_KEY}' 2>/dev/null`.split($/)
+        strings.select! { |s| s =~ /^[0-9a-f]{40}$/i }  # We're looking for a 40-character hex string
+
+        # If we didn't match anything, or we matched too many things, bail. Better safe than sorry.
+        raise AmaroError, 'Unable to find your developer token in the Crashlytics binary.' unless strings.length == 1
+
+        strings[0]
+    end
+
+    def get_organizations(dev_token)
+        Prompt.run_sequence(@email, @password)
+        organizations = nil
+        auth_error = false
+
+        task 'Fetching account details from the Crashlytics API', :failure_is_fatal => false do
+            begin
+                organizations = get_organizations_from_api(dev_token, @email.value, @password.value)
+            rescue Net::HTTPServerException
+                auth_error = true
+                raise AmaroError, 'There seems to be a problem with your email or password.'
+            end
+        end
+
+        return get_organizations(dev_token) if auth_error && YesNoPrompt.run!('Would you like to try again?')
+        organizations
+    end
+
+    def get_organizations_from_api(dev_token, email, password)
+        uri = URI.parse(ENDPOINT_URL)
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = uri.scheme.downcase == 'https'
+
+        request = Net::HTTP::Post.new(uri.request_uri)
+        request.body = { 'email' => email, 'password' => password }.to_json
+        request['Content-Type'] = 'application/json'
+        request[TOKEN_HEADER_KEY] = dev_token
+
+        response = http.request(request) rescue raise(AmaroError, 'Error communicating with the Crashlytics server.')
+        response.error! if response.code == '401' # Authentication error; retriable
+        raise AmaroError, 'Error communicating with the Crashlytics server.' if response.code != '201'
+
+        body = JSON.parse(response.body) rescue raise(AmaroError, 'Received an invalid response from the Crashlytics server.')
+        organizations = body['organizations']
+        raise AmaroError, 'Unable to get a list of organizations from the Crashlytics API.' if organizations.nil? || organizations.empty?
+        Hash[organizations.map { |o| [o['name'], o['api_key']] }]
+    end
+
+    def get_api_key(orgs)
+        if orgs.length == 1
+            puts "  ✨  Using the Crashlytics key from the organization #{orgs.keys[0].bold}."
+            return orgs.values[0]
+        end
+
+        puts "\nYou belong to multiple organizations in Crashlytics.".blue
+        orgs.keys.each_with_index { |name, i| puts "  #{i + 1}. #{name}" }
+
+        Prompt.run!('Enter the number of the organization you\'d like to use, or "q" to cancel') do |p|
+            p.length_limit = 2
+            p.show_correction = false
+            p.validation_proc = lambda do |input|
+                return nil if input.downcase == 'q'
+
+                as_int = input.to_i
+                raise 'Please enter one of the numbers above, or "q" to cancel.' unless as_int > 0 && as_int <= orgs.length
+
+                orgs.values[as_int - 1]
+            end
+        end
+    end
+end
+
+
+class Bootstrapper
+    REPLACEMENT_PREFIX = 'CRBS'
+    REPLACEMENT_PROJECT_NAME = 'CrushBootstrap'
+    REPLACEMENT_ORGANIZATION = 'Crush & Lovely'
+    REPLACEMENT_DOMAIN = 'com.crushlovely'
+    REPLACEMENT_CRASHLYTICS_KEY = '<<CrashlyticsAPIKey>>'
+
+    BOOTSTRAP_REPO = 'git://github.com/crushlovely/Amaro.git'
+    DEFAULT_BOOTSTRAP_BRANCH = 'master'
+    BOOTSTRAP_WEBSITE = 'https://github.com/crushlovely/Amaro'
+
+    attr_accessor :options
+
+    def run!
+        init_fs
+        init_git
+        rename_files
+        update_contents
+        init_externals
+        set_up_crashlytics
+        remove_bootstrap_detritus
+    end
+
+    def check_sanity
+        task 'Checking environment' do
+            osx_version = sh('sw_vers -productVersion', 'You don\'t seem to be on OS X, silly.', :show_output_on_error => false)
+            raise AmaroError, 'Amaro requires OS 10.9.0 or later.' if osx_version.split('.')[1].to_i < 9
+
+            raise AmaroError, 'This does not seem to be an interactive terminal. That\'s not gonna work.' unless STDIN.isatty and STDOUT.isatty
+            raise AmaroError.new('Amaro requires UTF-8 encoding on your terminal.', 'See http://stackoverflow.com/a/8161863 for details on how to fix this.') if Encoding.default_external != Encoding::UTF_8
+            sh('which -s pod', 'CocoaPods is not installed. See http://cocoapods.org/#install', :show_output_on_error => false)
+            sh('pkgutil --pkg-info=com.apple.pkg.CLTools_Executables', 'The Xcode command line tools are not installed. Running "xcode-select --install" should fix that.', :show_output_on_error => false)
+
+            if ARGV.empty?
+                @source_path = nil
+            else
+                path = Pathname.new(ARGV[0])
+                raise AmaroError, "Provided local clone path (#{ARGV[0]}) is invalid." unless path.directory?
+                @source_path = path.realpath.to_s
+            end
+
+            # If we're building in Travis, target the branch we came from. Otherwise, master.
+            @bootstrap_branch = ENV['TRAVIS_BRANCH'] || DEFAULT_BOOTSTRAP_BRANCH
+        end
+    end
+
+    def puts_source_description
+        if @source_path.nil?
+            puts 'Repository: '.gray.bold + Bootstrapper::BOOTSTRAP_REPO.gray
+            puts 'Branch: '.gray.bold + @bootstrap_branch.gray
+        else
+            puts 'Using local clone: '.gray.bold + @source_path.gray
+        end
+
+        puts
+    end
+
+    private
+
+    include AmaroUtils
+
+    def init_fs
+        Dir.mkdir(options[:project_name])
+        Dir.chdir(options[:project_name])
+    end
+
+    def init_git
+        task 'Initializing local repository' do
+            sh('git init -q')
+
+            # It's a shame we have to do this, really, but you can't do a squashed merge into an empty repo
+            IO.write('README.md', "# %{project_name}\n\n*An iOS project begun with [Amaro](#{BOOTSTRAP_WEBSITE})*\n" % options)
+            commit 'Initial commit'
+        end
+
+        if @source_path.nil?
+            fetch_from_remote
+        else
+            fetch_from_local
+        end
+    end
+
+    def fetch_from_remote
+        task 'Fetching repository' do
+            sh("git remote add bootstrap '#{BOOTSTRAP_REPO}'")
+            sh("git fetch --depth=1 -q bootstrap '#{@bootstrap_branch}'")
+        end
+
+        task 'Merging' do
+            # We're using 'ours' merge option so that our README.md wins
+            sh("git merge -q --squash -X ours 'remotes/bootstrap/#{@bootstrap_branch}'")
+            commit 'Bootstrapping', :add_all => false
+        end
+    end
+
+    def fetch_from_local
+        task 'Copying and preparing local clone' do
+            # Note the trailing / appended to source_path. Otherwise rsync will put
+            # a copy of the directory inside the destination, rather than a copy of its contents.
+            sh("rsync -a '#{@source_path}/' . --exclude=/.git --exclude=/.gitmodules --exclude=/README.md --exclude='/External/*'")
+            commit 'Bootstrapping'
+
+            sh('git clean -xdf') # Remove .gitignored files and directories
+        end
+    end
+
+    def rename_files
+        task 'Renaming project files' do
+            files_with_proj_name = FileList["**/*#{REPLACEMENT_PROJECT_NAME}*"]
+            rename_filelist(files_with_proj_name, REPLACEMENT_PROJECT_NAME, options[:project_name])
+        end
+
+        task 'Renaming prefixed files' do
+            files_with_prefix = FileList["**/#{REPLACEMENT_PREFIX}*"]
+            rename_filelist(files_with_prefix, /^#{Regexp.quote(REPLACEMENT_PREFIX)}/, options[:class_prefix])
+        end
+    end
+
+    def update_contents
+        task 'Updating file contents' do
+            # Any reference to the project name in all files.
+            filelist = FileList['**/*', '**/.*'].exclude('.git', '.', '..')
+            replace_in_files(filelist, REPLACEMENT_PROJECT_NAME, options[:project_name]) unless options[:project_name] == REPLACEMENT_PROJECT_NAME
+
+            # Replace default bundle domain and organization
+            replace_in_files(filelist, REPLACEMENT_ORGANIZATION, options[:org_name]) unless options[:org_name] == REPLACEMENT_ORGANIZATION
+            replace_in_files(filelist, REPLACEMENT_DOMAIN, options[:bundle_domain]) unless options[:bundle_domain] == REPLACEMENT_DOMAIN
+
+            # Replace the class prefix in all files.
+            replace_in_files(filelist, REPLACEMENT_PREFIX, options[:class_prefix])
+
+            # If the new class prefix is empty, we need to delete the whole CLASSPREFIX = ... line in the project file.
+            # In this case, the replacement above leaves this line reading "CLASSPREFIX = ;", which is invalid syntax.
+            if options[:class_prefix].empty?
+                project_file = FileList['**/project.pbxproj']
+                replace_in_files(project_file, /^\s*CLASSPREFIX\s*=.*$/, '')
+            end
+
+            # The 'Created by' line in the headers of code files
+            filelist = FileList['**/*.{h,m}']
+            today = Time.now.strftime('%-m/%-d/%y')
+            replace_in_files(filelist, /Created by .+ on [0-9].*/, "Created by %{full_name} on #{today}" % options)
+        end
+
+        task 'Committing' do
+            commit 'Bootstrapped'
+        end
+    end
+
+    def init_externals
+        edit 'Podfile' if YesNoPrompt.run!('Would you like to edit your Podfile?', :default => false)
+
+        task 'Initializing submodules and CocoaPods' do
+            sh('git submodule -q update --init --recursive')
+            sh("git submodule --quiet foreach 'git checkout -q master'")
+            sh('pod install --silent')
+            commit 'Install pods and submodules'
+        end
+    end
+
+    def set_up_crashlytics
+        api_key = CrashlyticsFlow.new.run!
+        if api_key.nil?
+            puts 'You can set up Crashlytics later by following the instructions in the project.'.gray
+            return
+        end
+
+        task 'Installing Crashlytics key' do
+            filelist = FileList['**/*'].exclude('tiramisu')
+            replace_in_files(filelist, REPLACEMENT_CRASHLYTICS_KEY, api_key)
+            commit 'Install Crashlytics key'
+        end
+    end
+
+    def remove_bootstrap_detritus
+        task 'Cleaning up after ourselves' do
+            sh('git rm -q tiramisu')
+            sh('git rm -rq bootstrap-scripts')
+
+            # Remove ignores and build commands that are only relevant in the bootstrap repo itself
+            # These are demarcated with ">>>bootstrap-only ... <<<bootstrap-only". The lines containing the
+            # delimiters will themselves be deleted.
+            filelist = FileList['.gitignore', '.travis.yml']
+            replace_in_files(filelist, /^.+>>>bootstrap-only(?:.|\n)*<<<bootstrap-only.*/, '')
+
+            commit 'Remove init scripts and bootstrap-specific stuff'
+
+            # Squash all of our commits together into one, for prettiness
+            # See: http://stackoverflow.com/questions/1657017/git-squash-all-commits-into-a-single-commit
+            squashed_commit_hash = sh('git commit-tree HEAD^{tree} -m "[Amaro] We have liftoff!"')
+            sh("git reset #{squashed_commit_hash}")
+        end
+    end
+end
+
+
+# Prompts
+
+project_name = Prompt.new('New project name', :key => :project_name) do |p|
+    p.validation_proc = lambda do |input|
+        input.gsub!(/\s+/, '-')
+        raise 'Your project name should consist of basic alphanumeric characters.' if input =~ /[^\w_-]/
+        raise 'A file or directory with that name already exists.' if File.exist? input
+
+        input
+    end
+end
+
+
+class_prefix = Prompt.new('Class prefix (optional; 2 or preferably 3 characters)', :key => :class_prefix) do |p|
+    p.default = ''
+    p.show_default = false
+    p.length_limit = 3
+    p.validation_proc = lambda do |input|
+        return '' if input.empty?
+
+        raise 'Prefix is too short.' if input.length == 1
+
+        input.upcase!
+
+        bad_prefixes = %w(AB AC AD AL AU AV CA CB CF CG CI CL CM CV CT EA EK GC JS MA MC MF MK NK NS PK QL SC SK SL SS TW UI UT SCN)
+        raise 'That prefix is already in use by a well-known library.' if bad_prefixes.include? input
+
+        raise 'Class prefixes must be valid identifiers.' unless input =~ /^[A-Z][A-Z0-9]+$/
+
+        input
+    end
+end
+
+
+full_name = Prompt.new('Your name', :key => :full_name) do |p|
+    last_line = `dscl . read "/Users/$USER" RealName 2>/dev/null`.lines.last || ''
+    p.default = last_line.strip.empty? ? 'Mr. Developer' : last_line.strip
+end
+
+
+org_name = Prompt.new('Organization name', :key => :org_name) do |p|
+    p.default = `/usr/libexec/PlistBuddy -c 'Print :IDETemplateOptions:organizationName' "${HOME}/Library/Preferences/com.apple.dt.Xcode.plist" 2>/dev/null`.strip
+    p.default = 'The Company' if p.default.empty?
+end
+
+
+bundle_domain = Prompt.new('Bundle ID domain', :key => :bundle_domain) do |p|
+    p.pre_run_hook = -> { p.default = 'com.' + org_name.value.gsub(/\W/, '').downcase! }
+
+    p.validation_proc = lambda do |input|
+        raise 'Domain should be a reverse domain name, like "com.apple".' unless input =~ /\w+\.\w+/
+        input.gsub(/\s+/, '-').downcase
+    end
+end
+
+
+# Away we go!
+
+print <<'EOS'.chomp.faint
+    ___           ___
+   /\  \         /\__\
+  /  \  \       / /  /
+ / /\ \__\     / /__/
+ \ \ \/__/  &  \ \  \
+  \ \__\        \ \__\
+   \/__/         \/__/
+EOS
+puts "  Amaro v0.2.0\n".blue.bold
+
+bootstrapper = Bootstrapper.new
+bootstrapper.check_sanity
+
+bootstrapper.puts_source_description
+
+bootstrapper.options = Prompt.run_sequence(project_name, class_prefix, full_name, org_name, bundle_domain)
+
+puts <<-EOS.gray
+
+🎉  #{'It\'s time to build your project!'.green}
+Pausing for 3 seconds in case you change your mind. Press any key to abort.
+EOS
+
+exit if STDIN.getch(:min => 0, :time => 3)
+
+bootstrapper.run!
+
+puts <<-EOS.gray
+
+👌️  #{'You\'re all set!'.green}
+
+Don't forget to open the .xcworkspace, not the .xcodeproj,
+and add some prose to README.md!
+
+XOXO -C&L 💋
+EOS
+
+open_prompt = YesNoPrompt.run!('Would you like to open your project?', :default => true)
+system("open '%{project_name}.xcworkspace'" % bootstrapper.options) if open_prompt
