@@ -1,13 +1,5 @@
 platform :ios, '7.0'
 
-# Inform CocoaPods that we use some custom build configurations
-xcodeproj 'CrushBootstrap',
-  'Debug_Staging'   => :debug,   'Debug_Production'   => :debug,
-  'Test_Staging'    => :debug,   'Test_Production'    => :debug,
-  'AdHoc_Staging'   => :release, 'AdHoc_Production'   => :release,
-  'Profile_Staging' => :release, 'Profile_Production' => :release,
-  'Distribution'    => :release
-
 # Crush Utility Belt
 pod 'Sidecar'
 
@@ -35,7 +27,6 @@ pod 'Asterism'        # Nice & fast collection operations
 #pod 'DateTools'      # Datetime heavy lifting
 
 
-
 # Testing necessities
 target 'Specs', :exclusive => true do
   pod 'Specta'
@@ -46,7 +37,17 @@ target 'Specs', :exclusive => true do
 end
 
 
-# Copy the license and settings plists over to our project
+# Inform CocoaPods that we use some custom build configurations
+# Leave this in place unless you've tweaked the project's targets and configurations.
+xcodeproj 'CrushBootstrap',
+  'Debug_Staging'   => :debug,   'Debug_Production'   => :debug,
+  'Test_Staging'    => :debug,   'Test_Production'    => :debug,
+  'AdHoc_Staging'   => :release, 'AdHoc_Production'   => :release,
+  'Profile_Staging' => :release, 'Profile_Production' => :release,
+  'Distribution'    => :release
+
+
+# After every installation, copy the license and settings plists over to our project
 post_install do |installer|
   require 'fileutils'
 
