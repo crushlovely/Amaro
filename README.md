@@ -126,6 +126,13 @@ As mentioned above, the bootstrap [automatically generates a settings section](h
 * Aperitif: [MIT](https://github.com/crushlovely/Aperitif/blob/master/LICENSE)
 
 
+## Similar Projects
+
+Once upon a time there was [a similar project](http://iosboilerplate.com/ "iOS Boilerplate"), but it seems to have been abandoned. More recently, the lovely folks at [thoughtbot](http://thoughtbot.com/) released [liftoff](https://github.com/thoughtbot/liftoff). Amaro takes a different tack than liftoff: more opinions, less scriptability. Check it out for an alternative take on the problem.
+
+Know of anything else in the realm? [Drop us a line!](mailto:engineering@crushlovely.com) We'd love to hear about it and see how others are tackling things.
+
+
 ## Acknowledgements
 
 The lovely [default icon](http://thenounproject.com/term/scotch/9025/) was created by Scott Lewis for The Noun Project. It is licensed under the [Creative Commons Attribution 3.0 license](http://creativecommons.org/licenses/by/3.0/us/).
