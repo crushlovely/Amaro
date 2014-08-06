@@ -1,3 +1,5 @@
+// Base configuration; included in all builds.
+
 // Bring in CocoaPods settings and xcconfigs' highly sensible defaults
 #include "../../External/xcconfigs/iOS/iOS-Application.xcconfig"
 #include "../../Pods/Pods.xcconfig"
@@ -15,11 +17,3 @@ WARNING_CFLAGS = $(inherited) -Wall -Wextra -Wno-unused-parameter -Wno-unknown-w
 
 // Tone down xcconfigs a touch:
 GCC_TREAT_WARNINGS_AS_ERRORS = NO
-
-// We don't need to generate dsym files in debug builds;
-// it will just take extra time, and the symbols aren't stripped anyway.
-// See: http://labs.spotify.com/2013/11/04/shaving-off-time-from-the-ios-edit-build-test-cycle/
-DEBUG_INFORMATION_FORMAT[config=Debug_Staging] = dwarf
-DEBUG_INFORMATION_FORMAT[config=Debug_Production] = dwarf
-DEBUG_INFORMATION_FORMAT[config=Test_Staging] = dwarf
-DEBUG_INFORMATION_FORMAT[config=Test_Production] = dwarf

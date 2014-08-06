@@ -1,10 +1,6 @@
-// Build settings for testing builds.
+// Build settings for debug builds.
 
-#include "../../External/xcconfigs/Base/Configurations/Test.xcconfig"
-
-// Instrument for code coverage:
-GCC_GENERATE_TEST_COVERAGE_FILES = YES
-GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES
+#include "../../External/xcconfigs/Base/Configurations/Debug.xcconfig"
 
 // We don't need to generate dsym files in debug builds;
 // it will just take extra time, and the symbols aren't stripped anyway.
