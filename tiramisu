@@ -67,9 +67,20 @@ end
 
 
 module AmaroUtils
-    def commit(message, add_all: true)
+    def commit(message, add_all: true, error_if_nothing_to_commit: true)
         sh('git add --all') if add_all
-        sh("git commit -q -m '[Amaro] #{message}'")
+        
+        has_changes = anything_to_commit?
+        if error_if_nothing_to_commit && !has_changes
+            raise AmaroError('Repository Error', 'There should be something to commit at this point, but there\'s not!')
+        elsif has_changes
+            sh("git commit -q -m '[Amaro] #{message}'")
+        end
+    end
+
+    def anything_to_commit?
+        # If this outputs anything, there are changed files.
+        sh('git status --porcelain').chomp.length > 0
     end
 
     def task(message, failure_is_fatal: true)
@@ -624,6 +635,13 @@ class Bootstrapper
             filelist = FileList['**/*.{h,m}']
             today = Time.now.strftime('%-m/%-d/%y')
             replace_in_files(filelist, /Created by .+ on [0-9].*/, "Created by %{full_name} on #{today}" % options)
+
+            # Remove ignores and build commands that are only relevant in the bootstrap repo itself
+            # These are demarcated with ">>>bootstrap-only ... <<<bootstrap-only". The lines containing the
+            # delimiters will themselves be deleted.
+            # It's important that we do this now so the gitignore is correct for future commits.
+            filelist = FileList['.gitignore', '.travis.yml']
+            replace_in_files(filelist, /^.+>>>bootstrap-only(?:.|\n)*<<<bootstrap-only.*/, '')
         end
 
         task 'Committing' do
@@ -660,14 +678,7 @@ class Bootstrapper
         task 'Cleaning up after ourselves' do
             sh('git rm -q tiramisu')
             sh('git rm -rq bootstrap-scripts')
-
-            # Remove ignores and build commands that are only relevant in the bootstrap repo itself
-            # These are demarcated with ">>>bootstrap-only ... <<<bootstrap-only". The lines containing the
-            # delimiters will themselves be deleted.
-            filelist = FileList['.gitignore', '.travis.yml']
-            replace_in_files(filelist, /^.+>>>bootstrap-only(?:.|\n)*<<<bootstrap-only.*/, '')
-
-            commit 'Remove init scripts and bootstrap-specific stuff'
+            commit 'Remove init and bootstrap-specific scripts'
 
             # Squash all of our commits together into one, for prettiness
             # See: http://stackoverflow.com/questions/1657017/git-squash-all-commits-into-a-single-commit
