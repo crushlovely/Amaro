@@ -1,4 +1,4 @@
-# ![icon](CrushBootstrap/Resources/Images.xcassets/AppIcon.appiconset/Icon-76.png) Amaro [![Build Status](https://travis-ci.org/crushlovely/Amaro.svg?branch=master)](https://travis-ci.org/crushlovely/Amaro)
+# ![icon](CrushBootstrap/Resources/Images.xcassets/AppIcon.appiconset/Icon-60@2x.png) Amaro [![Build Status](https://travis-ci.org/crushlovely/Amaro.svg?branch=master)](https://travis-ci.org/crushlovely/Amaro)
 
 Crush & Lovely's iOS boilerplate.
 
@@ -135,4 +135,4 @@ Know of anything else in the realm? [Drop us a line!](mailto:engineering@crushlo
 
 ## Acknowledgements
 
-The lovely [default icon](http://thenounproject.com/term/scotch/9025/) was created by Scott Lewis for The Noun Project. It is licensed under the [Creative Commons Attribution 3.0 license](http://creativecommons.org/licenses/by/3.0/us/).
+The lovely icon was created by [Ray Bruwelheide](http://ray-b.net). It is licensed under the [Creative Commons Attribution 3.0 license](http://creativecommons.org/licenses/by/3.0/us/).
