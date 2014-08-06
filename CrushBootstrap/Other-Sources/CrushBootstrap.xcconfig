@@ -17,3 +17,7 @@ WARNING_CFLAGS = $(inherited) -Wall -Wextra -Wno-unused-parameter -Wno-unknown-w
 
 // Tone down xcconfigs a touch:
 GCC_TREAT_WARNINGS_AS_ERRORS = NO
+
+// Don't ask me why this is necessary, but this doesn't seem to propagate from the
+// individual configuration .xcconfigs without it.
+ONLY_ACTIVE_ARCH = $(inherited)
