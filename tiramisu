@@ -8,9 +8,9 @@ require 'uri'
 require 'json'
 require 'pathname'
 
-# If the envrionmental variable AMARO_EXPECT is set, color output is disabled,
+# If the environmental variable AMARO_EXPECT is set, color output is disabled,
 # and a standard getc is used instead of io/console's getch. This mode is
-# for running the script under expect, which is used for testing purposes,
+# for running the script under expect(1), which is used for testing purposes,
 # and gets confused by all our l33t TTY hackery.
 
 # If an argument is passed to the script, it is expected to be a path to a
@@ -756,7 +756,7 @@ print <<'EOS'.chomp.faint
   \ \__\        \ \__\
    \/__/         \/__/
 EOS
-puts "  Amaro v0.2.0\n".blue.bold
+puts "  Amaro v0.2.1\n".blue.bold
 
 bootstrapper = Bootstrapper.new
 bootstrapper.check_sanity

@@ -1,8 +1,3 @@
 // Build settings for debug builds.
 
 #include "../../External/xcconfigs/Base/Configurations/Debug.xcconfig"
-
-// We don't need to generate dsym files in debug builds;
-// it will just take extra time, and the symbols aren't stripped anyway.
-// See: http://labs.spotify.com/2013/11/04/shaving-off-time-from-the-ios-edit-build-test-cycle/
-DEBUG_INFORMATION_FORMAT = dwarf
