@@ -13,9 +13,6 @@
 #endif
 
 #if HAS_POD(CocoaLumberjack)
-    #import <CocoaLumberjack/DDASLLogger.h>
-    #import <CocoaLumberjack/DDTTYLogger.h>
-
     #if HAS_POD(CrashlyticsLumberjack)
     #import <CrashlyticsLumberjack/CrashlyticsLogger.h>
     #endif
