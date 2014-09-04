@@ -23,7 +23,7 @@ set -o pipefail
 # Also, no use in running if we're not a Distribution or AdHoc build
 [ \( "$CONFIGURATION" != "Distribution" -a "${CONFIGURATION:0:5}" != "AdHoc" \) -o "$PLATFORM_NAME" = "iphonesimulator" ] && exit 0
 
-PROJ_FILE="$SRCROOT/$PROJECT_NAME.xcodeproj/project.pbxproj"
+PROJ_FILE="$SRCROOT/${PROJECT_NAME}.xcodeproj/project.pbxproj"
 
 if [ ! -r "$PROJ_FILE" ]; then
   echo "warning: The project file for localization parsing ($PROJ_FILE) was not found or is not readable. Please report this at https://github.com/crushlovely/Amaro/issues." 1&>2
