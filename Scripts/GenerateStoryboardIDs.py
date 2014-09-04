@@ -4,11 +4,11 @@
 # all the identifiers in the storyboards.
 # The generated constants are named like this:
 #   [class prefix][storyboard name]Storyboard[identifier name][identifier type]ID
-# For instance, a segue identifier named "M5ProfileSegue" in MainStoryboard.storyboard
+# For instance, a segue identifier named "M5ProfileSegueID" in MainStoryboard.storyboard
 # in a project with class prefix 'M5' would result in this constant:
 #   M5MainStoryboardProfileSegueID
-# Note that the code tries to avoid duplicating strings unnecessarily in the result;
-# it did not naively generate 'M5MainStoryboardStoryboardM5ProfileSegueSegueID'.
+# Note that the code tries to avoid duplicating strings unnecessarily when naming;
+# it did not naively generate 'M5MainStoryboardStoryboardM5ProfileSegueIDSegueID'.
 
 # Inspired by https://github.com/square/objc-codegenutils,
 # and using some slugification code from http://flask.pocoo.org/snippets/5/
@@ -110,6 +110,14 @@ def getAttrsForAllNodesWithAttr(root, attr, tag = "*"):
     # Results are all unicodified for consistency
     return [unicode(e.get(attr)) for e in root.findall('.//' + tag + '[@' + attr + ']')]
 
+def getRestorationIDsForVCsUsingStoryboardIDs(root):
+    # Returns a list of restoration IDs for view controllers that have their
+    # "Use Storyboard ID" box checked in Interface Builder.
+    # In this case, the element has useStoryboardIdentifierAsRestorationIdentifier set,
+    # but we're only interested in ones that also have a storyboardIdentifier
+    elements = root.findall('.//*[@useStoryboardIdentifierAsRestorationIdentifier][@storyboardIdentifier]')
+    return [unicode(e.get('storyboardIdentifier')) for e in elements]
+
 def headerAndImpLinesForFile(fn, masterPrefix = ''):
     storyboardName = sanitizeIdForVariableName(splitext(basename(fn))[0])
     if not storyboardName.endswith('Storyboard'): storyboardName += 'Storyboard'
@@ -119,11 +127,12 @@ def headerAndImpLinesForFile(fn, masterPrefix = ''):
     segueIds = getAttrsForAllNodesWithAttr(root, 'identifier', 'segue')
     storyboardIds = getAttrsForAllNodesWithAttr(root, 'storyboardIdentifier')
     restorationIds = getAttrsForAllNodesWithAttr(root, 'restorationIdentifier')
+    restorationIds.extend(getRestorationIDsForVCsUsingStoryboardIDs(root))
     reuseIds = getAttrsForAllNodesWithAttr(root, 'reuseIdentifier')
 
     res = ([], [])
     appendHeaderAndImpLinesForIds(res, '\n// Segue Identifiers', masterPrefix, storyboardName, segueIds, 'Segue')
-    appendHeaderAndImpLinesForIds(res, '\n// Storyboard Identifiers', masterPrefix, storyboardName, storyboardIds, 'Storyboard')
+    appendHeaderAndImpLinesForIds(res, '\n// View Controller Identifiers', masterPrefix, storyboardName, storyboardIds, 'Controller')
     appendHeaderAndImpLinesForIds(res, '\n// Restoration Identifiers', masterPrefix, storyboardName, restorationIds, 'Restoration')
     appendHeaderAndImpLinesForIds(res, '\n// Reuse Identifiers', masterPrefix, storyboardName, reuseIds, 'Reuse')
 
