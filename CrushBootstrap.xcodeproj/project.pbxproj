@@ -473,7 +473,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "if [ ! -s \"$INFOPLIST_FILE\" ]; then\n  echo \"Info plist could not be found at $INFOPLIST_FILE\" 1>&2\n  exit 1\nfi\n\nif [ \\( \"$CONFIGURATION\" = \"Distribution\" -o \"${CONFIGURATION:0:5}\" = \"AdHoc\" \\) -a \"$PLATFORM_NAME\" != \"iphonesimulator\" ]; then\n  buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n  buildNumber=$(($buildNumber + 1))\n  echo \"Incrementing build number to $buildNumber\"\n  /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\nfi";
+			shellScript = "if [ ! -s \"$INFOPLIST_FILE\" ]; then\n  echo \"error: Info plist could not be found at $INFOPLIST_FILE\" 1>&2\n  exit 1\nfi\n\nif [ \\( \"$CONFIGURATION\" = \"Distribution\" -o \"${CONFIGURATION:0:5}\" = \"AdHoc\" \\) -a \"$PLATFORM_NAME\" != \"iphonesimulator\" ]; then\n  buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n  buildNumber=$(($buildNumber + 1))\n  echo \"Incrementing build number to $buildNumber\"\n  /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\nfi";
 			showEnvVarsInLog = 0;
 		};
 		BDC7F36218EBA5EE0045D4BD /* Remove Unused Localizations */ = {
