@@ -19,6 +19,7 @@
 		BDDB996318C3943B003EBC42 /* CRBSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDB996218C3943B003EBC42 /* CRBSAppDelegate.m */; };
 		BDDB996C18C3943B003EBC42 /* CRBSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDB996B18C3943B003EBC42 /* CRBSViewController.m */; };
 		BDDB996E18C3943B003EBC42 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDDB996D18C3943B003EBC42 /* Images.xcassets */; };
+		BDF4202319B8F8D700FE6C13 /* StoryboardIdentifiers.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF4202219B8F8D700FE6C13 /* StoryboardIdentifiers.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -91,6 +92,8 @@
 		BDF1756218C3972E008BD9C6 /* Mac-Framework.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mac-Framework.xcconfig"; sourceTree = "<group>"; };
 		BDF1756318C3972E008BD9C6 /* Mac-StaticLibrary.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mac-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
 		BDF1756418C3972E008BD9C6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		BDF4202119B8F8D700FE6C13 /* StoryboardIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryboardIdentifiers.h; sourceTree = "<group>"; };
+		BDF4202219B8F8D700FE6C13 /* StoryboardIdentifiers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryboardIdentifiers.m; sourceTree = "<group>"; };
 		E6EBF96DA068437B82FA86E4 /* libPods-Specs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Specs.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -141,6 +144,8 @@
 		BD574AFC18EA481500EDD66F /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				BDF4202119B8F8D700FE6C13 /* StoryboardIdentifiers.h */,
+				BDF4202219B8F8D700FE6C13 /* StoryboardIdentifiers.m */,
 				BD6951EA18EA54A800F2F410 /* CrushBootstrap-Info.plist */,
 				BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */,
 				BD3570BB19929359006C5409 /* CrushBootstrap-Debug.xcconfig */,
@@ -321,6 +326,7 @@
 			buildConfigurationList = BDDB998418C3943B003EBC42 /* Build configuration list for PBXNativeTarget "CrushBootstrap" */;
 			buildPhases = (
 				CE78B447D2424EDEAEAB74EB /* Check Pods Manifest.lock */,
+				BDF4202019B8F31200FE6C13 /* Generate Storyboard Identifier File */,
 				BDDB994B18C3943B003EBC42 /* Sources */,
 				BDDB994C18C3943B003EBC42 /* Frameworks */,
 				BD36522718CE89C6009107A7 /* Increment Build Number */,
@@ -506,6 +512,21 @@
 			shellScript = "# If you have installed the Crashlytics pod, this script runs the required\n# setup script. If you didn't set up Crashlytics in the bootstrap script,\n# you will need to retrieve your API key and insert it below.\n# See https://gist.github.com/codebutler/5763818 for one way to find your key.\n\n# If you didn't install the Crashlytics pod, this script will do nothing.\n# Feel free to remove it in that case, if you wish.\n\nCRASHLYTICS_SCRIPT=\"./Pods/CrashlyticsFramework/Crashlytics.framework/run\"\n[ -x \"$CRASHLYTICS_SCRIPT\" ] || exit 0\n\n# Enter your key below:\nCRASHLYTICS_API_KEY=\"<<CrashlyticsAPIKey>>\"\n\nif [ \"${CRASHLYTICS_API_KEY:0:1}\" = \"<\" ]; then\n  echo \"warning: Set your Crashlytics API key in the Build Phases tab to enable Crashlytics integration\" 1>&2\n  exit 0\nfi\n\n\"$CRASHLYTICS_SCRIPT\" \"$CRASHLYTICS_API_KEY\"";
 			showEnvVarsInLog = 0;
 		};
+		BDF4202019B8F31200FE6C13 /* Generate Storyboard Identifier File */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Storyboard Identifier File";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This script walks the storyboards in your project and creates\n# StoryboardIdentifiers.{h,m} with constants for all the segue,\n# reuse, restoration, and storyboard identifiers.\n# The generated files live in the Other Sources group.\n\n# If this is not desired behavior for you, or you don't use\n# storyboards, feel free to remove this build phase and the\n# generated files in Other Sources.\n\n\"${SRCROOT}/Scripts/GenerateStoryboardIDs.sh\"";
+			showEnvVarsInLog = 0;
+		};
 		CE78B447D2424EDEAEAB74EB /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -531,6 +552,7 @@
 				BDDB996318C3943B003EBC42 /* CRBSAppDelegate.m in Sources */,
 				BD6951CF18EA4B0800F2F410 /* main.m in Sources */,
 				BDDB996C18C3943B003EBC42 /* CRBSViewController.m in Sources */,
+				BDF4202319B8F8D700FE6C13 /* StoryboardIdentifiers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
