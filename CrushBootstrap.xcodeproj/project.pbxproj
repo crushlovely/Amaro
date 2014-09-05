@@ -19,6 +19,7 @@
 		BDDB996318C3943B003EBC42 /* CRBSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDB996218C3943B003EBC42 /* CRBSAppDelegate.m */; };
 		BDDB996C18C3943B003EBC42 /* CRBSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDB996B18C3943B003EBC42 /* CRBSViewController.m */; };
 		BDDB996E18C3943B003EBC42 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDDB996D18C3943B003EBC42 /* Images.xcassets */; };
+		BDF4202319B8F8D700FE6C13 /* StoryboardIdentifiers.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF4202219B8F8D700FE6C13 /* StoryboardIdentifiers.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -32,7 +33,7 @@
 			outputFiles = (
 				"$(DERIVED_FILE_DIR)/$(INPUT_FILE_BASE).css",
 			);
-			script = "# Try to use an RVM install, or otherwise just hope sass is in the PATH\n[ -e ~/.rvm/environments/default ] && source ~/.rvm/environments/default\nif [ -n \"$GEM_HOME\" ]; then\n  SASS=\"$GEM_HOME/bin/sass\"\nelse\n  SASS=\"`which sass`\"\nfi\n\nif [ -z \"$SASS\" -o ! -x \"$SASS\" ]; then\n  echo \"To use .scss files, you must install sass and have it in your PATH.\" 1>&2\n  echo \"See http://sass-lang.com/install for instructions.\" 1>&2\n  exit 1\nfi\n\n# Xcode doesn't like to copy resources from build rules out to the product folder,\n# so we're doing it ourselves, and adding the derived files output to placate\n# its dependency stuff.\nOUTPUT=\"${DERIVED_FILE_DIR}/${INPUT_FILE_BASE}.css\"\n\"$SASS\" \"${INPUT_FILE_PATH}\" \"$OUTPUT\"\ncp \"$OUTPUT\" \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/${INPUT_FILE_BASE}.css\"";
+			script = "# This build rule converts .scss (sass) files in your project to .css files.\n# You will need to have sass installed to use it. See http://sass-lang.com/install\n# for instructions.\n\n# If you won't be using sass or Pixate Freestyle, feel free to remove this,\n# though it won't do anything unless there are scss files in your project.\n\n\"${SRCROOT}/Scripts/SCSSBuildRule.sh\"";
 		};
 /* End PBXBuildRule section */
 
@@ -91,6 +92,8 @@
 		BDF1756218C3972E008BD9C6 /* Mac-Framework.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mac-Framework.xcconfig"; sourceTree = "<group>"; };
 		BDF1756318C3972E008BD9C6 /* Mac-StaticLibrary.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mac-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
 		BDF1756418C3972E008BD9C6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		BDF4202119B8F8D700FE6C13 /* StoryboardIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryboardIdentifiers.h; sourceTree = "<group>"; };
+		BDF4202219B8F8D700FE6C13 /* StoryboardIdentifiers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryboardIdentifiers.m; sourceTree = "<group>"; };
 		E6EBF96DA068437B82FA86E4 /* libPods-Specs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Specs.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -141,6 +144,8 @@
 		BD574AFC18EA481500EDD66F /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				BDF4202119B8F8D700FE6C13 /* StoryboardIdentifiers.h */,
+				BDF4202219B8F8D700FE6C13 /* StoryboardIdentifiers.m */,
 				BD6951EA18EA54A800F2F410 /* CrushBootstrap-Info.plist */,
 				BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */,
 				BD3570BB19929359006C5409 /* CrushBootstrap-Debug.xcconfig */,
@@ -321,6 +326,7 @@
 			buildConfigurationList = BDDB998418C3943B003EBC42 /* Build configuration list for PBXNativeTarget "CrushBootstrap" */;
 			buildPhases = (
 				CE78B447D2424EDEAEAB74EB /* Check Pods Manifest.lock */,
+				BDF4202019B8F31200FE6C13 /* Generate Storyboard Identifier File */,
 				BDDB994B18C3943B003EBC42 /* Sources */,
 				BDDB994C18C3943B003EBC42 /* Frameworks */,
 				BD36522718CE89C6009107A7 /* Increment Build Number */,
@@ -472,8 +478,8 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "if [ ! -s \"$INFOPLIST_FILE\" ]; then\n  echo \"Info plist could not be found at $INFOPLIST_FILE\" 1>&2\n  exit 1\nfi\n\nif [ \\( \"$CONFIGURATION\" = \"Distribution\" -o \"${CONFIGURATION:0:5}\" = \"AdHoc\" \\) -a \"$PLATFORM_NAME\" != \"iphonesimulator\" ]; then\n  buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n  buildNumber=$(($buildNumber + 1))\n  echo \"Incrementing build number to $buildNumber\"\n  /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\nfi";
+			shellPath = /bin/sh;
+			shellScript = "# This script increments the build number (CFBundleVersion in the Info.plist)\n# on Ad-Hoc or Distribution builds that target real devices.\n# In the context of Amaro, that means an archive build of any scheme, or any\n# non-simulator build of the AppStore scheme.\n\n# Feel free to remove this build phase if that is not desired behavior for you.\n\n\"${SRCROOT}/Scripts/IncrementBuildNumber.sh\"";
 			showEnvVarsInLog = 0;
 		};
 		BDC7F36218EBA5EE0045D4BD /* Remove Unused Localizations */ = {
@@ -487,8 +493,8 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "# This removes localization files for regions which you haven't explicitly localized.\n# This is mainly to work around a three-factor problem:\n# 1) iTunes Connect reads .lproj folders to detect supported languages in an app.\n# 2) FormatterKit provides translations for a ton of languages.\n# 3) CocoaPods copies all of FormatterKit's translations into our app.\n# So, iTunes Connect ends up thinking our app supports a lot of languages it doesn't.\n# By reading the \"knownRegions\" property of the pbxproj, we can get the list of\n# regions you've actually created a localization for in the project settings.\n# See this GitHub issue for details and other workarounds:\n# https://github.com/mattt/FormatterKit/issues/88\n\n# Don't run in continuous integration\n[ \"$CI\" = \"true\" ] && exit 0\n\n# Also, no use in running if we're not a Distribution or AdHoc build\n[ \\( \"$CONFIGURATION\" != \"Distribution\" -a \"${CONFIGURATION:0:5}\" != \"AdHoc\" \\) -o \"$PLATFORM_NAME\" = \"iphonesimulator\" ] && exit 0\n\nset -ue\nset -o pipefail\n\nPROJ_FILE=\"$SRCROOT/$PROJECT_NAME.xcodeproj/project.pbxproj\"\n\nif [ ! -e \"$PROJ_FILE\" ]; then\n  echo \"warning: Unable to find project file for localization parsing. Please report this.\" 1&>2\n  exit 0\nfi\n\n# Grab the ID of the root object (the project itself)\nROOT_OBJ_ID=$(/usr/libexec/PlistBuddy -c 'Print :rootObject' \"$PROJ_FILE\" 2>/dev/null)\n\n# That object has a knownRegions property that is an array of locale strings (e.g. \"Base\", \"en\").\n# Grab that, spit it out in JSON, and massage it into a string fit for a find query.\n# For instance, the above example will become '-name Base.lproj -o -name en.lproj'\n# The <> stuff in the seds is jank to get the -o only between intermediate terms\nREGIONS_PRED=$(plutil -extract \"objects.${ROOT_OBJ_ID}.knownRegions\" json -o - \"$PROJ_FILE\" 2>/dev/null | \\\n    python -c 'import sys, json; print \"\\n\".join(json.load(sys.stdin))' | \\\n    sed 's/$/.lproj>/;s/^/<-name /' |  \\\n    paste -sd' ' - | \\\n    sed 's/> </ -o /g;s/[<>]//g' )\n\nfind \"$CODESIGNING_FOLDER_PATH\" -maxdepth 1 -type d -name '*.lproj' -not \\( $REGIONS_PRED \\) -exec rm -rf {} +\n";
+			shellPath = /bin/sh;
+			shellScript = "# This removes localization files for regions which you haven't explicitly localized\n# in the project settings. This is to work around an issue with pods that include\n# localizations for many languages, and the subsequent misreading of those files\n# by iTunes Connect.\n# See this GitHub issue for more details and other workarounds:\n# https://github.com/mattt/FormatterKit/issues/88\n\n# Feel free to remove this build phase if that problem doesn't apply to you,\n# though leaving it in should be harmless.\n\n\"${SRCROOT}/Scripts/RemoveUnusedLocalizations.sh\"";
 			showEnvVarsInLog = 0;
 		};
 		BDF1758318C3A844008BD9C6 /* Crashlytics Script */ = {
@@ -503,7 +509,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "CRASHLYTICS_SCRIPT=\"./Pods/CrashlyticsFramework/Crashlytics.framework/run\"\n[ -x \"$CRASHLYTICS_SCRIPT\" ] || exit 0\n\n# Enter your key below:\nCRASHLYTICS_API_KEY=\"<<CrashlyticsAPIKey>>\"\n\nif [ \"${CRASHLYTICS_API_KEY:0:1}\" = \"<\" ]; then\n  echo \"warning: Set your Crashlytics API key in the Build Phases tab to enable Crashlytics integration\" 1>&2\n  exit 0\nfi\n\n\"$CRASHLYTICS_SCRIPT\" \"$CRASHLYTICS_API_KEY\"";
+			shellScript = "# If you have installed the Crashlytics pod, this script runs the required\n# setup script. If you didn't set up Crashlytics in the bootstrap script,\n# you will need to retrieve your API key and insert it below.\n# See https://gist.github.com/codebutler/5763818 for one way to find your key.\n\n# If you didn't install the Crashlytics pod, this script will do nothing.\n# Feel free to remove it in that case, if you wish.\n\nCRASHLYTICS_SCRIPT=\"./Pods/CrashlyticsFramework/Crashlytics.framework/run\"\n[ -x \"$CRASHLYTICS_SCRIPT\" ] || exit 0\n\n# Enter your key below:\nCRASHLYTICS_API_KEY=\"<<CrashlyticsAPIKey>>\"\n\nif [ \"${CRASHLYTICS_API_KEY:0:1}\" = \"<\" ]; then\n  echo \"warning: Set your Crashlytics API key in the Build Phases tab to enable Crashlytics integration\" 1>&2\n  exit 0\nfi\n\n\"$CRASHLYTICS_SCRIPT\" \"$CRASHLYTICS_API_KEY\"";
+			showEnvVarsInLog = 0;
+		};
+		BDF4202019B8F31200FE6C13 /* Generate Storyboard Identifier File */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Storyboard Identifier File";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This script walks the storyboards in your project and creates\n# StoryboardIdentifiers.{h,m} with constants for all the segue,\n# reuse, restoration, and storyboard identifiers.\n# The generated files live in the Other Sources group.\n\n# If this is not desired behavior for you, or you don't use\n# storyboards, feel free to remove this build phase and the\n# generated files in Other Sources.\n\n# If you would like constants generated for restoration IDs,\n# uncomment this line:\n#export NEED_RESTORATION_IDS=1\n\n\"${SRCROOT}/Scripts/GenerateStoryboardIDs.sh\"";
 			showEnvVarsInLog = 0;
 		};
 		CE78B447D2424EDEAEAB74EB /* Check Pods Manifest.lock */ = {
@@ -531,6 +552,7 @@
 				BDDB996318C3943B003EBC42 /* CRBSAppDelegate.m in Sources */,
 				BD6951CF18EA4B0800F2F410 /* main.m in Sources */,
 				BDDB996C18C3943B003EBC42 /* CRBSViewController.m in Sources */,
+				BDF4202319B8F8D700FE6C13 /* StoryboardIdentifiers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
