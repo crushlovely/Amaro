@@ -22,6 +22,7 @@ from xml.etree import ElementTree
 import re
 from unicodedata import normalize
 from os.path import splitext, basename, join as pathjoin
+from os import environ
 import sys
 
 _punct_re = re.compile(r'[\t !"#$%&\'()*\-/<=>?@\[\\\]^_`{|},.]+')
@@ -118,7 +119,7 @@ def getRestorationIDsForVCsUsingStoryboardIDs(root):
     elements = root.findall('.//*[@useStoryboardIdentifierAsRestorationIdentifier][@storyboardIdentifier]')
     return [unicode(e.get('storyboardIdentifier')) for e in elements]
 
-def headerAndImpLinesForFile(fn, masterPrefix = ''):
+def headerAndImpLinesForFile(fn, masterPrefix = '', includeRestorationIDs = False):
     storyboardName = sanitizeIdForVariableName(splitext(basename(fn))[0])
     if not storyboardName.endswith('Storyboard'): storyboardName += 'Storyboard'
 
@@ -126,15 +127,19 @@ def headerAndImpLinesForFile(fn, masterPrefix = ''):
 
     segueIds = getAttrsForAllNodesWithAttr(root, 'identifier', 'segue')
     storyboardIds = getAttrsForAllNodesWithAttr(root, 'storyboardIdentifier')
-    restorationIds = getAttrsForAllNodesWithAttr(root, 'restorationIdentifier')
-    restorationIds.extend(getRestorationIDsForVCsUsingStoryboardIDs(root))
     reuseIds = getAttrsForAllNodesWithAttr(root, 'reuseIdentifier')
+
+    if includeRestorationIDs:
+        restorationIds = getAttrsForAllNodesWithAttr(root, 'restorationIdentifier')
+        restorationIds.extend(getRestorationIDsForVCsUsingStoryboardIDs(root))
 
     res = ([], [])
     appendHeaderAndImpLinesForIds(res, '\n// Segue Identifiers', masterPrefix, storyboardName, segueIds, 'Segue')
     appendHeaderAndImpLinesForIds(res, '\n// View Controller Identifiers', masterPrefix, storyboardName, storyboardIds, 'Controller')
-    appendHeaderAndImpLinesForIds(res, '\n// Restoration Identifiers', masterPrefix, storyboardName, restorationIds, 'Restoration')
     appendHeaderAndImpLinesForIds(res, '\n// Reuse Identifiers', masterPrefix, storyboardName, reuseIds, 'Reuse')
+
+    if includeRestorationIDs:
+        appendHeaderAndImpLinesForIds(res, '\n// Restoration Identifiers', masterPrefix, storyboardName, restorationIds, 'Restoration')
 
     return res
 
@@ -166,9 +171,11 @@ if __name__ == '__main__':
     outDir = sys.argv.pop(0)
     outBasename = 'StoryboardIdentifiers'
 
+    needRestorationIDs = 'NEED_RESTORATION_IDS' in environ
+
     lines = ([], [])
     for fn in sys.argv:
-        fnLines = headerAndImpLinesForFile(fn, prefix)
+        fnLines = headerAndImpLinesForFile(fn, prefix, needRestorationIDs)
         appendHeaderAndImpLines(lines, fnLines, '#pragma mark ' + basename(fn))
 
         # Add some space after this file's entries, if it had any
