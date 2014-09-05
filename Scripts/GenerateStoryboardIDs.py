@@ -125,20 +125,22 @@ def headerAndImpLinesForFile(fn, masterPrefix = '', includeRestorationIDs = Fals
 
     root = ElementTree.parse(fn)
 
+    res = ([], [])
+
     segueIds = getAttrsForAllNodesWithAttr(root, 'identifier', 'segue')
-    storyboardIds = getAttrsForAllNodesWithAttr(root, 'storyboardIdentifier')
+    appendHeaderAndImpLinesForIds(res, '\n// Segue Identifiers', masterPrefix, storyboardName, segueIds, 'Segue')
+
+    # This seems to be limited to view controllers, but we can't specify a tag, as different
+    # UIViewController subclasses have different tags (e.g. nav controllers).
+    viewControllerIds = getAttrsForAllNodesWithAttr(root, 'storyboardIdentifier')
+    appendHeaderAndImpLinesForIds(res, '\n// View Controller Identifiers', masterPrefix, storyboardName, viewControllerIds, 'Controller')
+
     reuseIds = getAttrsForAllNodesWithAttr(root, 'reuseIdentifier')
+    appendHeaderAndImpLinesForIds(res, '\n// Reuse Identifiers', masterPrefix, storyboardName, reuseIds, 'Reuse')
 
     if includeRestorationIDs:
         restorationIds = getAttrsForAllNodesWithAttr(root, 'restorationIdentifier')
         restorationIds.extend(getRestorationIDsForVCsUsingStoryboardIDs(root))
-
-    res = ([], [])
-    appendHeaderAndImpLinesForIds(res, '\n// Segue Identifiers', masterPrefix, storyboardName, segueIds, 'Segue')
-    appendHeaderAndImpLinesForIds(res, '\n// View Controller Identifiers', masterPrefix, storyboardName, storyboardIds, 'Controller')
-    appendHeaderAndImpLinesForIds(res, '\n// Reuse Identifiers', masterPrefix, storyboardName, reuseIds, 'Reuse')
-
-    if includeRestorationIDs:
         appendHeaderAndImpLinesForIds(res, '\n// Restoration Identifiers', masterPrefix, storyboardName, restorationIds, 'Restoration')
 
     return res
