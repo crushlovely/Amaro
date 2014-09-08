@@ -757,7 +757,7 @@ print <<'EOS'.chomp.faint
   \ \__\        \ \__\
    \/__/         \/__/
 EOS
-puts "  Amaro v0.2.5\n".blue.bold
+puts "  Amaro v0.2.7\n".blue.bold
 
 bootstrapper = Bootstrapper.new
 bootstrapper.check_sanity
