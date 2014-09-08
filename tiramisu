@@ -672,6 +672,8 @@ class Bootstrapper
     end
 
     def set_up_crashlytics
+        return unless Dir.exist? 'Pods/CrashlyticsFramework'
+
         api_key = CrashlyticsFlow.new.run!
         if api_key.nil?
             puts 'You can set up Crashlytics later by following the instructions in the project.'.gray
