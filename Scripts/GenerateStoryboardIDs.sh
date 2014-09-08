@@ -7,7 +7,7 @@
 PROJ_FILE="$SRCROOT/${PROJECT_NAME}.xcodeproj/project.pbxproj"
 
 if [ ! -r "$PROJ_FILE" ]; then
-  echo "warning: The project file for storyboard codegen ($PROJ_FILE) was not found or is not readable. Please report this at https://github.com/crushlovely/Amaro/issues." 1&>2
+  echo "warning: The project file for storyboard codegen ($PROJ_FILE) was not found or is not readable.\nPlease report this at https://github.com/crushlovely/Amaro/issues." 1&>2
   exit 0
 fi
 
