@@ -53,4 +53,6 @@
     #if HAS_POD(Asterism)
         #import <Asterism/Asterism.h>
     #endif
+
+    #import "CRBSConstants.h"
 #endif

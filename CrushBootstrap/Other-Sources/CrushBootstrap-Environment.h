@@ -28,6 +28,8 @@
 
 #if IS_DEBUG_CONFIGURATION(STAGING) || IS_TEST_CONFIGURATION(STAGING) || IS_ADHOC_CONFIGURATION(STAGING) || IS_PROFILE_CONFIGURATION(STAGING)
 #define TARGETING_STAGING
+#define IF_STAGING(stagingValue, productionValue) stagingValue
 #else
 #define TARGETING_PRODUCTION
+#define IF_STAGING(stagingValue, productionValue) productionValue
 #endif
