@@ -188,10 +188,17 @@ class InputReader
             end
 
             # Ignore all escape codes, which come in as multiple characters.
-            # Snatched from here: https://gist.github.com/acook/4190379
+            # The nonblock version is snatched from here: https://gist.github.com/acook/4190379,
+            # but it seems to be a Bad Idea to mix standard read methods with io/console's...
             if c == "\e"
-                @source.read_nonblock(3) rescue nil
-                @source.read_nonblock(2) rescue nil
+                if @source.isatty
+                    @source.getch
+                    @source.getch
+                else
+                    @source.read_nonblock(3) rescue nil
+                    @source.read_nonblock(2) rescue nil
+                end
+
                 next
             end
 
