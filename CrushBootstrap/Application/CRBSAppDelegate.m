@@ -26,13 +26,13 @@
 #import <Aperitif/CRLAperitif.h>
 #endif
 
+#import "CRBSConstants.h"
 
 @implementation CRBSAppDelegate
 
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self initializeLoggingAndServices];
-    [self applyBuildIconBadge];
 
     return YES;
 }
@@ -76,30 +76,6 @@
 
             [DDLog addLogger:[CrashlyticsLogger sharedInstance] withLogLevel:LOG_LEVEL_INFO];
        #endif
-    #endif
-}
-
-
-/**
- Use a private API to badge the application icon with an alpha or beta for internal/ad hoc builds.
- */
--(void)applyBuildIconBadge
-{
-    #if !IS_DISTRIBUTION_BUILD
-
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wundeclared-selector"
-    if([[UIApplication sharedApplication] respondsToSelector:@selector(setApplicationBadgeString:)]) {
-        #ifdef TARGETING_STAGING
-        NSString *badgeString = @"🅢";
-        #else
-        NSString *badgeString = @"🅟";
-        #endif
-
-        [[UIApplication sharedApplication] performSelector:@selector(setApplicationBadgeString:) withObject:badgeString];
-    }
-    #pragma clang diagnostic pop
-
     #endif
 }
 
