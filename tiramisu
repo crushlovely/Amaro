@@ -13,8 +13,11 @@ require 'pathname'
 # for running the script under expect(1), which is used for testing purposes,
 # and gets confused by all our l33t TTY hackery.
 
-# If an argument is passed to the script, it is expected to be a path to a
-# local clone of the Amaro repository. In this case, instead of cloning the
+# If the option --crashlytics is passed to the script, it will run through
+# the process of fetching your Crashlytics API key and nothing else.
+
+# Otherwise, if an argument is passed to the script, it is expected to be a path
+# to a local clone of the Amaro repository. In this case, instead of cloning the
 # github repo, the local clone is copied into place and cleaned up.
 # This is intended to test modifications to the repo without needing to push
 # to the remote.
@@ -386,7 +389,9 @@ class CrashlyticsFlow
     APP_BUNDLE_ID = 'com.crashlytics.mac'
     APP_BINARY_NAME = 'Crashlytics'
 
-    def initialize
+    def initialize(standalone: false)
+        @standalone = standalone
+
         @email = Prompt.new('Email address')
 
         @password = Prompt.new('Password')
@@ -395,7 +400,12 @@ class CrashlyticsFlow
     end
 
     def run!
-        return unless YesNoPrompt.run!('Would you like to set up Crashlytics?', :default => false)
+        if @standalone
+            puts "Let's fetch your Crashlytics API key!\nEnter your Crashlytics credentials.\n\n"
+        else
+            return unless YesNoPrompt.run!('Would you like to set up Crashlytics?', :default => false)
+        end
+
         dev_token = nil
 
         task 'Finding Crashlytics developer token', :failure_is_fatal => false do
@@ -759,6 +769,19 @@ print <<'EOS'.chomp.faint
 EOS
 puts "  Amaro v0.2.7\n".blue.bold
 
+
+# Are we doing the standlone Crashlytics stuff?
+if !ARGV.empty? && ARGV[0] == '--crashlytics'
+    crashlytics_flow = CrashlyticsFlow.new(:standalone => true)
+    api_key = crashlytics_flow.run!
+
+    puts "\nYour Crashlytics API key is:\n  #{api_key.bold}\n\n" if api_key
+
+    exit
+end
+
+
+# Otherwise, off to the races
 bootstrapper = Bootstrapper.new
 bootstrapper.check_sanity
 
