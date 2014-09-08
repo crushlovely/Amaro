@@ -26,7 +26,6 @@
 #import <Aperitif/CRLAperitif.h>
 #endif
 
-#import "CRBSConstants.h"
 
 @implementation CRBSAppDelegate
 
