@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
 
 # This script reads the Info.plist in CODESIGNING_FOLDER_PATH, as well as several other
@@ -9,22 +9,19 @@
 # Version and build information is hidden on very small icons, like those used
 # in Spotlight.
 
-
-from __future__ import print_function
-from os import environ
+import AmaroLib as lib
+import os.path
+from math import ceil
 from sys import exit
-
-# Exit early if we're in CI or making an app store build
-if environ.get('CI') == 'true': exit(0)
-if environ.get('CONFIGURATION') == 'Distribution': exit(0)
-
-
 from AppKit import *
 from Quartz import *
 from CoreText import *
-from os.path import splitext, join as pathJoin, exists as fileExists
-from math import floor, ceil
-from sys import argv, stderr
+
+# Bail if we're in CI or making an app store build
+if lib.inContinuousIntegration or lib.isDistributionConfiguration:
+    print 'Not badging icons; this is a build for the App Store'
+    exit(0)
+
 
 FONT_NAME = 'Helvetica-Bold'
 
@@ -205,7 +202,7 @@ def badgeFile(fn, destinationDir, isStaging, versionString, buildString):
     boxShadow.setShadowColor_(boxShadowColor)
     boxShadow.setShadowOffset_(NSZeroSize)
     boxShadow.setShadowBlurRadius_(iconHeight / 3.0)
-    boxShadow.set();
+    boxShadow.set()
 
     badgeBottomPadding = ceil(0.15 * size.height)
     badgeDestRect = ((size.width - badgeSize.width,
@@ -226,36 +223,34 @@ def badgeFile(fn, destinationDir, isStaging, versionString, buildString):
     pngData.writeToFile_atomically_(dest, False)
 
 
-def getIconFilenamesAndVersionAndBuild(dir):
-    plistData = NSData.dataWithContentsOfFile_(pathJoin(dir, 'Info.plist'))
-    if not plistData:
-        print('error: Unable to read Info plist file in %s.\nPlease report this at https://github.com/crushlovely/Amaro/issues' % dir, file=stderr)
-        exit(1)
-
-    plist, format, error = NSPropertyListSerialization.propertyListWithData_options_format_error_(plistData, 0, None, None)
-
-    if error:
-        print('error: Unable to deserialize Info plist file in %s\nError message: %s\n\nPlease report this at https://github.com/crushlovely/Amaro/issues' % (dir, error), file=stderr)
-        exit(1)
-
-    iPhoneIcons = plist.valueForKeyPath_('CFBundleIcons.CFBundlePrimaryIcon.CFBundleIconFiles') or []
-    iPadIcons = plist.valueForKeyPath_('CFBundleIcons~ipad.CFBundlePrimaryIcon.CFBundleIconFiles') or []
+def getIconFilenames(dir):
+    # We want the processed Info.plist in the .app, not the one in the project.
+    # Xcode consolidates asset catalog info into that plist, so it's a reliable
+    # source for the names of icon files, regardless of how they got to be that way.
+    packagedInfoPlist, _ = lib.loadPlist(os.path.join(dir, 'Info.plist'))
+    iPhoneIcons = packagedInfoPlist.valueForKeyPath_('CFBundleIcons.CFBundlePrimaryIcon.CFBundleIconFiles') or []
+    iPadIcons = packagedInfoPlist.valueForKeyPath_('CFBundleIcons~ipad.CFBundlePrimaryIcon.CFBundleIconFiles') or []
 
     fns = []
     fns.extend([fn + '.png' for fn in iPhoneIcons])
     fns.extend([fn + '@2x.png' for fn in iPhoneIcons])
+    fns.extend([fn + '@3x.png' for fn in iPhoneIcons])  # IT'S HAPPENING
     fns.extend([fn + '~ipad.png' for fn in iPadIcons])
     fns.extend([fn + '@2x~ipad.png' for fn in iPadIcons])
-    fns = [pathJoin(dir, fn) for fn in fns]
+    fns.extend([fn + '@3x~ipad.png' for fn in iPadIcons])
+    fns = [os.path.join(dir, fn) for fn in fns]
 
-    return (filter(fileExists, fns), plist.get('CFBundleShortVersionString'), plist.get('CFBundleVersion'))
+    fns = filter(os.path.exists, fns)
+
+    return fns
 
 
 if __name__ == '__main__':
-    staging = environ.get('CONFIGURATION', '').endswith('Staging')
-    sourceDir = environ.get('CODESIGNING_FOLDER_PATH')
+    sourceDir = lib.getEnv('CODESIGNING_FOLDER_PATH')
 
-    iconFns, version, build = getIconFilenamesAndVersionAndBuild(sourceDir)
+    iconFns = getIconFilenames(sourceDir)
 
     for fn in iconFns:
-        badgeFile(fn, sourceDir, staging, version, build)
+        badgeFile(fn, sourceDir, lib.targetingStaging, lib.version, lib.buildNumber)
+
+    print 'Badged the following icon files: ' + ', '.join([os.path.basename(fn) for fn in iconFns])

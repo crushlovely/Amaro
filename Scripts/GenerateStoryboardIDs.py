@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 
 # This script walks the given storyboards and spits out one .h/.m pair with constants for
 # all the identifiers in the storyboards.
@@ -13,17 +13,12 @@
 # Inspired by https://github.com/square/objc-codegenutils,
 # and using some slugification code from http://flask.pocoo.org/snippets/5/
 
-# Arguments to this script are as follows:
-#   StoryboardIdentifiers.py classPrefix outputDirectory storyboardFile [storyboardFile [...]]
-# Files called StoryboardIdentifiers.{h,m} will be output in the given directory.
-# Any existing files with those names will be overwritten.
 
+import AmaroLib as lib
 from xml.etree import ElementTree
 import re
-from unicodedata import normalize
-from os.path import splitext, basename, join as pathjoin
-from os import environ
-import sys
+import unicodedata
+import os
 
 _punct_re = re.compile(r'[\t !"#$%&\'()*\-/<=>?@\[\\\]^_`{|},.]+')
 def sanitizeIdForVariableName(id_):
@@ -37,7 +32,7 @@ def sanitizeIdForVariableName(id_):
     if isinstance(id_, str): id_ = unicode(id_)
 
     for word in _punct_re.split(id_):
-        word = normalize('NFKD', word).encode('ascii', 'ignore')
+        word = unicodedata.normalize('NFKD', word).encode('ascii', 'ignore')
         if word:
             result += word[0].upper() + word[1:]
 
@@ -120,7 +115,7 @@ def getRestorationIDsForVCsUsingStoryboardIDs(root):
     return [unicode(e.get('storyboardIdentifier')) for e in elements]
 
 def headerAndImpLinesForFile(fn, masterPrefix = '', includeRestorationIDs = False):
-    storyboardName = sanitizeIdForVariableName(splitext(basename(fn))[0])
+    storyboardName = sanitizeIdForVariableName(lib.bareFilename(fn))
     if not storyboardName.endswith('Storyboard'): storyboardName += 'Storyboard'
 
     root = ElementTree.parse(fn)
@@ -156,8 +151,8 @@ def assembleAndOutput(lines, outputDir, outputBasename):
     imp = warning
     imp += '\n'.join(lines[1])
 
-    headerFn = pathjoin(outputDir, outputBasename + '.h')
-    impFn = pathjoin(outputDir, outputBasename + '.m')
+    headerFn = os.path.join(outputDir, outputBasename + '.h')
+    impFn = os.path.join(outputDir, outputBasename + '.m')
 
     with open(headerFn, 'w') as f:
         f.write(header.encode('utf-8'))
@@ -167,18 +162,19 @@ def assembleAndOutput(lines, outputDir, outputBasename):
 
 
 if __name__ == '__main__':
-    sys.argv.pop(0)  # Our name
-
-    prefix = sys.argv.pop(0)
-    outDir = sys.argv.pop(0)
     outBasename = 'StoryboardIdentifiers'
+    prefix = lib.classPrefix
+    needRestorationIDs = 'NEED_RESTORATION_IDS' in os.environ
 
-    needRestorationIDs = 'NEED_RESTORATION_IDS' in environ
+    projectDir = os.path.join(lib.getEnv('SRCROOT'), lib.getEnv('PROJECT_NAME'))
+    outDir = os.path.join(projectDir, 'Other-Sources')
+
+    inputFiles = list(lib.recursiveGlob(projectDir, '*.storyboard'))
 
     lines = ([], [])
-    for fn in sys.argv:
+    for fn in inputFiles:
         fnLines = headerAndImpLinesForFile(fn, prefix, needRestorationIDs)
-        appendHeaderAndImpLines(lines, fnLines, '#pragma mark ' + basename(fn))
+        appendHeaderAndImpLines(lines, fnLines, '#pragma mark ' + lib.bareFilename(fn))
 
         # Add some space after this file's entries, if it had any
         if fnLines[0]:
@@ -186,3 +182,5 @@ if __name__ == '__main__':
             lines[1].append('\n')
 
     assembleAndOutput(lines, outDir, outBasename)
+
+    print 'Generated {}.h and .m files from identifiers in the following storyboard(s): {}'.format(outBasename, ', '.join([os.path.basename(fn) for fn in inputFiles]))

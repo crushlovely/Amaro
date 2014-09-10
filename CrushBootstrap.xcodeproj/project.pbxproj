@@ -500,7 +500,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# This script increments the build number (CFBundleVersion in the Info.plist)\n# on Ad-Hoc or Distribution builds that target real devices.\n# In the context of Amaro, that means an archive build of any scheme, or any\n# non-simulator build of the AppStore scheme.\n\n# Feel free to remove this build phase if that is not desired behavior for you.\n\n\"${SRCROOT}/Scripts/IncrementBuildNumber.sh\"";
+			shellScript = "# This script increments the build number (CFBundleVersion in the Info.plist)\n# on Ad-Hoc or Distribution builds that target real devices.\n# In the context of Amaro, that means an archive build of any scheme, or any\n# non-simulator build of the AppStore scheme.\n\n# Feel free to remove this build phase if that is not desired behavior for you.\n\n\"${SRCROOT}/Scripts/IncrementBuildNumber.py\"";
 			showEnvVarsInLog = 0;
 		};
 		BDC7F36218EBA5EE0045D4BD /* Remove Unused Localizations */ = {
@@ -515,7 +515,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# This removes localization files for regions which you haven't explicitly localized\n# in the project settings. This is to work around an issue with pods that include\n# localizations for many languages, and the subsequent misreading of those files\n# by iTunes Connect.\n# See this GitHub issue for more details and other workarounds:\n# https://github.com/mattt/FormatterKit/issues/88\n\n# Feel free to remove this build phase if that problem doesn't apply to you,\n# though leaving it in should be harmless.\n\n\"${SRCROOT}/Scripts/RemoveUnusedLocalizations.sh\"";
+			shellScript = "# This removes localization files for regions which you haven't explicitly localized\n# in the project settings. This is to work around an issue with pods that include\n# localizations for many languages, and the subsequent misreading of those files\n# by iTunes Connect.\n# See this GitHub issue for more details and other workarounds:\n# https://github.com/mattt/FormatterKit/issues/88\n\n# Feel free to remove this build phase if that problem doesn't apply to you,\n# though leaving it in should be harmless.\n\n\"${SRCROOT}/Scripts/RemoveUnusedLocalizations.py\"";
 			showEnvVarsInLog = 0;
 		};
 		BDF1758318C3A844008BD9C6 /* Crashlytics Script */ = {
@@ -545,7 +545,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# This script walks the storyboards in your project and creates\n# StoryboardIdentifiers.{h,m} with constants for all the segue,\n# reuse, restoration, and storyboard identifiers.\n# The generated files live in the Other Sources group.\n\n# If this is not desired behavior for you, or you don't use\n# storyboards, feel free to remove this build phase and the\n# generated files in Other Sources.\n\n# If you would like constants generated for restoration IDs,\n# uncomment this line:\n#export NEED_RESTORATION_IDS=1\n\n\"${SRCROOT}/Scripts/GenerateStoryboardIDs.sh\"";
+			shellScript = "# This script walks the storyboards in your project and creates\n# StoryboardIdentifiers.{h,m} with constants for all the segue,\n# reuse, restoration, and storyboard identifiers.\n# The generated files live in the Other Sources group.\n\n# If this is not desired behavior for you, or you don't use\n# storyboards, feel free to remove this build phase and the\n# generated files in Other Sources.\n\n# If you would like constants generated for restoration IDs,\n# uncomment this line:\n#export NEED_RESTORATION_IDS=1\n\n\"${SRCROOT}/Scripts/GenerateStoryboardIDs.py\"";
 			showEnvVarsInLog = 0;
 		};
 		CE78B447D2424EDEAEAB74EB /* Check Pods Manifest.lock */ = {
