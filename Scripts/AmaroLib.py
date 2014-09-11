@@ -113,7 +113,7 @@ class AmaroLibModule(types.ModuleType):
 
     @property
     def classPrefix(self):
-        return self.getProjectKeypath('attributes.CLASSPREFIX')
+        return self.getProjectKeypath('attributes.CLASSPREFIX') or ''
 
     @lazyprop
     def mainTargetObject(self):
