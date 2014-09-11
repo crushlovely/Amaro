@@ -10,6 +10,8 @@
  section of your build phases, *not* the "Copy Bundle Resources" section.
  From there, there's a custom build rule that will compile them as needed and
  included only the resulting .css in your app bundle.
+ 
+ If you're not using Pixate Freestyle, delete this file at your leisure.
  */
 
 freestyle-config {

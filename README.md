@@ -50,7 +50,7 @@ Amaro aims to set you up with all you need to write a beautiful, maintainable, w
 * The build number of the app is incremented on every ad-hoc and distribution build. This ensures that external distribution services can reliably distinguish builds, even if the version number itself doesn't change.
 * [CocoaPods](http://cocoapods.org) are integrated from the get-go.
 * A barebones settings bundle is included with an "Acknowledgements" section that includes licenses for all your pods. It's automatically updated after each `pod install`.
-* Identifiers from storyboards are pulled out into constants, much like [objc-codegenutils](https://github.com/square/objc-codegenutils/).
+* Identifiers from storyboards and asset catalogs are pulled out into constants, much like [objc-codegenutils](https://github.com/square/objc-codegenutils/).
 
 ### Logging, Error Reporting, Testing
 * [CocoaLumberjack](https://github.com/CocoaLumberjack/CocoaLumberjack) is configured for logging. A [custom formatter](https://github.com/crushlovely/Sidecar/blob/master/Sidecar/CRLMethodLogFormatter.h) is used by default to include the class and method name in log messages.
