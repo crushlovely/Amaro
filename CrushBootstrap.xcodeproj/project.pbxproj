@@ -17,10 +17,11 @@
 		BD6951CF18EA4B0800F2F410 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6951CE18EA4B0800F2F410 /* main.m */; };
 		BD6951ED18EA54BB00F2F410 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD6951EB18EA54BB00F2F410 /* Main_iPad.storyboard */; };
 		BD6951EE18EA54BB00F2F410 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD6951EC18EA54BB00F2F410 /* Main_iPhone.storyboard */; };
+		BD934CD419C211F600B48551 /* AssetCatalogIdentifiers.m in Sources */ = {isa = PBXBuildFile; fileRef = BD934CD119C211F600B48551 /* AssetCatalogIdentifiers.m */; };
+		BD934CD519C211F600B48551 /* StoryboardIdentifiers.m in Sources */ = {isa = PBXBuildFile; fileRef = BD934CD319C211F600B48551 /* StoryboardIdentifiers.m */; };
 		BDDB996318C3943B003EBC42 /* CRBSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDB996218C3943B003EBC42 /* CRBSAppDelegate.m */; };
 		BDDB996C18C3943B003EBC42 /* CRBSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDB996B18C3943B003EBC42 /* CRBSViewController.m */; };
 		BDDB996E18C3943B003EBC42 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDDB996D18C3943B003EBC42 /* Images.xcassets */; };
-		BDF4202319B8F8D700FE6C13 /* StoryboardIdentifiers.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF4202219B8F8D700FE6C13 /* StoryboardIdentifiers.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -70,6 +71,10 @@
 		BD6951EA18EA54A800F2F410 /* CrushBootstrap-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CrushBootstrap-Info.plist"; sourceTree = "<group>"; };
 		BD6951EB18EA54BB00F2F410 /* Main_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPad.storyboard; sourceTree = "<group>"; };
 		BD6951EC18EA54BB00F2F410 /* Main_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPhone.storyboard; sourceTree = "<group>"; };
+		BD934CD019C211F600B48551 /* AssetCatalogIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetCatalogIdentifiers.h; sourceTree = "<group>"; };
+		BD934CD119C211F600B48551 /* AssetCatalogIdentifiers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetCatalogIdentifiers.m; sourceTree = "<group>"; };
+		BD934CD219C211F600B48551 /* StoryboardIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryboardIdentifiers.h; sourceTree = "<group>"; };
+		BD934CD319C211F600B48551 /* StoryboardIdentifiers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryboardIdentifiers.m; sourceTree = "<group>"; };
 		BD9FFD9418E66DF4001DF6EC /* Specs-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Specs-Prefix.pch"; sourceTree = "<group>"; };
 		BDDB994F18C3943B003EBC42 /* CrushBootstrap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrushBootstrap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDDB996118C3943B003EBC42 /* CRBSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRBSAppDelegate.h; sourceTree = "<group>"; };
@@ -95,8 +100,6 @@
 		BDF1756218C3972E008BD9C6 /* Mac-Framework.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mac-Framework.xcconfig"; sourceTree = "<group>"; };
 		BDF1756318C3972E008BD9C6 /* Mac-StaticLibrary.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mac-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
 		BDF1756418C3972E008BD9C6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		BDF4202119B8F8D700FE6C13 /* StoryboardIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryboardIdentifiers.h; sourceTree = "<group>"; };
-		BDF4202219B8F8D700FE6C13 /* StoryboardIdentifiers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryboardIdentifiers.m; sourceTree = "<group>"; };
 		E6EBF96DA068437B82FA86E4 /* libPods-Specs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Specs.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -147,10 +150,9 @@
 		BD574AFC18EA481500EDD66F /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				BD934CCF19C211F600B48551 /* Generated */,
 				BD35136419BE274A00A19841 /* CRBSConstants.h */,
 				BD35136519BE274A00A19841 /* CRBSConstants.m */,
-				BDF4202119B8F8D700FE6C13 /* StoryboardIdentifiers.h */,
-				BDF4202219B8F8D700FE6C13 /* StoryboardIdentifiers.m */,
 				BD6951EA18EA54A800F2F410 /* CrushBootstrap-Info.plist */,
 				BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */,
 				BD3570BB19929359006C5409 /* CrushBootstrap-Debug.xcconfig */,
@@ -171,6 +173,17 @@
 			children = (
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		BD934CCF19C211F600B48551 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				BD934CD019C211F600B48551 /* AssetCatalogIdentifiers.h */,
+				BD934CD119C211F600B48551 /* AssetCatalogIdentifiers.m */,
+				BD934CD219C211F600B48551 /* StoryboardIdentifiers.h */,
+				BD934CD319C211F600B48551 /* StoryboardIdentifiers.m */,
+			);
+			path = Generated;
 			sourceTree = "<group>";
 		};
 		BDB71B2518EA46ED00579B97 /* Application */ = {
@@ -332,6 +345,7 @@
 			buildPhases = (
 				CE78B447D2424EDEAEAB74EB /* Check Pods Manifest.lock */,
 				BDF4202019B8F31200FE6C13 /* Generate Storyboard Identifier File */,
+				BD79800C19C0CF3E0087DCCA /* Generate Asset Catalog Identifier File */,
 				BDDB994B18C3943B003EBC42 /* Sources */,
 				BDDB994C18C3943B003EBC42 /* Frameworks */,
 				BD36522718CE89C6009107A7 /* Increment Build Number */,
@@ -503,6 +517,21 @@
 			shellScript = "# This script increments the build number (CFBundleVersion in the Info.plist)\n# on Ad-Hoc or Distribution builds that target real devices.\n# In the context of Amaro, that means an archive build of any scheme, or any\n# non-simulator build of the AppStore scheme.\n\n# Feel free to remove this build phase if that is not desired behavior for you.\n\n\"${SRCROOT}/Scripts/IncrementBuildNumber.py\"";
 			showEnvVarsInLog = 0;
 		};
+		BD79800C19C0CF3E0087DCCA /* Generate Asset Catalog Identifier File */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Asset Catalog Identifier File";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This script walks the asset catalogs in your project and creates\n# AssetCatalogIdentifiers.{h,m} with methods for all the UIImages\n# found therein.\n# The generated files live in the Other Sources group.\n\n# If this is not desired behavior for you, or you don't use\n# asset catalogs, feel free to remove this build phase and the\n# generated files in Other Sources.\n\n\"${SRCROOT}/Scripts/GenerateAssetCatalogIDs.py\"";
+			showEnvVarsInLog = 0;
+		};
 		BDC7F36218EBA5EE0045D4BD /* Remove Unused Localizations */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -572,9 +601,10 @@
 			files = (
 				BD35136619BE274A00A19841 /* CRBSConstants.m in Sources */,
 				BDDB996318C3943B003EBC42 /* CRBSAppDelegate.m in Sources */,
+				BD934CD419C211F600B48551 /* AssetCatalogIdentifiers.m in Sources */,
+				BD934CD519C211F600B48551 /* StoryboardIdentifiers.m in Sources */,
 				BD6951CF18EA4B0800F2F410 /* main.m in Sources */,
 				BDDB996C18C3943B003EBC42 /* CRBSViewController.m in Sources */,
-				BDF4202319B8F8D700FE6C13 /* StoryboardIdentifiers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

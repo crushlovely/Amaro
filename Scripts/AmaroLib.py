@@ -6,6 +6,8 @@ from collections import defaultdict
 import types
 import Foundation
 from fnmatch import fnmatch
+import unicodedata
+import re
 
 # Hat tip: http://stackoverflow.com/a/3013910
 def lazyprop(fn):
@@ -27,6 +29,8 @@ class AmaroLibModule(types.ModuleType):
         # These are populated when the corresponding files are loaded
         self.projectPlistFormat = None
         self.infoPlistFormat = None
+
+        self._punct_re = re.compile(r'[\t !"#$%&\'()*\-/<=>?@\[\\\]^_`{|},.]+')
 
 
     #### Build environment predicates
@@ -207,11 +211,80 @@ class AmaroLibModule(types.ModuleType):
     def bareFilename(self, fn):
         return os.path.splitext(os.path.basename(fn))[0]
 
-    def recursiveGlob(self, rootDir, pattern):
-        for root, _, files in os.walk(rootDir):
-            for basename in files:
+    def recursiveGlob(self, rootDir, pattern, includeDirs = False):
+        for root, dirs, files in os.walk(rootDir):
+            options = files[:]
+            if includeDirs:
+                options.extend(dirs)
+
+            for basename in options:
                 if fnmatch(basename, pattern):
                     yield os.path.join(root, basename)
+
+    def stripPrefixesAndSuffixes(self, s, prefixes, suffixes):
+        suffixes = suffixes[:]
+        prefixes = prefixes[:]
+
+        # Tries to remove the given affix from the end or beginning of 
+        # s (as determined by isSuffix). Returns a tuple (newS, didStrip).
+        def stripIfPossible(s, affix, isSuffix):
+            if isSuffix and s.endswith(affix):
+                return (s[:-len(affix)], True)
+            elif not isSuffix and s.startswith(affix):
+                return (s[len(affix):], True)
+
+            return (s, False)
+
+        # Removes the given list of affixes from the end or beginning of s (as
+        # determined by areSuffixes). Affixes are tried exhaustively until no
+        # more can be removed, but any given affix will be removed at most once.
+        # Returns the updated string.
+        def stripUntilExhausted(s, affixes, areSuffixes):
+            affixes = affixes[:]
+
+            # Loop until we've run out of options...
+            while True:
+                usedOne = False
+                for index, affix in enumerate(affixes):
+                    if not affix: continue  # A previously used affix
+                    s, didStrip = stripIfPossible(s, affix, areSuffixes)
+                    if didStrip:
+                        usedOne = True
+                        # Mark this one as used. Doing this rather than removing
+                        # the element lets us mutate the list while iterating.
+                        affixes[index] = None
+
+                # If nothing matched on this try, we're done.
+                if not usedOne:
+                    break
+
+            return s
+
+        s = stripUntilExhausted(s, prefixes, False)
+        return stripUntilExhausted(s, suffixes, True)
+
+    def variableNameForString(self, id_, prefixesToStrip = None, suffixesToStrip = None, lower = True):
+        # Split everything apart on illegal characters, then recombine,
+        # title-casing (but not strictly; other caps inside 'words' can
+        # remain) along the way, and stripping any prefixes or suffixes.
+        # At the end, lowercases the first character. Also normalizes
+        # unicode characters into ASCII. This may not be foolproof...
+
+        result = ''
+
+        if isinstance(id_, str): id_ = unicode(id_)
+
+        for word in self._punct_re.split(id_):
+            word = unicodedata.normalize('NFKD', word).encode('ascii', 'ignore')
+            if word:
+                result += word[0].upper() + word[1:]
+
+        result = self.stripPrefixesAndSuffixes(result, prefixesToStrip or [], suffixesToStrip or [])
+
+        if lower:
+            result = result[0].lower() + result[1:]
+
+        return result
 
     def die(self, message):
         print('error: ' + message, file = sys.stderr)

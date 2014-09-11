@@ -1,7 +1,7 @@
 #!/usr/bin/env python2.7
 
-# This script walks the given storyboards and spits out one .h/.m pair with constants for
-# all the identifiers in the storyboards.
+# This script walks the storyboards in your project and spits out one .h/.m pair with
+# constants for all the identifiers in the storyboards.
 # The constants are namespaced by storyboard name and then category, and look like this:
 #   [class prefix][storyboard name]StoryboardIDs.[identifier type].[identifier name]
 # For instance, a segue identifier named "M5MainStoryboardProfileSegueID" in
@@ -24,74 +24,7 @@
 
 import AmaroLib as lib
 from xml.etree import ElementTree
-import re
-import unicodedata
 import os
-
-def stripPrefixesAndSuffixes(s, prefixes, suffixes):
-    suffixes = suffixes[:]
-
-    # Tries to remove the given affix from the end or beginning of 
-    # s (as determined by isSuffix). Returns a tuple (newS, didStrip).
-    def stripIfPossible(s, affix, isSuffix):
-        if isSuffix and s.endswith(affix):
-            return (s[:-len(affix)], True)
-        elif not isSuffix and s.startswith(affix):
-            return (s[len(affix):], True)
-
-        return (s, False)
-
-    # Removes the given list of affixes from the end or beginning of s (as
-    # determined by areSuffixes). Affixes are tried exhaustively until no
-    # more can be removed, but any given affix will be removed at most once.
-    # Returns the updated string.
-    def stripUntilExhausted(s, affixes, areSuffixes):
-        affixes = affixes[:]
-
-        # Loop until we've run out of options...
-        while True:
-            usedOne = False
-            for index, affix in enumerate(affixes):
-                if not affix: continue  # A previously used affix
-                s, didStrip = stripIfPossible(s, affix, areSuffixes)
-                if didStrip:
-                    usedOne = True
-                    # Mark this one as used. Doing this rather than removing
-                    # the element lets us mutate the list while iterating.
-                    affixes[index] = None
-
-            # If nothing matched on this try, we're done.
-            if not usedOne:
-                break
-
-        return s
-
-    s = stripUntilExhausted(s, prefixes, False)
-    return stripUntilExhausted(s, suffixes, True)
-
-_punct_re = re.compile(r'[\t !"#$%&\'()*\-/<=>?@\[\\\]^_`{|},.]+')
-def variableNameForId(id_, prefixesToStrip = None, suffixesToStrip = None, lower = True):
-    # Split everything apart on illegal characters, then recombine,
-    # title-casing (but not strictly; other caps inside 'words' can
-    # remain) along the way, and stripping any prefixes or suffixes.
-    # At the end, lowercases the first character. Also normalizes
-    # unicode characters into ASCII. This may not be foolproof...
-
-    result = ''
-
-    if isinstance(id_, str): id_ = unicode(id_)
-
-    for word in _punct_re.split(id_):
-        word = unicodedata.normalize('NFKD', word).encode('ascii', 'ignore')
-        if word:
-            result += word[0].upper() + word[1:]
-
-    result = stripPrefixesAndSuffixes(result, prefixesToStrip or [], suffixesToStrip or [])
-
-    if lower:
-        result = result[0].lower() + result[1:]
-
-    return result
 
 class IDList(object):
     SEGUE = 0
@@ -111,7 +44,7 @@ class IDList(object):
         if storyboardName.endswith('Storyboard'):
             self._defaultPrefixes.append(storyboardName[:-10])
 
-        self.className = variableNameForId(storyboardName, self._defaultPrefixes, [ 'Storyboard' ], False)
+        self.className = lib.variableNameForString(storyboardName, self._defaultPrefixes, [ 'Storyboard' ], lower = False)
         self._defaultPrefixes.append(self.className)
 
         if classPrefix:
@@ -137,7 +70,7 @@ class IDList(object):
             targetDict = self.restorables
             suffixes.append('Restoration')
 
-        variableName = variableNameForId(id_, self._defaultPrefixes, suffixes)
+        variableName = lib.variableNameForString(id_, self._defaultPrefixes, suffixes)
         targetDict[variableName] = id_
 
     def _addIds(self, ids, type_):
@@ -252,7 +185,7 @@ if __name__ == '__main__':
             lines[1].append('#pragma mark ' + idList.name)
             lines[1].append(mString)
 
-    outDir = os.path.join(projectDir, 'Other-Sources')
+    outDir = os.path.join(projectDir, 'Other-Sources', 'Generated')
     assembleAndOutput(lines, outDir, outBasename)
 
     print 'Generated {}.h and .m files from identifiers in the following storyboard(s): {}'.format(outBasename, ', '.join([os.path.basename(fn) for fn in inputFiles]))
