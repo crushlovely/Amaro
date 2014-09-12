@@ -8,6 +8,7 @@
 # This script should be run as a build phase before the "Copy Bundle Resources"
 # phase. It has no input or output files.
 
+from __future__ import unicode_literals
 import AmaroLib as lib
 from sys import exit
 
