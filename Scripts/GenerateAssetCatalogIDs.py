@@ -10,6 +10,7 @@
 # Inspired by https://github.com/square/objc-codegenutils,
 # and using some slugification code from http://flask.pocoo.org/snippets/5/.
 
+from __future__ import unicode_literals
 import AmaroLib as lib
 from glob import glob
 import os.path

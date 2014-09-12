@@ -1,4 +1,4 @@
-from __future__ import print_function
+from __future__ import print_function, unicode_literals
 
 import os
 import sys
@@ -24,7 +24,7 @@ class AmaroLibModule(types.ModuleType):
     REPORT_URL = 'https://github.com/crushlovely/Amaro/issues'
 
     def __init__(self):
-        super(AmaroLibModule, self).__init__('AmaroLib')
+        super(AmaroLibModule, self).__init__(str('AmaroLib'))
 
         # These are populated when the corresponding files are loaded
         self.projectPlistFormat = None
@@ -281,7 +281,10 @@ class AmaroLibModule(types.ModuleType):
 
         result = self.stripPrefixesAndSuffixes(result, prefixesToStrip or [], suffixesToStrip or [])
 
-        if lower:
+        # Lowercase the first letter if we were asked to, unless the whole thing
+        # is uppercase, in which case we will assume it is an abbreviation and
+        # let it stand.
+        if lower and not result.isupper():
             result = result[0].lower() + result[1:]
 
         return result

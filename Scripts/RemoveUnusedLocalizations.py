@@ -14,6 +14,7 @@
 # This script should be run as a build phase after both the "Copy Bundle Resources"
 # and "Copy Pods Resources" phases. It has no input or output files.
 
+from __future__ import unicode_literals
 import AmaroLib as lib
 from sys import exit
 from glob import glob

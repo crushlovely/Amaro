@@ -21,7 +21,7 @@
 # and using some slugification code from http://flask.pocoo.org/snippets/5/ and
 # namespacing idea from https://www.mikeash.com/pyblog/friday-qa-2011-08-19-namespaced-constants-and-functions.html
 
-
+from __future__ import unicode_literals
 import AmaroLib as lib
 from xml.etree import ElementTree
 import os
@@ -44,7 +44,7 @@ class IDList(object):
         if storyboardName.endswith('Storyboard'):
             self._defaultPrefixes.append(storyboardName[:-10])
 
-        self.className = lib.variableNameForString(storyboardName, self._defaultPrefixes, [ 'Storyboard' ], lower = False)
+        self.className = lib.variableNameForString(storyboardName, [ classPrefix ], [ 'Storyboard' ], lower = False)
         self._defaultPrefixes.append(self.className)
 
         if classPrefix:

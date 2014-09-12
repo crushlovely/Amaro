@@ -9,6 +9,7 @@
 # Version and build information is hidden on very small icons, like those used
 # in Spotlight.
 
+from __future__ import unicode_literals
 import AmaroLib as lib
 import os.path
 from math import ceil
@@ -29,10 +30,10 @@ FONT_NAME = 'Helvetica-Bold'
 def getIconAndBaseColor(isStaging):
     if isStaging:
         baseColor = NSColor.colorWithCalibratedRed_green_blue_alpha_(0.168, 0.306, 0.184, 1)
-        iconCharacter = u'🅢'
+        iconCharacter = '🅢'
     else:
         baseColor = NSColor.colorWithCalibratedRed_green_blue_alpha_(0.315, 0.108, 0.093, 1)
-        iconCharacter = u'🅟'
+        iconCharacter = '🅟'
 
     return (iconCharacter, baseColor)
 
