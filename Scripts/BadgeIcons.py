@@ -92,7 +92,11 @@ def getBadgeImage(approxIconHeight, staging, versionText):
     borderedIconSize = NSMakeSize(iconSize.width + totalBorderThickness.width,
                                   iconSize.height + totalBorderThickness.height)
 
-    badgeSize = NSMakeSize(ceil(borderedIconSize.width + versionStringWidth + totalBorderThickness.width / 2.0),
+    farRightPadding = totalBorderThickness.width / 2.0
+    if versionStringWidth == 0:
+        farRightPadding = 0
+
+    badgeSize = NSMakeSize(ceil(borderedIconSize.width + versionStringWidth + farRightPadding),
                            borderedIconSize.height)
 
     rightBackgroundBoxBounds = NSIntegralRect(NSMakeRect(borderedIconSize.width / 2.0,
@@ -110,7 +114,7 @@ def getBadgeImage(approxIconHeight, staging, versionText):
     badgeImage.lockFocusFlipped_(True)
 
     # The background rectangle + circle
-    boxColor = NSColor.colorWithCalibratedHue_saturation_brightness_alpha_(baseColor.hueComponent(), baseColor.saturationComponent(), 0.6, 0.9)
+    boxColor = NSColor.colorWithCalibratedHue_saturation_brightness_alpha_(baseColor.hueComponent(), baseColor.saturationComponent(), 0.6, 1.0)
     boxColor.set()
     NSRectFill(rightBackgroundBoxBounds)
 
@@ -119,13 +123,20 @@ def getBadgeImage(approxIconHeight, staging, versionText):
     boxColor.set()
     iconBackgroundCirclePath.fill()
 
-    # The icon
-    iconDestRect = (iconOrigin, iconSize)
-    iconImage.drawInRect_fromRect_operation_fraction_respectFlipped_hints_(iconDestRect, NSZeroRect, NSCompositeSourceAtop, 1.0, True, None)
-
     # Text
     if approxIconHeight >= MIN_ICON_HEIGHT_FOR_VERSION_TEXT:
         versionString.drawInRect_(textFrameBounds)
+
+    # The icon & its shadow
+    boxShadowColor = NSColor.colorWithWhite_alpha_(1.0, 0.7)
+    boxShadow = NSShadow.alloc().init()
+    boxShadow.setShadowColor_(boxShadowColor)
+    boxShadow.setShadowOffset_(NSZeroSize)
+    boxShadow.setShadowBlurRadius_(totalBorderThickness.width)
+    boxShadow.set()
+    
+    iconDestRect = (iconOrigin, iconSize)
+    iconImage.drawInRect_fromRect_operation_fraction_respectFlipped_hints_(iconDestRect, NSZeroRect, NSCompositeSourceAtop, 1.0, True, None)
 
     badgeImage.unlockFocus()
 
@@ -197,13 +208,6 @@ def badgeFile(fn, destinationDir, isStaging, versionString, buildString):
 
     # Draw it over top
     img.lockFocus()
-
-    boxShadowColor = NSColor.colorWithWhite_alpha_(0.2, 0.5)
-    boxShadow = NSShadow.alloc().init()
-    boxShadow.setShadowColor_(boxShadowColor)
-    boxShadow.setShadowOffset_(NSZeroSize)
-    boxShadow.setShadowBlurRadius_(iconHeight / 3.0)
-    boxShadow.set()
 
     badgeBottomPadding = ceil(0.15 * size.height)
     badgeDestRect = ((size.width - badgeSize.width,
