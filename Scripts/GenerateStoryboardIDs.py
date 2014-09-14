@@ -21,7 +21,7 @@
 # and using some slugification code from http://flask.pocoo.org/snippets/5/ and
 # namespacing idea from https://www.mikeash.com/pyblog/friday-qa-2011-08-19-namespaced-constants-and-functions.html
 
-from __future__ import unicode_literals
+from __future__ import print_function, unicode_literals
 import AmaroLib as lib
 from xml.etree import ElementTree
 import os
@@ -188,4 +188,4 @@ if __name__ == '__main__':
     outDir = os.path.join(projectDir, 'Other-Sources', 'Generated')
     assembleAndOutput(lines, outDir, outBasename)
 
-    print 'Generated {}.h and .m files from identifiers in the following storyboard(s): {}'.format(outBasename, ', '.join([os.path.basename(fn) for fn in inputFiles]))
+    print('Generated {}.h and .m files from identifiers in the following storyboard(s): {}'.format(outBasename, ', '.join([os.path.basename(fn) for fn in inputFiles])))

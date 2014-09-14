@@ -8,13 +8,13 @@
 # This script should be run as a build phase before the "Copy Bundle Resources"
 # phase. It has no input or output files.
 
-from __future__ import unicode_literals
+from __future__ import print_function, unicode_literals
 import AmaroLib as lib
 from sys import exit
 
 # Bail unless we're a build for something that's going to be released
 if not lib.isDistributionOrAdHocBuildForDevice:
-    print 'Not incrementing build number; this is an internal build'
+    print('Not incrementing build number; this is an internal build')
     exit(0)
 
 buildNumber = lib.buildNumber

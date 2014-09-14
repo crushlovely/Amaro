@@ -9,9 +9,10 @@
 # Version and build information is hidden on very small icons, like those used
 # in Spotlight.
 
-from __future__ import unicode_literals
+from __future__ import print_function, unicode_literals
 import AmaroLib as lib
 import os.path
+import itertools
 from math import ceil
 from sys import exit
 from AppKit import *
@@ -20,7 +21,7 @@ from CoreText import *
 
 # Bail if we're in CI or making an app store build
 if lib.inContinuousIntegration or lib.isDistributionConfiguration:
-    print 'Not badging icons; this is a build for the App Store'
+    print('Not badging icons; this is a build for the App Store')
     exit(0)
 
 
@@ -236,18 +237,17 @@ def getIconFilenames(dir):
     iPhoneIcons = packagedInfoPlist.valueForKeyPath_('CFBundleIcons.CFBundlePrimaryIcon.CFBundleIconFiles') or []
     iPadIcons = packagedInfoPlist.valueForKeyPath_('CFBundleIcons~ipad.CFBundlePrimaryIcon.CFBundleIconFiles') or []
 
-    fns = []
-    fns.extend([fn + '.png' for fn in iPhoneIcons])
-    fns.extend([fn + '@2x.png' for fn in iPhoneIcons])
-    fns.extend([fn + '@3x.png' for fn in iPhoneIcons])  # IT'S HAPPENING
-    fns.extend([fn + '~ipad.png' for fn in iPadIcons])
-    fns.extend([fn + '@2x~ipad.png' for fn in iPadIcons])
-    fns.extend([fn + '@3x~ipad.png' for fn in iPadIcons])
-    fns = [os.path.join(dir, fn) for fn in fns]
+    allIconNames = set(itertools.chain(iPhoneIcons, iPadIcons))
 
-    fns = filter(os.path.exists, fns)
+    resSuffixes = ['', '@2x', '@3x']
+    devSuffixes = ['', '~ipad']
 
-    return fns
+    fns = [os.path.join(dir, fn + res + dev + '.png')
+            for fn in allIconNames
+            for res in resSuffixes
+            for dev in devSuffixes]
+
+    return filter(os.path.exists, fns)
 
 
 if __name__ == '__main__':
@@ -258,4 +258,4 @@ if __name__ == '__main__':
     for fn in iconFns:
         badgeFile(fn, sourceDir, lib.targetingStaging, lib.version, lib.buildNumber)
 
-    print 'Badged the following icon files: ' + ', '.join([os.path.basename(fn) for fn in iconFns])
+    print('Badged the following icon files: ' + ', '.join([os.path.basename(fn) for fn in iconFns]))
