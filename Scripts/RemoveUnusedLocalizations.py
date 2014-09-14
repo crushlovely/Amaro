@@ -49,4 +49,4 @@ if regionsAndFoldersToDelete:
         for _, folder in regionsAndFoldersToDelete:
             rmtree(folder)
     except Exception, e:
-        lib.die('Error deleting localization directories: {!s}\n\nPlease report this at {}'.format(e, lib.REPORT_URL))
+        lib.warn('Error deleting localization directories: {!s}\n\nPlease report this at {}'.format(e, lib.REPORT_URL))
