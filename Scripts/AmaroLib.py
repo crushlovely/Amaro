@@ -8,6 +8,16 @@ import Foundation
 from fnmatch import fnmatch
 import unicodedata
 import re
+import traceback
+
+def lastDitchErrorHandler(type, e, backtrace):
+    formattedExc = ''.join(traceback.format_exception(type, e, backtrace))
+    msg = 'error: Script error: {}\nPlease report this to {} and include the details below.\n\n{}'.format(e.message, AmaroLibModule.REPORT_URL, formattedExc)
+    print(msg, file = sys.stderr)
+    sys.exit(1)
+
+sys.excepthook = lastDitchErrorHandler
+
 
 # Hat tip: http://stackoverflow.com/a/3013910
 def lazyprop(fn):

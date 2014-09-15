@@ -10,7 +10,7 @@
 # Inspired by https://github.com/square/objc-codegenutils,
 # and using some slugification code from http://flask.pocoo.org/snippets/5/.
 
-from __future__ import unicode_literals
+from __future__ import print_function, unicode_literals
 import AmaroLib as lib
 from glob import glob
 import os.path
@@ -81,4 +81,4 @@ if __name__ == '__main__':
     outDir = os.path.join(projectDir, 'Other-Sources', 'Generated')
     assembleAndOutput(lines, outDir, outBasename)
 
-    print 'Generated {}.h and .m for image assets in the following catalog(s): {}'.format(outBasename, ', '.join([os.path.basename(d) for d in catalogDirs]))
+    print('Generated {}.h and .m for image assets in the following catalog(s): {}'.format(outBasename, ', '.join([os.path.basename(d) for d in catalogDirs])))

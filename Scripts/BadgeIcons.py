@@ -9,9 +9,10 @@
 # Version and build information is hidden on very small icons, like those used
 # in Spotlight.
 
-from __future__ import unicode_literals
+from __future__ import print_function, unicode_literals
 import AmaroLib as lib
 import os.path
+import itertools
 from math import ceil
 from sys import exit
 from AppKit import *
@@ -20,7 +21,7 @@ from CoreText import *
 
 # Bail if we're in CI or making an app store build
 if lib.inContinuousIntegration or lib.isDistributionConfiguration:
-    print 'Not badging icons; this is a build for the App Store'
+    print('Not badging icons; this is a build for the App Store')
     exit(0)
 
 
@@ -92,7 +93,11 @@ def getBadgeImage(approxIconHeight, staging, versionText):
     borderedIconSize = NSMakeSize(iconSize.width + totalBorderThickness.width,
                                   iconSize.height + totalBorderThickness.height)
 
-    badgeSize = NSMakeSize(ceil(borderedIconSize.width + versionStringWidth + totalBorderThickness.width / 2.0),
+    farRightPadding = totalBorderThickness.width / 2.0
+    if versionStringWidth == 0:
+        farRightPadding = 0
+
+    badgeSize = NSMakeSize(ceil(borderedIconSize.width + versionStringWidth + farRightPadding),
                            borderedIconSize.height)
 
     rightBackgroundBoxBounds = NSIntegralRect(NSMakeRect(borderedIconSize.width / 2.0,
@@ -110,7 +115,7 @@ def getBadgeImage(approxIconHeight, staging, versionText):
     badgeImage.lockFocusFlipped_(True)
 
     # The background rectangle + circle
-    boxColor = NSColor.colorWithCalibratedHue_saturation_brightness_alpha_(baseColor.hueComponent(), baseColor.saturationComponent(), 0.6, 0.9)
+    boxColor = NSColor.colorWithCalibratedHue_saturation_brightness_alpha_(baseColor.hueComponent(), baseColor.saturationComponent(), 0.6, 1.0)
     boxColor.set()
     NSRectFill(rightBackgroundBoxBounds)
 
@@ -119,13 +124,20 @@ def getBadgeImage(approxIconHeight, staging, versionText):
     boxColor.set()
     iconBackgroundCirclePath.fill()
 
-    # The icon
-    iconDestRect = (iconOrigin, iconSize)
-    iconImage.drawInRect_fromRect_operation_fraction_respectFlipped_hints_(iconDestRect, NSZeroRect, NSCompositeSourceAtop, 1.0, True, None)
-
     # Text
     if approxIconHeight >= MIN_ICON_HEIGHT_FOR_VERSION_TEXT:
         versionString.drawInRect_(textFrameBounds)
+
+    # The icon & its shadow
+    boxShadowColor = NSColor.colorWithWhite_alpha_(1.0, 0.7)
+    boxShadow = NSShadow.alloc().init()
+    boxShadow.setShadowColor_(boxShadowColor)
+    boxShadow.setShadowOffset_(NSZeroSize)
+    boxShadow.setShadowBlurRadius_(totalBorderThickness.width)
+    boxShadow.set()
+    
+    iconDestRect = (iconOrigin, iconSize)
+    iconImage.drawInRect_fromRect_operation_fraction_respectFlipped_hints_(iconDestRect, NSZeroRect, NSCompositeSourceAtop, 1.0, True, None)
 
     badgeImage.unlockFocus()
 
@@ -198,13 +210,6 @@ def badgeFile(fn, destinationDir, isStaging, versionString, buildString):
     # Draw it over top
     img.lockFocus()
 
-    boxShadowColor = NSColor.colorWithWhite_alpha_(0.2, 0.5)
-    boxShadow = NSShadow.alloc().init()
-    boxShadow.setShadowColor_(boxShadowColor)
-    boxShadow.setShadowOffset_(NSZeroSize)
-    boxShadow.setShadowBlurRadius_(iconHeight / 3.0)
-    boxShadow.set()
-
     badgeBottomPadding = ceil(0.15 * size.height)
     badgeDestRect = ((size.width - badgeSize.width,
                       badgeBottomPadding),
@@ -232,18 +237,17 @@ def getIconFilenames(dir):
     iPhoneIcons = packagedInfoPlist.valueForKeyPath_('CFBundleIcons.CFBundlePrimaryIcon.CFBundleIconFiles') or []
     iPadIcons = packagedInfoPlist.valueForKeyPath_('CFBundleIcons~ipad.CFBundlePrimaryIcon.CFBundleIconFiles') or []
 
-    fns = []
-    fns.extend([fn + '.png' for fn in iPhoneIcons])
-    fns.extend([fn + '@2x.png' for fn in iPhoneIcons])
-    fns.extend([fn + '@3x.png' for fn in iPhoneIcons])  # IT'S HAPPENING
-    fns.extend([fn + '~ipad.png' for fn in iPadIcons])
-    fns.extend([fn + '@2x~ipad.png' for fn in iPadIcons])
-    fns.extend([fn + '@3x~ipad.png' for fn in iPadIcons])
-    fns = [os.path.join(dir, fn) for fn in fns]
+    allIconNames = set(itertools.chain(iPhoneIcons, iPadIcons))
 
-    fns = filter(os.path.exists, fns)
+    resSuffixes = ['', '@2x', '@3x']
+    devSuffixes = ['', '~ipad']
 
-    return fns
+    fns = [os.path.join(dir, fn + res + dev + '.png')
+            for fn in allIconNames
+            for res in resSuffixes
+            for dev in devSuffixes]
+
+    return filter(os.path.exists, fns)
 
 
 if __name__ == '__main__':
@@ -254,4 +258,4 @@ if __name__ == '__main__':
     for fn in iconFns:
         badgeFile(fn, sourceDir, lib.targetingStaging, lib.version, lib.buildNumber)
 
-    print 'Badged the following icon files: ' + ', '.join([os.path.basename(fn) for fn in iconFns])
+    print('Badged the following icon files: ' + ', '.join([os.path.basename(fn) for fn in iconFns]))

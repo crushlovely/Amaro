@@ -14,7 +14,7 @@
 # This script should be run as a build phase after both the "Copy Bundle Resources"
 # and "Copy Pods Resources" phases. It has no input or output files.
 
-from __future__ import unicode_literals
+from __future__ import print_function, unicode_literals
 import AmaroLib as lib
 from sys import exit
 from glob import glob
@@ -23,7 +23,7 @@ from shutil import rmtree
 
 # Don't run in continuous integration or if we're not a build for release
 if lib.inContinuousIntegration or not lib.isDistributionOrAdHocBuildForDevice:
-    print 'Not removing localizations; this is an internal build'
+    print('Not removing localizations; this is an internal build')
     exit(0)
 
 # The project object has a knownRegions property that is an array of 
@@ -34,7 +34,7 @@ if not knownRegions:
     lib.warn('The project is reporting that there are no known localizations in your project.\nPlease report this at {}'.format(lib.REPORT_URL))
     exit(0)
 
-print 'Keeping localizations for regions: ' + ', '.join(knownRegions)
+print('Keeping localizations for regions: ' + ', '.join(knownRegions))
 
 regionsAndFoldersToDelete = []
 lprojFolders = glob(os.path.join(lib.getEnv('CODESIGNING_FOLDER_PATH'), '*.lproj'))
@@ -44,9 +44,9 @@ for lprojFolder in lprojFolders:
         regionsAndFoldersToDelete.append((region, lprojFolder))
 
 if regionsAndFoldersToDelete:
-    print 'Removing extraneous localizations: ' + ', '.join([t[0] for t in regionsAndFoldersToDelete])
+    print('Removing extraneous localizations: ' + ', '.join([t[0] for t in regionsAndFoldersToDelete]))
     try:
         for _, folder in regionsAndFoldersToDelete:
             rmtree(folder)
     except Exception, e:
-        lib.die('Error deleting localization directories: {!s}\n\nPlease report this at {}'.format(e, lib.REPORT_URL))
+        lib.warn('Error deleting localization directories: {!s}\n\nPlease report this at {}'.format(e, lib.REPORT_URL))
