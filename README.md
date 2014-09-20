@@ -33,6 +33,9 @@ And, optionally:
 * Sass/`.scss` support requires the [Sass command line tool](http://sass-lang.com/install) to be installed.
 
 
+**Want to use Swift?** Amaro won't stop you, but note that CocoaPods support for third-party Swift projects is still pending. See [this issue](https://github.com/crushlovely/Amaro/issues/17) for details and future plans.
+
+
 ## What's Included?
 Amaro aims to set you up with all you need to write a beautiful, maintainable, well-tested app. All the default pods are optional; feel free to pick and choose as needed for your project (though you will probably want most of them).
 
