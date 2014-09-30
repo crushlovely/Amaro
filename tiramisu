@@ -515,7 +515,7 @@ class Bootstrapper
     REPLACEMENT_PROJECT_NAME = 'CrushBootstrap'
     REPLACEMENT_ORGANIZATION = 'Crush & Lovely'
     REPLACEMENT_DOMAIN = 'com.crushlovely'
-    REPLACEMENT_CRASHLYTICS_KEY = '<<CrashlyticsAPIKey>>'
+    REPLACEMENT_CRASHLYTICS_KEY = '((CrashlyticsAPIKey))'
 
     BOOTSTRAP_REPO = 'git://github.com/crushlovely/Amaro.git'
     DEFAULT_BOOTSTRAP_BRANCH = 'master'
@@ -776,7 +776,7 @@ print <<'EOS'.chomp.faint
   \ \__\        \ \__\
    \/__/         \/__/
 EOS
-puts "  Amaro v0.2.12\n".blue.bold
+puts "  Amaro v0.3.0\n".blue.bold
 
 
 # Are we doing the standlone Crashlytics stuff?

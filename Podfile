@@ -1,10 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
 platform :ios, '7.0'
 
 # Crush Utility Belt
 pod 'Sidecar'
 
 # Update checker for Installr (installrapp.com)
-pod 'Aperitif'
+pod 'Aperitif', :configurations => ['Debug_Staging', 'Debug_Production', 'AdHoc_Staging', 'AdHoc_Production']
 
 # Logging & Analytics
 pod 'CocoaLumberjack'
@@ -51,11 +53,13 @@ xcodeproj 'CrushBootstrap',
 post_install do |installer|
   require 'fileutils'
 
-  if Dir.exists?('CrushBootstrap/Resources/Settings.bundle') && File.exists?('Pods/Pods-Acknowledgements.plist')
-    FileUtils.cp_r('Pods/Pods-Acknowledgements.plist', 'CrushBootstrap/Resources/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
+  acknowledgements_plist = 'Pods/Target Support Files/Pods/Pods-Acknowledgements.plist'
+  if Dir.exists?('CrushBootstrap/Resources/Settings.bundle') && File.exists?(acknowledgements_plist)
+    FileUtils.cp(acknowledgements_plist, 'CrushBootstrap/Resources/Settings.bundle/Acknowledgements.plist')
   end
 
-  if File.exists?('Pods/Pods-Environment.h')
-    FileUtils.cp_r('Pods/Pods-Environment.h', 'CrushBootstrap/Other-Sources/Pods-Environment.h', :remove_destination => true)
+  environment_file = 'Pods/Target Support Files/Pods/Pods-environment.h'
+  if File.exists?(environment_file)
+    FileUtils.cp(environment_file, 'CrushBootstrap/Other-Sources/Pods-Environment.h')
   end
 end
