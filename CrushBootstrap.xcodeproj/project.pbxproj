@@ -10,6 +10,20 @@
 	<string>46</string>
 	<key>objects</key>
 	<dict>
+		<key>036A61EAF6146EA59BD29634</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A06B515E067379B8477A8245</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>074C8AD7A4D403DECEE7F926</key>
+		<dict>
+			<key>fileRef</key>
+			<string>46A5F5E57179B0D085AF4FF2</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>12CC9EC171F3BB2114E66841</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -24,19 +38,6 @@
 			<string>Pods/Target Support Files/Pods-Specs/Pods-Specs.test_staging.xcconfig</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>1D61E01362DD444BBFD6E388</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libPods.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
 		<key>295A078AF08D45C99B314B81</key>
 		<dict>
@@ -127,6 +128,19 @@ fi
 			<string>Pods/Target Support Files/Pods-Specs/Pods-Specs.distribution.xcconfig</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>46A5F5E57179B0D085AF4FF2</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>libPods-Specs.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
 		<key>4D26DC1D97A4FF5AB8CC483F</key>
 		<dict>
@@ -272,13 +286,6 @@ fi
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>7A1059CDD505490C88A04C84</key>
-		<dict>
-			<key>fileRef</key>
-			<string>1D61E01362DD444BBFD6E388</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>8B825A2DB6F2180BF8C6BAE6</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -309,12 +316,18 @@ fi
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>9A02F77A5711492A9BF635F8</key>
+		<key>A06B515E067379B8477A8245</key>
 		<dict>
-			<key>fileRef</key>
-			<string>E6EBF96DA068437B82FA86E4</string>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>libPods.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
 		<key>A20A1E42928D4423912BE388</key>
 		<dict>
@@ -1401,6 +1414,17 @@ fi
 			<key>name</key>
 			<string>AdHoc_Staging</string>
 		</dict>
+		<key>BDD81EE419DB5FCB00E45AC2</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>folder</string>
+			<key>path</key>
+			<string>xcconfigs</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>BDDB994618C3943B003EBC42</key>
 		<dict>
 			<key>children</key>
@@ -1408,8 +1432,9 @@ fi
 				<string>BDDB995818C3943B003EBC42</string>
 				<string>BDDB997A18C3943B003EBC42</string>
 				<string>BDF1754E18C3972E008BD9C6</string>
-				<string>BDDB995018C3943B003EBC42</string>
+				<string>D36FABF09F1A984E257F1EAF</string>
 				<string>55C5AA14CC157D6E10D487F9</string>
+				<string>BDDB995018C3943B003EBC42</string>
 			</array>
 			<key>indentWidth</key>
 			<string>4</string>
@@ -1517,7 +1542,7 @@ fi
 			<string>2147483647</string>
 			<key>files</key>
 			<array>
-				<string>7A1059CDD505490C88A04C84</string>
+				<string>036A61EAF6146EA59BD29634</string>
 			</array>
 			<key>isa</key>
 			<string>PBXFrameworksBuildPhase</string>
@@ -1722,7 +1747,7 @@ fi
 			<string>2147483647</string>
 			<key>files</key>
 			<array>
-				<string>9A02F77A5711492A9BF635F8</string>
+				<string>074C8AD7A4D403DECEE7F926</string>
 			</array>
 			<key>isa</key>
 			<string>PBXFrameworksBuildPhase</string>
@@ -2050,315 +2075,12 @@ fi
 		<dict>
 			<key>children</key>
 			<array>
-				<string>1D61E01362DD444BBFD6E388</string>
-				<string>E6EBF96DA068437B82FA86E4</string>
-				<string>BDF1754F18C3972E008BD9C6</string>
+				<string>BDD81EE419DB5FCB00E45AC2</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
 			<key>path</key>
 			<string>External</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BDF1754F18C3972E008BD9C6</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BDF1755018C3972E008BD9C6</string>
-				<string>BDF1755A18C3972E008BD9C6</string>
-				<string>BDF1755E18C3972E008BD9C6</string>
-				<string>BDF1756418C3972E008BD9C6</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>xcconfigs</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BDF1755018C3972E008BD9C6</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BDF1755118C3972E008BD9C6</string>
-				<string>BDF1755218C3972E008BD9C6</string>
-				<string>BDF1755718C3972E008BD9C6</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>Base</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BDF1755118C3972E008BD9C6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Common.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BDF1755218C3972E008BD9C6</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BDF1755318C3972E008BD9C6</string>
-				<string>BDF1755418C3972E008BD9C6</string>
-				<string>BDF1755518C3972E008BD9C6</string>
-				<string>BDF1755618C3972E008BD9C6</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>Configurations</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BDF1755318C3972E008BD9C6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BDF1755418C3972E008BD9C6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Profile.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BDF1755518C3972E008BD9C6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BDF1755618C3972E008BD9C6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Test.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BDF1755718C3972E008BD9C6</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BDF1755818C3972E008BD9C6</string>
-				<string>BDF1755918C3972E008BD9C6</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>Targets</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BDF1755818C3972E008BD9C6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Application.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BDF1755918C3972E008BD9C6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>StaticLibrary.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BDF1755A18C3972E008BD9C6</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BDF1755B18C3972E008BD9C6</string>
-				<string>BDF1755C18C3972E008BD9C6</string>
-				<string>BDF1755D18C3972E008BD9C6</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>iOS</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BDF1755B18C3972E008BD9C6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>iOS-Application.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BDF1755C18C3972E008BD9C6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>iOS-Base.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BDF1755D18C3972E008BD9C6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>iOS-StaticLibrary.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BDF1755E18C3972E008BD9C6</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BDF1755F18C3972E008BD9C6</string>
-				<string>BDF1756018C3972E008BD9C6</string>
-				<string>BDF1756118C3972E008BD9C6</string>
-				<string>BDF1756218C3972E008BD9C6</string>
-				<string>BDF1756318C3972E008BD9C6</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>Mac OS X</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BDF1755F18C3972E008BD9C6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Mac-Application.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BDF1756018C3972E008BD9C6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Mac-Base.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BDF1756118C3972E008BD9C6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Mac-DynamicLibrary.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BDF1756218C3972E008BD9C6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Mac-Framework.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BDF1756318C3972E008BD9C6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Mac-StaticLibrary.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BDF1756418C3972E008BD9C6</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>README.md</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -2629,6 +2351,20 @@ fi
 			<key>showEnvVarsInLog</key>
 			<string>0</string>
 		</dict>
+		<key>D36FABF09F1A984E257F1EAF</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>A06B515E067379B8477A8245</string>
+				<string>46A5F5E57179B0D085AF4FF2</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>D5905E5F82BFFA7584BAD4C5</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -2673,19 +2409,6 @@ fi
 			<string>Pods/Target Support Files/Pods-Specs/Pods-Specs.profile_staging.xcconfig</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E6EBF96DA068437B82FA86E4</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libPods-Specs.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
 	</dict>
 	<key>rootObject</key>
