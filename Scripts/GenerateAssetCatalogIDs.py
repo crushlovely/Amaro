@@ -34,8 +34,9 @@ def headerAndImpContentsForCatalog(catalogDir, classPrefix):
     mLines = ['@implementation {}\n'.format(className)]
 
     for imageName in imageNames:
-        hLines.append('+(UIImage *)' + imageName + ';')
-        mLines.append('+(UIImage *)' + imageName + ' { return [UIImage imageNamed:@"' + imageName + '"]; }')
+        identifier = lib.variableNameForString(imageName)
+        hLines.append('+(UIImage *)' + identifier + ';')
+        mLines.append('+(UIImage *)' + identifier + ' { return [UIImage imageNamed:@"' + imageName + '"]; }')
 
     hLines.append('\n@end')
     mLines.append('\n@end')
