@@ -24,5 +24,8 @@ except ValueError, e:
     lib.warn('Unable to parse your build number ("{}") as an integer. Not incrementing it!'.format(buildNumber))
     exit(0)
 
-lib.infoPlist['CFBundleVersionKey'] = str(buildNumber + 1)
+newBuildNumber = str(buildNumber + 1)
+lib.infoPlist['CFBundleVersion'] = newBuildNumber
+print('Incrementing build number to {}'.format(newBuildNumber))
+
 lib.writePlist(lib.infoPlistFilename, lib.infoPlist, lib.infoPlistFormat)
