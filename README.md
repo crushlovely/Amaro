@@ -23,7 +23,7 @@ Of course, if you're wary of running random scripts (legit!), please read [tiram
 The bootstrap assumes:
 
 * You are using Xcode 5 or later.
-* You have the [CocoaPods gem](http://cocoapods.org/#install) installed.
+* You have version 0.34.1 or later of the [CocoaPods gem](http://cocoapods.org/#install) installed.
 * You are on OS 10.9 or later
 * You are targetting iOS 7.0, at minimum (and thus will be compiling against at least the iOS 7.0 SDK).
     * As of [July 2014](https://developer.apple.com/support/appstore/), iOS 7 has an 90% adoption rate.
