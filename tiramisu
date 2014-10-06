@@ -608,6 +608,11 @@ class Bootstrapper
             sh("git merge -q --squash -X ours 'remotes/bootstrap/#{@bootstrap_branch}'")
             commit 'Bootstrapping', :add_all => false
         end
+
+        task 'Cleaning up' do
+            # See issue #21
+            sh("git remote rm bootstrap")
+        end
     end
 
     def fetch_from_local
@@ -781,7 +786,7 @@ print <<'EOS'.chomp.faint
   \ \__\        \ \__\
    \/__/         \/__/
 EOS
-puts "  Amaro v0.3.0\n".blue.bold
+puts "  Amaro v0.3.1\n".blue.bold
 
 
 # Are we doing the standlone Crashlytics stuff?
