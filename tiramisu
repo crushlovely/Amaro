@@ -786,7 +786,7 @@ print <<'EOS'.chomp.faint
   \ \__\        \ \__\
    \/__/         \/__/
 EOS
-puts "  Amaro v0.3.3\n".blue.bold
+puts "  Amaro v0.3.4\n".blue.bold
 
 
 # Are we doing the standlone Crashlytics stuff?

@@ -85,11 +85,11 @@ class AmaroLibModule(types.ModuleType):
 
     @property
     def inContinuousIntegration(self):
-        return os.environ.get('CI') == 'true'
+        return self.getEnv('CI', missingIsFatal = False) == 'true'
 
     @property
     def buildingForSimulator(self):
-        return os.environ.get('PLATFORM_NAME') == 'iphonesimulator'
+        return self.getEnv('PLATFORM_NAME') == 'iphonesimulator'
 
     @property
     def buildingForDevice(self):
@@ -291,13 +291,18 @@ class AmaroLibModule(types.ModuleType):
 
         result = self.stripPrefixesAndSuffixes(result, prefixesToStrip or [], suffixesToStrip or [])
 
-        # Lowercase the first letter if we were asked to, unless the whole thing
-        # is uppercase, in which case we will assume it is an abbreviation and
-        # let it stand.
-        if lower and not result.isupper():
-            result = result[0].lower() + result[1:]
+        if lower:
+            result = self.smartLowerCase(result)
 
         return result
+
+    def smartLowerCase(self, s):
+        # If the second character is capitalized, let it stand. Assume
+        # the string has a prefix (e.g. "HTTPError"), or is an abbreviation.
+        if len(s) > 2 and s[1].isupper():
+            return s
+
+        return s[0].lower() + s[1:]
 
     def die(self, message):
         print('error: ' + message, file = sys.stderr)
