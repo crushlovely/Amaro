@@ -659,7 +659,7 @@ fi
 				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
 				<string>LaunchImage</string>
 				<key>BUNDLE_ID_SUFFIX</key>
-				<string>.prod.debug</string>
+				<string>.prod</string>
 				<key>BUNDLE_NAME_SUFFIX</key>
 				<string> (Prod)</string>
 				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
@@ -737,7 +737,7 @@ fi
 				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
 				<string>LaunchImage</string>
 				<key>BUNDLE_ID_SUFFIX</key>
-				<string>.prod.debug</string>
+				<string>.prod</string>
 				<key>BUNDLE_NAME_SUFFIX</key>
 				<string> (Prod)</string>
 				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
@@ -817,7 +817,7 @@ fi
 				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
 				<string>LaunchImage</string>
 				<key>BUNDLE_ID_SUFFIX</key>
-				<string>.prod.adhoc</string>
+				<string>.prod</string>
 				<key>BUNDLE_NAME_SUFFIX</key>
 				<string> (Prod)</string>
 				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
@@ -899,7 +899,7 @@ fi
 				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
 				<string>LaunchImage</string>
 				<key>BUNDLE_ID_SUFFIX</key>
-				<string>.prod.adhoc</string>
+				<string>.prod</string>
 				<key>BUNDLE_NAME_SUFFIX</key>
 				<string> (Prod)</string>
 				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
@@ -1363,7 +1363,7 @@ fi
 				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
 				<string>LaunchImage</string>
 				<key>BUNDLE_ID_SUFFIX</key>
-				<string>.staging.adhoc</string>
+				<string>.staging</string>
 				<key>BUNDLE_NAME_SUFFIX</key>
 				<string> (Staging)</string>
 				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
@@ -1939,7 +1939,7 @@ fi
 				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
 				<string>LaunchImage</string>
 				<key>BUNDLE_ID_SUFFIX</key>
-				<string>.staging.debug</string>
+				<string>.staging</string>
 				<key>BUNDLE_NAME_SUFFIX</key>
 				<string> (Staging)</string>
 				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
@@ -2115,7 +2115,7 @@ fi
 				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
 				<string>LaunchImage</string>
 				<key>BUNDLE_ID_SUFFIX</key>
-				<string>.staging.adhoc</string>
+				<string>.staging</string>
 				<key>BUNDLE_NAME_SUFFIX</key>
 				<string> (Staging)</string>
 				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
@@ -2193,7 +2193,7 @@ fi
 				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
 				<string>LaunchImage</string>
 				<key>BUNDLE_ID_SUFFIX</key>
-				<string>.staging.debug</string>
+				<string>.staging</string>
 				<key>BUNDLE_NAME_SUFFIX</key>
 				<string> (Staging)</string>
 				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
