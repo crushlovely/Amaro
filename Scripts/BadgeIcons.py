@@ -15,9 +15,10 @@ import os.path
 import itertools
 from math import ceil
 from sys import exit
-from AppKit import *
-from Quartz import *
-from CoreText import *
+import Foundation
+import AppKit
+import Quartz
+import CoreText
 
 # Bail if we're in CI or making an app store build
 if lib.inContinuousIntegration or lib.isDistributionConfiguration:
@@ -30,39 +31,39 @@ FONT_NAME = 'Helvetica-Bold'
 
 def getIconAndBaseColor(isStaging):
     if isStaging:
-        baseColor = NSColor.colorWithCalibratedRed_green_blue_alpha_(0.168, 0.306, 0.184, 1)
+        baseColor = Foundation.NSColor.colorWithCalibratedRed_green_blue_alpha_(0.168, 0.306, 0.184, 1)
         iconCharacter = '🅢'
     else:
-        baseColor = NSColor.colorWithCalibratedRed_green_blue_alpha_(0.315, 0.108, 0.093, 1)
+        baseColor = Foundation.NSColor.colorWithCalibratedRed_green_blue_alpha_(0.315, 0.108, 0.093, 1)
         iconCharacter = '🅟'
 
     return (iconCharacter, baseColor)
 
 
 def makeAttributedVersionString(versionText, fontSize, color):
-    versionParagraphStyle = NSParagraphStyle.defaultParagraphStyle().mutableCopy()
-    versionParagraphStyle.setLineBreakMode_(NSLineBreakByClipping)
-    versionParagraphStyle.setAlignment_(NSRightTextAlignment)
+    versionParagraphStyle = AppKit.NSParagraphStyle.defaultParagraphStyle().mutableCopy()
+    versionParagraphStyle.setLineBreakMode_(AppKit.NSLineBreakByClipping)
+    versionParagraphStyle.setAlignment_(AppKit.NSRightTextAlignment)
 
-    versionFont = NSFont.fontWithName_size_(FONT_NAME, fontSize)
+    versionFont = Foundation.NSFont.fontWithName_size_(FONT_NAME, fontSize)
 
     versionAttributes = {
-        NSFontAttributeName: versionFont,
-        NSForegroundColorAttributeName: color,
-        NSParagraphStyleAttributeName: versionParagraphStyle
+        AppKit.NSFontAttributeName: versionFont,
+        AppKit.NSForegroundColorAttributeName: color,
+        AppKit.NSParagraphStyleAttributeName: versionParagraphStyle
     }
 
-    return NSAttributedString.alloc().initWithString_attributes_(versionText, versionAttributes)
+    return Foundation.NSAttributedString.alloc().initWithString_attributes_(versionText, versionAttributes)
 
 
 def makeAttributedIconString(iconGlyph, fontSize, color):
-    iconFont = NSFont.fontWithName_size_(FONT_NAME, fontSize)
+    iconFont = Foundation.NSFont.fontWithName_size_(FONT_NAME, fontSize)
     iconAttributes = {
-        NSFontAttributeName: iconFont,
-        NSForegroundColorAttributeName: color
+        AppKit.NSFontAttributeName: iconFont,
+        AppKit.NSForegroundColorAttributeName: color
     }
 
-    return NSAttributedString.alloc().initWithString_attributes_(iconGlyph, iconAttributes)
+    return Foundation.NSAttributedString.alloc().initWithString_attributes_(iconGlyph, iconAttributes)
 
 
 def getBadgeImage(approxIconHeight, staging, versionText):
@@ -72,55 +73,57 @@ def getBadgeImage(approxIconHeight, staging, versionText):
     MIN_ICON_HEIGHT_FOR_VERSION_TEXT = 15  # below this, the version text will be left out
 
     # First, calculate the size of the version text
-    versionString = makeAttributedVersionString(versionText, approxIconHeight / 2.5, NSColor.whiteColor())
-    versionStringBounds = versionString.boundingRectWithSize_options_(NSZeroSize, NSStringDrawingUsesLineFragmentOrigin)
-    versionStringWidth = NSWidth(versionStringBounds)
+    versionString = makeAttributedVersionString(versionText, approxIconHeight / 2.5, Foundation.NSColor.whiteColor())
+    versionStringBounds = versionString.boundingRectWithSize_options_(Foundation.NSZeroSize, AppKit.NSStringDrawingUsesLineFragmentOrigin)
+    versionStringWidth = Foundation.NSWidth(versionStringBounds)
     if approxIconHeight < MIN_ICON_HEIGHT_FOR_VERSION_TEXT:
         versionStringWidth = 0
 
     # And now the icon...
     iconString = makeAttributedIconString(iconGlyph, approxIconHeight, baseColor)
-    iconImage = getImageOfGlyph(iconString, NSColor.colorWithWhite_alpha_(1.0, 0.8))
+    iconImage = getImageOfGlyph(iconString, Foundation.NSColor.colorWithWhite_alpha_(1.0, 0.8))
     iconSize = iconImage.size()
 
     # Calculate some frames and whatnot
-    totalBorderThickness = NSMakeSize(ceil(iconSize.width * BORDER_THICKNESS),
-                                      ceil(iconSize.height * BORDER_THICKNESS))
+    totalBorderThickness = Foundation.NSMakeSize(ceil(iconSize.width * BORDER_THICKNESS),
+                                                 ceil(iconSize.height * BORDER_THICKNESS))
 
-    iconOrigin = NSMakePoint(ceil(totalBorderThickness.width / 2.0),
-                             ceil(totalBorderThickness.height / 2.0))
+    iconOrigin = Foundation.NSMakePoint(ceil(totalBorderThickness.width / 2.0),
+                                        ceil(totalBorderThickness.height / 2.0))
 
-    borderedIconSize = NSMakeSize(iconSize.width + totalBorderThickness.width,
-                                  iconSize.height + totalBorderThickness.height)
+    borderedIconSize = Foundation.NSMakeSize(iconSize.width + totalBorderThickness.width,
+                                             iconSize.height + totalBorderThickness.height)
 
     farRightPadding = totalBorderThickness.width / 2.0
     if versionStringWidth == 0:
         farRightPadding = 0
 
-    badgeSize = NSMakeSize(ceil(borderedIconSize.width + versionStringWidth + farRightPadding),
-                           borderedIconSize.height)
+    badgeSize = Foundation.NSMakeSize(ceil(borderedIconSize.width + versionStringWidth + farRightPadding),
+                                      borderedIconSize.height)
 
-    rightBackgroundBoxBounds = NSIntegralRect(NSMakeRect(borderedIconSize.width / 2.0,
-                                                         0,
-                                                         badgeSize.width - borderedIconSize.width / 2.0,
-                                                         badgeSize.height))
+    rightBackgroundBoxBounds = Foundation.NSIntegralRect(
+                                Foundation.NSMakeRect(borderedIconSize.width / 2.0,
+                                                      0,
+                                                      badgeSize.width - borderedIconSize.width / 2.0,
+                                                      badgeSize.height))
 
-    textFrameBounds = NSIntegralRect(NSMakeRect(borderedIconSize.width,
-                                                (badgeSize.height - NSHeight(versionStringBounds)) / 2.0,  # vertically centered
-                                                versionStringWidth,
-                                                badgeSize.height))
+    textFrameBounds = Foundation.NSIntegralRect(
+                        Foundation.NSMakeRect(borderedIconSize.width,
+                                              (badgeSize.height - Foundation.NSHeight(versionStringBounds)) / 2.0,  # vertically centered
+                                              versionStringWidth,
+                                              badgeSize.height))
 
     # And now drawing
-    badgeImage = NSImage.alloc().initWithSize_(badgeSize)
+    badgeImage = Foundation.NSImage.alloc().initWithSize_(badgeSize)
     badgeImage.lockFocusFlipped_(True)
 
     # The background rectangle + circle
-    boxColor = NSColor.colorWithCalibratedHue_saturation_brightness_alpha_(baseColor.hueComponent(), baseColor.saturationComponent(), 0.6, 1.0)
+    boxColor = Foundation.NSColor.colorWithCalibratedHue_saturation_brightness_alpha_(baseColor.hueComponent(), baseColor.saturationComponent(), 0.6, 1.0)
     boxColor.set()
-    NSRectFill(rightBackgroundBoxBounds)
+    AppKit.NSRectFill(rightBackgroundBoxBounds)
 
-    iconBackgroundCircleRect = (NSZeroPoint, borderedIconSize)
-    iconBackgroundCirclePath = NSBezierPath.bezierPathWithOvalInRect_(iconBackgroundCircleRect)
+    iconBackgroundCircleRect = (Foundation.NSZeroPoint, borderedIconSize)
+    iconBackgroundCirclePath = AppKit.NSBezierPath.bezierPathWithOvalInRect_(iconBackgroundCircleRect)
     boxColor.set()
     iconBackgroundCirclePath.fill()
 
@@ -129,15 +132,15 @@ def getBadgeImage(approxIconHeight, staging, versionText):
         versionString.drawInRect_(textFrameBounds)
 
     # The icon & its shadow
-    boxShadowColor = NSColor.colorWithWhite_alpha_(1.0, 0.7)
-    boxShadow = NSShadow.alloc().init()
+    boxShadowColor = Foundation.NSColor.colorWithWhite_alpha_(1.0, 0.7)
+    boxShadow = AppKit.NSShadow.alloc().init()
     boxShadow.setShadowColor_(boxShadowColor)
-    boxShadow.setShadowOffset_(NSZeroSize)
+    boxShadow.setShadowOffset_(Foundation.NSZeroSize)
     boxShadow.setShadowBlurRadius_(totalBorderThickness.width)
     boxShadow.set()
     
     iconDestRect = (iconOrigin, iconSize)
-    iconImage.drawInRect_fromRect_operation_fraction_respectFlipped_hints_(iconDestRect, NSZeroRect, NSCompositeSourceAtop, 1.0, True, None)
+    iconImage.drawInRect_fromRect_operation_fraction_respectFlipped_hints_(iconDestRect, Foundation.NSZeroRect, AppKit.NSCompositeSourceAtop, 1.0, True, None)
 
     badgeImage.unlockFocus()
 
@@ -145,44 +148,44 @@ def getBadgeImage(approxIconHeight, staging, versionText):
 
 
 def getImageOfGlyph(glyphAttributedString, backingColor):
-    line = CTLineCreateWithAttributedString(glyphAttributedString)
+    line = CoreText.CTLineCreateWithAttributedString(glyphAttributedString)
 
     # Get a rough size of our glyph. We'll use this to make the NSImage, and get a more accurate
     # frame once we have a context to call CTLineGetImageBounds.
-    typographicWidth, ascent, descent, leading = CTLineGetTypographicBounds(line, None, None, None)
+    typographicWidth, ascent, descent, leading = CoreText.CTLineGetTypographicBounds(line, None, None, None)
 
-    img = NSImage.alloc().initWithSize_(NSMakeSize(ceil(typographicWidth), ceil(ascent + descent)))
+    img = Foundation.NSImage.alloc().initWithSize_(Foundation.NSMakeSize(ceil(typographicWidth), ceil(ascent + descent)))
 
     
     img.lockFocus()
 
-    context = NSGraphicsContext.currentContext().graphicsPort()
+    context = AppKit.NSGraphicsContext.currentContext().graphicsPort()
 
-    bounds = CTLineGetImageBounds(line, context)
+    bounds = CoreText.CTLineGetImageBounds(line, context)
 
-    CGContextTranslateCTM(context, 0, ceil(descent))  # Shift everything up so the descender is inside our image
+    Quartz.CGContextTranslateCTM(context, 0, ceil(descent))  # Shift everything up so the descender is inside our image
 
     if backingColor:
         # Draw a circle behind the glyph with the ratio to the size of the glyph
         bgCircleDiameterRatio = 0.9
         bgCircleOffsetRatio = (1.0 - bgCircleDiameterRatio) / 2.0
 
-        bgCircleRect = NSMakeRect(bounds.origin.x + bounds.size.width * bgCircleOffsetRatio,
-                                  bounds.origin.y + bounds.size.height * bgCircleOffsetRatio,
-                                  bounds.size.width * bgCircleDiameterRatio,
-                                  bounds.size.height * bgCircleDiameterRatio)
+        bgCircleRect = Foundation.NSMakeRect(bounds.origin.x + bounds.size.width * bgCircleOffsetRatio,
+                                             bounds.origin.y + bounds.size.height * bgCircleOffsetRatio,
+                                             bounds.size.width * bgCircleDiameterRatio,
+                                            bounds.size.height * bgCircleDiameterRatio)
 
-        backgroundCirclePath = NSBezierPath.bezierPathWithOvalInRect_(bgCircleRect)
+        backgroundCirclePath = Foundation.NSBezierPath.bezierPathWithOvalInRect_(bgCircleRect)
         backingColor.setFill()
         backgroundCirclePath.fill()
 
-    CTLineDraw(line, context)
+    CoreText.CTLineDraw(line, context)
 
-    bitmapRep = NSBitmapImageRep.alloc().initWithFocusedViewRect_(NSIntegralRect(bounds))
+    bitmapRep = Foundation.NSBitmapImageRep.alloc().initWithFocusedViewRect_(Foundation.NSIntegralRect(bounds))
 
     img.unlockFocus()
 
-    finalImage = NSImage.alloc().initWithSize_(NSIntegralRect(bounds).size)
+    finalImage = Foundation.NSImage.alloc().initWithSize_(Foundation.NSIntegralRect(bounds).size)
     finalImage.addRepresentation_(bitmapRep)
 
     return finalImage
@@ -198,8 +201,8 @@ def badgeFile(fn, destinationDir, isStaging, versionString, buildString):
 
     # Not using -[NSImage initWithContentsOfFile:] here, since that treats @2x files
     # specially, which we don't want in this case.
-    imgData = NSData.dataWithContentsOfFile_(fn)
-    img = NSImage.alloc().initWithData_(imgData)
+    imgData = Foundation.NSData.dataWithContentsOfFile_(fn)
+    img = Foundation.NSImage.alloc().initWithData_(imgData)
     size = img.size()
 
     # Generate the badge image
@@ -214,17 +217,17 @@ def badgeFile(fn, destinationDir, isStaging, versionString, buildString):
     badgeDestRect = ((size.width - badgeSize.width,
                       badgeBottomPadding),
                      badgeSize)
-    badgeImage.drawInRect_fromRect_operation_fraction_respectFlipped_hints_(badgeDestRect, NSZeroRect, NSCompositeSourceAtop, 1.0, True, None)
+    badgeImage.drawInRect_fromRect_operation_fraction_respectFlipped_hints_(badgeDestRect, Foundation.NSZeroRect, AppKit.NSCompositeSourceAtop, 1.0, True, None)
 
-    bitmapRep = NSBitmapImageRep.alloc().initWithFocusedViewRect_((NSZeroPoint, size))
+    bitmapRep = Foundation.NSBitmapImageRep.alloc().initWithFocusedViewRect_((Foundation.NSZeroPoint, size))
 
     img.unlockFocus()
 
     # And spit the thing out
-    pngData = bitmapRep.representationUsingType_properties_(NSPNGFileType, None)
+    pngData = bitmapRep.representationUsingType_properties_(AppKit.NSPNGFileType, None)
 
-    destFn = NSString.lastPathComponent(fn).stringByDeletingPathExtension() + '.png'
-    dest = NSString.pathWithComponents_([ destinationDir, destFn ])
+    destFn = Foundation.NSString.lastPathComponent(fn).stringByDeletingPathExtension() + '.png'
+    dest = Foundation.NSString.pathWithComponents_([ destinationDir, destFn ])
 
     pngData.writeToFile_atomically_(dest, False)
 
