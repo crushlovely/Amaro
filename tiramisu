@@ -395,6 +395,7 @@ class CrashlyticsFlow
     TOKEN_HEADER_KEY = 'X-CRASHLYTICS-DEVELOPER-TOKEN'
     APP_BUNDLE_ID = 'com.crashlytics.mac'
     APP_BINARY_NAME = 'Crashlytics'
+    REPLACEMENT_CRASHLYTICS_KEY = '((CrashlyticsAPIKey))'
 
     def initialize(standalone: false)
         @standalone = standalone
@@ -424,7 +425,33 @@ class CrashlyticsFlow
         organizations = get_organizations dev_token
         return if organizations.nil?
 
-        get_api_key organizations
+        api_key = get_api_key organizations
+        return if api_key.nil?
+
+        do_replacement = !@standalone
+
+        if @standalone
+            puts "\nYour Crashlytics API key is:\n  #{api_key.bold}\n\n"
+            if File.exist? '.amaro'
+                puts "You seem to be in the directoy for an Amaro project.".blue
+                do_replacement = YesNoPrompt.run!("Would you like install the key into the project in this directory?", :default => false)
+            else
+                puts "You don't seem to be in the directory of an Amaro project.".yellow
+                do_replacement = false
+            end
+        end
+
+        if do_replacement
+            task 'Installing Crashlytics key' do
+                filelist = FileList['**/*'].exclude('tiramisu')
+                replace_in_files(filelist, REPLACEMENT_CRASHLYTICS_KEY, api_key)
+                commit 'Install Crashlytics key'
+            end
+        else
+            puts "\nTo use Crashlytics in your app, make sure the CrashlyticsFramework pod\nis included, and copy the API key above into the Crashlytics build\nphase and the app delegate."
+        end
+
+        api_key
     end
 
     private
@@ -515,7 +542,6 @@ class Bootstrapper
     REPLACEMENT_PROJECT_NAME = 'CrushBootstrap'
     REPLACEMENT_ORGANIZATION = 'Crush & Lovely'
     REPLACEMENT_DOMAIN = 'com.crushlovely'
-    REPLACEMENT_CRASHLYTICS_KEY = '((CrashlyticsAPIKey))'
 
     BOOTSTRAP_REPO = 'git://github.com/crushlovely/Amaro.git'
     DEFAULT_BOOTSTRAP_BRANCH = 'master'
@@ -696,12 +722,6 @@ class Bootstrapper
             puts 'You can set up Crashlytics later by following the instructions in the project.'.gray
             return
         end
-
-        task 'Installing Crashlytics key' do
-            filelist = FileList['**/*'].exclude('tiramisu')
-            replace_in_files(filelist, REPLACEMENT_CRASHLYTICS_KEY, api_key)
-            commit 'Install Crashlytics key'
-        end
     end
 
     def remove_bootstrap_detritus
@@ -786,15 +806,13 @@ print <<'EOS'.chomp.faint
   \ \__\        \ \__\
    \/__/         \/__/
 EOS
-puts "  Amaro v0.3.4\n".blue.bold
+puts "  Amaro v0.3.5\n".blue.bold
 
 
 # Are we doing the standlone Crashlytics stuff?
 if !ARGV.empty? && ARGV[0] == '--crashlytics'
     crashlytics_flow = CrashlyticsFlow.new(:standalone => true)
     api_key = crashlytics_flow.run!
-
-    puts "\nYour Crashlytics API key is:\n  #{api_key.bold}\n\n" if api_key
 
     exit
 end
