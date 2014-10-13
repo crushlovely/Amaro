@@ -786,7 +786,7 @@ end
 
 
 bundle_domain = Prompt.new('Bundle ID domain', :key => :bundle_domain) do |p|
-    p.pre_run_hook = -> { p.default = 'com.' + org_name.value.gsub(/\W/, '').downcase! }
+    p.pre_run_hook = -> { p.default = 'com.' + org_name.value.gsub(/\W/, '').downcase }
 
     p.validation_proc = lambda do |input|
         raise 'Domain should be a reverse domain name, like "com.apple".' unless input =~ /\w+\.\w+/
