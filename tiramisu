@@ -732,7 +732,7 @@ class Bootstrapper
 
             # Squash all of our commits together into one, for prettiness
             # See: http://stackoverflow.com/questions/1657017/git-squash-all-commits-into-a-single-commit
-            squashed_commit_hash = sh('git commit-tree HEAD^{tree} -m "[Amaro] All set. Go make something beautiful!"')
+            squashed_commit_hash = sh('git commit-tree HEAD^{tree} -m "[Amaro] Bootstrapped."')
             sh("git reset #{squashed_commit_hash}")
         end
     end
@@ -806,10 +806,10 @@ print <<'EOS'.chomp.faint
   \ \__\        \ \__\
    \/__/         \/__/
 EOS
-puts "  Amaro v0.3.5\n".blue.bold
+puts "  Amaro v0.3.6\n".blue.bold
 
 
-# Are we doing the standlone Crashlytics stuff?
+# Are we doing the standalone Crashlytics stuff?
 if !ARGV.empty? && ARGV[0] == '--crashlytics'
     crashlytics_flow = CrashlyticsFlow.new(:standalone => true)
     api_key = crashlytics_flow.run!

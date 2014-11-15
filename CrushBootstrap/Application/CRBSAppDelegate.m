@@ -13,6 +13,11 @@
 #endif
 
 #if HAS_POD(CocoaLumberjack)
+    #if COCOAPODS_VERSION_MAJOR_CocoaLumberjack == 1
+    #import <CocoaLumberjack/DDASLLogger.h>
+    #import <CocoaLumberjack/DDTTYLogger.h>
+    #endif
+
     #if HAS_POD(CrashlyticsLumberjack)
     #import <CrashlyticsLumberjack/CrashlyticsLogger.h>
     #endif

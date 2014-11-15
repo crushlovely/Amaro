@@ -27,7 +27,11 @@
     #import <Foundation/Foundation.h>
 
     #if HAS_POD(CocoaLumberjack)
-        #import <CocoaLumberjack/CocoaLumberjack.h>
+        #if COCOAPODS_VERSION_MAJOR_CocoaLumberjack == 1
+            #import <CocoaLumberjack/DDLog.h>
+        #else
+            #import <CocoaLumberjack/CocoaLumberjack.h>
+        #endif
 
         #ifdef DEBUG
             static const int ddLogLevel = LOG_LEVEL_VERBOSE;

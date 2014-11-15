@@ -5,29 +5,32 @@ platform :ios, '7.0'
 # Crush Utility Belt
 pod 'Sidecar'
 
-# Update checker for Installr (installrapp.com)
-pod 'Aperitif', :configurations => ['Debug_Staging', 'Debug_Production', 'AdHoc_Staging', 'AdHoc_Production']
-
 # Logging & Analytics
-pod 'CocoaLumberjack'
+pod 'CocoaLumberjack', '~> 1.9.0'
 pod 'CrashlyticsFramework'
-pod 'CrashlyticsLumberjack'
+pod 'CrashlyticsLumberjack', '~>1.0.0'
 
 # Networking
 pod 'AFNetworking'
 
 # Various goodies
-pod 'libextobjc'      # Useful macros and some craziness
-pod 'PixateFreestyle' # Style your app with CSS
-pod 'FormatterKit'    # For all your string formatting needs
-pod 'Asterism'        # Nice & fast collection operations
+pod 'libextobjc'       # Useful macros and some craziness
+pod 'FormatterKit'     # For all your string formatting needs
+pod 'Asterism'         # Nice & fast collection operations
 
 # You may want...
-#pod 'PromiseKit'     # Promises/A+-alike
-#pod 'Mantle'         # Github's model framework
-#pod 'SSKeychain'     # Go-to keychain wrapper
-#pod 'DateTools'      # Datetime heavy lifting
+#pod 'PromiseKit'      # Promises/A+-alike
+#pod 'Mantle'          # Github's model framework
+#pod 'SSKeychain'      # Go-to keychain wrapper
+#pod 'DateTools'       # Datetime heavy lifting
+#pod 'PixateFreestyle' # Style your app with CSS
+#pod 'Masonry'         # Convenient autolayout DSL
 
+# Update checker for Installr (installrapp.com)
+#pod 'Aperitif', :configurations => ['Debug_Staging', 'Debug_Production', 'AdHoc_Staging', 'AdHoc_Production']
+
+# Reveal app view debugger
+pod 'Reveal-iOS-SDK', :configurations => ['Debug_Staging', 'Debug_Production']
 
 # Testing necessities
 target 'Specs', :exclusive => true do
