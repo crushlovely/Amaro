@@ -1,6 +1,7 @@
 # ![icon](CrushBootstrap/Resources/Images.xcassets/AppIcon.appiconset/Icon-60@2x.png) Amaro [![Build Status](http://img.shields.io/travis/crushlovely/Amaro.svg?style=flat)](https://travis-ci.org/crushlovely/Amaro)
 
 Crush & Lovely's iOS boilerplate.
+[Changelog](https://github.com/crushlovely/Amaro/wiki/Changelog)
 
 
 ## Say what now?
@@ -42,7 +43,7 @@ Amaro aims to set you up with all you need to write a beautiful, maintainable, w
 ### Foundation
 * A well-chosen class prefix is enforced (or may be omitted entirely... [the times, they are a-changin'](http://inessential.com/2014/07/24/prefixes_considered_passe))
 * A local git repository for the application is created (and committed to a few times through the initialization process).
-* Sane `.gitignore` and `.gitattributes` files are included.
+* A sane `.gitignore` file is included.
 * A `Certificates` directory is included with a readme file about what to include so that other developers can test and release the app.
 * Sensible defaults for build options, warnings, and the like.
     * Build configurations are split into xcconfig files for modularity and consistency. We're using [jspahrsummers/xcconfigs](https://github.com/jspahrsummers/xcconfigs) as our base.
