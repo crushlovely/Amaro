@@ -569,7 +569,7 @@ class Bootstrapper
             
             sh('which -s pod', 'CocoaPods is not installed. See http://cocoapods.org/#install', :show_output_on_error => false)
             pod_version = sh('pod --version', 'Error getting CocoaPods version. Make sure the pod binary is functional.').strip
-            version_is_good = Gem::Dependency.new('pod', '~>0.34.1').match?('pod', pod_version)
+            version_is_good = Gem::Dependency.new('pod', '>0.34.0').match?('pod', pod_version)
             raise AmaroError.new("Amaro requires version 0.34.1 or later of CocoaPods. You have version #{pod_version}", 'Running "gem update cocoapods" should fix this.') unless version_is_good
 
             sh('pkgutil --pkg-info=com.apple.pkg.CLTools_Executables', 'The Xcode command line tools are not installed. Running "xcode-select --install" should fix that.', :show_output_on_error => false)
@@ -806,7 +806,7 @@ print <<'EOS'.chomp.faint
   \ \__\        \ \__\
    \/__/         \/__/
 EOS
-puts "  Amaro v0.3.6\n".blue.bold
+puts "  Amaro v0.3.7\n".blue.bold
 
 
 # Are we doing the standalone Crashlytics stuff?
