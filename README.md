@@ -1,6 +1,7 @@
 # ![icon](CrushBootstrap/Resources/Images.xcassets/AppIcon.appiconset/Icon-60@2x.png) Amaro [![Build Status](http://img.shields.io/travis/crushlovely/Amaro.svg?style=flat)](https://travis-ci.org/crushlovely/Amaro)
 
 Crush & Lovely's iOS boilerplate.
+
 [Changelog](https://github.com/crushlovely/Amaro/wiki/Changelog)
 
 
