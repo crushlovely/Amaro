@@ -1,4 +1,0 @@
-[submodule "External/xcconfigs"]
-	path = External/xcconfigs
-	url = git://github.com/jspahrsummers/xcconfigs.git
-	branch = master

@@ -68,7 +68,6 @@
 		BD934CD219C211F600B48551 /* StoryboardIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryboardIdentifiers.h; sourceTree = "<group>"; };
 		BD934CD319C211F600B48551 /* StoryboardIdentifiers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryboardIdentifiers.m; sourceTree = "<group>"; };
 		BD9FFD9418E66DF4001DF6EC /* Specs-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Specs-Prefix.pch"; sourceTree = "<group>"; };
-		BDD81EE419DB5FCB00E45AC2 /* xcconfigs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = xcconfigs; sourceTree = "<group>"; };
 		BDDB994F18C3943B003EBC42 /* CrushBootstrap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrushBootstrap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDDB996118C3943B003EBC42 /* CRBSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRBSAppDelegate.h; sourceTree = "<group>"; };
 		BDDB996218C3943B003EBC42 /* CRBSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRBSAppDelegate.m; sourceTree = "<group>"; };
@@ -215,7 +214,6 @@
 			children = (
 				BDDB995818C3943B003EBC42 /* CrushBootstrap */,
 				BDDB997A18C3943B003EBC42 /* Specs */,
-				BDF1754E18C3972E008BD9C6 /* External */,
 				D36FABF09F1A984E257F1EAF /* Frameworks */,
 				55C5AA14CC157D6E10D487F9 /* Pods */,
 				BDDB995018C3943B003EBC42 /* Products */,
@@ -264,14 +262,6 @@
 				BD9FFD9418E66DF4001DF6EC /* Specs-Prefix.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		BDF1754E18C3972E008BD9C6 /* External */ = {
-			isa = PBXGroup;
-			children = (
-				BDD81EE419DB5FCB00E45AC2 /* xcconfigs */,
-			);
-			path = External;
 			sourceTree = "<group>";
 		};
 		D36FABF09F1A984E257F1EAF /* Frameworks */ = {
