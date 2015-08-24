@@ -4,15 +4,6 @@ env:
   global:
     - LANG=en_US.UTF-8
 
-# The version of xctool installed in the Travis VM is flaky when testing against iOS 7 targets.
-# The HEAD works. Unfortunately they haven't had a release in a while, so we can't target a specific version.
-
-before_install:
-  - gem install cocoapods --no-ri --no-rdoc
-  - brew update
-  - brew unlink xctool
-  - brew install xctool --HEAD
-
 script:
   - xctool -workspace CrushBootstrap.xcworkspace -scheme CrushBootstrap-Staging -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone Retina (4-inch)' build test ARCHS=i386 VALID_ARCHS=i386 ONLY_ACTIVE_ARCH=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES GCC_PREPROCESSOR_DEFINITIONS='${inherited} CI=1'
   # >>>bootstrap-only

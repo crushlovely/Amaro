@@ -30,6 +30,7 @@
 
 
 //NSURL *CRBSAPIRoot;
-void __attribute__((constructor)) CRBSConstantsInitializer() {
+void __attribute__((constructor)) CRBSConstantsInitializer()
+{
 //    CRBSAPIRoot = [NSURL URLWithString:IF_STAGING(@"http://myapp.com/api/staging", @"http://myapp.com/api")];
 }

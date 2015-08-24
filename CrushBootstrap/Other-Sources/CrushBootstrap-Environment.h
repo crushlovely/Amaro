@@ -6,10 +6,11 @@
 //  Copyright (c) 2014 Crush & Lovely. All rights reserved.
 //
 
-// Defines about installed Pods
-#import "Pods-Environment.h"
+#define HAS_POD(podname) HAS_POD_INCLUDE(podname, podname)
 
-#define HAS_POD(podname) defined(COCOAPODS_POD_AVAILABLE_ ## podname)
+#define HAS_POD_INCLUDE(podname, headername) __has_include(__HEADER_STRING(podname, headername))
+
+#define __HEADER_STRING(podname, headername) <podname/headername.h>
 
 
 // Unfortunately, you can't define preprocessor macros per scheme, so we're stuck
