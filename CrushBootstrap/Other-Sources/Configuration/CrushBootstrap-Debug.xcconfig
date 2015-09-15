@@ -1,0 +1,5 @@
+// Build settings for debug builds.
+
+#include "jspahrsummers-xcconfigs/iOS/iOS-Application.xcconfig"
+#include "jspahrsummers-xcconfigs/Base/Configurations/Debug.xcconfig"
+#include "CrushBootstrap.xcconfig"

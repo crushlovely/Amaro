@@ -72,7 +72,7 @@ module AmaroUtils
         
         has_changes = anything_to_commit?
         if error_if_nothing_to_commit && !has_changes
-            raise AmaroError('Repository Error', 'There should be something to commit at this point, but there\'s not!')
+            raise AmaroError.new('Repository Error', 'There should be something to commit at this point, but there\'s not!')
         elsif has_changes
             sh("git commit -q -m '[Amaro] #{message}'")
         end
@@ -84,7 +84,11 @@ module AmaroUtils
     end
 
     def task(message, failure_is_fatal: true)
-        print "#{message}...".blue.bold
+        print "#{message}... ".blue.bold
+        system('tput sc')
+
+        recall_cursor = `tput rc`
+        clear_to_end_of_line = `tput el`
 
         chars = %w(⣻ ⢿ ⡿ ⣟ ⣯ ⣷ ⣾ ⣽)
         bg_thread = Thread.new do
@@ -95,7 +99,7 @@ module AmaroUtils
                 loop do
                     sleep 0.1
                     i = (i + 1) % chars.length
-                    print "\b#{chars[i]}"
+                    print "#{recall_cursor}#{chars[i]}#{clear_to_end_of_line}"
                 end
             ensure
                 system('tput cnorm')
@@ -103,25 +107,16 @@ module AmaroUtils
         end
 
         begin
-            bg_thread.run
+            bg_thread.run if STDIN.isatty && !ENV['AMARO_EXPECT']
             yield
         rescue AmaroError => e
-            puts "\b 💀"
+            puts "#{recall_cursor}💀#{clear_to_end_of_line}"
             die(e.message, e.details, :fatal => failure_is_fatal)
         else
-            puts "\b 👍 "
+            puts "#{recall_cursor}👍#{clear_to_end_of_line}"
         ensure
             bg_thread.kill
         end
-
-        # begin
-        #     yield
-        # rescue AmaroError => e
-        #     puts ' 💀'
-        #     die(e.message, e.details, :fatal => failure_is_fatal)
-        # else
-        #     puts ' 👍'
-        # end
     end
 
     def replace_in_files(file_list, pattern, replacement)
@@ -423,7 +418,7 @@ class Bootstrapper
     REPLACEMENT_ORGANIZATION = 'Crush & Lovely'
     REPLACEMENT_DOMAIN = 'com.crushlovely'
 
-    BOOTSTRAP_REPO = 'git://github.com/crushlovely/Amaro.git'
+    BOOTSTRAP_REPO = 'https://github.com/crushlovely/Amaro.git'
     DEFAULT_BOOTSTRAP_BRANCH = 'master'
     BOOTSTRAP_WEBSITE = 'https://github.com/crushlovely/Amaro'
 
@@ -434,7 +429,8 @@ class Bootstrapper
         init_git
         rename_files
         update_contents
-        init_externals
+        update_xcconfigs
+        install_pods
         remove_bootstrap_detritus
     end
 
@@ -448,10 +444,14 @@ class Bootstrapper
             
             sh('which -s pod', 'CocoaPods is not installed. See http://cocoapods.org/#install', :show_output_on_error => false)
             pod_version = sh('pod --version', 'Error getting CocoaPods version. Make sure the pod binary is functional.').strip
-            version_is_good = Gem::Dependency.new('pod', '>0.34.0').match?('pod', pod_version)
-            raise AmaroError.new("Amaro requires version 0.34.1 or later of CocoaPods. You have version #{pod_version}", 'Running "gem update cocoapods" should fix this.') unless version_is_good
+            pod_version_is_good = Gem::Dependency.new('pod', '>0.34.0').match?('pod', pod_version)
+            raise AmaroError.new("Amaro requires version 0.34.1 or later of CocoaPods. You have version #{pod_version}", 'Running "gem update cocoapods" should fix this.') unless pod_version_is_good
 
-            sh('xcode-select -p', 'The Xcode command line tools don\'t seem to be installed. Running "xcode-select --install" should fix that.', :show_output_on_error => false)
+            dev_tools_path = sh('xcode-select -p', 'The Xcode command line tools don\'t seem to be installed. Running "xcode-select --install" should fix that.', :show_output_on_error => false).strip
+            xcode_version = sh("/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' '#{dev_tools_path}/../Info.plist'").strip
+            xcode_version_is_good = Gem::Dependency.new('xcode', '~>7.0').match?('xcode', xcode_version)
+            raise AmaroError.new("Amaro requires the default Xcode command line tools to point to Xcode 7.0 or later. Yours point to #{xcode_version}.", 'Install Xcode 7.0 or later, and run "xcode-select" to point to that.') unless xcode_version_is_good
+
 
             if ARGV.empty?
                 @source_path = nil
@@ -468,7 +468,7 @@ class Bootstrapper
 
     def puts_source_description
         if @source_path.nil?
-            puts 'Repository: '.gray.bold + Bootstrapper::BOOTSTRAP_REPO.gray
+            puts 'Repository: '.gray.bold + BOOTSTRAP_REPO.gray
             puts 'Branch: '.gray.bold + @bootstrap_branch.gray
         else
             puts 'Using local clone: '.gray.bold + @source_path.gray
@@ -516,7 +516,7 @@ class Bootstrapper
 
         task 'Cleaning up' do
             # See issue #21
-            sh("git remote rm bootstrap")
+            sh('git remote rm bootstrap')
         end
     end
 
@@ -525,7 +525,6 @@ class Bootstrapper
             # Note the trailing / appended to source_path. Otherwise rsync will put
             # a copy of the directory inside the destination, rather than a copy of its contents.
             sh("rsync -a '#{@source_path}/' . --exclude=/.git --exclude=/README.md")
-            sh("cp -R '#{@source_path}/.git/modules' .git/")
             commit 'Bootstrapping'
 
             sh('git clean -xdf') # Remove .gitignored files and directories
@@ -582,14 +581,30 @@ class Bootstrapper
         end
     end
 
-    def init_externals
+    def update_xcconfigs
+        task 'Pulling latest xcconfigs' do
+            sh("'%{project_name}/Other-Sources/Configuration/jspahrsummers-xcconfigs/UpdateXCConfigs.sh'" % options)
+        end
+
+        if anything_to_commit?
+            task 'Committing' do
+                commit 'Updated xcconfigs'
+            end
+        end
+    end
+
+    def install_pods
         edit 'Podfile' if YesNoPrompt.run!('Would you like to edit your Podfile?', :default => false)
 
-        task 'Initializing submodules and CocoaPods' do
-            sh('git submodule -q update --init --recursive')
-            sh("git submodule --quiet foreach 'git checkout -q master'")
+        if anything_to_commit?
+            task 'Committing' do
+                commit 'Modified Podfile'
+            end
+        end
+
+        task 'Installing CocoaPods' do
             sh('pod install --silent')
-            commit 'Install pods and submodules'
+            commit 'Install pods and update subtrees'
         end
     end
 

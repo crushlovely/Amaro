@@ -1,5 +1,0 @@
-// Build settings for debug builds.
-
-#include "../../External/xcconfigs/iOS/iOS-Application.xcconfig"
-#include "../../External/xcconfigs/Base/Configurations/Debug.xcconfig"
-#include "CrushBootstrap.xcconfig"

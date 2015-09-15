@@ -2,7 +2,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 
 # Crush Utility Belt
-pod 'Sidecar', :path => '~/dev/Sidecar'
+pod 'Sidecar', '~> 1.0'
 
 # Logging & Analytics
 pod 'CocoaLumberjack', '~> 2.0'

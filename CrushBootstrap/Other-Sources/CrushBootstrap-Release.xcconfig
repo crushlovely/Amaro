@@ -1,5 +1,0 @@
-// Build settings for ad-hoc and app store builds.
-
-#include "../../External/xcconfigs/iOS/iOS-Application.xcconfig"
-#include "../../External/xcconfigs/Base/Configurations/Release.xcconfig"
-#include "CrushBootstrap.xcconfig"

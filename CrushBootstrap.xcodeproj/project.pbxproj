@@ -54,13 +54,14 @@
 		BD304C8218E77F7E0034105E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		BD35136419BE274A00A19841 /* CRBSConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRBSConstants.h; sourceTree = "<group>"; };
 		BD35136519BE274A00A19841 /* CRBSConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBSConstants.m; sourceTree = "<group>"; };
-		BD3570BB19929359006C5409 /* CrushBootstrap-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "CrushBootstrap-Debug.xcconfig"; sourceTree = "<group>"; };
-		BD3570BC199293C2006C5409 /* CrushBootstrap-Profile.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "CrushBootstrap-Profile.xcconfig"; sourceTree = "<group>"; };
-		BD3570BD19929436006C5409 /* CrushBootstrap-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "CrushBootstrap-Release.xcconfig"; sourceTree = "<group>"; };
 		BD49EA2C18EC842B00F73350 /* CrushBootstrap-Environment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CrushBootstrap-Environment.h"; sourceTree = "<group>"; };
+		BD4E49501B8AC7BE004C140F /* CrushBootstrap-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "CrushBootstrap-Debug.xcconfig"; sourceTree = "<group>"; };
+		BD4E49511B8AC7BE004C140F /* CrushBootstrap-Profile.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "CrushBootstrap-Profile.xcconfig"; sourceTree = "<group>"; };
+		BD4E49521B8AC7BE004C140F /* CrushBootstrap-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "CrushBootstrap-Release.xcconfig"; sourceTree = "<group>"; };
+		BD4E49531B8AC7BE004C140F /* CrushBootstrap-Test.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "CrushBootstrap-Test.xcconfig"; sourceTree = "<group>"; };
+		BD4E49541B8AC7BE004C140F /* CrushBootstrap.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CrushBootstrap.xcconfig; sourceTree = "<group>"; };
+		BD4E49731B8AC7DC004C140F /* jspahrsummers-xcconfigs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "jspahrsummers-xcconfigs"; sourceTree = "<group>"; };
 		BD574AFE18EA481500EDD66F /* CrushBootstrap-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CrushBootstrap-Prefix.pch"; sourceTree = "<group>"; };
-		BD574AFF18EA481500EDD66F /* CrushBootstrap-Test.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "CrushBootstrap-Test.xcconfig"; sourceTree = "<group>"; };
-		BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = CrushBootstrap.xcconfig; sourceTree = "<group>"; };
 		BD6951CE18EA4B0800F2F410 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BD6951EA18EA54A800F2F410 /* CrushBootstrap-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CrushBootstrap-Info.plist"; sourceTree = "<group>"; };
 		BD934CD019C211F600B48551 /* AssetCatalogIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetCatalogIdentifiers.h; sourceTree = "<group>"; };
@@ -138,6 +139,19 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		BD4E494F1B8AC7BE004C140F /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				BD4E49731B8AC7DC004C140F /* jspahrsummers-xcconfigs */,
+				BD4E49501B8AC7BE004C140F /* CrushBootstrap-Debug.xcconfig */,
+				BD4E49511B8AC7BE004C140F /* CrushBootstrap-Profile.xcconfig */,
+				BD4E49521B8AC7BE004C140F /* CrushBootstrap-Release.xcconfig */,
+				BD4E49531B8AC7BE004C140F /* CrushBootstrap-Test.xcconfig */,
+				BD4E49541B8AC7BE004C140F /* CrushBootstrap.xcconfig */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
 		BD574AFA18EA47FA00EDD66F /* Library */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,15 +169,11 @@
 		BD574AFC18EA481500EDD66F /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				BD4E494F1B8AC7BE004C140F /* Configuration */,
 				BD934CCF19C211F600B48551 /* Generated */,
 				BD35136419BE274A00A19841 /* CRBSConstants.h */,
 				BD35136519BE274A00A19841 /* CRBSConstants.m */,
 				BD6951EA18EA54A800F2F410 /* CrushBootstrap-Info.plist */,
-				BD574B0018EA481500EDD66F /* CrushBootstrap.xcconfig */,
-				BD3570BB19929359006C5409 /* CrushBootstrap-Debug.xcconfig */,
-				BD574AFF18EA481500EDD66F /* CrushBootstrap-Test.xcconfig */,
-				BD3570BC199293C2006C5409 /* CrushBootstrap-Profile.xcconfig */,
-				BD3570BD19929436006C5409 /* CrushBootstrap-Release.xcconfig */,
 				BD49EA2C18EC842B00F73350 /* CrushBootstrap-Environment.h */,
 			);
 			name = "Other Sources";
@@ -327,7 +337,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = CRBS;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Crush & Lovely";
 				TargetAttributes = {
 					BDDB997218C3943B003EBC42 = {
@@ -548,8 +558,9 @@
 /* Begin XCBuildConfiguration section */
 		BD49EA2018EC611D00F73350 /* Debug_Production */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD3570BB19929359006C5409 /* CrushBootstrap-Debug.xcconfig */;
+			baseConfigurationReference = BD4E49501B8AC7BE004C140F /* CrushBootstrap-Debug.xcconfig */;
 			buildSettings = {
+				ENABLE_TESTABILITY = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -563,9 +574,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = .prod;
 				BUNDLE_NAME_SUFFIX = " (Prod)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
 				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier:lower}${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug_Production;
@@ -583,6 +596,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
 				INFOPLIST_FILE = "Specs/Specs-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -591,7 +605,7 @@
 		};
 		BD49EA2318EC612E00F73350 /* Test_Production */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD574AFF18EA481500EDD66F /* CrushBootstrap-Test.xcconfig */;
+			baseConfigurationReference = BD4E49531B8AC7BE004C140F /* CrushBootstrap-Test.xcconfig */;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
@@ -606,9 +620,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = .prod;
 				BUNDLE_NAME_SUFFIX = " (Prod)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
 				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier:lower}${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Test_Production;
@@ -626,6 +642,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
 				INFOPLIST_FILE = "Specs/Specs-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -634,12 +651,11 @@
 		};
 		BD49EA2618EC614F00F73350 /* AdHoc_Production */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD3570BD19929436006C5409 /* CrushBootstrap-Release.xcconfig */;
+			baseConfigurationReference = BD4E49521B8AC7BE004C140F /* CrushBootstrap-Release.xcconfig */;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 			};
 			name = AdHoc_Production;
 		};
@@ -650,10 +666,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = .prod;
 				BUNDLE_NAME_SUFFIX = " (Prod)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
 				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier:lower}${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = AdHoc_Production;
@@ -671,6 +688,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
 				INFOPLIST_FILE = "Specs/Specs-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -679,12 +697,11 @@
 		};
 		BD49EA2918EC62DD00F73350 /* Profile_Production */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD3570BC199293C2006C5409 /* CrushBootstrap-Profile.xcconfig */;
+			baseConfigurationReference = BD4E49511B8AC7BE004C140F /* CrushBootstrap-Profile.xcconfig */;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Profile_Production;
 		};
@@ -695,9 +712,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = .prod;
 				BUNDLE_NAME_SUFFIX = " (Prod)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
 				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier:lower}${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Profile_Production;
@@ -715,6 +734,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
 				INFOPLIST_FILE = "Specs/Specs-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -723,12 +743,11 @@
 		};
 		BDD67CDB18DFAB85008ECBBD /* AdHoc_Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD3570BD19929436006C5409 /* CrushBootstrap-Release.xcconfig */;
+			baseConfigurationReference = BD4E49521B8AC7BE004C140F /* CrushBootstrap-Release.xcconfig */;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 			};
 			name = AdHoc_Staging;
 		};
@@ -739,10 +758,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = .staging;
 				BUNDLE_NAME_SUFFIX = " (Staging)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
 				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier:lower}${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = AdHoc_Staging;
@@ -760,6 +780,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
 				INFOPLIST_FILE = "Specs/Specs-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -768,8 +789,9 @@
 		};
 		BDDB998218C3943B003EBC42 /* Debug_Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD3570BB19929359006C5409 /* CrushBootstrap-Debug.xcconfig */;
+			baseConfigurationReference = BD4E49501B8AC7BE004C140F /* CrushBootstrap-Debug.xcconfig */;
 			buildSettings = {
+				ENABLE_TESTABILITY = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -778,12 +800,11 @@
 		};
 		BDDB998318C3943B003EBC42 /* Distribution */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD3570BD19929436006C5409 /* CrushBootstrap-Release.xcconfig */;
+			baseConfigurationReference = BD4E49521B8AC7BE004C140F /* CrushBootstrap-Release.xcconfig */;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Distribution;
 		};
@@ -794,9 +815,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = .staging;
 				BUNDLE_NAME_SUFFIX = " (Staging)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
 				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier:lower}${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug_Staging;
@@ -808,10 +831,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = "";
 				BUNDLE_NAME_SUFFIX = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
 				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier:lower}${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Distribution;
@@ -829,6 +853,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
 				INFOPLIST_FILE = "Specs/Specs-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -848,6 +873,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
 				INFOPLIST_FILE = "Specs/Specs-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -856,12 +882,11 @@
 		};
 		BDF1757A18C3986D008BD9C6 /* Profile_Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD3570BC199293C2006C5409 /* CrushBootstrap-Profile.xcconfig */;
+			baseConfigurationReference = BD4E49511B8AC7BE004C140F /* CrushBootstrap-Profile.xcconfig */;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Profile_Staging;
 		};
@@ -872,9 +897,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = .staging;
 				BUNDLE_NAME_SUFFIX = " (Staging)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
 				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier:lower}${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Profile_Staging;
@@ -892,6 +919,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
 				INFOPLIST_FILE = "Specs/Specs-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -900,7 +928,7 @@
 		};
 		BDF1757D18C39BD3008BD9C6 /* Test_Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD574AFF18EA481500EDD66F /* CrushBootstrap-Test.xcconfig */;
+			baseConfigurationReference = BD4E49531B8AC7BE004C140F /* CrushBootstrap-Test.xcconfig */;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
@@ -915,9 +943,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = .staging;
 				BUNDLE_NAME_SUFFIX = " (Staging)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
 				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier:lower}${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Test_Staging;
@@ -935,6 +965,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Specs/Specs-Prefix.pch";
 				INFOPLIST_FILE = "Specs/Specs-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

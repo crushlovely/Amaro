@@ -1,0 +1,6 @@
+// Build settings for testing builds.
+
+#include "jspahrsummers-xcconfigs/iOS/iOS-Application.xcconfig"
+#include "jspahrsummers-xcconfigs/Base/Configurations/Test.xcconfig"
+#include "CrushBootstrap.xcconfig"
+
