@@ -300,6 +300,7 @@
 				5934C2BEC75D4C51B3689E07 /* Copy Pods Resources */,
 				BDC7F36218EBA5EE0045D4BD /* Remove Unused Localizations */,
 				BD35136319BE21BD00A19841 /* Badge App Icons */,
+				39C981DC16D867281773C28F /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -319,6 +320,7 @@
 				BDDB997018C3943B003EBC42 /* Frameworks */,
 				BDDB997118C3943B003EBC42 /* Resources */,
 				A20A1E42928D4423912BE388 /* Copy Pods Resources */,
+				24CF772DB41806DAC2DF5758 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -386,6 +388,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		24CF772DB41806DAC2DF5758 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Specs/Pods-Specs-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		295A078AF08D45C99B314B81 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -399,6 +416,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		39C981DC16D867281773C28F /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5934C2BEC75D4C51B3689E07 /* Copy Pods Resources */ = {
