@@ -583,7 +583,7 @@ class Bootstrapper
 
     def update_xcconfigs
         task 'Pulling latest xcconfigs' do
-            sh("'%{project_name}/Other-Sources/Configuration/jspahrsummers-xcconfigs/UpdateXCConfigs.sh'" % options)
+            sh("'%{project_name}/Other-Sources/Configuration/jspahrsummers-xcconfigs/UpdateXCConfigs.sh' -q" % options)
         end
 
         if anything_to_commit?
