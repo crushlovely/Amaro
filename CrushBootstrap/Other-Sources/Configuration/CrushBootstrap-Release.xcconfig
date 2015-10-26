@@ -1,0 +1,5 @@
+// Build settings for ad-hoc and app store builds.
+
+#include "jspahrsummers-xcconfigs/iOS/iOS-Application.xcconfig"
+#include "jspahrsummers-xcconfigs/Base/Configurations/Release.xcconfig"
+#include "CrushBootstrap.xcconfig"

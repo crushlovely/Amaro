@@ -1,9 +1,0 @@
-// Build settings for testing builds.
-
-#include "../../External/xcconfigs/iOS/iOS-Application.xcconfig"
-#include "../../External/xcconfigs/Base/Configurations/Test.xcconfig"
-#include "CrushBootstrap.xcconfig"
-
-// Instrument for code coverage:
-GCC_GENERATE_TEST_COVERAGE_FILES = YES
-GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES

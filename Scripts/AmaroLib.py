@@ -1,7 +1,9 @@
 from __future__ import print_function, unicode_literals
 
-import os
 import sys
+sys.path.append('/System/Library/Frameworks/Python.framework/Versions/Current/Extras/lib/python/PyObjC')
+
+import os
 from collections import defaultdict
 import types
 import Foundation

@@ -13,10 +13,7 @@ require 'pathname'
 # for running the script under expect(1), which is used for testing purposes,
 # and gets confused by all our l33t TTY hackery.
 
-# If the option --crashlytics is passed to the script, it will run through
-# the process of fetching your Crashlytics API key and nothing else.
-
-# Otherwise, if an argument is passed to the script, it is expected to be a path
+# If an argument is passed to the script, it is expected to be a path
 # to a local clone of the Amaro repository. In this case, instead of cloning the
 # github repo, the local clone is copied into place and cleaned up.
 # This is intended to test modifications to the repo without needing to push
@@ -75,7 +72,7 @@ module AmaroUtils
         
         has_changes = anything_to_commit?
         if error_if_nothing_to_commit && !has_changes
-            raise AmaroError('Repository Error', 'There should be something to commit at this point, but there\'s not!')
+            raise AmaroError.new('Repository Error', 'There should be something to commit at this point, but there\'s not!')
         elsif has_changes
             sh("git commit -q -m '[Amaro] #{message}'")
         end
@@ -87,14 +84,38 @@ module AmaroUtils
     end
 
     def task(message, failure_is_fatal: true)
-        print "#{message}...".blue.bold
+        print "#{message}... ".blue.bold
+        system('tput sc')
+
+        recall_cursor = `tput rc`
+        clear_to_end_of_line = `tput el`
+
+        chars = %w(⣻ ⢿ ⡿ ⣟ ⣯ ⣷ ⣾ ⣽)
+        bg_thread = Thread.new do
+            system('tput civis')
+            begin
+                print chars[0]
+                i = 0
+                loop do
+                    sleep 0.1
+                    i = (i + 1) % chars.length
+                    print "#{recall_cursor}#{chars[i]}#{clear_to_end_of_line}"
+                end
+            ensure
+                system('tput cnorm')
+            end
+        end
+
         begin
+            bg_thread.run if STDIN.isatty && !ENV['AMARO_EXPECT']
             yield
         rescue AmaroError => e
-            puts ' 💀'
+            puts "#{recall_cursor}💀#{clear_to_end_of_line}"
             die(e.message, e.details, :fatal => failure_is_fatal)
         else
-            puts ' 👍'
+            puts "#{recall_cursor}👍#{clear_to_end_of_line}"
+        ensure
+            bg_thread.kill
         end
     end
 
@@ -390,152 +411,6 @@ class YesNoPrompt < Prompt
 end
 
 
-class CrashlyticsFlow
-    ENDPOINT_URL = 'https://api.crashlytics.com/api/v2/session.json'
-    TOKEN_HEADER_KEY = 'X-CRASHLYTICS-DEVELOPER-TOKEN'
-    APP_BUNDLE_ID = 'com.crashlytics.mac'
-    APP_BINARY_NAME = 'Crashlytics'
-    REPLACEMENT_CRASHLYTICS_KEY = '((CrashlyticsAPIKey))'
-
-    def initialize(standalone: false)
-        @standalone = standalone
-
-        @email = Prompt.new('Email address')
-
-        @password = Prompt.new('Password')
-        @password.secure_echo = true
-        @password.strip = false
-    end
-
-    def run!
-        if @standalone
-            puts "Let's fetch your Crashlytics API key!\nEnter your Crashlytics credentials.\n\n"
-        else
-            return unless YesNoPrompt.run!('Would you like to set up Crashlytics?', :default => false)
-        end
-
-        dev_token = nil
-
-        task 'Finding Crashlytics developer token', :failure_is_fatal => false do
-            dev_token = get_dev_token
-        end
-
-        return if dev_token.nil?
-
-        organizations = get_organizations dev_token
-        return if organizations.nil?
-
-        api_key = get_api_key organizations
-        return if api_key.nil?
-
-        do_replacement = !@standalone
-
-        if @standalone
-            puts "\nYour Crashlytics API key is:\n  #{api_key.bold}\n\n"
-            if File.exist? '.amaro'
-                puts "You seem to be in the directoy for an Amaro project.".blue
-                do_replacement = YesNoPrompt.run!("Would you like install the key into the project in this directory?", :default => false)
-            else
-                puts "You don't seem to be in the directory of an Amaro project.".yellow
-                do_replacement = false
-            end
-        end
-
-        if do_replacement
-            task 'Installing Crashlytics key' do
-                filelist = FileList['**/*'].exclude('tiramisu')
-                replace_in_files(filelist, REPLACEMENT_CRASHLYTICS_KEY, api_key)
-                commit 'Install Crashlytics key'
-            end
-        else
-            puts "\nTo use Crashlytics in your app, make sure the CrashlyticsFramework pod\nis included, and copy the API key above into the Crashlytics build\nphase and the app delegate."
-        end
-
-        api_key
-    end
-
-    private
-
-    include AmaroUtils
-
-    def get_dev_token
-        app_path = `mdfind "kMDItemCFBundleIdentifier == '#{APP_BUNDLE_ID}'" 2>/dev/null`.split($/).first
-        raise AmaroError, 'Crashlytics does not seem to be installed.' if app_path.nil? || app_path.empty?
-
-        app_path = File.join(app_path, 'Contents', 'MacOS', APP_BINARY_NAME)
-        raise AmaroError, "The Crashlytics binary (#{app_path}) is not readable." unless File.file? app_path
-
-        strings = `strings -n #{TOKEN_HEADER_KEY.length} '#{app_path}' | grep -C10 '#{TOKEN_HEADER_KEY}' 2>/dev/null`.split($/)
-        strings.select! { |s| s =~ /^[0-9a-f]{40}$/i }  # We're looking for a 40-character hex string
-
-        # If we didn't match anything, or we matched too many things, bail. Better safe than sorry.
-        raise AmaroError, 'Unable to find your developer token in the Crashlytics binary.' unless strings.length == 1
-
-        strings[0]
-    end
-
-    def get_organizations(dev_token)
-        Prompt.run_sequence(@email, @password)
-        organizations = nil
-        auth_error = false
-
-        task 'Fetching account details from the Crashlytics API', :failure_is_fatal => false do
-            begin
-                organizations = get_organizations_from_api(dev_token, @email.value, @password.value)
-            rescue Net::HTTPServerException
-                auth_error = true
-                raise AmaroError, 'There seems to be a problem with your email or password.'
-            end
-        end
-
-        return get_organizations(dev_token) if auth_error && YesNoPrompt.run!('Would you like to try again?')
-        organizations
-    end
-
-    def get_organizations_from_api(dev_token, email, password)
-        uri = URI.parse(ENDPOINT_URL)
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = uri.scheme.downcase == 'https'
-
-        request = Net::HTTP::Post.new(uri.request_uri)
-        request.body = { 'email' => email, 'password' => password }.to_json
-        request['Content-Type'] = 'application/json'
-        request[TOKEN_HEADER_KEY] = dev_token
-
-        response = http.request(request) rescue raise(AmaroError, 'Error communicating with the Crashlytics server.')
-        response.error! if response.code == '401' # Authentication error; retriable
-        raise AmaroError, 'Error communicating with the Crashlytics server.' if response.code != '201'
-
-        body = JSON.parse(response.body) rescue raise(AmaroError, 'Received an invalid response from the Crashlytics server.')
-        organizations = body['organizations']
-        raise AmaroError, 'Unable to get a list of organizations from the Crashlytics API.' if organizations.nil? || organizations.empty?
-        Hash[organizations.map { |o| [o['name'], o['api_key']] }]
-    end
-
-    def get_api_key(orgs)
-        if orgs.length == 1
-            puts "  ✨  Using the Crashlytics key from the organization #{orgs.keys[0].bold}."
-            return orgs.values[0]
-        end
-
-        puts "\nYou belong to multiple organizations in Crashlytics.".blue
-        orgs.keys.each_with_index { |name, i| puts "  #{i + 1}. #{name}" }
-
-        Prompt.run!('Enter the number of the organization you\'d like to use, or "q" to cancel') do |p|
-            p.length_limit = 2
-            p.show_correction = false
-            p.validation_proc = lambda do |input|
-                return nil if input.downcase == 'q'
-
-                as_int = input.to_i
-                raise 'Please enter one of the numbers above, or "q" to cancel.' unless as_int > 0 && as_int <= orgs.length
-
-                orgs.values[as_int - 1]
-            end
-        end
-    end
-end
-
 
 class Bootstrapper
     REPLACEMENT_PREFIX = 'CRBS'
@@ -543,7 +418,7 @@ class Bootstrapper
     REPLACEMENT_ORGANIZATION = 'Crush & Lovely'
     REPLACEMENT_DOMAIN = 'com.crushlovely'
 
-    BOOTSTRAP_REPO = 'git://github.com/crushlovely/Amaro.git'
+    BOOTSTRAP_REPO = 'https://github.com/crushlovely/Amaro.git'
     DEFAULT_BOOTSTRAP_BRANCH = 'master'
     BOOTSTRAP_WEBSITE = 'https://github.com/crushlovely/Amaro'
 
@@ -554,8 +429,8 @@ class Bootstrapper
         init_git
         rename_files
         update_contents
-        init_externals
-        set_up_crashlytics
+        update_xcconfigs
+        install_pods
         remove_bootstrap_detritus
     end
 
@@ -569,10 +444,14 @@ class Bootstrapper
             
             sh('which -s pod', 'CocoaPods is not installed. See http://cocoapods.org/#install', :show_output_on_error => false)
             pod_version = sh('pod --version', 'Error getting CocoaPods version. Make sure the pod binary is functional.').strip
-            version_is_good = Gem::Dependency.new('pod', '>0.34.0').match?('pod', pod_version)
-            raise AmaroError.new("Amaro requires version 0.34.1 or later of CocoaPods. You have version #{pod_version}", 'Running "gem update cocoapods" should fix this.') unless version_is_good
+            pod_version_is_good = Gem::Dependency.new('pod', '>0.34.0').match?('pod', pod_version)
+            raise AmaroError.new("Amaro requires version 0.34.1 or later of CocoaPods. You have version #{pod_version}", 'Running "gem update cocoapods" should fix this.') unless pod_version_is_good
 
-            sh('pkgutil --pkg-info=com.apple.pkg.CLTools_Executables', 'The Xcode command line tools are not installed. Running "xcode-select --install" should fix that.', :show_output_on_error => false)
+            dev_tools_path = sh('xcode-select -p', 'The Xcode command line tools don\'t seem to be installed. Running "xcode-select --install" should fix that.', :show_output_on_error => false).strip
+            xcode_version = sh("/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' '#{dev_tools_path}/../Info.plist'").strip
+            xcode_version_is_good = Gem::Dependency.new('xcode', '~>7.0').match?('xcode', xcode_version)
+            raise AmaroError.new("Amaro requires the default Xcode command line tools to point to Xcode 7.0 or later. Yours point to #{xcode_version}.", 'Install Xcode 7.0 or later, and run "xcode-select" to point to that.') unless xcode_version_is_good
+
 
             if ARGV.empty?
                 @source_path = nil
@@ -589,7 +468,7 @@ class Bootstrapper
 
     def puts_source_description
         if @source_path.nil?
-            puts 'Repository: '.gray.bold + Bootstrapper::BOOTSTRAP_REPO.gray
+            puts 'Repository: '.gray.bold + BOOTSTRAP_REPO.gray
             puts 'Branch: '.gray.bold + @bootstrap_branch.gray
         else
             puts 'Using local clone: '.gray.bold + @source_path.gray
@@ -637,7 +516,7 @@ class Bootstrapper
 
         task 'Cleaning up' do
             # See issue #21
-            sh("git remote rm bootstrap")
+            sh('git remote rm bootstrap')
         end
     end
 
@@ -646,7 +525,6 @@ class Bootstrapper
             # Note the trailing / appended to source_path. Otherwise rsync will put
             # a copy of the directory inside the destination, rather than a copy of its contents.
             sh("rsync -a '#{@source_path}/' . --exclude=/.git --exclude=/README.md")
-            sh("cp -R '#{@source_path}/.git/modules' .git/")
             commit 'Bootstrapping'
 
             sh('git clean -xdf') # Remove .gitignored files and directories
@@ -703,24 +581,30 @@ class Bootstrapper
         end
     end
 
-    def init_externals
-        edit 'Podfile' if YesNoPrompt.run!('Would you like to edit your Podfile?', :default => false)
+    def update_xcconfigs
+        task 'Pulling latest xcconfigs' do
+            sh("'%{project_name}/Other-Sources/Configuration/jspahrsummers-xcconfigs/UpdateXCConfigs.sh' -q" % options)
+        end
 
-        task 'Initializing submodules and CocoaPods' do
-            sh('git submodule -q update --init --recursive')
-            sh("git submodule --quiet foreach 'git checkout -q master'")
-            sh('pod install --silent')
-            commit 'Install pods and submodules'
+        if anything_to_commit?
+            task 'Committing' do
+                commit 'Updated xcconfigs'
+            end
         end
     end
 
-    def set_up_crashlytics
-        return unless Dir.exist? 'Pods/CrashlyticsFramework'
+    def install_pods
+        edit 'Podfile' if YesNoPrompt.run!('Would you like to edit your Podfile?', :default => false)
 
-        api_key = CrashlyticsFlow.new.run!
-        if api_key.nil?
-            puts 'You can set up Crashlytics later by following the instructions in the project.'.gray
-            return
+        if anything_to_commit?
+            task 'Committing' do
+                commit 'Modified Podfile'
+            end
+        end
+
+        task 'Installing CocoaPods' do
+            sh('pod install --silent')
+            commit 'Install pods and update subtrees'
         end
     end
 
@@ -763,7 +647,7 @@ class_prefix = Prompt.new('Class prefix (optional; 2 or preferably 3 characters)
 
         input.upcase!
 
-        bad_prefixes = %w(AB AC AD AL AU AV CA CB CF CG CI CL CM CV CT EA EK GC JS MA MC MF MK NK NS PK QL SC SK SL SS TW UI UT SCN)
+        bad_prefixes = %w(AB AC AD AF AL AU AV CA CB CF CG CI CL CM CV CT EA EK GC JS MA MC MF MK NK NS PK QL SC SK SL SS TW UI UT SCN WK)
         raise 'That prefix is already in use by a well-known library.' if bad_prefixes.include? input
 
         raise 'Class prefixes must be valid identifiers.' unless input =~ /^[A-Z][A-Z0-9]+$/
@@ -775,7 +659,7 @@ end
 
 full_name = Prompt.new('Your name', :key => :full_name) do |p|
     last_line = `dscl . read "/Users/$USER" RealName 2>/dev/null`.lines.last || ''
-    p.default = last_line.strip.empty? ? 'Mr. Developer' : last_line.strip
+    p.default = last_line.strip.empty? ? 'Pfr. Developer' : last_line.strip
 end
 
 
@@ -806,19 +690,9 @@ print <<'EOS'.chomp.faint
   \ \__\        \ \__\
    \/__/         \/__/
 EOS
-puts "  Amaro v0.3.8\n".blue.bold
+puts "  Amaro v1.0.0\n".blue.bold
 
 
-# Are we doing the standalone Crashlytics stuff?
-if !ARGV.empty? && ARGV[0] == '--crashlytics'
-    crashlytics_flow = CrashlyticsFlow.new(:standalone => true)
-    api_key = crashlytics_flow.run!
-
-    exit
-end
-
-
-# Otherwise, off to the races
 bootstrapper = Bootstrapper.new
 bootstrapper.check_sanity
 

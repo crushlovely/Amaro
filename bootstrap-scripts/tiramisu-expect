@@ -27,8 +27,5 @@ send -h "n\r"
 
 set timeout 500
 
-expect -re "Would you like to set up .*? "
-send -h "n\r"
-
 expect -re "Would you like to open *? "
 send -h "n\r"

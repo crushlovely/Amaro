@@ -11,15 +11,19 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 
-    #import <CocoaLumberjack/DDLog.h>
+    #import "CrushBootstrap-Environment.h"
 
-    static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+    #if HAS_POD(CocoaLumberjack)
+        #import <CocoaLumberjack/CocoaLumberjack.h>
+        static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
+    #endif
 
-    #import <Specta/Specta.h>
+    #if HAS_POD(Specta)
+        #import <Specta/Specta.h>
 
-    #define EXP_SHORTHAND
-    #import <Expecta/Expecta.h>
-
-    #define MOCKITO_SHORTHAND
-    #import <OCMockito/OCMockito.h>
+        #if HAS_POD(Expecta)
+            #define EXP_SHORTHAND
+            #import <Expecta/Expecta.h>
+        #endif
+    #endif
 #endif

@@ -8,7 +8,7 @@
 
 
 // Pull in tgmath for seamless 32-/64-bit math functions.
-// Due to a nasty clang situation right now (early 2014), we can't just use <tgmath.h>
+// Due to a nasty clang situation right now (mid 2015), we can't just use <tgmath.h>
 // directly. See the note in the header.
 #if HAS_POD(Sidecar)
 #import <Sidecar/tgmath-stopgap.h>
@@ -17,8 +17,8 @@
 
 #import <Availability.h>
 
-#ifndef __IPHONE_7_0
-#warning "This project uses features only available in iOS SDK 7.0 and later."
+#ifndef __IPHONE_8_0
+#warning "This project uses features only available in iOS SDK 8.0 and later."
 #endif
 
 
@@ -27,35 +27,35 @@
     #import <Foundation/Foundation.h>
 
     #if HAS_POD(CocoaLumberjack)
-        #if COCOAPODS_VERSION_MAJOR_CocoaLumberjack == 1
-            #import <CocoaLumberjack/DDLog.h>
-        #else
-            #import <CocoaLumberjack/CocoaLumberjack.h>
-        #endif
+        #import <CocoaLumberjack/CocoaLumberjack.h>
 
         #ifdef DEBUG
-            static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+            static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
         #else
-            static const int ddLogLevel = LOG_LEVEL_WARN;
+            static const DDLogLevel ddLogLevel = DDLogLevelWarning;
         #endif
     #endif
 
     #if HAS_POD(Sidecar)
-        #import <Sidecar/CRLCategoriesAndUtils.h>
+        #import <Sidecar/Sidecar.h>
     #endif
 
-    #if HAS_POD(libextobjc)
+    #if HAS_POD_INCLUDE(libextobjc, extobjc)
         // A lot of the extobjc stuff is a little crazy.
         // We're including it mainly for 2 things:
         // The Scope module which gives @weakify and @strongify, and
         // the KeyPathCoding module which gives @keypath and @collectionkeypath.
-        // Use of any of the other modules is not recommended.
+        // Proceed with caution with the other modules.
         #import <libextobjc/EXTScope.h>
         #import <libextobjc/EXTKeyPathCoding.h>
     #endif
 
     #if HAS_POD(Asterism)
         #import <Asterism/Asterism.h>
+    #endif
+
+    #if HAS_POD(Masonry)
+        #import <Masonry/Masonry.h>
     #endif
 
     #import "CRBSConstants.h"

@@ -1,0 +1,7 @@
+// Build settings for profile builds.
+
+#include "jspahrsummers-xcconfigs/iOS/iOS-Application.xcconfig"
+#include "jspahrsummers-xcconfigs/Base/Configurations/Profile.xcconfig"
+#include "CrushBootstrap.xcconfig"
+
+ONLY_ACTIVE_ARCH = YES

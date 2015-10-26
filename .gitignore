@@ -18,12 +18,11 @@ profile
 DerivedData
 *.hmap
 *.ipa
+ObjectiveC.gcda
+*.xcscmblueprint
 
 # CocoaPods
 Pods
-
-# Sass' compilation cache
-.sass-cache
 
 # >>>bootstrap-only
 # This 'bootstrap-only' block will be removed from this file for projects created from tiramisu.
