@@ -1,6 +1,10 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 
+# Uncomment this line if you need Swift support:
+# use_frameworks!
+
+
 # Crush Utility Belt
 pod 'Sidecar', '~> 1.0'
 

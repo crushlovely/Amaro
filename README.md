@@ -24,18 +24,14 @@ Of course, if you're wary of running random scripts (legit!), please read [tiram
 ## Details and Requirements
 The bootstrap assumes:
 
-* You are using Xcode 5 or later.
+* You are using Xcode 7 or later.
 * You have version 0.34.1 or later of the [CocoaPods gem](http://cocoapods.org/#install) installed.
 * You are on OS 10.9 or later
-* You are targetting iOS 7.0, at minimum (and thus will be compiling against at least the iOS 7.0 SDK).
-    * As of [July 2014](https://developer.apple.com/support/appstore/), iOS 7 has an 90% adoption rate.
-
-And, optionally:
-
-* Sass/`.scss` support requires the [Sass command line tool](http://sass-lang.com/install) to be installed.
+* You are targetting iOS 8.0, at minimum (and thus will be compiling against at least the iOS 8.0 SDK).
+    * As of [October 2015](https://developer.apple.com/support/appstore/), 91% of iOS devices are on iOS 8 or later.
 
 
-**Want to use Swift?** Amaro won't stop you, but note that CocoaPods support for third-party Swift projects is still pending. See [this issue](https://github.com/crushlovely/Amaro/issues/17) for details and future plans.
+**Want to use Swift?** Go to town! The small amount of code that is included in generated projects is in Objective-C, but you can blow it all away and replace it with Swift on a whim.
 
 
 ## What's Included?
@@ -59,30 +55,22 @@ Amaro aims to set you up with all you need to write a beautiful, maintainable, w
 
 ### Logging, Error Reporting, Testing
 * [CocoaLumberjack](https://github.com/CocoaLumberjack/CocoaLumberjack) is configured for logging. A [custom formatter](https://github.com/crushlovely/Sidecar/blob/master/Sidecar/CRLMethodLogFormatter.h) is used by default to include the class and method name in log messages.
-* The [Crashlytics framework](http://crashlytics.com) is included, and tied into CocoaLumberjack via [CrashlyticsLumberjack](https://github.com/TechSmith/CrashlyticsLumberjack) so that high-importance log messages are sent to Crashlytics.
-* [Aperitif](https://github.com/crushlovely/Aperitif), to check for updates of the app in [Installr](https://installrapp.com) and prompt the user to install them (in ad hoc builds only, obviously).
-* [Specta](https://github.com/specta/specta), [Expecta](https://github.com/specta/expecta), and [OCMokito](https://github.com/jonreid/OCMockito) are included to allow for the creation of [Rspec](http://rspec.info)-like tests. Xcode integration for testing is fully configured; add your tests to the Specs target and hit Cmd+U.
-* The test target automatically generates code coverage data that can be viewed with [Cover Story](https://code.google.com/p/coverstory/) or [gcov](http://gcc.gnu.org/onlinedocs/gcc/Gcov-Intro.html).
-
-### Visuals
-* [Pixate Freestyle](https://github.com/Pixate/pixate-freestyle-ios), for easy, centralized app styling via CSS.
-    * SCSS files included in the project are automatically compiled at build-time, and only the resulting CSS is included in your app. This functionality requires that [Sass](http://sass-lang.com/install) be installed and available in your path (or in your default RVM configuration's path).
+* [Specta](https://github.com/specta/specta) and [Expecta](https://github.com/specta/expecta) are included to allow for the creation of [Rspec](http://rspec.info)-like tests. Xcode integration for testing is fully configured; add your tests to the Specs target and hit Cmd+U.
 
 ### Utility Belt
 * [AFNetworking](https://github.com/AFNetworking/AFNetworking)
 * [libextobjc](https://github.com/jspahrsummers/libextobjc)'s [scope](https://github.com/jspahrsummers/libextobjc/blob/master/extobjc/EXTScope.h) and [keypath checking](https://github.com/jspahrsummers/libextobjc/blob/master/extobjc/EXTKeyPathCoding.h) modules.
-* [FormatterKit](https://github.com/mattt/FormatterKit), for all your string-formatting needs.
 * [Asterism](https://github.com/robb/Asterism), a fast, simple and flexible library for manipulating collections.
 * [Sidecar](https://github.com/crushlovely/Sidecar), Crush's homegrown library. Features commonly needed functionality, such as creating UIColors from hex, playing short sound effects, and performing blocks on the main thread.
 
 ### More...
-Additionally, the Podfile notes a few optional libraries that you may find useful:
+Additionally, the Podfile notes a few other libraries that you may find useful:
 
+* [FormatterKit](https://github.com/mattt/FormatterKit), for all your string-formatting needs.
 * [PromiseKit](https://github.com/mxcl/PromiseKit/blob/master/LICENSE), a promises/futures library similar to [Promises/A+](http://promises-aplus.github.io/promises-spec/), and related wrappers for core libraries.
 * [Mantle](https://github.com/MantleFramework/Mantle), a project from the GitHub folks to make simpler, safer model classes.
 * [SSKeychain](https://github.com/soffes/sskeychain), a friendly wrapper around the Keychain API.
 * [DateTools](https://github.com/MatthewYork/DateTools), if you find yourself needing to do a lot of datetime math.
-* [OHHTTPStubs](https://github.com/AliSoftware/OHHTTPStubs), to stub out responses from web services for testing or early in development.
 
 
 ## Maintaining the Spirit
@@ -97,7 +85,6 @@ Here are some specific tips:
     * There should almost never be a reason to check in third-party projects wholesale. If you need to modify someone else's code, fork the repo and include the fork in your Podfile with a direct [`:git` reference](http://guides.cocoapods.org/syntax/podfile.html#pod).
 * Use CocoaLumberjack's `DDLog` variants instead of `NSLog`. It's faster, provides more information, is more configurable, and understands log levels. All of that with the same familiar syntax. Retrain your fingers.
 * Need to define different settings in staging and production? Check out the [ProjectName-Environment.h](CrushBootstrap/Other-Sources/CrushBootstrap-Environment.h) file in Other Sources. It defines macros to test the type of build that is currently taking place.
-* Make friends with Pixate Freestyle. We've yet to have much experience with it in the real world, but it seems pretty damn amazing. Check out the [samples](https://github.com/Pixate/pixate-freestyle-ios/tree/master/samples) to see what I mean.
 
 
 ## License
@@ -114,11 +101,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## Third-Party License Rundown
 
-As mentioned above, the bootstrap [automatically generates a settings section](https://github.com/CocoaPods/CocoaPods/wiki/Acknowledgements) containing license information for all your Cocoapods. If that's unacceptable for your purposes, here's the license information on the included and optional components:
+As mentioned above, the bootstrap [automatically generates a settings section](https://github.com/CocoaPods/CocoaPods/wiki/Acknowledgements) containing license information for all your Cocoapods. If that's unacceptable for your purposes, here's the license information on the major components:
 
-* Pixate Freestyle: [Apache 2](https://github.com/Pixate/pixate-freestyle-ios/blob/master/LICENSE) -- **requires a copy of the license somewhere in the distribution**
-* Crashlytics Framework: [Terms and Conditions](http://try.crashlytics.com/terms)
-* CrashlyticsLumberjack: [BSD 3-Clause](https://github.com/TechSmith/CrashlyticsLumberjack/blob/master/LICENSE) -- see [this StackOverflow discussion](http://stackoverflow.com/a/670982) about the implications of this for iOS applications (short version: consensus seems to be "do what you will", but the official word is unclear).
 * CocoaLumberjack: [standard BSD](https://github.com/CocoaLumberjack/CocoaLumberjack/blob/master/LICENSE.txt)
 * AFNetworking: [MIT](https://github.com/AFNetworking/AFNetworking/blob/master/LICENSE)
 * extobjc: [MIT](https://github.com/jspahrsummers/libextobjc/blob/master/LICENSE.md)
@@ -129,7 +113,6 @@ As mentioned above, the bootstrap [automatically generates a settings section](h
 * SSKeyChain: [MIT](https://github.com/soffes/sskeychain/blob/master/LICENSE)
 * DateTools: [MIT](https://github.com/MatthewYork/DateTools/blob/master/LICENSE)
 * Sidecar: [MIT](https://github.com/crushlovely/Sidecar/blob/master/LICENSE)
-* Aperitif: [MIT](https://github.com/crushlovely/Aperitif/blob/master/LICENSE)
 
 
 ## Similar Projects
