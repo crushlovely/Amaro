@@ -1,4 +1,4 @@
-# ![icon](CrushBootstrap/Resources/Images.xcassets/AppIcon.appiconset/Icon-60@2x.png) Amaro [![Build Status](http://img.shields.io/travis/crushlovely/Amaro.svg?style=flat)](https://travis-ci.org/crushlovely/Amaro)
+# ![icon](CrushBootstrap/Resources/Images.xcassets/AppIcon.appiconset/Icon-60@2x.png) Amaro [![Build Status](https://img.shields.io/travis/crushlovely/Amaro.svg?style=flat)](https://travis-ci.org/crushlovely/Amaro)
 
 Crush & Lovely's iOS boilerplate.
 
@@ -51,7 +51,7 @@ Amaro aims to set you up with all you need to write a beautiful, maintainable, w
 * The build number of the app is incremented on every ad-hoc and distribution build. This ensures that external distribution services can reliably distinguish builds, even if the version number itself doesn't change.
 * [CocoaPods](http://cocoapods.org) are integrated from the get-go.
 * A barebones settings bundle is included with an "Acknowledgements" section that includes licenses for all your pods. It's automatically updated after each `pod install`.
-* Identifiers from storyboards and asset catalogs are pulled out into constants, much like [objc-codegenutils](https://github.com/square/objc-codegenutils/).
+* Identifiers from storyboards and asset catalogs are pulled out into constants, much like [objc-codegenutils](https://github.com/puls/objc-codegenutils).
 
 ### Logging, Error Reporting, Testing
 * [CocoaLumberjack](https://github.com/CocoaLumberjack/CocoaLumberjack) is configured for logging. A [custom formatter](https://github.com/crushlovely/Sidecar/blob/master/Sidecar/CRLMethodLogFormatter.h) is used by default to include the class and method name in log messages.
@@ -68,7 +68,7 @@ Additionally, the Podfile notes a few other libraries that you may find useful:
 
 * [FormatterKit](https://github.com/mattt/FormatterKit), for all your string-formatting needs.
 * [PromiseKit](https://github.com/mxcl/PromiseKit/blob/master/LICENSE), a promises/futures library similar to [Promises/A+](http://promises-aplus.github.io/promises-spec/), and related wrappers for core libraries.
-* [Mantle](https://github.com/MantleFramework/Mantle), a project from the GitHub folks to make simpler, safer model classes.
+* [Mantle](https://github.com/Mantle/Mantle), a project from the GitHub folks to make simpler, safer model classes.
 * [SSKeychain](https://github.com/soffes/sskeychain), a friendly wrapper around the Keychain API.
 * [DateTools](https://github.com/MatthewYork/DateTools), if you find yourself needing to do a lot of datetime math.
 
@@ -109,7 +109,7 @@ As mentioned above, the bootstrap [automatically generates a settings section](h
 * FormatterKit: [MIT](https://github.com/mattt/FormatterKit/blob/master/LICENSE)
 * Asterism: [MIT](https://github.com/mattt/FormatterKit/blob/master/LICENSE)
 * PromiseKit: [MIT](https://github.com/mxcl/PromiseKit/blob/master/LICENSE)
-* Mantle: [MIT](https://github.com/MantleFramework/Mantle)
+* Mantle: [MIT](https://github.com/Mantle/Mantle)
 * SSKeyChain: [MIT](https://github.com/soffes/sskeychain/blob/master/LICENSE)
 * DateTools: [MIT](https://github.com/MatthewYork/DateTools/blob/master/LICENSE)
 * Sidecar: [MIT](https://github.com/crushlovely/Sidecar/blob/master/LICENSE)
@@ -117,7 +117,7 @@ As mentioned above, the bootstrap [automatically generates a settings section](h
 
 ## Similar Projects
 
-Once upon a time there was [a similar project](http://iosboilerplate.com/ "iOS Boilerplate"), but it seems to have been abandoned. More recently, the lovely folks at [thoughtbot](http://thoughtbot.com/) released [liftoff](https://github.com/thoughtbot/liftoff). Amaro takes a different tack than liftoff: more opinions, less scriptability. Check it out for an alternative take on the problem.
+Once upon a time there was [a similar project](http://iosboilerplate.com/ "iOS Boilerplate"), but it seems to have been abandoned. More recently, the lovely folks at [thoughtbot](https://thoughtbot.com/) released [liftoff](https://github.com/thoughtbot/liftoff). Amaro takes a different tack than liftoff: more opinions, less scriptability. Check it out for an alternative take on the problem.
 
 Know of anything else in the realm? [Drop us a line!](mailto:engineering@crushlovely.com) We'd love to hear about it and see how others are tackling things.
 
