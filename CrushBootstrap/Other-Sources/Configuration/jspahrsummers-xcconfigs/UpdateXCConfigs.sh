@@ -18,7 +18,7 @@ cd "$(dirname "$0")"
 
 say "Grabbing latest xcconfigs..."
 
-curl -fSL#$CURL_QUIET_OPT 'https://github.com/jspahrsummers/xcconfigs/archive/master.zip' | tar xz --strip-components=1
+curl -fSL#$CURL_QUIET_OPT 'https://github.com/jspahrsummers/xcconfigs/archive/master.tar.gz' | tar xz --strip-components=1
 
 # No commit checking stuff in quiet mode
 $QUIET && exit 0
