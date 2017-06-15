@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		036A61EAF6146EA59BD29634 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A06B515E067379B8477A8245 /* libPods.a */; };
 		074C8AD7A4D403DECEE7F926 /* libPods-Specs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46A5F5E57179B0D085AF4FF2 /* libPods-Specs.a */; };
 		BD304C8118E672EA0034105E /* CRBSDummySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = BD304C8018E672EA0034105E /* CRBSDummySpec.m */; };
 		BD304C8318E77F7E0034105E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BD304C8218E77F7E0034105E /* Settings.bundle */; };
@@ -34,21 +33,12 @@
 
 /* Begin PBXFileReference section */
 		12CC9EC171F3BB2114E66841 /* Pods-Specs.test_staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Specs.test_staging.xcconfig"; path = "Pods/Target Support Files/Pods-Specs/Pods-Specs.test_staging.xcconfig"; sourceTree = "<group>"; };
-		2CB569C4CA54BBB2A8A3438F /* Pods.adhoc_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.adhoc_production.xcconfig; path = "Pods/Target Support Files/Pods/Pods.adhoc_production.xcconfig"; sourceTree = "<group>"; };
 		326C1F0145B5BE66CBCC67F1 /* Pods-Specs.test_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Specs.test_production.xcconfig"; path = "Pods/Target Support Files/Pods-Specs/Pods-Specs.test_production.xcconfig"; sourceTree = "<group>"; };
-		3EA32E3BEF65BE84130D7190 /* Pods.profile_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.profile_production.xcconfig; path = "Pods/Target Support Files/Pods/Pods.profile_production.xcconfig"; sourceTree = "<group>"; };
 		40BA951C2C05A8E480C4A89C /* Pods-Specs.distribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Specs.distribution.xcconfig"; path = "Pods/Target Support Files/Pods-Specs/Pods-Specs.distribution.xcconfig"; sourceTree = "<group>"; };
 		46A5F5E57179B0D085AF4FF2 /* libPods-Specs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Specs.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D26DC1D97A4FF5AB8CC483F /* Pods-Specs.profile_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Specs.profile_production.xcconfig"; path = "Pods/Target Support Files/Pods-Specs/Pods-Specs.profile_production.xcconfig"; sourceTree = "<group>"; };
-		570039B4FD45DBAF5A8E969C /* Pods.test_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.test_production.xcconfig; path = "Pods/Target Support Files/Pods/Pods.test_production.xcconfig"; sourceTree = "<group>"; };
-		5AF873AF0F585B45C1E0F5B4 /* Pods.adhoc_staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.adhoc_staging.xcconfig; path = "Pods/Target Support Files/Pods/Pods.adhoc_staging.xcconfig"; sourceTree = "<group>"; };
-		62820E5E5DCE1B7643DDFCAC /* Pods.debug_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug_production.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug_production.xcconfig"; sourceTree = "<group>"; };
 		6770FFEDF6A5EE7451E4DEDF /* Pods-Specs.adhoc_staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Specs.adhoc_staging.xcconfig"; path = "Pods/Target Support Files/Pods-Specs/Pods-Specs.adhoc_staging.xcconfig"; sourceTree = "<group>"; };
-		6AE8431A4C79A1C8F2737EEB /* Pods.profile_staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.profile_staging.xcconfig; path = "Pods/Target Support Files/Pods/Pods.profile_staging.xcconfig"; sourceTree = "<group>"; };
-		8B825A2DB6F2180BF8C6BAE6 /* Pods.distribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.distribution.xcconfig; path = "Pods/Target Support Files/Pods/Pods.distribution.xcconfig"; sourceTree = "<group>"; };
-		973497EBFED9FC87626B9E25 /* Pods.debug_staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug_staging.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug_staging.xcconfig"; sourceTree = "<group>"; };
 		A06B515E067379B8477A8245 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		B9A22FEAECDB5B172A6420E4 /* Pods.test_staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.test_staging.xcconfig; path = "Pods/Target Support Files/Pods/Pods.test_staging.xcconfig"; sourceTree = "<group>"; };
 		B9B99CA30A14373A9E910099 /* Pods-Specs.debug_staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Specs.debug_staging.xcconfig"; path = "Pods/Target Support Files/Pods-Specs/Pods-Specs.debug_staging.xcconfig"; sourceTree = "<group>"; };
 		BD304C8018E672EA0034105E /* CRBSDummySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBSDummySpec.m; sourceTree = "<group>"; };
 		BD304C8218E77F7E0034105E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -89,7 +79,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				036A61EAF6146EA59BD29634 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,15 +96,6 @@
 		55C5AA14CC157D6E10D487F9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				973497EBFED9FC87626B9E25 /* Pods.debug_staging.xcconfig */,
-				62820E5E5DCE1B7643DDFCAC /* Pods.debug_production.xcconfig */,
-				B9A22FEAECDB5B172A6420E4 /* Pods.test_staging.xcconfig */,
-				570039B4FD45DBAF5A8E969C /* Pods.test_production.xcconfig */,
-				8B825A2DB6F2180BF8C6BAE6 /* Pods.distribution.xcconfig */,
-				5AF873AF0F585B45C1E0F5B4 /* Pods.adhoc_staging.xcconfig */,
-				2CB569C4CA54BBB2A8A3438F /* Pods.adhoc_production.xcconfig */,
-				6AE8431A4C79A1C8F2737EEB /* Pods.profile_staging.xcconfig */,
-				3EA32E3BEF65BE84130D7190 /* Pods.profile_production.xcconfig */,
 				B9B99CA30A14373A9E910099 /* Pods-Specs.debug_staging.xcconfig */,
 				D5905E5F82BFFA7584BAD4C5 /* Pods-Specs.debug_production.xcconfig */,
 				12CC9EC171F3BB2114E66841 /* Pods-Specs.test_staging.xcconfig */,
@@ -290,17 +270,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BDDB998418C3943B003EBC42 /* Build configuration list for PBXNativeTarget "CrushBootstrap" */;
 			buildPhases = (
-				CE78B447D2424EDEAEAB74EB /* Check Pods Manifest.lock */,
 				BDF4202019B8F31200FE6C13 /* Generate Storyboard Identifier File */,
 				BD79800C19C0CF3E0087DCCA /* Generate Asset Catalog Identifier File */,
 				BDDB994B18C3943B003EBC42 /* Sources */,
 				BDDB994C18C3943B003EBC42 /* Frameworks */,
 				BD36522718CE89C6009107A7 /* Increment Build Number */,
 				BDDB994D18C3943B003EBC42 /* Resources */,
-				5934C2BEC75D4C51B3689E07 /* Copy Pods Resources */,
 				BDC7F36218EBA5EE0045D4BD /* Remove Unused Localizations */,
 				BD35136319BE21BD00A19841 /* Badge App Icons */,
-				39C981DC16D867281773C28F /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -315,12 +292,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BDDB998718C3943B003EBC42 /* Build configuration list for PBXNativeTarget "Specs" */;
 			buildPhases = (
-				295A078AF08D45C99B314B81 /* Check Pods Manifest.lock */,
+				295A078AF08D45C99B314B81 /* [CP] Check Pods Manifest.lock */,
 				BDDB996F18C3943B003EBC42 /* Sources */,
 				BDDB997018C3943B003EBC42 /* Frameworks */,
 				BDDB997118C3943B003EBC42 /* Resources */,
-				A20A1E42928D4423912BE388 /* Copy Pods Resources */,
-				24CF772DB41806DAC2DF5758 /* Embed Pods Frameworks */,
+				A20A1E42928D4423912BE388 /* [CP] Copy Pods Resources */,
+				24CF772DB41806DAC2DF5758 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -342,6 +319,9 @@
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Crush & Lovely";
 				TargetAttributes = {
+					BDDB994E18C3943B003EBC42 = {
+						ProvisioningStyle = Automatic;
+					};
 					BDDB997218C3943B003EBC42 = {
 						TestTargetID = BDDB994E18C3943B003EBC42;
 					};
@@ -388,14 +368,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		24CF772DB41806DAC2DF5758 /* Embed Pods Frameworks */ = {
+		24CF772DB41806DAC2DF5758 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,59 +383,29 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Specs/Pods-Specs-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		295A078AF08D45C99B314B81 /* Check Pods Manifest.lock */ = {
+		295A078AF08D45C99B314B81 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		39C981DC16D867281773C28F /* Embed Pods Frameworks */ = {
+		A20A1E42928D4423912BE388 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5934C2BEC75D4C51B3689E07 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A20A1E42928D4423912BE388 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -538,21 +488,6 @@
 			shellScript = "# This script walks the storyboards in your project and creates\n# StoryboardIdentifiers.{h,m} with constants for all the segue,\n# reuse, restoration, and storyboard identifiers.\n# The generated files live in the Other Sources group.\n\n# If this is not desired behavior for you, or you don't use\n# storyboards, feel free to remove this build phase and the\n# generated files in Other Sources.\n\n# If you would like constants generated for restoration IDs,\n# uncomment this line:\n#export NEED_RESTORATION_IDS=1\n\n\"${SRCROOT}/Scripts/GenerateStoryboardIDs.py\"";
 			showEnvVarsInLog = 0;
 		};
-		CE78B447D2424EDEAEAB74EB /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -601,17 +536,19 @@
 		};
 		BD49EA2118EC611D00F73350 /* Debug_Production */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 62820E5E5DCE1B7643DDFCAC /* Pods.debug_production.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = .prod;
 				BUNDLE_NAME_SUFFIX = " (Prod)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
 				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier:lower}${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug_Production;
 		};
@@ -647,17 +584,19 @@
 		};
 		BD49EA2418EC612E00F73350 /* Test_Production */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 570039B4FD45DBAF5A8E969C /* Pods.test_production.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = .prod;
 				BUNDLE_NAME_SUFFIX = " (Prod)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
 				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier:lower}${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Test_Production;
 		};
@@ -693,17 +632,19 @@
 		};
 		BD49EA2718EC614F00F73350 /* AdHoc_Production */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2CB569C4CA54BBB2A8A3438F /* Pods.adhoc_production.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = .prod;
 				BUNDLE_NAME_SUFFIX = " (Prod)";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
 				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier:lower}${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = AdHoc_Production;
 		};
@@ -739,17 +680,19 @@
 		};
 		BD49EA2A18EC62DD00F73350 /* Profile_Production */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3EA32E3BEF65BE84130D7190 /* Pods.profile_production.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = .prod;
 				BUNDLE_NAME_SUFFIX = " (Prod)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
 				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier:lower}${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Profile_Production;
 		};
@@ -785,17 +728,19 @@
 		};
 		BDD67CDC18DFAB85008ECBBD /* AdHoc_Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5AF873AF0F585B45C1E0F5B4 /* Pods.adhoc_staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = .staging;
 				BUNDLE_NAME_SUFFIX = " (Staging)";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
 				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier:lower}${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = AdHoc_Staging;
 		};
@@ -842,33 +787,37 @@
 		};
 		BDDB998518C3943B003EBC42 /* Debug_Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 973497EBFED9FC87626B9E25 /* Pods.debug_staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = .staging;
 				BUNDLE_NAME_SUFFIX = " (Staging)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
 				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier:lower}${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug_Staging;
 		};
 		BDDB998618C3943B003EBC42 /* Distribution */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8B825A2DB6F2180BF8C6BAE6 /* Pods.distribution.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = "";
 				BUNDLE_NAME_SUFFIX = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
 				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier:lower}${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Distribution;
 		};
@@ -924,17 +873,19 @@
 		};
 		BDF1757B18C3986D008BD9C6 /* Profile_Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6AE8431A4C79A1C8F2737EEB /* Pods.profile_staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = .staging;
 				BUNDLE_NAME_SUFFIX = " (Staging)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
 				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier:lower}${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Profile_Staging;
 		};
@@ -970,17 +921,19 @@
 		};
 		BDF1757E18C39BD3008BD9C6 /* Test_Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B9A22FEAECDB5B172A6420E4 /* Pods.test_staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_ID_SUFFIX = .staging;
 				BUNDLE_NAME_SUFFIX = " (Staging)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CrushBootstrap/Application/CrushBootstrap-Prefix.pch";
 				INFOPLIST_FILE = "CrushBootstrap/Other-Sources/CrushBootstrap-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.crushlovely.${PRODUCT_NAME:rfc1034identifier:lower}${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Test_Staging;
 		};
