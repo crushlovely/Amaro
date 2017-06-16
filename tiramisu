@@ -448,8 +448,12 @@ class Bootstrapper
             raise AmaroError.new("Amaro requires version 0.34.1 or later of CocoaPods. You have version #{pod_version}", 'Running "gem update cocoapods" should fix this.') unless pod_version_is_good
 
             dev_tools_path = sh('xcode-select -p', 'The Xcode command line tools don\'t seem to be installed. Running "xcode-select --install" should fix that.', :show_output_on_error => false).strip
+
+            raise AmaroError.new('Amaro requires the developer tools path to point to Xcode installation', 'Running "sudo xcode-select --switch /Applications/Xcode.app" should fix this') unless Pathname.new(dev_tools_path).exist?
+
             xcode_version = sh("/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' '#{dev_tools_path}/../Info.plist'").strip
-            xcode_version_is_good = Gem::Dependency.new('xcode', '~>7.0').match?('xcode', xcode_version)
+
+            xcode_version_is_good = Gem::Dependency.new('xcode', '>=7.0', '<9.0').match?('xcode', xcode_version)
             raise AmaroError.new("Amaro requires the default Xcode command line tools to point to Xcode 7.0 or later. Yours point to #{xcode_version}.", 'Install Xcode 7.0 or later, and run "xcode-select" to point to that.') unless xcode_version_is_good
 
 
@@ -509,8 +513,15 @@ class Bootstrapper
         end
 
         task 'Merging' do
+            # We need to use --allow-unrelated-histories only for git 2.9 and above
+            git_version = %x[git --version | awk -F'[^0-9.]+' '$0=$2'].chomp!
+            is_new_git = Gem::Dependency.new('git', ">=2.9").match?('git',git_version)
             # We're using 'ours' merge option so that our README.md wins
-            sh("git merge -q --squash -X ours 'remotes/bootstrap/#{@bootstrap_branch}'")
+            if is_new_git
+                sh("git merge -q --squash -X ours 'remotes/bootstrap/#{@bootstrap_branch}' --allow-unrelated-histories")
+            else
+                sh("git merge -q --squash -X ours 'remotes/bootstrap/#{@bootstrap_branch}'")
+            end
             commit 'Bootstrapping', :add_all => false
         end
 
